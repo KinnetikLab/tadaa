@@ -1,0 +1,40 @@
+name: TADAA! CI · código y seguridad de archivos
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validar scripts web y servidor
+        run: |
+          node --check web/data.js
+          node --check web/app.js
+          node --check web/integrations.js
+          node --check web/integrations-catalog.js
+          node --check server/src/server.mjs
+          node --check server/src/db.mjs
+          node --check server/scripts/migrate.mjs
+          node --check server/src/auth.mjs
+          node --check server/src/vault.mjs
+          node --check server/src/tests.mjs
+          node --check mobile/api-client.js
+      - name: Pruebas del servidor
+        working-directory: server
+        run: npm test
+      - name: Revisar Expo JSON
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('mobile/app.json'))"
+          node -e "JSON.parse(require('fs').readFileSync('mobile/package.json'))"
+          node -e "JSON.parse(require('fs').readFileSync('mobile/eas.json'))"
+          test -s server/migrations/001_initial_schema.sql
+      - name: Verificar que no se empaquetaron secretos
+        run: |
+          test ! -f .env
+          test ! -f server/private-data/integration-vault.enc.json
+          test ! -f .secrets-generated.env

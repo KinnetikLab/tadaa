@@ -1,0 +1,18 @@
+{
+  "name": "tadaa-v06-server",
+  "version": "0.6.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/server.mjs",
+    "setup:secrets": "node scripts/setup.mjs",
+    "test": "node --test",
+    "migrate": "node scripts/migrate.mjs"
+  },
+  "dependencies": {
+    "pg": "^8.16.3"
+  }
+}

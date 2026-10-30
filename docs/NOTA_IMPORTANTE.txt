@@ -1,0 +1,1 @@
+PROTOTIPO. Sin backend, seguridad de cuentas ni pagos reales. Nunca cargar padrones auténticos. Proteger staging con Basic Authentication.

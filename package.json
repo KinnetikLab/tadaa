@@ -1,0 +1,21 @@
+{
+  "name": "tadaa-v06",
+  "private": true,
+  "version": "0.6.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server/src/server.mjs",
+    "dev": "node server/src/server.mjs",
+    "test": "node --test server/src/*.test.mjs",
+    "syntax": "node --check web/app.js && node --check web/integrations.js && node --check server/src/server.mjs",
+    "setup:secrets": "node server/scripts/setup.mjs",
+    "db:migrate": "node server/scripts/migrate.mjs",
+    "deploy:check": "npm run syntax && npm test"
+  },
+  "dependencies": {
+    "pg": "^8.16.3"
+  }
+}

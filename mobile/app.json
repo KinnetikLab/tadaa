@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "TADAA!",
+    "slug": "tadaa-app",
+    "scheme": "tadaa",
+    "version": "0.6.0",
+    "orientation": "portrait",
+    "icon": "./assets/app-icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "backgroundColor": "#0B0B0B"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.tadaa.app"
+    },
+    "android": {
+      "package": "com.tadaa.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/app-icon.png",
+        "backgroundColor": "#D6FF35"
+      }
+    },
+    "description": "Plataforma TADAA! para descubrir, reservar y gestionar experiencias."
+  }
+}
