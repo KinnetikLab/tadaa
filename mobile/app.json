@@ -7,9 +7,6 @@
     "orientation": "portrait",
     "icon": "./assets/app-icon.png",
     "userInterfaceStyle": "dark",
-    "splash": {
-      "backgroundColor": "#0B0B0B"
-    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.tadaa.app"
@@ -21,6 +18,16 @@
         "backgroundColor": "#D6FF35"
       }
     },
-    "description": "Plataforma TADAA! para descubrir, reservar y gestionar experiencias."
+    "description": "Plataforma TADAA! para descubrir, reservar y gestionar experiencias.",
+    "plugins": [
+      "expo-video",
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#0B0B0B"
+        }
+      ]
+    ]
   }
 }
