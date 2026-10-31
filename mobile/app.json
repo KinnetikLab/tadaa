@@ -28,6 +28,12 @@
           "backgroundColor": "#0B0B0B"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "ff6b4221-3bea-41c4-bf99-45bee66281aa"
+      }
+    },
+    "owner": "kinnetik-dev"
   }
 }
