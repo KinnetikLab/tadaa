@@ -21,6 +21,21 @@ async function body(req){let count=0;const chunks=[];for await(const chunk of re
 async function request(req,res){
  res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('X-Frame-Options','DENY');res.setHeader('Referrer-Policy','no-referrer');res.setHeader('Permissions-Policy','camera=(), microphone=(), geolocation=()');
  const u=new URL(req.url,'http://local');const pathname=u.pathname;
+ // La portada vive en /experience/. Sin esta redirección, /curtain.js,
+ // /site-live.js y /login.html se resuelven incorrectamente desde /.
+ const aliasPaths={
+  '/':'/experience/',
+  '/index.html':'/experience/',
+  '/login.html':'/experience/login.html',
+  '/app.html':'/experience/app.html',
+  '/admin.html':'/experience/admin.html',
+  '/partner.html':'/experience/partner.html'
+ };
+ if(Object.prototype.hasOwnProperty.call(aliasPaths,pathname)){
+  res.writeHead(302,{'Location':aliasPaths[pathname]+(u.search||'')+(u.hash||''),'Cache-Control':'no-store'});
+  res.end();return;
+ }
+
  if(pathname.startsWith('/api/')){
   if(process.env.NODE_ENV==='production'&&!reqSecure(req))return send(res,403,{error:'HTTPS obligatorio'});
   if(!corsGuard(req))return send(res,403,{error:'Origen no autorizado'});
@@ -58,7 +73,7 @@ async function request(req,res){
   }catch(e){if(e instanceof SyntaxError)return send(res,400,{error:'JSON incorrecto'});if(e.message?.includes('no permitido')||e.message?.includes('incorrecto')||e.message?.includes('inválido')||e.message?.includes('Código postal'))return send(res,400,{error:e.message});console.error('Error API:',e.name);return send(res,500,{error:'Error interno. Consulta los logs del servidor.'});}
  }
  if(req.method!=='GET'&&req.method!=='HEAD'){res.writeHead(405);return res.end()}
- let file=pathname==='/'?'/experience/index.html':decodeURIComponent(pathname);
+ let file=decodeURIComponent(pathname);
  if(pathname==='/experience/'||pathname==='/experience')file='/experience/index.html';
  // Never expose files outside the web directory.
  if(file.includes('\0')){res.writeHead(400);return res.end()}
@@ -67,7 +82,7 @@ async function request(req,res){
  let st;try{st=fs.statSync(target)}catch{res.writeHead(404);return res.end()}
  if(!st.isFile()){res.writeHead(404);return res.end()}
  const type=types[path.extname(target)]||'application/octet-stream';
- res.setHeader('Content-Type',type);res.setHeader('Cache-Control',path.extname(target)==='.html'?'no-store':'public, max-age=3600');
+ res.setHeader('Content-Type',type);res.setHeader('Cache-Control',['.html','.js','.css'].includes(path.extname(target))?'no-store':'public, max-age=3600');
  if(req.method==='HEAD'){res.writeHead(200);return res.end()}
  fs.createReadStream(target).pipe(res);
 }

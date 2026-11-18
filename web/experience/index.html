@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="es">
 <head>
+<base href="/experience/">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>tadaa! — Esta noche todavía alcanzas</title>
@@ -8,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="curtain.css?v=3">
+<link rel="stylesheet" href="curtain.css?v=3.1.1-muestra">
 <style>
 :root{
   --lime:#d6ff35; --ink:#050505; --ink2:#0d0d0d; --ink3:#151515;
@@ -289,11 +290,26 @@ footer{border-top:1px solid var(--line);padding:70px 0 0;overflow:hidden;positio
   .mani{height:240vh}.fcols{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.hero .sub,.search,.live{opacity:1;transform:none}.hero h1 span i{transform:none}.curtain{display:none}}
+/* Seguridad visual: la portada no depende del JS para ser visible o desplazable. */
+body.lock {overflow-y:auto!important}
+
+.sample-note{margin:0 0 20px;padding:12px 16px;border:1px solid #4c582b;background:#12180d;color:#d5eba7;border-radius:13px;font-size:13px;line-height:1.5}
+.sample-note[hidden]{display:none!important}
+.sample-dialog{position:fixed;inset:0;z-index:450;display:grid;place-items:center;background:#000b;padding:18px;backdrop-filter:blur(8px)}
+.sample-dialog[hidden]{display:none!important}
+.sample-card{display:grid;grid-template-columns:minmax(160px,.6fr) 1fr;background:#0e0e0e;border:1px solid #454545;border-radius:24px;overflow:hidden;max-height:calc(100vh - 36px);overflow-y:auto;width:min(760px,100%);position:relative}
+.sample-card img{width:100%;height:100%;object-fit:cover;min-height:300px}
+.sample-details{padding:36px 30px;display:flex;flex-direction:column;justify-content:center;gap:14px}
+.sample-details h2{font-size:clamp(28px,4vw,45px);line-height:1.03;letter-spacing:-.04em}
+.sample-details p{color:#bcbcbc;line-height:1.55}
+.sample-details .sample-tag{color:#d6ff35;font-size:12px;letter-spacing:.12em;font-weight:700}
+.sample-close{position:absolute;top:13px;right:13px;background:#191919;border:1px solid #777;color:#fff;border-radius:50%;width:40px;height:40px;cursor:pointer;z-index:2}
+@media(max-width:620px){.sample-card{grid-template-columns:1fr}.sample-card img{height:240px;min-height:0}.sample-details{padding:22px}}
 </style>
 </head>
 <body class="ready">
 
-<script src="curtain.js?v=2.0.1-fix"></script>
+<script src="curtain.js?v=3.1.1-muestra"></script>
 <script>
 /* Arranque autónomo: nunca dejar bloqueada la web si algún script falla. */
 (function () {
@@ -346,7 +362,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 0;overflow:hidden;positio
       <button class="btn" type="submit">Buscar</button>
     </form>
     <div class="live">
-      <span><i class="dot"></i><b id="liveCount">0</b> experiencias publicadas</span>
+      <span><i class="dot"></i><b id="liveCount">0</b> <span id="liveCountLabel">experiencias publicadas</span></span>
       <span>Descubre experiencias <b id="cd">en tu ciudad</b></span>
       <span>Próximamente <b>más experiencias</b></span>
     </div>
@@ -370,7 +386,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 0;overflow:hidden;positio
       <button class="tab" data-t="proximos">Próximos días</button>
       <span class="filt" id="filt"><span id="filtx"></span><button id="filtc" aria-label="Quitar filtro">✕</button></span>
     </div>
-    <div class="railwrap"><div class="rail" id="rail"></div></div>
+    <p class="sample-note" id="sampleNote" hidden>Cartelera ilustrativa: eventos ficticios para explorar TADAA!. No representan ofertas ni disponibilidad real.</p><div class="railwrap"><div class="rail" id="rail"></div></div>
     <div class="none on" id="none"><b>Estamos preparando la cartelera</b>Los eventos aparecerán aquí cuando sean publicados. <a href="partner.html" style="color:var(--lime);text-decoration:underline">¿Organizas eventos? Conoce el programa de partners</a>.</div>
     
   </div>
@@ -493,7 +509,8 @@ footer{border-top:1px solid var(--line);padding:70px 0 0;overflow:hidden;positio
 
 <div class="toast" id="toast" role="status"><i></i><span id="tt"></span></div>
 
-<script src="api.js?v=2.0.1-fix"></script><script src="site-live.js?v=2.0.1-fix"></script>
+<div id="sampleDialog" class="sample-dialog" hidden aria-modal="true" role="dialog" aria-label="Evento de muestra"><div id="sampleDialogContent" class="sample-card"></div></div>
+<script src="api.js?v=3.1.1-muestra"></script><script src="catalog-samples.js?v=3.1.1-muestra"></script><script src="site-live.js?v=3.1.1-muestra"></script>
 
 
 </body>
