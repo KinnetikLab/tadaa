@@ -7,6 +7,7 @@ import {readVault,saveVault,writeAudit,auditRecent} from './vault.mjs';
 import {verifyPassword,isRateLimited,failedLogin,successfulLogin,createSession,currentSession,clearSession,csrfMatches} from './auth.mjs';
 import {checkConnection} from './tests.mjs';
 import {databaseStatus} from './db.mjs';
+import {platformRequest} from './platform.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../web');
 const PUBLIC_ORIGIN=process.env.PUBLIC_ORIGIN||'http://localhost:3000';
 if(process.env.NODE_ENV==='production'&&!/^https:\/\/[a-z0-9.-]+(?::\d+)?$/i.test(PUBLIC_ORIGIN))throw Error('PUBLIC_ORIGIN debe tener HTTPS en producción');
@@ -24,7 +25,8 @@ async function request(req,res){
   if(process.env.NODE_ENV==='production'&&!reqSecure(req))return send(res,403,{error:'HTTPS obligatorio'});
   if(!corsGuard(req))return send(res,403,{error:'Origen no autorizado'});
   try{
-   if(pathname==='/api/public/status'&&req.method==='GET'){const database=await databaseStatus();return send(res,200,{server:true,version:'0.6.1',configuredServices:'private',database,ordersMode:'demo',checkoutMode:'demo'});}
+   if(await platformRequest(req,res,pathname,u))return;
+   if(pathname==='/api/public/status'&&req.method==='GET'){const database=await databaseStatus();return send(res,200,{server:true,version:'2.0.0-beta.1',configuredServices:'private',database,ordersMode:'postgresql',checkoutMode:'sandbox-interno',realPayments:false});}
    if(pathname==='/api/admin/login'&&req.method==='POST'){
     const ip=ipOf(req);if(isRateLimited(ip))return send(res,429,{error:'Demasiados intentos. Intenta más tarde.'});
     const d=await body(req);if(!verifyPassword(d.password)){failedLogin(ip);return send(res,401,{error:'Contraseña incorrecta'})}
@@ -56,7 +58,8 @@ async function request(req,res){
   }catch(e){if(e instanceof SyntaxError)return send(res,400,{error:'JSON incorrecto'});if(e.message?.includes('no permitido')||e.message?.includes('incorrecto')||e.message?.includes('inválido')||e.message?.includes('Código postal'))return send(res,400,{error:e.message});console.error('Error API:',e.name);return send(res,500,{error:'Error interno. Consulta los logs del servidor.'});}
  }
  if(req.method!=='GET'&&req.method!=='HEAD'){res.writeHead(405);return res.end()}
- let file=pathname==='/'?'/index.html':decodeURIComponent(pathname);
+ let file=pathname==='/'?'/experience/index.html':decodeURIComponent(pathname);
+ if(pathname==='/experience/'||pathname==='/experience')file='/experience/index.html';
  // Never expose files outside the web directory.
  if(file.includes('\0')){res.writeHead(400);return res.end()}
  const target=path.resolve(root,'.'+file);
@@ -68,4 +71,4 @@ async function request(req,res){
  if(req.method==='HEAD'){res.writeHead(200);return res.end()}
  fs.createReadStream(target).pipe(res);
 }
-http.createServer((req,res)=>{request(req,res).catch(e=>{console.error('Error:',e.name);if(!res.headersSent)send(res,500,{error:'Error de servidor'})})}).listen(PORT,'0.0.0.0',()=>console.log('TADAA! v0.6 en puerto '+PORT));
+http.createServer((req,res)=>{request(req,res).catch(e=>{console.error('Error:',e.name);if(!res.headersSent)send(res,500,{error:'Error de servidor'})})}).listen(PORT,'0.0.0.0',()=>console.log('TADAA! Beta2 core en puerto '+PORT));

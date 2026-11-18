@@ -1,7 +1,7 @@
 {
-  "name": "tadaa-v06",
+  "name": "tadaa-platform",
   "private": true,
-  "version": "0.6.0",
+  "version": "2.0.0-beta.1",
   "type": "module",
   "engines": {
     "node": ">=22"
@@ -10,12 +10,14 @@
     "start": "node server/src/server.mjs",
     "dev": "node server/src/server.mjs",
     "test": "node --test server/src/*.test.mjs",
-    "syntax": "node --check web/app.js && node --check web/integrations.js && node --check server/src/server.mjs",
+    "syntax": "node --check web/app.js && node --check web/integrations.js && node --check server/src/server.mjs && node --check server/src/platform.mjs && node --check web/experience/api.js",
     "setup:secrets": "node server/scripts/setup.mjs",
     "db:migrate": "node server/scripts/migrate.mjs",
     "deploy:check": "npm run syntax && npm test"
   },
   "dependencies": {
-    "pg": "^8.16.3"
+    "pg": "^8.16.3",
+    "qrcode": "^1.5.4",
+    "exceljs": "^4.4.0"
   }
 }

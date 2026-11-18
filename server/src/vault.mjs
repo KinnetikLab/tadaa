@@ -5,7 +5,7 @@ import crypto from 'node:crypto';
 const MASTER = process.env.TADAA_ENCRYPTION_KEY || '';
 if(!/^[a-fA-F0-9]{64}$/.test(MASTER))throw new Error('Falta TADAA_ENCRYPTION_KEY (32 bytes hex). No se inicia servidor inseguro.');
 const KEY=Buffer.from(MASTER,'hex');
-const DATA_DIR=path.resolve(process.env.DATA_DIR||path.join(process.cwd(),'private-data'));
+const DATA_DIR=path.resolve(process.env.DATA_DIR||path.join(process.env.HOME||process.cwd(),'tadaa-private')); // Fuera del checkout de Git
 const FILE=path.join(DATA_DIR,'integration-vault.enc.json');
 const AUDIT=path.join(DATA_DIR,'integrations-audit.ndjson');
 fs.mkdirSync(DATA_DIR,{recursive:true,mode:0o700});

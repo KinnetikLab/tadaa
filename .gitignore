@@ -38,3 +38,7 @@ Thumbs.db
 .secrets-generated.env
 **/.secrets-generated.env
 *.enc.json
+
+# Datos privados y respaldos fuera del checkout
+**/tadaa-private/
+**/TADAA-Respaldos/
