@@ -291,9 +291,27 @@ footer{border-top:1px solid var(--line);padding:70px 0 0;overflow:hidden;positio
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.hero .sub,.search,.live{opacity:1;transform:none}.hero h1 span i{transform:none}.curtain{display:none}}
 </style>
 </head>
-<body class="lock">
+<body class="ready">
 
-<script src="curtain.js?v=3"></script>
+<script src="curtain.js?v=2.0.1-fix"></script>
+<script>
+/* Arranque autónomo: nunca dejar bloqueada la web si algún script falla. */
+(function () {
+  const recover = () => {
+    document.body.classList.remove('lock');
+    document.body.classList.add('ready');
+  };
+  try {
+    if (window.Curtain && typeof window.Curtain.load === 'function') {
+      window.Curtain.load({onOpen: recover});
+    } else { recover(); }
+  } catch (error) { recover(); }
+  window.setTimeout(() => {
+    recover();
+    document.querySelectorAll('.curtain, .tadaa-veil').forEach(el => el.remove());
+  }, 6500);
+})();
+</script>
 
 <header id="hd">
   <div class="wrap nav">
@@ -330,7 +348,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 0;overflow:hidden;positio
     <div class="live">
       <span><i class="dot"></i><b id="liveCount">0</b> experiencias publicadas</span>
       <span>Descubre experiencias <b id="cd">en tu ciudad</b></span>
-      <span>Precios y disponibilidad <b>verificados</b></span>
+      <span>Próximamente <b>más experiencias</b></span>
     </div>
   </div>
   <div class="scroll">DESLIZA</div>
@@ -353,7 +371,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 0;overflow:hidden;positio
       <span class="filt" id="filt"><span id="filtx"></span><button id="filtc" aria-label="Quitar filtro">✕</button></span>
     </div>
     <div class="railwrap"><div class="rail" id="rail"></div></div>
-    <div class="none" id="none"><b>Sin funciones por ahora</b>Prueba con otra búsqueda o activa tus alertas de último minuto.</div>
+    <div class="none on" id="none"><b>Estamos preparando la cartelera</b>Los eventos aparecerán aquí cuando sean publicados. <a href="partner.html" style="color:var(--lime);text-decoration:underline">¿Organizas eventos? Conoce el programa de partners</a>.</div>
     
   </div>
 </section>
@@ -475,7 +493,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 0;overflow:hidden;positio
 
 <div class="toast" id="toast" role="status"><i></i><span id="tt"></span></div>
 
-<script src="api.js"></script><script src="site-live.js"></script>
+<script src="api.js?v=2.0.1-fix"></script><script src="site-live.js?v=2.0.1-fix"></script>
 
 
 </body>
