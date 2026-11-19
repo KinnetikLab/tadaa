@@ -41,7 +41,7 @@ async function request(req,res){
   if(!corsGuard(req))return send(res,403,{error:'Origen no autorizado'});
   try{
    if(await platformRequest(req,res,pathname,u))return;
-   if(pathname==='/api/public/status'&&req.method==='GET'){const database=await databaseStatus();return send(res,200,{server:true,version:'2.0.0-beta.1',configuredServices:'private',database,ordersMode:'postgresql',checkoutMode:'sandbox-interno',realPayments:false});}
+   if(pathname==='/api/public/status'&&req.method==='GET'){const database=await databaseStatus();return send(res,200,{server:true,version:'3.0.0-beta.1',configuredServices:'private',database,ordersMode:'postgresql',checkoutMode:'clip-checkout-v2-or-internal-test',realPayments:false});}
    if(pathname==='/api/admin/login'&&req.method==='POST'){
     const ip=ipOf(req);if(isRateLimited(ip))return send(res,429,{error:'Demasiados intentos. Intenta más tarde.'});
     const d=await body(req);if(!verifyPassword(d.password)){failedLogin(ip);return send(res,401,{error:'Contraseña incorrecta'})}

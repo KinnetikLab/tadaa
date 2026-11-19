@@ -46,6 +46,7 @@ async function load(){
  sampleMode=real.length===0&&localSamples.length>0;
  shows=real.length?real:localSamples;
  if(sampleMode)$('#none').innerHTML='<b>Contenido ilustrativo</b>Estas fichas sirven para explorar el diseño; no tienen disponibilidad ni boletos asociados.';
+ try{const auth=await api.call('/api/v2/auth/me');if(auth.authenticated){$$('[data-curtain-login]').forEach(a=>{a.href='app.html';a.textContent='Ir a mi TADAA!';a.removeAttribute('data-curtain-login');a.classList.add('is-authenticated')});const navLogin=$('.mobile-login-link');if(navLogin){navLogin.href='app.html';navLogin.textContent='Ir a mi TADAA!';navLogin.removeAttribute('data-curtain-login')}}}catch{}
  render();
 }
 load();
