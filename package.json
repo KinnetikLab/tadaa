@@ -13,7 +13,8 @@
     "syntax": "node --check web/app.js && node --check web/integrations.js && node --check server/src/server.mjs && node --check server/src/platform.mjs && node --check web/experience/api.js",
     "setup:secrets": "node server/scripts/setup.mjs",
     "db:migrate": "node server/scripts/migrate.mjs",
-    "deploy:check": "npm run syntax && npm test"
+    "deploy:check": "npm run syntax && npm test",
+    "db:seed:cdmx-demo": "node server/scripts/seed-cdmx-demo.mjs"
   },
   "dependencies": {
     "pg": "^8.16.3",
