@@ -13,7 +13,7 @@ const cv=$('#stage'),ctx=cv?.getContext('2d'),bc=$('#beams'),bctx=bc?.getContext
 new IntersectionObserver(e=>active=e[0].isIntersecting).observe($('.hero'));
 if(ctx&&bctx&&!matchMedia('(prefers-reduced-motion:reduce)').matches){const lights=[0.2,0.5,0.8];function frame(ms){requestAnimationFrame(frame);if(!active||document.hidden)return;const t=ms/1000;bctx.clearRect(0,0,bc.width,bc.height);ctx.clearRect(0,0,w,h);lights.forEach((l,i)=>{const x=w*(l+Math.sin(t*.25+i)*.055),color=i===1?'214,255,53':'255,255,245';const g=ctx.createRadialGradient(x,h*.34,5,x,h*.34,w*.56);g.addColorStop(0,`rgba(${color},.16)`);g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);ctx.save();ctx.translate(x,-25);ctx.rotate(Math.sin(t*.22+i)*.19+(i-1)*.2);const b=ctx.createLinearGradient(0,0,0,h);b.addColorStop(0,`rgba(${color},.20)`);b.addColorStop(.6,`rgba(${color},.025)`);b.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=b;ctx.beginPath();ctx.moveTo(-4,0);ctx.lineTo(4,0);ctx.lineTo(w*.22,h);ctx.lineTo(-w*.22,h);ctx.closePath();ctx.fill();ctx.restore()});ctx.fillStyle='#030303';for(let i=0;i<w;i+=34){const y=h-29-Math.sin(i*.18+t*.4)*5;ctx.beginPath();ctx.arc(i,y,13,0,7);ctx.fill();ctx.fillRect(i-14,y,28,45)}}requestAnimationFrame(frame)}
 /* Marquee */const words=['Conciertos','Teatro','Cultura','Planes','Familia','Experiencias'];$('#mq').innerHTML=[...words,...words,...words,...words].map(x=>`<span>${x}</span>`).join('');
-function poster(x){const img=x.poster_url?`<img src="${escape(x.poster_url)}" alt="" onerror="this.remove()">`:'';const d=x.metadata?.schedule_label||(x.starts_at?new Date(x.starts_at).toLocaleString('es-MX',{dateStyle:'medium',timeStyle:'short',timeZone:'America/Mexico_City'}):'Consultar programación');return `<article class="show" tabindex="0" data-id="${escape(x.id)}" data-slug="${escape(x.slug||x.id)}" style="--a:#516c34;--b:#0e140b"><div class="art">${img}</div><div class="glow"></div><div class="shade"></div><div class="show-in"><div class="badges"><span class="pill">${escape(x.metadata?.category||'Experiencias')}</span>${x.metadata?.is_demo_content?'<span class="off">DEMO EDITORIAL</span>':x.picks?'<span class="off">TADAA! Picks</span>':''}</div><h3>${escape(x.title)}</h3><div class="sub2">${escape(x.venue||'Sede por anunciar')}</div><div class="when">${d}</div><div class="foot"><div class="price"><small>${x.sample?'Precio ficticio':'Precio de referencia'}</small><b>${x.from_price_minor==null?'Consultar':money(x.from_price_minor)}</b></div><span class="go">↗</span></div></div></article>`}
+function poster(x){const posterUrl=x.poster_url||x.metadata?.poster_url||'';const img=posterUrl?`<img src="${escape(posterUrl)}" alt="Arte editorial de ${escape(x.title)}" onerror="this.remove()">`:'';const d=x.metadata?.schedule_label||(x.starts_at?new Date(x.starts_at).toLocaleString('es-MX',{dateStyle:'medium',timeStyle:'short',timeZone:'America/Mexico_City'}):'Consultar programación');return `<article class="show" tabindex="0" data-id="${escape(x.id)}" data-slug="${escape(x.slug||x.id)}" style="--a:#516c34;--b:#0e140b"><div class="art">${img}</div><div class="glow"></div><div class="shade"></div><div class="show-in"><div class="badges"><span class="pill">${escape(x.metadata?.category||'Experiencias')}</span>${x.metadata?.is_demo_content?'<span class="off">DEMO EDITORIAL</span>':x.picks?'<span class="off">TADAA! Picks</span>':''}</div><h3>${escape(x.title)}</h3><div class="sub2">${escape(x.venue||'Sede por anunciar')}</div><div class="when">${d}</div><div class="foot"><div class="price"><small>${x.metadata?.is_demo_content?'Precio y disponibilidad por confirmar':'Precio de referencia'}</small><b>${x.from_price_minor==null?'Consultar':money(x.from_price_minor)}</b></div><span class="go">↗</span></div></div></article>`}
 function sampleTab(item){
  if(!sampleMode) return true;
  const diff=Math.round((new Date(item.starts_at).setHours(0,0,0,0)-new Date().setHours(0,0,0,0))/86400000);
@@ -52,7 +52,68 @@ function openSample(id){
 function closeSample(){const modal=$('#sampleDialog');modal.hidden=true;document.body.style.overflow=''}
 $('#sampleDialog')?.addEventListener('click',e=>{if(e.target.id==='sampleDialog'||e.target.closest('[data-sample-close]'))closeSample()});
 addEventListener('keydown',e=>{if(e.key==='Escape')closeSample()});
-function openCard(c){if(!c)return;const item=shows.find(x=>String(x.id)===String(c.dataset.id));if(item?.sample){openSample(item.id);return;}location.href='event.html?slug='+encodeURIComponent(c.dataset.slug||item?.slug||c.dataset.id)}$('#rail').onclick=e=>openCard(e.target.closest('[data-id]'));$('#rail').onkeydown=e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-id]')){e.preventDefault();openCard(e.target)}};
+
+/* TADAA! ficha en modal: todos los eventos permanecen en la portada. */
+const eventDialog=(()=>{
+ let el=document.getElementById('tadaaEventDialog');
+ if(el)return el;
+ const style=document.createElement('style');
+ style.textContent=`
+ #tadaaEventDialog{position:fixed;inset:0;z-index:600;display:none;place-items:center;padding:22px;background:rgba(0,0,0,.82);backdrop-filter:blur(14px)}
+ #tadaaEventDialog.open{display:grid;animation:tdFade .22s ease both}
+ @keyframes tdFade{from{opacity:0}to{opacity:1}}
+ #tadaaEventDialog .td-modal{position:relative;width:min(940px,100%);max-height:90vh;overflow:auto;background:#0b0b0b;border:1px solid rgba(255,255,255,.14);border-radius:26px;box-shadow:0 35px 100px rgba(0,0,0,.65);display:grid;grid-template-columns:minmax(240px,.85fr) 1.15fr;color:#f7f7f7}
+ #tadaaEventDialog .td-art{min-height:430px;background:#111}
+ #tadaaEventDialog .td-art img{width:100%;height:100%;min-height:430px;object-fit:cover;display:block}
+ #tadaaEventDialog .td-body{padding:clamp(22px,4vw,42px)}
+ #tadaaEventDialog .td-kicker{color:#d6ff35;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+ #tadaaEventDialog h2{font-size:clamp(27px,4vw,42px);line-height:1.02;letter-spacing:-.045em;margin:12px 0}
+ #tadaaEventDialog p{color:#c4c4c4;line-height:1.6;margin:12px 0}
+ #tadaaEventDialog .td-meta{display:grid;gap:10px;margin:20px 0}
+ #tadaaEventDialog .td-meta div{border-top:1px solid rgba(255,255,255,.12);padding-top:10px}
+ #tadaaEventDialog .td-meta small{display:block;color:#929292;font-size:11px;margin-bottom:3px}
+ #tadaaEventDialog .td-meta b{font-size:14px}
+ #tadaaEventDialog .td-close{position:absolute;right:14px;top:14px;z-index:2;width:42px;height:42px;border:1px solid rgba(255,255,255,.2);border-radius:50%;background:#111;color:#fff;font-size:25px;cursor:pointer}
+ #tadaaEventDialog .td-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+ #tadaaEventDialog .td-note{font-size:12px;border-left:2px solid #d6ff35;padding:10px 13px;background:rgba(214,255,53,.06)}
+ @media(max-width:680px){#tadaaEventDialog{padding:10px}#tadaaEventDialog .td-modal{grid-template-columns:1fr;max-height:92vh;border-radius:20px}#tadaaEventDialog .td-art,#tadaaEventDialog .td-art img{min-height:0;height:230px}#tadaaEventDialog .td-body{padding:22px}}
+ @media(prefers-reduced-motion:reduce){#tadaaEventDialog.open{animation:none}}
+ `;
+ document.head.appendChild(style);
+ el=document.createElement('div');el.id='tadaaEventDialog';el.setAttribute('role','dialog');el.setAttribute('aria-modal','true');el.setAttribute('aria-label','Detalle del evento');
+ el.innerHTML='<div class="td-modal"><button class="td-close" type="button" aria-label="Cerrar">×</button><div class="td-content"></div></div>';
+ document.body.appendChild(el);
+ const close=()=>{el.classList.remove('open');document.body.style.overflow='';};
+ el.addEventListener('click',e=>{if(e.target===el||e.target.closest('.td-close'))close();});
+ addEventListener('keydown',e=>{if(e.key==='Escape'&&el.classList.contains('open'))close();});
+ return el;
+})();
+const safeHttpUrl=value=>{try{const u=new URL(value,location.href);return ['http:','https:'].includes(u.protocol)?u.href:'#'}catch{return '#'}};
+async function openRemoteEvent(slug,item){
+ const dialog=eventDialog,content=dialog.querySelector('.td-content');
+ const fallback=item||{};
+ content.innerHTML='<div class="td-body"><div class="td-kicker">TADAA! · EVENTO</div><h2>Cargando experiencia…</h2><p>Consultando información publicada.</p></div>';
+ dialog.classList.add('open');document.body.style.overflow='hidden';
+ try{
+  let e=fallback;
+  if(!e||!e.description){const result=await api.call('/api/v2/events/'+encodeURIComponent(slug));e=result.event||result.data?.event||fallback;}
+  if(!e)throw new Error('No encontramos la ficha de esta experiencia.');
+  const m=e.metadata||{};
+  const art=e.hero_url||e.poster_url||fallback.poster_url||'/experience/img/catalogo/el-rey-leon-hero.svg';
+  const date=m.schedule_label||(e.starts_at?new Date(e.starts_at).toLocaleString('es-MX',{dateStyle:'full',timeStyle:'short',timeZone:'America/Mexico_City'}):'Consultar programación vigente');
+  const source=safeHttpUrl(m.source_url||e.ticket_url||'https://www.ticketmaster.com.mx/');
+  const demo=!!m.is_demo_content;
+  const note=demo
+   ?'Ficha editorial de demostración. El arte es una composición original de TADAA!, no el cartel oficial. No hay inventario, descuentos ni venta de boletos habilitados.'
+   :'Consulta la fuente oficial para confirmar horarios, precios y disponibilidad. Esta ficha no implica que TADAA! venda o emita boletos para esta producción.';
+  content.innerHTML=`<div class="td-art"><img src="${escape(art)}" alt="Arte editorial de ${escape(e.title)}"></div><div class="td-body"><div class="td-kicker">${escape(m.category||'Teatro')} · CIUDAD DE MÉXICO</div><h2>${escape(e.title)}</h2><p>${escape(e.description||e.details||'Consulta la información oficial de esta producción.')}</p><div class="td-meta"><div><small>Recinto</small><b>${escape(e.venue||'Por confirmar')}</b></div><div><small>Temporada / función</small><b>${escape(date)}</b></div><div><small>Precio y disponibilidad</small><b>Consultar fuente oficial</b></div></div><p class="td-note">${escape(note)}</p><div class="td-actions"><a class="btn" href="${source}" target="_blank" rel="noopener noreferrer">Consultar fuente oficial ↗</a><a class="btn ghost" href="login.html">Crear cuenta TADAA!</a></div></div>`;
+ }catch(err){
+  content.innerHTML=`<div class="td-body"><div class="td-kicker">TADAA! · EVENTO</div><h2>No pudimos cargar esta ficha</h2><p>${escape(err.message||'Intenta nuevamente.')}</p><button class="btn ghost" type="button" data-td-retry>Reintentar</button></div>`;
+  content.querySelector('[data-td-retry]')?.addEventListener('click',()=>openRemoteEvent(slug,fallback));
+ }
+}
+
+function openCard(c){if(!c)return;const item=shows.find(x=>String(x.id)===String(c.dataset.id));if(!item)return;openRemoteEvent(c.dataset.slug||item.slug||item.id,item)}$('#rail').onclick=e=>openCard(e.target.closest('[data-id]'));$('#rail').onkeydown=e=>{const c=e.target.closest('[data-id]');if(c&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openCard(c)}};
 $('#sf').onsubmit=e=>{e.preventDefault();state.q=$('#sq').value.trim().toLowerCase();state.tab=$('#sd')?.value||'hoy';render();$('#hoy').scrollIntoView({behavior:'smooth'})};
 $('#tabs').onclick=e=>{if(e.target.classList.contains('tab')){state.cat='';state.q='';state.tab=e.target.dataset.t;$('#sq').value='';render()}};
 $('#catgrid').onclick=e=>{const b=e.target.closest('[data-c]');if(b){state.cat=b.dataset.c;state.q='';render();$('#hoy').scrollIntoView({behavior:'smooth'})}};
