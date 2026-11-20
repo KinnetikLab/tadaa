@@ -233,6 +233,26 @@ CREATE TABLE IF NOT EXISTS cashback_rules (
 );
 CREATE INDEX IF NOT EXISTS idx_cashback_rules_active ON cashback_rules(status,event_id,starts_at,ends_at);
 
+-- Compatibility with Beta 2: its reward_ledger stores points (kind/points/source),
+-- while Beta 3 uses a monetary cashback ledger (order_id/amount_minor/status).
+-- Preserve the old records under a legacy name before creating the Beta 3 ledger.
+DO $$
+BEGIN
+  IF to_regclass('public.reward_ledger') IS NOT NULL
+     AND NOT EXISTS (
+       SELECT 1 FROM information_schema.columns
+       WHERE table_schema='public'
+         AND table_name='reward_ledger'
+         AND column_name='order_id'
+     ) THEN
+    IF to_regclass('public.reward_ledger_legacy_beta2') IS NULL THEN
+      ALTER TABLE public.reward_ledger RENAME TO reward_ledger_legacy_beta2;
+    ELSE
+      RAISE EXCEPTION 'reward_ledger legacy table exists and backup name is already occupied; manual review required';
+    END IF;
+  END IF;
+END $$;
+
 CREATE TABLE IF NOT EXISTS reward_ledger (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES app_users(id) ON DELETE CASCADE,
