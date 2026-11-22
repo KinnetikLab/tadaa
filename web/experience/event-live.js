@@ -30,6 +30,7 @@ function panes(e,m){
   res:`<div class="pane" style="display:flex;flex-wrap:wrap;gap:24px">${m.tadaa_rating?`<div style="flex:0 1 200px"><div class="tv-eyebrow" style="color:#1238FF">Calificación TADAA!</div><div class="score">${esc(m.tadaa_rating)}</div><small style="color:#4A5068">De asistentes verificados</small></div>`:''}<div style="flex:1 1 320px">${reviews.length?`<div class="reviews">${reviews.map(r=>`<div class="review"><span style="color:#D6FF35">${stars(r.stars)}</span><p>${esc(r.quote)}</p><span>${esc(r.source)}</span></div>`).join('')}</div>`:'<p class="empty">Aún no hay reseñas. Después de la función podrás calificar tu experiencia.</p>'}</div></div>`
  };
 }
+let extra={addons:[],golden:null,now:[]};
 function render(){
  const e=ev,m=e.metadata||{},img=safeUrl(e.hero_url||e.poster_url||'')||'img/tv/blue-wide.webp';
  const tadaa=e.ticketing_mode==='tadaa',z=types[state.zone];
@@ -54,7 +55,7 @@ function render(){
     <div class="tv-perf" style="--tv-notch:#EEF1F7;margin:20px -22px 0"></div>
     <div class="total"><span style="font-size:13px;color:#4A5068">Total estimado</span><b>${total}</b></div>
     ${tadaa?`<a class="tv-btn" style="width:100%;margin-top:14px" href="app.html#/evento/${encodeURIComponent(e.id)}">${e.seating_mode==='reserved'||e.has_seats?'Elegir asientos':'Elegir boletos'} →</a>`:`<a class="tv-btn" style="width:100%;margin-top:14px" href="app.html#/evento/${encodeURIComponent(e.id)}">Solicitar con TADAA! →</a>${source?`<a class="tv-btn ghost" style="width:100%;margin-top:10px;color:#08091A;border-color:#D5DBEA" target="_blank" rel="noopener noreferrer" href="${esc(source)}">Ver fuente oficial ↗</a>`:''}`}
-    ${m.golden_enabled?`<div class="golden-note"><b>1/100</b><span>Tu boleto puede convertirse en <b style="font:inherit;font-weight:800">Golden Ticket</b>${m.golden_benefit?': '+esc(m.golden_benefit):''}.</span></div>`:''}
+    ${extra.golden||m.golden_enabled?`<div class="golden-note"><b>1/${esc(extra.golden?.odds||100)}</b><span>Tu boleto puede convertirse en <b style="font:inherit;font-weight:800">Golden Ticket</b>${extra.golden?.benefit_title?': '+esc(extra.golden.benefit_title):m.golden_benefit?': '+esc(m.golden_benefit):''}.</span></div>`:''}${extra.now.map(n=>`<a class="now-note" href="app.html#/now"><b>Now!</b><span>${esc(n.ticket_type)} a ${money(n.price_minor)} · ${n.state==='open'?'¡abierto para registrados!':'regístrate antes de que abra'} · ${n.signups} registrados</span></a>`).join('')}${extra.addons.length&&tadaa?`<div class="addons-note"><b>Agrega a tu plan</b>${extra.addons.map(a=>`<div class="row"><span>${esc(a.title)}</span><b>${a.available>0?money(a.price_minor):'Agotado'}</b></div>`).join('')}<small>Se eligen al comprar en Mi TADAA! y se entregan en el evento.</small></div>`:''}
    </div>
    <div class="before"><h3>${tadaa?'Antes de comprar':'Antes de solicitar'}</h3>${tadaa?'• Tus lugares se apartan mientras pagas con Clip.<br>• Recibes tu boleto final con QR dinámico en Mi Wallet; las capturas no sirven.':'• Sin pago ahora: confirmamos disponibilidad con el proveedor.<br>• Recibes un pase provisional de seguimiento; el acceso son los boletos oficiales que entrega el proveedor.'}</div>
   </aside>
@@ -71,7 +72,7 @@ async function load(){
  try{
   const data=await TadaaApi.call('/api/v2/events/'+encodeURIComponent(slug));
   ev=data.event;document.title=ev.title+' · TADAA!';
-  types=(Array.isArray(data.ticketTypes)?data.ticketTypes:[]).filter(t=>t&&t.price_minor!=null&&(t.name||t.section_name));
+  types=(Array.isArray(data.ticketTypes)?data.ticketTypes:[]).filter(t=>t&&!t.now&&t.price_minor!=null&&(t.name||t.section_name));extra={addons:data.addons||[],golden:data.golden||null,now:data.now||[]};
   render();
   try{const cat=await TadaaApi.call('/api/v2/catalog');const list=Array.isArray(cat.events)?cat.events:[];const c=ev.metadata?.category;similar=list.filter(x=>x.id!==ev.id&&(!c||x.metadata?.category===c)).slice(0,4);if(similar.length<4)similar=similar.concat(list.filter(x=>x.id!==ev.id&&!similar.includes(x)).slice(0,4-similar.length));render()}catch{}
  }catch(err){root.innerHTML=`<div class="wrap" style="padding-top:40px"><div class="before"><h3>No pudimos cargar esta ficha.</h3><p>${esc(err.message)}</p><a class="tv-btn" href="index.html">Volver a cartelera</a></div></div>`}
