@@ -7,6 +7,7 @@ import {readVault,saveVault,writeAudit,auditRecent} from './vault.mjs';
 import {verifyPassword,isRateLimited,failedLogin,successfulLogin,createSession,currentSession,clearSession,csrfMatches} from './auth.mjs';
 import {checkConnection} from './tests.mjs';
 import {databaseStatus} from './db.mjs';
+import {platformRequest} from './platform.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../web');
 const PUBLIC_ORIGIN=process.env.PUBLIC_ORIGIN||'http://localhost:3000';
 if(process.env.NODE_ENV==='production'&&!/^https:\/\/[a-z0-9.-]+(?::\d+)?$/i.test(PUBLIC_ORIGIN))throw Error('PUBLIC_ORIGIN debe tener HTTPS en producción');
@@ -18,13 +19,30 @@ function corsGuard(req){const origin=req.headers.origin;return !origin||origin==
 function reqSecure(req){return req.socket.encrypted||req.headers['x-forwarded-proto']==='https';}
 async function body(req){let count=0;const chunks=[];for await(const chunk of req){count+=chunk.length;if(count>20_000)throw new Error('JSON supera el tamaño permitido');chunks.push(chunk)}const str=Buffer.concat(chunks).toString('utf8');return str?JSON.parse(str):{}}
 async function request(req,res){
- res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('X-Frame-Options','DENY');res.setHeader('Referrer-Policy','no-referrer');res.setHeader('Permissions-Policy','camera=(), microphone=(), geolocation=()');
+ res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('X-Frame-Options','DENY');res.setHeader('Referrer-Policy','no-referrer');res.setHeader('Permissions-Policy','camera=(self), microphone=(), geolocation=()');
  const u=new URL(req.url,'http://local');const pathname=u.pathname;
+ // La portada vive en /experience/. Sin esta redirección, /curtain.js,
+ // /site-live.js y /login.html se resuelven incorrectamente desde /.
+ const aliasPaths={
+  '/':'/experience/',
+  '/index.html':'/experience/',
+  '/login.html':'/experience/login.html',
+  '/app.html':'/experience/app.html',
+  '/admin.html':'/experience/admin.html',
+  '/partner.html':'/experience/partner.html',
+  '/staff.html':'/experience/staff.html'
+ };
+ if(Object.prototype.hasOwnProperty.call(aliasPaths,pathname)){
+  res.writeHead(302,{'Location':aliasPaths[pathname]+(u.search||'')+(u.hash||''),'Cache-Control':'no-store'});
+  res.end();return;
+ }
+
  if(pathname.startsWith('/api/')){
   if(process.env.NODE_ENV==='production'&&!reqSecure(req))return send(res,403,{error:'HTTPS obligatorio'});
   if(!corsGuard(req))return send(res,403,{error:'Origen no autorizado'});
   try{
-   if(pathname==='/api/public/status'&&req.method==='GET'){const database=await databaseStatus();return send(res,200,{server:true,version:'0.6.1',configuredServices:'private',database,ordersMode:'demo',checkoutMode:'demo'});}
+   if(await platformRequest(req,res,pathname,u))return;
+   if(pathname==='/api/public/status'&&req.method==='GET'){const database=await databaseStatus();return send(res,200,{server:true,version:'3.0.0-beta.1',configuredServices:'private',database,ordersMode:'postgresql',checkoutMode:'clip-checkout-v2-or-internal-test',realPayments:false});}
    if(pathname==='/api/admin/login'&&req.method==='POST'){
     const ip=ipOf(req);if(isRateLimited(ip))return send(res,429,{error:'Demasiados intentos. Intenta más tarde.'});
     const d=await body(req);if(!verifyPassword(d.password)){failedLogin(ip);return send(res,401,{error:'Contraseña incorrecta'})}
@@ -56,7 +74,8 @@ async function request(req,res){
   }catch(e){if(e instanceof SyntaxError)return send(res,400,{error:'JSON incorrecto'});if(e.message?.includes('no permitido')||e.message?.includes('incorrecto')||e.message?.includes('inválido')||e.message?.includes('Código postal'))return send(res,400,{error:e.message});console.error('Error API:',e.name);return send(res,500,{error:'Error interno. Consulta los logs del servidor.'});}
  }
  if(req.method!=='GET'&&req.method!=='HEAD'){res.writeHead(405);return res.end()}
- let file=pathname==='/'?'/index.html':decodeURIComponent(pathname);
+ let file=decodeURIComponent(pathname);
+ if(pathname==='/experience/'||pathname==='/experience')file='/experience/index.html';
  // Never expose files outside the web directory.
  if(file.includes('\0')){res.writeHead(400);return res.end()}
  const target=path.resolve(root,'.'+file);
@@ -64,8 +83,8 @@ async function request(req,res){
  let st;try{st=fs.statSync(target)}catch{res.writeHead(404);return res.end()}
  if(!st.isFile()){res.writeHead(404);return res.end()}
  const type=types[path.extname(target)]||'application/octet-stream';
- res.setHeader('Content-Type',type);res.setHeader('Cache-Control',path.extname(target)==='.html'?'no-store':'public, max-age=3600');
+ res.setHeader('Content-Type',type);res.setHeader('Cache-Control',['.html','.js','.css'].includes(path.extname(target))?'no-store':'public, max-age=3600');
  if(req.method==='HEAD'){res.writeHead(200);return res.end()}
  fs.createReadStream(target).pipe(res);
 }
-http.createServer((req,res)=>{request(req,res).catch(e=>{console.error('Error:',e.name);if(!res.headersSent)send(res,500,{error:'Error de servidor'})})}).listen(PORT,'0.0.0.0',()=>console.log('TADAA! v0.6 en puerto '+PORT));
+http.createServer((req,res)=>{request(req,res).catch(e=>{console.error('Error:',e.name);if(!res.headersSent)send(res,500,{error:'Error de servidor'})})}).listen(PORT,'0.0.0.0',()=>console.log('TADAA! Beta2 core en puerto '+PORT));

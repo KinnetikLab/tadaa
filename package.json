@@ -1,7 +1,7 @@
 {
-  "name": "tadaa-v06",
+  "name": "tadaa-platform",
   "private": true,
-  "version": "0.6.0",
+  "version": "3.0.0-beta.1",
   "type": "module",
   "engines": {
     "node": ">=22"
@@ -10,12 +10,15 @@
     "start": "node server/src/server.mjs",
     "dev": "node server/src/server.mjs",
     "test": "node --test server/src/*.test.mjs",
-    "syntax": "node --check web/app.js && node --check web/integrations.js && node --check server/src/server.mjs",
+    "syntax": "node --check server/src/server.mjs && node --check server/src/platform.mjs && node --check server/src/features.mjs && node --check web/experience/site-live.js && node --check web/experience/app-live.js && node --check web/experience/admin-live.js && node --check web/experience/event-live.js && node --check web/experience/partner-live.js && node --check web/experience/staff-live.js && node --check web/experience/tv-motion.js",
     "setup:secrets": "node server/scripts/setup.mjs",
     "db:migrate": "node server/scripts/migrate.mjs",
-    "deploy:check": "npm run syntax && npm test"
+    "deploy:check": "npm run syntax && npm test",
+    "db:seed:cdmx-demo": "node server/scripts/seed-cdmx-demo.mjs"
   },
   "dependencies": {
-    "pg": "^8.16.3"
+    "pg": "^8.16.3",
+    "qrcode": "^1.5.4",
+    "exceljs": "^4.4.0"
   }
 }

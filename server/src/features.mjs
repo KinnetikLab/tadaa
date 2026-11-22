@@ -1,0 +1,201 @@
+/* TADAA! Ticket vibrante — Now!, Golden Ticket aleatorio, add-ons, RFC, portales y app de Staff.
+ * Se monta desde platform.mjs: los helpers de sesión/permisos llegan en `ctx` para no duplicar
+ * la lógica de seguridad. Todo lo comercial vive en PostgreSQL (migración 004).
+ */
+import crypto from 'node:crypto';
+
+// ───────────────────────── helpers puros (cubiertos por features.test.mjs) ─────────────────────────
+const RFC_RE=/^([A-ZÑ&]{3,4})(\d{2})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])([A-Z\d]{2}[A\d])$/;
+export function normalizeRfc(x){return String(x??'').toUpperCase().replace(/[\s-]/g,'').slice(0,13)}
+export function validRfc(x){const v=normalizeRfc(x);return (v.length===12||v.length===13)&&RFC_RE.test(v)}
+export function rollGolden(odds,rand=n=>crypto.randomInt(n)){const n=Math.trunc(Number(odds));if(!Number.isFinite(n)||n<2)return false;return rand(n)===0}
+export function nowState(c,at=new Date()){if(!c||c.enabled===false)return 'off';const t=+at;if(t<+new Date(c.opens_at))return 'upcoming';if(c.closes_at&&t>=+new Date(c.closes_at))return 'closed';return 'open'}
+export function discounted(baseMinor,pct){return Math.max(0,Math.round(Number(baseMinor)*(100-Number(pct||0))/100))}
+export function folio(orderId){return 'TD-'+String(orderId||'').replace(/-/g,'').slice(0,8).toUpperCase()}
+export function accountLevel(stats){const xp=(stats.tickets||0)*100+(stats.attended||0)*150+(stats.golden||0)*250+(stats.months||0)*80;const levels=[[0,'Curioso'],[300,'Fan'],[900,'Habitual'],[2000,'Leyenda'],[4000,'Ícono TADAA!']];let i=0;while(i+1<levels.length&&xp>=levels[i+1][0])i++;const next=levels[i+1]?.[0]??null;return {xp,level:i+1,name:levels[i][1],nextAt:next,progress:next?Math.round((xp-levels[i][0])/(next-levels[i][0])*100):100}}
+export function accountBadges(stats){const b=[];if(stats.tickets>=1)b.push({key:'primer_plan',title:'Primer plan'});if(stats.attended>=3)b.push({key:'habitual',title:'Siempre llega'});if(stats.golden>=1)b.push({key:'golden',title:'Golden'});if(stats.now>=1)b.push({key:'now',title:'Reflejos Now!'});if(stats.months>=3)b.push({key:'socio',title:'Socio fiel'});if(stats.categories>=3)b.push({key:'explorador',title:'Explorador'});return b}
+
+const BENEFIT_KINDS=['upgrade','meet_greet','ticket','custom'];
+const ADDON_KINDS=['merch','combo','food','experience','parking'];
+const META_KEYS=['logo_url','tadaa_original','cast','crew','duration','rating','tags','reviews','tadaa_rating','synopsis','category','preventa','proximamente'];
+
+// ───────────────────────── hooks usados por platform.mjs ─────────────────────────
+/** Now!: si el tipo de boleto pertenece a una campaña, solo registrados compran, primero en pagar. */
+export async function nowGate(c,{userId,ticketType,quantity,invalid}){
+ const r=await c.query(`SELECT * FROM now_campaigns WHERE ticket_type_id=$1 AND enabled FOR UPDATE`,[ticketType.id]);const camp=r.rows[0];if(!camp)return null;
+ const st=nowState(camp);
+ if(st==='upcoming')throw invalid('Now! abre '+new Date(camp.opens_at).toLocaleString('es-MX',{timeZone:'America/Mexico_City',dateStyle:'medium',timeStyle:'short'})+'. Regístrate para entrar.',409);
+ if(st==='closed')throw invalid('Esta venta Now! ya cerró',409);
+ const sign=await c.query('SELECT 1 FROM now_signups WHERE campaign_id=$1 AND user_id=$2',[camp.id,userId]);if(!sign.rowCount)throw invalid('Now! es solo para registrados. Regístrate antes de que abra.',403);
+ const used=await c.query(`SELECT COALESCE(sum(oi.quantity),0)::int total,COALESCE(sum(oi.quantity) FILTER(WHERE o.user_id=$2),0)::int mine FROM orders o JOIN order_items oi ON oi.order_id=o.id WHERE o.metadata->>'nowCampaignId'=$1 AND o.status IN('pending','paid')`,[camp.id,userId]);
+ if(used.rows[0].mine+quantity>camp.max_per_user)throw invalid(`Now! permite máximo ${camp.max_per_user} boletos por persona`,409);
+ if(used.rows[0].total+quantity>camp.quota)throw invalid('Se agotaron los lugares Now!. Los primeros en pagar se los llevaron.',409);
+ return {campaignId:camp.id,unitPriceMinor:camp.price_minor==null?Number(ticketType.price_minor):Number(camp.price_minor)};
+}
+/** Add-ons: valida stock (stock − pedidos vivos) y regresa líneas con precio del servidor. */
+export async function prepareAddons(c,{eventId,addons,invalid}){
+ if(addons===undefined||addons===null)return [];
+ if(!Array.isArray(addons)||addons.length>12)throw invalid('Add-ons inválidos');
+ const lines=[],seen=new Set();
+ for(const a of addons){const id=String(a?.id||''),qty=Number(a?.quantity);if(!/^[0-9a-f-]{36}$/i.test(id)||!Number.isInteger(qty)||qty<1||seen.has(id))throw invalid('Add-on inválido');seen.add(id);
+  const r=await c.query(`SELECT a.*,a.stock-COALESCE((SELECT sum(x.quantity) FROM order_addons x JOIN orders o ON o.id=x.order_id WHERE x.addon_id=a.id AND o.status IN('pending','paid')),0) available FROM event_addons a WHERE a.id=$1 AND a.event_id=$2 AND a.active FOR UPDATE OF a`,[id,eventId]);
+  const row=r.rows[0];if(!row)throw invalid('Ese add-on ya no está disponible',409);if(qty>row.max_per_order)throw invalid(`Máximo ${row.max_per_order} de “${row.title}” por pedido`);if(Number(row.available)<qty)throw invalid(`“${row.title}” se agotó`,409);
+  lines.push({id,title:row.title,quantity:qty,unitPriceMinor:Number(row.price_minor),totalMinor:Number(row.price_minor)*qty});}
+ return lines;
+}
+export async function saveAddons(c,orderId,lines){for(const l of lines)await c.query(`INSERT INTO order_addons(order_id,addon_id,title,quantity,unit_price_minor,total_minor) VALUES($1,$2,$3,$4,$5,$6)`,[orderId,l.id,l.title,l.quantity,l.unitPriceMinor,l.totalMinor])}
+/** Emite un boleto y tira el dado del Golden Ticket aleatorio del evento. */
+export async function issueTicket(c,{itemId,userId,seatId=null,eventId=null,rand}){
+ const code=crypto.createHash('sha256').update(crypto.randomBytes(32)).digest('hex');
+ let golden=false,benefit=null;
+ if(eventId){const g=await c.query(`SELECT * FROM event_golden_config WHERE event_id=$1 AND enabled FOR UPDATE`,[eventId]);const cfg=g.rows[0];
+  if(cfg){const won=await c.query(`SELECT count(*)::int n FROM tickets t JOIN order_items oi ON oi.id=t.order_item_id JOIN orders o ON o.id=oi.order_id JOIN reservations r ON r.id=o.reservation_id WHERE r.event_id=$1 AND t.golden`,[eventId]);
+   if(won.rows[0].n<cfg.max_winners&&rollGolden(cfg.odds,rand)){golden=true;benefit={kind:cfg.benefit_kind,title:cfg.benefit_title,detail:cfg.benefit_detail||null,eventId:cfg.benefit_event_id||null};}}}
+ const t=await c.query(`INSERT INTO tickets(order_item_id,owner_user_id,code_hash,seat_id,golden,golden_benefit) VALUES($1,$2,$3,$4,$5,$6) RETURNING id`,[itemId,userId,code,seatId,golden,benefit?JSON.stringify(benefit):null]);
+ if(golden)await c.query(`INSERT INTO user_notifications(user_id,kind,title,message,action_url) VALUES($1,'golden_ticket','¡Te salió un Golden Ticket!','Uno de tus boletos se volvió dorado. Ábrelo para descubrir tu beneficio.','/experience/app.html#/boletos')`,[userId]);
+ return {id:t.rows[0].id,golden};
+}
+/** Precio de membresía: $100/mes o el descuento de una oferta abierta (p. ej. salida de convenio). */
+export async function membershipQuote(c,userId,baseMinor=10000){
+ const r=await c.query(`SELECT id,discount_pct FROM membership_offers WHERE user_id=$1 AND months_used<months_total AND expires_at>now() ORDER BY discount_pct DESC LIMIT 1`,[userId]);const o=r.rows[0];
+ return o?{priceMinor:discounted(baseMinor,o.discount_pct),offerId:o.id,discountPct:o.discount_pct}:{priceMinor:baseMinor,offerId:null,discountPct:0};
+}
+export async function consumeMembershipOffer(c,orderId){const r=await c.query(`SELECT metadata->>'offerId' offer FROM orders WHERE id=$1`,[orderId]);const id=r.rows[0]?.offer;if(id)await c.query(`UPDATE membership_offers SET months_used=months_used+1,expires_at=GREATEST(expires_at,now()+interval '45 days') WHERE id=$1 AND months_used<months_total`,[id])}
+/** Baja de convenio: solo inactiva beneficios y ofrece “Un pajarito nos contó…”. */
+export async function employeeExit(c,{orgId,employee}){
+ if(!employee?.claimed_by)return false;
+ await c.query(`INSERT INTO membership_offers(user_id,kind,discount_pct,months_total,source_organization_id) VALUES($1,'company_exit',50,3,$2) ON CONFLICT DO NOTHING`,[employee.claimed_by,orgId]);
+ await c.query(`INSERT INTO user_notifications(user_id,kind,title,message,action_url) VALUES($1,'company_exit','Un pajarito nos contó…','Tus beneficios de convenio se pausaron, pero tu cuenta sigue aquí. Te regalamos 3 meses de membresía al 50%.','/experience/app.html#/membresia')`,[employee.claimed_by]);
+ return true;
+}
+/** Re-afiliación por RFC: liga el registro de colaborador con la cuenta existente, sin duplicar. */
+export async function linkEmployeeByRfc(c,{orgId,code,rfc}){
+ if(!rfc)return null;const u=await c.query(`SELECT user_id FROM user_profiles WHERE upper(rfc)=upper($1)`,[rfc]);if(!u.rowCount)return null;
+ await c.query(`UPDATE company_employees SET claimed_by=$1,approved_at=COALESCE(approved_at,now()),updated_at=now() WHERE organization_id=$2 AND employee_code=$3 AND (claimed_by IS NULL OR claimed_by=$1)`,[u.rows[0].user_id,orgId,code]);return u.rows[0].user_id;
+}
+/** Info pública extra de la ficha de evento. */
+export async function eventPublicExtras(p,eventId){
+ const [addons,golden,now]=await Promise.all([
+  p.query(`SELECT a.id,a.kind,a.title,a.description,a.price_minor,a.max_per_order,a.image_url,GREATEST(a.stock-COALESCE((SELECT sum(x.quantity) FROM order_addons x JOIN orders o ON o.id=x.order_id WHERE x.addon_id=a.id AND o.status IN('pending','paid')),0),0)::int available FROM event_addons a WHERE a.event_id=$1 AND a.active ORDER BY a.sort_order,a.price_minor`,[eventId]),
+  p.query(`SELECT enabled,odds,benefit_kind,benefit_title,benefit_detail FROM event_golden_config WHERE event_id=$1 AND enabled`,[eventId]),
+  p.query(`SELECT n.id,n.ticket_type_id,n.function_label,n.opens_at,n.closes_at,COALESCE(n.price_minor,t.price_minor) price_minor,n.quota,n.max_per_user,n.enabled,t.name ticket_type,(SELECT count(*)::int FROM now_signups s WHERE s.campaign_id=n.id) signups FROM now_campaigns n JOIN ticket_types t ON t.id=n.ticket_type_id WHERE n.event_id=$1 AND n.enabled AND (n.closes_at IS NULL OR n.closes_at>now()) ORDER BY n.opens_at`,[eventId])]);
+ return {addons:addons.rows,golden:golden.rows[0]||null,now:now.rows.map(x=>({...x,state:nowState(x)}))};
+}
+
+// ───────────────────────── rutas ─────────────────────────
+async function isStaff(ctx,userId,org){if(await ctx.canManage(userId,org))return true;const r=await ctx.getPool().query(`SELECT 1 FROM organization_members WHERE user_id=$1 AND organization_id=$2 AND role IN('staff','scanner')`,[userId,org]);return r.rowCount>0}
+async function staffUser(req,ctx,org){const s=await ctx.requireUser(req);if(!ctx.uuid(org)||!(await isStaff(ctx,s.user_id,org)))throw ctx.invalid('No eres staff de esa organización',403);return s}
+async function producerUser(req,ctx,org){const s=await ctx.organizationManager(req,org);const a=await ctx.getPool().query(`SELECT 1 FROM partner_agreements WHERE organization_id=$1 AND kind='producer' AND status='active'`,[org]);if(!a.rowCount)throw ctx.invalid('La organización no tiene convenio de productor activo',403);return s}
+async function ownEvent(ctx,org,eventId){if(!ctx.uuid(eventId))throw ctx.invalid('Evento inválido');const r=await ctx.getPool().query('SELECT id,title,starts_at,ticketing_mode,metadata FROM events WHERE id=$1 AND organization_id=$2',[eventId,org]);if(!r.rowCount)throw ctx.invalid('Evento no encontrado en tu organización',404);return r.rows[0]}
+async function syncFlags(p,eventId){await p.query(`UPDATE events SET metadata=metadata||jsonb_build_object('now_enabled',EXISTS(SELECT 1 FROM now_campaigns WHERE event_id=$1 AND enabled AND (closes_at IS NULL OR closes_at>now())),'golden_enabled',EXISTS(SELECT 1 FROM event_golden_config WHERE event_id=$1 AND enabled),'addons_enabled',EXISTS(SELECT 1 FROM event_addons WHERE event_id=$1 AND active)),updated_at=now() WHERE id=$1`,[eventId])}
+const EVENT_ORDERS=`FROM orders o JOIN reservations r ON r.id=o.reservation_id JOIN events e ON e.id=r.event_id LEFT JOIN app_users u ON u.id=o.user_id LEFT JOIN user_profiles up ON up.user_id=u.id`;
+const ORDER_FIELDS=`o.id,o.status,o.total_minor,o.created_at,o.metadata->>'nowCampaignId' now_campaign_id,e.id event_id,e.title event_title,e.ticketing_mode,u.full_name buyer_name,u.email buyer_email,
+ (SELECT COALESCE(sum(oi.quantity),0)::int FROM order_items oi WHERE oi.order_id=o.id) quantity,
+ (SELECT json_agg(json_build_object('id',t.id,'status',t.status,'delivery_status',t.delivery_status,'golden',t.golden,'used_at',t.used_at,'external_reference',t.external_reference) ORDER BY t.created_at) FROM tickets t JOIN order_items oi ON oi.id=t.order_item_id WHERE oi.order_id=o.id) tickets,
+ (SELECT json_agg(json_build_object('id',x.id,'title',x.title,'quantity',x.quantity,'delivered_at',x.delivered_at)) FROM order_addons x WHERE x.order_id=o.id) addons,
+ (SELECT COALESCE(sum(people),0)::int FROM order_access_checks ac WHERE ac.order_id=o.id) people_checked`;
+const withFolio=rows=>rows.map(x=>({...x,folio:folio(x.id)}));
+
+export async function featureRequest(req,res,pathname,url,parts,ctx){
+ const {getPool,response,invalid,reqBody,clean,uuid,requireUser,requireAdmin,audit}=ctx;const p=getPool();const M=req.method;
+
+ // ── Now! (usuarios) ──
+ if(pathname==='/api/v2/now'&&M==='GET'){const s=await ctx.session(req);const r=await p.query(`SELECT n.id,n.event_id,n.ticket_type_id,n.function_label,n.opens_at,n.closes_at,COALESCE(n.price_minor,t.price_minor) price_minor,t.price_minor regular_price_minor,n.quota,n.max_per_user,n.enabled,t.name ticket_type,e.title,e.slug,e.starts_at,e.metadata,v.name venue,ex.hero_url,ex.poster_url,
+  (SELECT count(*)::int FROM now_signups s WHERE s.campaign_id=n.id) signups,
+  GREATEST(n.quota-(SELECT COALESCE(sum(oi.quantity),0) FROM orders o JOIN order_items oi ON oi.order_id=o.id WHERE o.metadata->>'nowCampaignId'=n.id::text AND o.status IN('pending','paid')),0)::int remaining,
+  EXISTS(SELECT 1 FROM now_signups s WHERE s.campaign_id=n.id AND s.user_id=$1) signed
+  FROM now_campaigns n JOIN ticket_types t ON t.id=n.ticket_type_id JOIN events e ON e.id=n.event_id LEFT JOIN venues v ON v.id=e.venue_id LEFT JOIN event_extras ex ON ex.event_id=e.id
+  WHERE n.enabled AND e.status='published' AND (n.closes_at IS NULL OR n.closes_at>now()) ORDER BY n.opens_at LIMIT 60`,[s?.user_id||null]);
+  return response(res,200,{campaigns:r.rows.map(x=>({...x,state:nowState(x)})),serverTime:new Date().toISOString()}),true}
+ if(parts[2]==='now'&&uuid(parts[3])&&parts[4]==='signup'&&(M==='POST'||M==='DELETE')){const s=await requireUser(req);const r=await p.query(`SELECT n.*,e.status FROM now_campaigns n JOIN events e ON e.id=n.event_id WHERE n.id=$1`,[parts[3]]);const camp=r.rows[0];if(!camp||camp.status!=='published'||!camp.enabled)throw invalid('Campaña Now! no disponible',404);
+  if(M==='DELETE'){await p.query('DELETE FROM now_signups WHERE campaign_id=$1 AND user_id=$2',[camp.id,s.user_id]);return response(res,200,{ok:true,signed:false}),true}
+  if(nowState(camp)==='closed')throw invalid('Esta venta Now! ya cerró',409);
+  if(nowState(camp)==='open')throw invalid('El registro cerró: Now! ya abrió para los registrados',409);
+  await p.query('INSERT INTO now_signups(campaign_id,user_id) VALUES($1,$2) ON CONFLICT DO NOTHING',[camp.id,s.user_id]);return response(res,201,{ok:true,signed:true,opensAt:camp.opens_at}),true}
+
+ // ── Golden reveal + cuenta ──
+ if(parts[2]==='tickets'&&uuid(parts[3])&&parts[4]==='reveal'&&M==='POST'){const s=await requireUser(req);const r=await p.query(`UPDATE tickets SET golden_revealed_at=COALESCE(golden_revealed_at,now()) WHERE id=$1 AND owner_user_id=$2 AND golden RETURNING id,golden_benefit,golden_revealed_at`,[parts[3],s.user_id]);if(!r.rowCount)throw invalid('Este boleto no es dorado',404);return response(res,200,{ok:true,benefit:r.rows[0].golden_benefit,revealedAt:r.rows[0].golden_revealed_at}),true}
+ if(pathname==='/api/v2/me/account'&&M==='GET'){const s=await requireUser(req);const [prof,st,offers]=await Promise.all([
+   p.query('SELECT rfc FROM user_profiles WHERE user_id=$1',[s.user_id]),
+   p.query(`SELECT count(*)::int tickets,count(*) FILTER(WHERE t.status='used')::int attended,count(*) FILTER(WHERE t.golden)::int golden,count(DISTINCT o.id) FILTER(WHERE o.metadata ? 'nowCampaignId')::int now,count(DISTINCT e.metadata->>'category')::int categories,
+    (SELECT COALESCE(sum(GREATEST(1,round(extract(epoch FROM (LEAST(current_period_end,now())-current_period_start))/2592000))),0)::int FROM memberships WHERE user_id=$1 AND current_period_start IS NOT NULL) months
+    FROM tickets t JOIN order_items oi ON oi.id=t.order_item_id JOIN orders o ON o.id=oi.order_id JOIN reservations r ON r.id=o.reservation_id JOIN events e ON e.id=r.event_id WHERE t.owner_user_id=$1`,[s.user_id]),
+   p.query(`SELECT id,kind,discount_pct,months_total,months_used,expires_at FROM membership_offers WHERE user_id=$1 AND months_used<months_total AND expires_at>now()`,[s.user_id])]);
+  const stats=st.rows[0];return response(res,200,{rfc:prof.rows[0]?.rfc||null,stats,level:accountLevel(stats),badges:accountBadges(stats),offers:offers.rows}),true}
+ if(pathname==='/api/v2/me/rfc'&&M==='PUT'){const s=await requireUser(req),d=await reqBody(req),rfc=normalizeRfc(d.rfc);if(!validRfc(rfc))throw invalid('RFC inválido: revisa los 12 o 13 caracteres');
+  const dup=await p.query('SELECT user_id FROM user_profiles WHERE upper(rfc)=$1 AND user_id<>$2',[rfc,s.user_id]);if(dup.rowCount)throw invalid('Ese RFC ya está ligado a otra cuenta TADAA!. Inicia sesión con ella para reactivar tus beneficios.',409);
+  await p.query(`INSERT INTO user_profiles(user_id,rfc) VALUES($1,$2) ON CONFLICT(user_id) DO UPDATE SET rfc=EXCLUDED.rfc,updated_at=now()`,[s.user_id,rfc]);
+  const linked=await p.query(`UPDATE company_employees SET claimed_by=$1,updated_at=now() WHERE upper(rfc)=$2 AND claimed_by IS NULL RETURNING organization_id`,[s.user_id,rfc]);
+  await audit(s.user_id,'profile.rfc','user',s.user_id,{linked:linked.rowCount});return response(res,200,{ok:true,rfc,linkedAgreements:linked.rowCount}),true}
+
+ // ── Productores ──
+ if(parts[2]==='orgs'&&uuid(parts[3])&&parts[4]==='producer'){const org=parts[3];
+  if(parts[5]==='purchases'&&M==='GET'){await producerUser(req,ctx,org);const ev=url.searchParams.get('eventId'),q=clean(url.searchParams.get('q'),80);const args=[org];let where=`e.organization_id=$1 AND o.status='paid'`;if(uuid(ev)){args.push(ev);where+=` AND e.id=$${args.length}`}if(q){args.push('%'+q.toLowerCase()+'%');where+=` AND (lower(u.full_name) LIKE $${args.length} OR lower(u.email) LIKE $${args.length} OR lower(o.id::text) LIKE $${args.length})`}
+   const r=await p.query(`SELECT ${ORDER_FIELDS} ${EVENT_ORDERS} WHERE ${where} ORDER BY o.created_at DESC LIMIT 300`,args);
+   const totals=await p.query(`SELECT count(DISTINCT o.id)::int orders,COALESCE(sum(o.total_minor),0)::bigint gross_minor,(SELECT count(*)::int FROM tickets t JOIN order_items oi ON oi.id=t.order_item_id JOIN orders o2 ON o2.id=oi.order_id JOIN reservations r2 ON r2.id=o2.reservation_id JOIN events e2 ON e2.id=r2.event_id WHERE e2.organization_id=$1 AND t.golden) golden ${EVENT_ORDERS} WHERE e.organization_id=$1 AND o.status='paid'`,[org]);
+   return response(res,200,{purchases:withFolio(r.rows),totals:totals.rows[0]}),true}
+  if(parts[5]==='events'&&uuid(parts[6])&&parts[7]==='features'&&M==='GET'){await producerUser(req,ctx,org);const e=await ownEvent(ctx,org,parts[6]);const [golden,now,addons,types]=await Promise.all([
+    p.query('SELECT * FROM event_golden_config WHERE event_id=$1',[e.id]),
+    p.query(`SELECT n.*,t.name ticket_type,(SELECT count(*)::int FROM now_signups s WHERE s.campaign_id=n.id) signups FROM now_campaigns n JOIN ticket_types t ON t.id=n.ticket_type_id WHERE n.event_id=$1 ORDER BY n.opens_at`,[e.id]),
+    p.query(`SELECT a.*,(SELECT COALESCE(sum(x.quantity),0)::int FROM order_addons x JOIN orders o ON o.id=x.order_id WHERE x.addon_id=a.id AND o.status='paid') sold FROM event_addons a WHERE a.event_id=$1 ORDER BY a.sort_order,a.created_at`,[e.id]),
+    p.query('SELECT id,name,price_minor,quantity_total,quantity_reserved FROM ticket_types WHERE event_id=$1 ORDER BY price_minor',[e.id])]);
+   return response(res,200,{event:e,golden:golden.rows[0]||{enabled:false,odds:100,max_winners:10,benefit_kind:'upgrade',benefit_title:'Upgrade de sección'},now:now.rows.map(x=>({...x,state:nowState(x)})),addons:addons.rows,ticketTypes:types.rows}),true}
+  if(parts[5]==='events'&&uuid(parts[6])&&parts[7]==='golden'&&M==='PUT'){const s=await producerUser(req,ctx,org),e=await ownEvent(ctx,org,parts[6]),d=await reqBody(req);const kind=BENEFIT_KINDS.includes(d.benefitKind)?d.benefitKind:'upgrade',title=clean(d.benefitTitle,120)||'Upgrade de sección',odds=Math.max(2,Math.min(100000,Math.trunc(Number(d.odds)||100))),max=Number.isFinite(Number(d.maxWinners))&&d.maxWinners!==''&&d.maxWinners!==null?Math.max(0,Math.min(10000,Math.trunc(Number(d.maxWinners)))):10;
+   if(kind==='ticket'&&d.benefitEventId&&!uuid(d.benefitEventId))throw invalid('Evento de regalo inválido');
+   await p.query(`INSERT INTO event_golden_config(event_id,enabled,odds,max_winners,benefit_kind,benefit_title,benefit_detail,benefit_event_id,updated_by) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9) ON CONFLICT(event_id) DO UPDATE SET enabled=EXCLUDED.enabled,odds=EXCLUDED.odds,max_winners=EXCLUDED.max_winners,benefit_kind=EXCLUDED.benefit_kind,benefit_title=EXCLUDED.benefit_title,benefit_detail=EXCLUDED.benefit_detail,benefit_event_id=EXCLUDED.benefit_event_id,updated_by=EXCLUDED.updated_by,updated_at=now()`,[e.id,d.enabled===true,odds,max,kind,title,clean(d.benefitDetail,500)||null,kind==='ticket'&&uuid(d.benefitEventId)?d.benefitEventId:null,s.user_id]);
+   await syncFlags(p,e.id);await audit(s.user_id,'producer.golden.config','event',e.id,{enabled:d.enabled===true,odds,kind});return response(res,200,{ok:true}),true}
+  if(parts[5]==='events'&&uuid(parts[6])&&parts[7]==='now'&&M==='POST'){const s=await producerUser(req,ctx,org),e=await ownEvent(ctx,org,parts[6]),d=await reqBody(req);if(!uuid(d.ticketTypeId))throw invalid('Elige el tipo de boleto para Now!');const tt=await p.query('SELECT id FROM ticket_types WHERE id=$1 AND event_id=$2',[d.ticketTypeId,e.id]);if(!tt.rowCount)throw invalid('Tipo de boleto no pertenece al evento',404);
+   let opens=d.opensAt?new Date(d.opensAt):null;if(!opens&&Number(d.hoursBefore)>0&&e.starts_at)opens=new Date(+new Date(e.starts_at)-Number(d.hoursBefore)*3600000);if(!opens||Number.isNaN(+opens))throw invalid('Indica cuándo abre Now! (fecha u horas antes del evento)');
+   const closes=d.closesAt?new Date(d.closesAt):(e.starts_at?new Date(e.starts_at):null);const quota=Math.trunc(Number(d.quota)),maxU=Math.max(1,Math.min(8,Math.trunc(Number(d.maxPerUser)||2)));if(!(quota>0))throw invalid('Cupo Now! requerido');const price=d.priceMinor===undefined||d.priceMinor===null||d.priceMinor===''?null:Math.trunc(Number(d.priceMinor));if(price!==null&&!(price>=0))throw invalid('Precio inválido');
+   const r=await p.query(`INSERT INTO now_campaigns(event_id,ticket_type_id,function_label,opens_at,closes_at,price_minor,quota,max_per_user,enabled,created_by) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) ON CONFLICT(ticket_type_id) DO UPDATE SET function_label=EXCLUDED.function_label,opens_at=EXCLUDED.opens_at,closes_at=EXCLUDED.closes_at,price_minor=EXCLUDED.price_minor,quota=EXCLUDED.quota,max_per_user=EXCLUDED.max_per_user,enabled=EXCLUDED.enabled,updated_at=now() RETURNING id`,[e.id,d.ticketTypeId,clean(d.functionLabel,80)||null,opens,closes,price,quota,maxU,d.enabled!==false,s.user_id]);
+   await syncFlags(p,e.id);await audit(s.user_id,'producer.now.upsert','event',e.id,{campaignId:r.rows[0].id});return response(res,201,{campaignId:r.rows[0].id}),true}
+  if(parts[5]==='now'&&uuid(parts[6])&&M==='PATCH'){const s=await producerUser(req,ctx,org),d=await reqBody(req);const r=await p.query(`UPDATE now_campaigns n SET enabled=COALESCE($1,n.enabled),updated_at=now() FROM events e WHERE n.id=$2 AND e.id=n.event_id AND e.organization_id=$3 RETURNING n.event_id`,[typeof d.enabled==='boolean'?d.enabled:null,parts[6],org]);if(!r.rowCount)throw invalid('Campaña no encontrada',404);await syncFlags(p,r.rows[0].event_id);await audit(s.user_id,'producer.now.toggle','now_campaign',parts[6],{enabled:d.enabled});return response(res,200,{ok:true}),true}
+  if(parts[5]==='events'&&uuid(parts[6])&&parts[7]==='addons'&&M==='POST'){const s=await producerUser(req,ctx,org),e=await ownEvent(ctx,org,parts[6]),d=await reqBody(req);const title=clean(d.title,100),price=Math.trunc(Number(d.priceMinor)),stock=Math.trunc(Number(d.stock));if(title.length<2||!(price>=0)||!(stock>=0))throw invalid('Nombre, precio en centavos y stock requeridos');
+   const r=await p.query(`INSERT INTO event_addons(event_id,kind,title,description,price_minor,stock,max_per_order,image_url,sort_order) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING id`,[e.id,ADDON_KINDS.includes(d.kind)?d.kind:'merch',title,clean(d.description,400)||null,price,stock,Math.max(1,Math.min(20,Math.trunc(Number(d.maxPerOrder)||4))),/^https:\/\//.test(String(d.imageUrl||''))?clean(d.imageUrl,500):null,Math.trunc(Number(d.sortOrder)||0)]);
+   await syncFlags(p,e.id);await audit(s.user_id,'producer.addon.create','event',e.id,{addonId:r.rows[0].id});return response(res,201,{addonId:r.rows[0].id}),true}
+  if(parts[5]==='addons'&&uuid(parts[6])&&M==='PATCH'){const s=await producerUser(req,ctx,org),d=await reqBody(req);const num=x=>x===undefined||x===null||x===''?null:Math.max(0,Math.trunc(Number(x)));const r=await p.query(`UPDATE event_addons a SET active=COALESCE($1,a.active),stock=COALESCE($2,a.stock),price_minor=COALESCE($3,a.price_minor) FROM events e WHERE a.id=$4 AND e.id=a.event_id AND e.organization_id=$5 RETURNING a.event_id`,[typeof d.active==='boolean'?d.active:null,num(d.stock),num(d.priceMinor),parts[6],org]);if(!r.rowCount)throw invalid('Add-on no encontrado',404);await syncFlags(p,r.rows[0].event_id);await audit(s.user_id,'producer.addon.update','event_addon',parts[6]);return response(res,200,{ok:true}),true}
+  if(parts[5]==='tickets'&&uuid(parts[6])&&parts[7]==='delivery'&&M==='PATCH'){const s=await producerUser(req,ctx,org),d=await reqBody(req);if(!['provisional','delivering','final'].includes(d.status))throw invalid('Estado de entrega inválido');const r=await p.query(`UPDATE tickets t SET delivery_status=$1,external_reference=COALESCE($2,t.external_reference) FROM order_items oi,orders o,reservations re,events e WHERE t.id=$3 AND oi.id=t.order_item_id AND o.id=oi.order_id AND re.id=o.reservation_id AND e.id=re.event_id AND e.organization_id=$4 RETURNING t.owner_user_id`,[d.status,clean(d.externalReference,120)||null,parts[6],org]);if(!r.rowCount)throw invalid('Boleto no encontrado',404);
+   if(d.status==='final'&&r.rows[0].owner_user_id)await p.query(`INSERT INTO user_notifications(user_id,kind,title,message,action_url) VALUES($1,'ticket_final','Tu boleto final está listo','Ya puedes usar tu boleto final en la entrada.','/experience/app.html#/boletos')`,[r.rows[0].owner_user_id]);
+   await audit(s.user_id,'producer.ticket.delivery','ticket',parts[6],{status:d.status});return response(res,200,{ok:true}),true}
+ }
+
+ // ── Empresas ──
+ if(parts[2]==='orgs'&&uuid(parts[3])&&parts[4]==='company'){const org=parts[3];
+  if(parts[5]==='stats'&&M==='GET'){await ctx.organizationManager(req,org);const [emp,use,top,monthly]=await Promise.all([
+    p.query(`SELECT count(*)::int total,count(*) FILTER(WHERE active)::int active,count(*) FILTER(WHERE NOT active)::int inactive,count(*) FILTER(WHERE active AND claimed_by IS NOT NULL)::int claimed,count(*) FILTER(WHERE active AND approved_at IS NOT NULL)::int approved FROM company_employees WHERE organization_id=$1`,[org]),
+    p.query(`SELECT count(DISTINCT o.id)::int orders,count(DISTINCT o.user_id)::int buyers,COALESCE(sum(o.total_minor),0)::bigint spend_minor FROM orders o JOIN company_employees ce ON ce.claimed_by=o.user_id AND ce.organization_id=$1 AND ce.active WHERE o.status='paid' AND o.created_at>now()-interval '90 days'`,[org]),
+    p.query(`SELECT e.title,count(DISTINCT o.id)::int orders FROM orders o JOIN company_employees ce ON ce.claimed_by=o.user_id AND ce.organization_id=$1 AND ce.active JOIN reservations r ON r.id=o.reservation_id JOIN events e ON e.id=r.event_id WHERE o.status='paid' GROUP BY e.title ORDER BY orders DESC LIMIT 6`,[org]),
+    p.query(`SELECT to_char(date_trunc('month',o.created_at),'YYYY-MM') AS month,count(DISTINCT o.id)::int orders FROM orders o JOIN company_employees ce ON ce.claimed_by=o.user_id AND ce.organization_id=$1 WHERE o.status='paid' AND o.created_at>now()-interval '6 months' GROUP BY 1 ORDER BY 1`,[org])]);
+   const e=emp.rows[0];return response(res,200,{employees:e,adoptionPct:e.active?Math.round(e.claimed/e.active*100):0,usage:use.rows[0],topEvents:top.rows,monthly:monthly.rows}),true}
+  if(parts[5]==='employees'&&M==='GET'){await ctx.organizationManager(req,org);const q=clean(url.searchParams.get('q'),80).toLowerCase();const r=await p.query(`SELECT ce.id,ce.employee_code,ce.given_name,ce.rfc,ce.active,ce.claimed_by IS NOT NULL claimed,ce.approved_at,ce.deactivated_at,ce.updated_at,u.full_name account_name FROM company_employees ce LEFT JOIN app_users u ON u.id=ce.claimed_by WHERE ce.organization_id=$1 AND ($2='' OR lower(ce.given_name||' '||ce.employee_code||' '||COALESCE(ce.rfc,'')) LIKE '%'||$2||'%') ORDER BY ce.active DESC,ce.updated_at DESC LIMIT 500`,[org,q]);return response(res,200,{employees:r.rows}),true}
+  if(parts[5]==='employees'&&parts.length===6&&M==='POST'){const s=await ctx.organizationManager(req,org),d=await reqBody(req);const code=clean(d.employeeCode,64),name=clean(d.givenName,80),rfc=d.rfc?normalizeRfc(d.rfc):null;if(!/^[-_a-z0-9.]{1,64}$/i.test(code)||!name)throw invalid('Número de colaborador y nombre requeridos');if(rfc&&!validRfc(rfc))throw invalid('RFC inválido');
+   const c=await p.connect();try{await c.query('BEGIN');const r=await c.query(`INSERT INTO company_employees(organization_id,employee_code,given_name,rfc,active) VALUES($1,$2,$3,$4,true) ON CONFLICT(organization_id,employee_code) DO UPDATE SET given_name=EXCLUDED.given_name,rfc=COALESCE(EXCLUDED.rfc,company_employees.rfc),active=true,deactivated_at=NULL,updated_at=now() RETURNING id`,[org,code,name,rfc]);const linked=await linkEmployeeByRfc(c,{orgId:org,code,rfc});await c.query('COMMIT');await audit(s.user_id,'employee.alta','organization',org,{code,linked:!!linked});return response(res,201,{employeeId:r.rows[0].id,linkedExistingAccount:!!linked}),true}catch(e){await c.query('ROLLBACK');throw e}finally{c.release()}}
+  if(parts[5]==='employees'&&uuid(parts[6])&&(parts[7]==='deactivate'||parts[7]==='reactivate')&&M==='POST'){const s=await ctx.organizationManager(req,org);const c=await p.connect();try{await c.query('BEGIN');const on=parts[7]==='reactivate';const r=await c.query(`UPDATE company_employees SET active=$1,deactivated_at=CASE WHEN $1 THEN NULL ELSE now() END,approved_at=CASE WHEN $1 THEN approved_at ELSE NULL END,updated_at=now() WHERE id=$2 AND organization_id=$3 AND active<>$1 RETURNING *`,[on,parts[6],org]);if(!r.rowCount)throw invalid('Colaborador no encontrado o sin cambios',404);let promo=false;if(!on)promo=await employeeExit(c,{orgId:org,employee:r.rows[0]});await c.query('COMMIT');await audit(s.user_id,on?'employee.reactivate':'employee.baja','employee',parts[6]);return response(res,200,{ok:true,active:on,exitOfferSent:promo,note:on?'Beneficios reactivados en la misma cuenta':'Solo se inactivaron los beneficios; la cuenta del colaborador sigue activa'}),true}catch(e){await c.query('ROLLBACK');throw e}finally{c.release()}}
+ }
+
+ // ── Staff ──
+ if(parts[2]==='staff'){
+  if(parts[3]==='me'&&M==='GET'){const s=await requireUser(req);const r=await p.query(`SELECT o.id,o.name,m.role,COALESCE((SELECT json_agg(json_build_object('id',e.id,'title',e.title,'starts_at',e.starts_at,'ticketing_mode',e.ticketing_mode) ORDER BY e.starts_at) FROM events e WHERE e.organization_id=o.id AND e.status='published' AND (e.starts_at IS NULL OR e.starts_at>now()-interval '2 days')),'[]') events FROM organization_members m JOIN organizations o ON o.id=m.organization_id WHERE m.user_id=$1 AND m.role IN('owner','admin','manager','staff','scanner') ORDER BY o.name`,[s.user_id]);return response(res,200,{user:{name:s.full_name,email:s.email},organizations:r.rows}),true}
+  const org=parts[3];
+  if(uuid(org)&&parts[4]==='events'&&uuid(parts[5])&&parts[6]==='scan'&&M==='POST'){const s=await staffUser(req,ctx,org),e=await ownEvent(ctx,org,parts[5]),d=await reqBody(req),id=ctx.verifiedTicket(clean(d.qrPayload,3000));if(!id)throw invalid('QR inválido o vencido: pide que actualicen el boleto',403);
+   const c=await p.connect();try{await c.query('BEGIN');const r=await c.query(`SELECT t.id,t.status,t.delivery_status,t.golden,t.golden_benefit,o.id order_id,u.full_name,tt.name ticket_type,es.section_name,es.row_label,es.seat_label FROM tickets t JOIN order_items oi ON oi.id=t.order_item_id JOIN orders o ON o.id=oi.order_id JOIN reservations re ON re.id=o.reservation_id LEFT JOIN ticket_types tt ON tt.id=oi.ticket_type_id LEFT JOIN app_users u ON u.id=t.owner_user_id LEFT JOIN event_seats es ON es.id=t.seat_id WHERE t.id=$1 AND re.event_id=$2 FOR UPDATE OF t`,[id,e.id]);const t=r.rows[0];
+    if(!t){await c.query('ROLLBACK');throw invalid('Boleto de otro evento',409)}
+    if(t.status!=='valid'){await c.query(`INSERT INTO ticket_scans(ticket_id,scanned_by,result) VALUES($1,$2,'rejected')`,[id,s.user_id]);await c.query('COMMIT');return response(res,409,{accepted:false,error:t.status==='used'?'Boleto ya utilizado':'Boleto no válido',ticket:{...t,folio:folio(t.order_id)}}),true}
+    await c.query(`UPDATE tickets SET status='used',used_at=now() WHERE id=$1`,[id]);await c.query(`INSERT INTO ticket_scans(ticket_id,scanned_by,result) VALUES($1,$2,'accepted')`,[id,s.user_id]);const ad=await c.query(`SELECT id,title,quantity,delivered_at FROM order_addons WHERE order_id=$1`,[t.order_id]);await c.query('COMMIT');
+    return response(res,200,{accepted:true,ticket:{...t,folio:folio(t.order_id)},addons:ad.rows}),true}catch(err){await c.query('ROLLBACK').catch(()=>{});throw err}finally{c.release()}}
+  if(uuid(org)&&parts[4]==='events'&&uuid(parts[5])&&parts[6]==='lookup'&&M==='GET'){await staffUser(req,ctx,org);const e=await ownEvent(ctx,org,parts[5]);const raw=clean(url.searchParams.get('q'),80);const q=raw.toLowerCase().replace(/^td-/,'');if(q.length<3)throw invalid('Escribe al menos 3 caracteres: folio, nombre o correo');
+   const r=await p.query(`SELECT ${ORDER_FIELDS} ${EVENT_ORDERS} WHERE e.id=$1 AND o.status='paid' AND (replace(o.id::text,'-','') LIKE $2||'%' OR lower(u.full_name) LIKE '%'||$2||'%' OR lower(u.email) LIKE '%'||$2||'%' OR EXISTS(SELECT 1 FROM tickets t JOIN order_items oi ON oi.id=t.order_item_id WHERE oi.order_id=o.id AND lower(t.external_reference)=$2)) ORDER BY o.created_at DESC LIMIT 25`,[e.id,q]);
+   return response(res,200,{event:{id:e.id,title:e.title,ticketing_mode:e.ticketing_mode},orders:withFolio(r.rows)}),true}
+  if(uuid(org)&&parts[4]==='events'&&uuid(parts[5])&&parts[6]==='orders'&&uuid(parts[7])&&parts[8]==='access'&&M==='POST'){const s=await staffUser(req,ctx,org),e=await ownEvent(ctx,org,parts[5]),d=await reqBody(req);const c=await p.connect();try{await c.query('BEGIN');const o=await c.query(`SELECT o.id FROM orders o JOIN reservations r ON r.id=o.reservation_id WHERE o.id=$1 AND r.event_id=$2 AND o.status='paid' FOR UPDATE OF o`,[parts[7],e.id]);if(!o.rowCount)throw invalid('Compra no encontrada para este evento',404);
+    const pending=await c.query(`SELECT t.id FROM tickets t JOIN order_items oi ON oi.id=t.order_item_id WHERE oi.order_id=$1 AND t.status='valid' ORDER BY t.created_at FOR UPDATE OF t`,[o.rows[0].id]);const people=Math.max(1,Math.min(pending.rowCount||1,Math.trunc(Number(d.people)||pending.rowCount||1)));if(!pending.rowCount)throw invalid('Todos los accesos de esta compra ya se usaron',409);
+    const ids=pending.rows.slice(0,people).map(x=>x.id);await c.query(`UPDATE tickets SET status='used',used_at=now() WHERE id=ANY($1::uuid[])`,[ids]);for(const id of ids)await c.query(`INSERT INTO ticket_scans(ticket_id,scanned_by,result) VALUES($1,$2,'accepted_manual')`,[id,s.user_id]);
+    await c.query(`INSERT INTO order_access_checks(order_id,event_id,checked_by,people,notes) VALUES($1,$2,$3,$4,$5)`,[o.rows[0].id,e.id,s.user_id,ids.length,clean(d.notes,300)||null]);await c.query('COMMIT');return response(res,200,{ok:true,admitted:ids.length,remaining:pending.rowCount-ids.length}),true}catch(err){await c.query('ROLLBACK');throw err}finally{c.release()}}
+  if(uuid(org)&&parts[4]==='order-addons'&&uuid(parts[5])&&parts[6]==='deliver'&&M==='POST'){const s=await staffUser(req,ctx,org);const r=await p.query(`UPDATE order_addons x SET delivered_at=now(),delivered_by=$1 FROM event_addons a,events e WHERE x.id=$2 AND a.id=x.addon_id AND e.id=a.event_id AND e.organization_id=$3 AND x.delivered_at IS NULL RETURNING x.id,x.title,x.quantity,x.delivered_at`,[s.user_id,parts[5],org]);if(!r.rowCount)throw invalid('Add-on no encontrado o ya entregado',409);return response(res,200,{ok:true,addon:r.rows[0]}),true}
+ }
+
+ // ── Admin TADAA! ──
+ if(parts[2]==='admin'&&parts[3]==='events'&&uuid(parts[4])&&parts[5]==='flags'&&M==='PATCH'){requireAdmin(req);const d=await reqBody(req);const patch={};for(const k of META_KEYS)if(d[k]!==undefined)patch[k]=k==='tadaa_original'||k==='preventa'||k==='proximamente'?d[k]===true:d[k];if(patch.logo_url&&!/^(https:\/\/|\/)/.test(String(patch.logo_url)))throw invalid('Logo debe ser https o ruta relativa');
+  const s=JSON.stringify(patch);if(s.length>60000)throw invalid('Metadata demasiado grande');const r=await p.query(`UPDATE events SET metadata=metadata||$1::jsonb,updated_at=now() WHERE id=$2 RETURNING metadata`,[s,parts[4]]);if(!r.rowCount)throw invalid('Evento no encontrado',404);return response(res,200,{ok:true,metadata:r.rows[0].metadata}),true}
+ if(parts[2]==='admin'&&parts[3]==='features'&&M==='GET'){requireAdmin(req);const r=await p.query(`SELECT (SELECT count(*)::int FROM now_campaigns WHERE enabled) now_active,(SELECT count(*)::int FROM now_signups) now_signups,(SELECT count(*)::int FROM event_golden_config WHERE enabled) golden_events,(SELECT count(*)::int FROM tickets WHERE golden) golden_issued,(SELECT count(*)::int FROM event_addons WHERE active) addons_active,(SELECT count(*)::int FROM membership_offers WHERE months_used<months_total) offers_open,(SELECT count(*)::int FROM events WHERE (metadata->>'tadaa_original')::boolean IS TRUE) originals`);return response(res,200,r.rows[0]),true}
+ return false;
+}

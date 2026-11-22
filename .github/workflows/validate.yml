@@ -27,6 +27,22 @@ jobs:
       - name: Pruebas del servidor
         working-directory: server
         run: npm test
+      - name: Validar nuevas API y experiencia web
+        run: |
+          node --check server/src/platform.mjs
+          node --check web/experience/api.js
+          node --check web/experience/site-live.js
+          node --check web/experience/app-live.js
+          node --check web/experience/admin-live.js
+          node --check web/experience/partner-live.js
+          node --check web/experience/curtain.js
+          node --check web/experience/staff-live.js
+          node --check web/experience/tv-motion.js
+          node --check server/src/features.mjs
+          test -s server/migrations/004_now_golden_addons_rfc.sql
+          test -s server/migrations/002_beta2_core.sql
+          test -s web/experience/admin.html
+          test -s docs/BETA2_INTEGRACION.md
       - name: Revisar Expo JSON
         run: |
           node -e "JSON.parse(require('fs').readFileSync('mobile/app.json'))"
