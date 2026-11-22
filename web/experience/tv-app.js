@@ -27,7 +27,7 @@ function proc(node,scope,out,item){
  if(tag==='sc-for'){const m=(node.getAttribute('list')||'').match(WHOLE),as=node.getAttribute('as')||'item',list=m?lookup(m[1],scope):[];(list||[]).forEach((it,i)=>{const s=Object.create(scope);s[as]=it;s.index=i;for(const c of node.childNodes)proc(c,s,out,it)});return}
  const el=node.namespaceURI==='http://www.w3.org/2000/svg'?document.createElementNS(node.namespaceURI,node.tagName):document.createElement(node.tagName);
  for(const a of node.attributes){if(a.name.startsWith('hint-'))continue;const w=a.value.match(WHOLE);
-  if(/^on[a-z]/i.test(a.name)){const fn=w?lookup(w[1],scope):null;if(typeof fn==='function'){let ev=a.name.slice(2).toLowerCase();if(ev==='change'&&/input|textarea/i.test(tag))ev='input';el.addEventListener(ev,e=>{e.preventDefault?.();fn(e)})}continue}
+  if(/^on[a-z]/i.test(a.name)){const fn=w?lookup(w[1],scope):null;if(typeof fn==='function'){let ev=a.name.slice(2).toLowerCase();if(ev==='change'&&/input|textarea/i.test(tag))ev='input';(el.__tvH=el.__tvH||{})[ev]=fn;bindH(el,ev)}continue}
   let v=w?lookup(w[1],scope):a.value.replace(HOLE,(_,e)=>{const x=lookup(e,scope);return x==null?'':String(x)});
   if(v===false||v==null){if(a.name.startsWith('aria-'))el.setAttribute(a.name,'false');continue}
   if(v===true&&!a.name.startsWith('aria-'))v='';
@@ -38,6 +38,17 @@ function proc(node,scope,out,item){
  out.appendChild(el);
 }
 
+/* Manejadores: un solo listener por tipo que llama a la función vigente (sobrevive al morph). */
+function bindH(el,ev){el.__tvB=el.__tvB||{};if(el.__tvB[ev])return;el.__tvB[ev]=true;el.addEventListener(ev,e=>{const fn=el.__tvH&&el.__tvH[ev];if(!fn)return;if(ev==='click'||ev==='submit')e.preventDefault();fn(e)})}
+/* Morph: actualiza el DOM existente en lugar de reemplazarlo (sin parpadeos, conserva videos, foco y scroll). */
+function syncAttrs(o,n){for(const a of [...o.attributes]){if(!n.hasAttribute(a.name))o.removeAttribute(a.name)}for(const a of n.attributes){if(o.getAttribute(a.name)!==a.value)o.setAttribute(a.name,a.value)}
+ o.__tvItem=n.__tvItem;o.__tvH=n.__tvH;if(n.__tvH)for(const ev in n.__tvH)bindH(o,ev);
+ if(o.tagName==='INPUT'||o.tagName==='TEXTAREA'){if(document.activeElement!==o&&o.value!==(n.getAttribute('value')||''))o.value=n.getAttribute('value')||''}}
+function morph(oldP,newP){const oc=[...oldP.childNodes],nc=[...newP.childNodes];const len=Math.max(oc.length,nc.length);
+ for(let i=0;i<len;i++){const o=oc[i],n=nc[i];if(!n){o.remove();continue}if(!o){oldP.appendChild(n);continue}
+  if(o.nodeType!==n.nodeType||o.nodeName!==n.nodeName||(o.nodeType===1&&o.tagName==='VIDEO'&&o.getAttribute('src')!==n.getAttribute('src'))){oldP.replaceChild(n,o);continue}
+  if(o.nodeType===3||o.nodeType===8){if(o.nodeValue!==n.nodeValue)o.nodeValue=n.nodeValue;continue}
+  if(o.nodeType===1){syncAttrs(o,n);morph(o,n)}}}
 /* ───── estado de la vista ───── */
 let cur=null,comp=null,tplNode=null,pending=false,mode=null,screenName=null;
 function schedule(){if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;paint(false)})}
@@ -47,11 +58,11 @@ function makeComponent(name,code,params){let C=class extends DCLogic{renderVals(
  const c=new C({route:cur,params});return c}
 function paint(first){const host=$host();if(!tplNode)return;let vals={};try{vals=comp?comp.renderVals():{}}catch(e){console.error('[tv] renderVals',screenName,e)}
  const prevRoot=host.firstElementChild;const keep=[...(prevRoot?.querySelectorAll('[data-tv-scroll]')||[])].map(e=>[e.scrollLeft,e.scrollTop]);
- const frag=document.createDocumentFragment();proc(tplNode,vals,frag,null);host.replaceChildren(frag);layout();
+ const frag=document.createDocumentFragment();proc(tplNode,vals,frag,null);if(first||!host.firstElementChild)host.replaceChildren(frag);else morph(host,frag);layout();
  [...host.querySelectorAll('[data-tv-scroll]')].forEach((e,i)=>{if(keep[i]){e.scrollLeft=keep[i][0];e.scrollTop=keep[i][1]}});
- host.querySelectorAll('video').forEach(v=>{v.muted=true;v.playsInline=true;v.setAttribute('playsinline','');v.play?.().catch(()=>{})});
+ host.querySelectorAll('video').forEach(v=>{v.muted=true;v.playsInline=true;if(v.paused)v.play?.().catch(()=>{})});
  try{comp?.afterPaint?.(host.firstElementChild,first)}catch(e){console.error(e)}
- window.TadaaMotion?.enhance?.(host)}
+ if(first)window.TadaaMotion?.enhance?.(host)}
 
 /* ───── maquetación: escritorio fluido, móvil escalado a lo ancho ───── */
 function layout(){const host=$host(),root=host.firstElementChild;if(!root)return;const vw=document.documentElement.clientWidth;const isM=screenName&&screenName[0]==='M'||screenName==='Main';
