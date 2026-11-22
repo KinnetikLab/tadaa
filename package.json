@@ -10,7 +10,7 @@
     "start": "node server/src/server.mjs",
     "dev": "node server/src/server.mjs",
     "test": "node --test server/src/*.test.mjs",
-    "syntax": "node --check server/src/server.mjs && node --check server/src/platform.mjs && node --check web/experience/site-live.js && node --check web/experience/app-live.js && node --check web/experience/admin-live.js && node --check web/experience/event-live.js && node --check web/experience/partner-live.js",
+    "syntax": "node --check server/src/server.mjs && node --check server/src/platform.mjs && node --check server/src/features.mjs && node --check web/experience/site-live.js && node --check web/experience/app-live.js && node --check web/experience/admin-live.js && node --check web/experience/event-live.js && node --check web/experience/partner-live.js && node --check web/experience/staff-live.js && node --check web/experience/tv-motion.js",
     "setup:secrets": "node server/scripts/setup.mjs",
     "db:migrate": "node server/scripts/migrate.mjs",
     "deploy:check": "npm run syntax && npm test",

@@ -7,7 +7,7 @@
 <meta name="description" content="Boletos de último momento para teatro, conciertos y experiencias. Tu próxima gran experiencia comienza aquí.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="curtain.css?v=3">
 <style>
 :root{
@@ -383,6 +383,60 @@ body.ready{overflow-x:hidden}
 @media(max-width:420px){.join-grid{grid-template-columns:1fr}.join-card{min-height:260px}}
 
 </style>
+<link rel="stylesheet" href="tv.css?v=1">
+<style id="tv-site">
+/* Piel "Ticket vibrante" para la portada */
+:root{--ink:#08091A;--ink2:#0E1028;--ink3:#161833;--line:rgba(255,255,255,.12)}
+body{background:var(--tv-ink)}
+.btn{border-radius:999px;font-weight:800}
+.btn:hover{box-shadow:0 14px 34px rgba(214,255,53,.35)}
+header .wrap.nav{gap:20px}
+nav{background:rgba(8,9,26,.28);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:5px;gap:4px;margin-right:auto}
+nav a{padding:10px 16px;border-radius:999px;font-weight:700;font-size:13px;color:#fff}
+nav a::after{display:none}
+nav a:hover{background:#fff;color:var(--tv-ink)}
+header.scrolled{background:rgba(10,24,140,.82)}
+.hero{background:var(--tv-blue) url(img/tv/blue-wide.webp) center/cover}
+.hero #beams,.hero #stage{display:none}
+.hero::after{background:linear-gradient(0deg,rgba(6,14,90,.9) 0%,rgba(6,14,90,.3) 45%,transparent 75%),url(img/tv/grain.png) 0 0/256px;opacity:1}
+.hero .eyebrow{color:var(--tv-lime)}
+.hero h1{font-family:var(--tv-display);font-weight:900;letter-spacing:-.05em;line-height:.86}
+.hero h1 em{color:var(--tv-lime)}
+.hero .sub{color:#E1E6F5}
+.search{border-radius:999px;padding:6px}
+.search .btn{border-radius:999px}
+.live{color:#D9E0FF}
+.hero-art{border:6px solid #fff;border-radius:26px;box-shadow:0 40px 90px rgba(6,14,90,.55)}
+.hero-gallery-caption{color:#D9E0FF}
+.marq{background:var(--tv-lime);border:0;padding:14px 0}
+.marq span{color:var(--tv-ink);-webkit-text-stroke:0;font-family:var(--tv-display);font-weight:900;font-size:clamp(22px,2.6vw,34px)}
+.marq span::after{color:var(--tv-ink)}
+.marq span:nth-child(3n){color:var(--tv-blue)}
+.h2{font-family:var(--tv-display);font-weight:900}
+.h2 em{color:var(--tv-lime)}
+.tab{border-radius:999px;font-weight:700}
+.tab.on{background:var(--tv-blue);color:#fff;box-shadow:0 8px 24px rgba(18,56,255,.4)}
+.show{border-radius:30px;border:0;aspect-ratio:3/4.1}
+.show:hover{border-color:transparent;box-shadow:0 30px 70px rgba(0,0,0,.6)}
+.show .shade{background:linear-gradient(180deg,rgba(8,9,26,.25),transparent 30%,rgba(8,9,26,.35) 55%,rgba(8,9,26,.95) 90%)}
+.show h3{font-family:var(--tv-display);text-transform:none;font-weight:800;letter-spacing:-.035em;font-size:clamp(26px,2.2vw,32px)}
+.show .tv-icons+h3{margin-top:0}
+.show .tv-icons{margin-top:auto}
+.pill{background:rgba(8,9,26,.55)}
+.off{border-radius:999px;font-size:12px}
+.go{background:var(--tv-lime)}
+.step .n{color:var(--tv-lime)}.step h3{font-family:var(--tv-display);font-weight:900}
+.cat{border-radius:30px;background:linear-gradient(160deg,var(--tv-ink3),var(--tv-ink))}
+.cat h3,.join-card h3,.cta h2{font-family:var(--tv-display);font-weight:900}
+.cat:hover .ar{background:var(--tv-lime)}
+.join-card{border-radius:30px}
+.join-icon{border-radius:12px}
+.cta::before{background:radial-gradient(circle,rgba(18,56,255,.35),rgba(18,56,255,.08) 42%,transparent 66%)}
+.form{border-radius:30px}.form input{border-radius:999px}
+footer{background:radial-gradient(60% 80% at 85% 0%,rgba(91,60,255,.25),transparent 70%),var(--tv-ink)}
+@media(max-width:900px){nav{background:rgba(8,9,26,.96);border-radius:24px}}
+</style>
+<link rel="stylesheet" href="tv-motion.css">
 </head>
 <body class="ready">
 
@@ -412,7 +466,7 @@ body.ready{overflow-x:hidden}
   <canvas id="stage" aria-hidden="true"></canvas>
   <div class="wrap hero-in">
     <div class="eyebrow">Descubre · Reserva · Vive</div>
-    <h1><span><i>Esta noche</i></span><span><i><em>todavía alcanzas.</em></i></span></h1>
+    <h1><span><i>¿Qué plan</i></span><span><i><em>hay hoy?</em></i></span></h1>
     <p class="sub">Conciertos, teatro, cultura y experiencias para vivir más. Accede con tu membresía o los beneficios de tu empresa.</p>
     <form class="search" id="sf" role="search">
       <label><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="sq" placeholder="Buscar eventos, artistas o experiencias…" aria-label="Buscar"></label>
@@ -614,5 +668,6 @@ body.ready{overflow-x:hidden}
 <script src="api.js"></script><script src="site-live.js?v=8"></script>
 
 
+<script src="tv-motion.js" defer></script>
 </body>
 </html>

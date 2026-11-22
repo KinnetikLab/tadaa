@@ -1,0 +1,50 @@
+/* TADAA! Ticket vibrante — capa de movimiento: transiciones, microinteracciones y revelados.
+   Todo se apaga con prefers-reduced-motion. */
+:root{--tv-ease:cubic-bezier(.2,.8,.2,1);--tv-spring:cubic-bezier(.34,1.56,.64,1)}
+html{scroll-behavior:smooth}
+:focus-visible{outline:3px solid #D6FF35;outline-offset:3px;border-radius:12px}
+/* Botones: presión y brillo */
+button,.btn,.tv-btn,a.tv-btn,[data-route],[data-r]{transition:transform .18s var(--tv-ease),box-shadow .25s var(--tv-ease),background-color .2s,color .2s,opacity .2s}
+button:active,.btn:active,.tv-btn:active{transform:scale(.96)}
+.tv-btn,.btn{position:relative;overflow:hidden;isolation:isolate}
+.tv-btn:hover,.btn:hover{box-shadow:0 10px 28px rgba(214,255,53,.22)}
+.tvm-ripple{position:absolute;border-radius:50%;pointer-events:none;background:currentColor;opacity:.22;transform:scale(0);animation:tvm-ripple .6s var(--tv-ease) forwards;z-index:-1}
+@keyframes tvm-ripple{to{transform:scale(2.6);opacity:0}}
+/* Transición entre vistas */
+.tvm-enter{animation:tvm-view .45s var(--tv-ease) both}
+@keyframes tvm-view{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+/* Revelado escalonado */
+.tvm-r{opacity:0;transform:translateY(18px) scale(.985);transition:opacity .55s var(--tv-ease),transform .6s var(--tv-ease);transition-delay:var(--tvm-d,0ms)}
+.tvm-r.tvm-in{opacity:1;transform:none}
+/* Tarjetas: elevación al pasar */
+.show,.card,.tv-card,.now-card,.tk,.zn,.pr,.box,.addon,.similar a{transition:transform .35s var(--tv-ease),box-shadow .35s var(--tv-ease),border-color .25s,background-color .25s}
+@media (hover:hover){.show:hover,.tv-card:hover,.now-card:hover,.similar a:hover{transform:translateY(-4px);box-shadow:0 22px 50px rgba(8,9,26,.35)}.zn:hover{transform:translateX(3px)}}
+.tk,.tv-ticket{transform-style:preserve-3d;will-change:transform}
+/* Contadores y pasos */
+.tvm-bump{animation:tvm-bump .35s var(--tv-spring)}
+@keyframes tvm-bump{40%{transform:scale(1.35)}}
+[data-countdown]{font-variant-numeric:tabular-nums}
+.tvm-tick{animation:tvm-tick .5s ease}
+@keyframes tvm-tick{from{opacity:.55}}
+/* Brillo en etiquetas Golden y Now! */
+.tv-ic.gold,.gold-tag,.badge.b-golden{background-size:200% 100%;animation:tvm-shine 3.5s ease-in-out infinite}
+@keyframes tvm-shine{50%{filter:brightness(1.15) saturate(1.1)}}
+.tv-ic.now{animation:tvm-pulse 2.4s ease-in-out infinite}
+@keyframes tvm-pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,61,139,.45)}50%{box-shadow:0 0 0 7px rgba(255,61,139,0)}}
+/* Avisos */
+#toast,.toast,[role=status].on{transition:opacity .25s,transform .35s var(--tv-spring)}
+/* Modales de la app */
+.modal,.sheet,[role=dialog]{animation:tvm-sheet .4s var(--tv-ease) both}
+@keyframes tvm-sheet{from{opacity:0;transform:translateY(24px) scale(.98)}}
+/* Barra de progreso del nivel */
+.bar i{transition:width 1.1s var(--tv-ease)}
+/* QR dinámico: barrido al renovarse */
+img.ticket-qr{transition:opacity .3s,filter .3s}
+img.ticket-qr.tvm-refresh{opacity:.35;filter:blur(2px)}
+/* Staff: línea de escaneo */
+.cam .frame:after{content:"";position:absolute;left:8%;right:8%;height:3px;border-radius:3px;background:#D6FF35;box-shadow:0 0 18px #D6FF35;top:10%;animation:tvm-scan 2.2s ease-in-out infinite alternate}
+@keyframes tvm-scan{to{top:88%}}
+/* Carga */
+.tvm-skel{position:relative;color:transparent!important;border-radius:12px;background:linear-gradient(100deg,rgba(255,255,255,.06) 30%,rgba(255,255,255,.16) 50%,rgba(255,255,255,.06) 70%) 0 0/250% 100%;animation:tvm-skel 1.2s linear infinite}
+@keyframes tvm-skel{to{background-position:-250% 0}}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.tvm-r{opacity:1;transform:none}}
