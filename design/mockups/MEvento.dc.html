@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Tadaa! móvil · Evento Morat</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+.tx{background:#1238FF url(/_blob/c238803f93edbcfca0600e4470e86b80) center/cover}
+</style>
+</helmet>
+<div class="tx" style="width: 390px; height: 844px; position: relative; overflow: hidden; font-family: 'Plus Jakarta Sans', sans-serif; color: #FFFFFF">
+
+  <div style="position: absolute; left: 0; right: 0; top: 0; height: 360px">
+    <img src="{{ev.img}}" alt="{{ev.title}}" style="width: 100%; height: 100%; object-fit: cover; object-position: {{ev.pos}}">
+    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,9,26,.35) 0%, transparent 35%, rgba(20,58,250,.97) 100%)"></div>
+  </div>
+
+  <div style="position: absolute; left: 20px; right: 20px; top: 56px; display: flex; justify-content: space-between">
+    <a href="Main.dc.html" aria-label="Volver" style="width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.2); backdrop-filter: blur(10px); display: grid; place-items: center">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+    </a>
+    <div style="display: flex; gap: 8px">
+      <button aria-label="Guardar en favoritos" style="width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.2); backdrop-filter: blur(10px); display: grid; place-items: center">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="#D6FF35" stroke="#D6FF35" stroke-width="2" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
+      </button>
+      <button aria-label="Compartir" style="width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.2); backdrop-filter: blur(10px); display: grid; place-items: center">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 20px; right: 20px; top: 196px; display: flex; flex-direction: column; gap: 8px">
+    <div style="display: flex; gap: 6px; align-items: center">
+<sc-if value="{{ev.original}}"><span title="TADAA! Original" role="img" aria-label="TADAA! Original" style="width: 36px; height: 36px; border-radius: 50%; background: #D6FF35; color: #08091A; display: grid; place-items: center; font: 800 13px Outfit, sans-serif">t!</span></sc-if><sc-if value="{{ev.now}}">      <a href="MRush.dc.html" title="Now! disponible" aria-label="Now! disponible · inscríbete" style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #FF3D8B, #FF8A3D); display: grid; place-items: center"><svg width="17" height="17" viewBox="0 0 24 24" fill="#0B0A1C" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></a></sc-if><sc-if value="{{ev.golden}}"><span title="Golden Ticket activo" role="img" aria-label="Golden Ticket activo" style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #FFE9A3, #E2B23C 55%, #B8860B); display: grid; place-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A1A00" stroke-width="2.2" aria-hidden="true"><path d="M3 7h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4z"/></svg></span></sc-if>
+      <span style="background: #D6FF35; color: #08091A; font-size: 11px; font-weight: 800; padding: 6px 10px; border-radius: 99px">{{ev.chip}}</span>
+    </div>
+    <h1 aria-label="{{ev.title}}" style="margin: 0">
+      <sc-if value="{{ev.logo}}"><img src="{{ev.logo}}" alt="" style="display: block; max-width: 250px; max-height: 96px; object-fit: contain; object-position: left center; filter: drop-shadow(0 6px 20px rgba(0,0,0,.45))"></sc-if>
+      <sc-if value="{{ev.noLogo}}"><span style="display: block; font-family: Outfit, sans-serif; font-weight: 900; font-size: {{ev.titleSize}}; line-height: .95; letter-spacing: -2px; text-shadow: 0 4px 24px rgba(0,0,0,.35)">{{ev.title}}</span></sc-if>
+    </h1>
+    <span style="font-size: 13px; color: #D9E0FF">{{ev.sub}}</span>
+  </div>
+
+  <div style="position: relative; margin: 380px 16px 0; background: #FFFFFF; color: #08091A; border-radius: 28px; padding: 18px 16px 16px">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 0 4px">
+      <h2 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 20px">Elige tu zona</h2>
+      <sc-if value="{{hasSeats}}"><a href="MAsientos.dc.html" style="font-size: 12px; font-weight: 700; color: #1238FF">Ver mapa</a></sc-if>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px">
+      <sc-for list="{{zones}}" as="z" hint-placeholder-count="3">
+        <button onClick="{{z.pick}}" aria-pressed="{{z.on}}" style="{{z.style}}">
+          <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px">
+            <span style="font-weight: 800; font-size: 14px">{{z.name}}</span>
+            <sc-if value="{{z.regular}}"><span style="font-size: 11px; text-decoration: line-through; opacity: .7">{{z.regular}}</span></sc-if>
+          </span>
+          <span style="display: flex; align-items: center; gap: 8px">
+            <span style="font-family: Outfit, sans-serif; font-weight: 800; font-size: 20px">{{z.price}}</span>
+            <sc-if value="{{z.pct}}"><span style="background: #D6FF35; color: #08091A; font-size: 11px; font-weight: 800; padding: 5px 8px; border-radius: 99px">{{z.pct}}</span></sc-if>
+          </span>
+        </button>
+      </sc-for>
+      <sc-if value="{{noZones}}"><div style="padding: 16px; border-radius: 18px; background: #EEF1F7; font-size: 13px; color: #4A5068">{{noZonesMsg}}</div></sc-if>
+    </div>
+    <div style="position: relative; margin: 16px -16px 0; border-top: 2px dashed #C9D1EA">
+      <span style="position: absolute; left: -10px; top: -11px; width: 20px; height: 20px; border-radius: 50%; background: #1535E6"></span>
+      <span style="position: absolute; right: -10px; top: -11px; width: 20px; height: 20px; border-radius: 50%; background: #1535E6"></span>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 4px 0">
+      <span style="display: flex; flex-direction: column"><span style="font-weight: 800; font-size: 14px">Boletos</span><span style="font-size: 11px; color: #5A6178">Hasta {{maxQty}} por solicitud</span></span>
+      <span style="display: flex; align-items: center; gap: 4px; background: #EEF1F7; border-radius: 99px; padding: 4px">
+        <button onClick="{{minus}}" aria-label="Restar boleto" style="width: 44px; height: 44px; border: 0; border-radius: 50%; background: #FFFFFF; font-size: 20px; font-weight: 700; color: #08091A">−</button>
+        <span style="min-width: 28px; text-align: center; font-family: Outfit, sans-serif; font-weight: 800; font-size: 18px">{{qty}}</span>
+        <button onClick="{{plus}}" aria-label="Sumar boleto" style="width: 44px; height: 44px; border: 0; border-radius: 50%; background: #08091A; color: #FFFFFF; font-size: 20px; font-weight: 700">+</button>
+      </span>
+    </div>
+  </div>
+
+  <sc-if value="{{ev.golden}}"><div style="margin: 14px 16px 0; display: flex; gap: 12px; align-items: center; padding: 14px; border-radius: 22px; background: linear-gradient(120deg, #FFE9A8, #E9B949); color: #2A1A00"><b style="font-family: Outfit, sans-serif; font-size: 22px">1/{{ev.odds}}</b><span style="font-size: 12px; line-height: 1.4">Tu boleto puede volverse <b>Golden Ticket</b>: {{ev.goldenBenefit}}</span></div></sc-if>
+  <sc-if value="{{hasAddons}}"><a href="MAddons.dc.html" style="margin: 12px 16px 0; display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border-radius: 22px; background: rgba(255,255,255,.14); color: #FFFFFF; font-size: 13px"><span><b style="display: block; font-family: Outfit, sans-serif; font-size: 17px">Agrega a tu plan</b>{{addonsLabel}}</span><span style="height: 40px; padding: 0 14px; border-radius: 99px; background: #FFFFFF; color: #08091A; display: flex; align-items: center; font-weight: 800; font-size: 12px">{{addonsCta}}</span></a></sc-if>
+  <sc-if value="{{ev.desc}}"><div style="margin: 12px 16px 0; padding: 18px; border-radius: 22px; background: rgba(8,9,26,.28); color: #EEF1FF; font-size: 14px; line-height: 1.55"><b style="display: block; font-family: Outfit, sans-serif; font-size: 18px; color: #FFFFFF; margin-bottom: 6px">Sinopsis</b>{{ev.desc}}</div></sc-if>
+  <div style="height: 130px"></div>
+  <div style="position: absolute; left: 16px; right: 16px; bottom: 26px; height: 72px; border-radius: 99px; background: #08091A; display: flex; align-items: center; justify-content: space-between; padding: 0 8px 0 24px">
+    <span style="display: flex; flex-direction: column">
+      <span style="font-size: 11px; color: #AEB6D6">{{saveLabel}}</span>
+      <span style="font-family: Outfit, sans-serif; font-weight: 800; font-size: 22px">{{total}}</span>
+    </span>
+    <button onClick="{{buy}}" aria-disabled="{{buyDisabled}}" style="border: 0; font-family: inherit; height: 56px; padding: 0 22px; border-radius: 99px; background: #D6FF35; color: #08091A; display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 14px">{{ctaLabel}}
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#08091A" stroke-width="2.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { zone: 'c', qty: 2 }; }
+  renderVals() {
+    const mx = n => '$' + n.toLocaleString('en-US');
+    const data = [
+      { id: 'oro', name: 'Oro', regular: 4129, price: 3600 },
+      { id: 'c', name: 'Zona C', regular: 2765, price: 2400 },
+      { id: 'd', name: 'Zona D', regular: 2393, price: 2100 }
+    ];
+    const base = 'width: 100%; min-height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-radius: 18px; font-family: inherit; text-align: left; ';
+    const zones = data.map(z => {
+      const on = this.state.zone === z.id;
+      return { name: z.name, regular: mx(z.regular), price: mx(z.price),
+        pct: '−' + Math.round((1 - z.price / z.regular) * 100) + '%', on,
+        pick: () => this.setState({ zone: z.id }),
+        style: base + (on ? 'background: #1238FF; color: #FFFFFF; border: 2px solid #1238FF;' : 'background: #FFFFFF; color: #08091A; border: 2px solid #E1E6F2;') };
+    });
+    const sel = data.find(z => z.id === this.state.zone);
+    const q = this.state.qty;
+    return { zones, qty: q, total: mx(sel.price * q), save: mx((sel.regular - sel.price) * q),
+      minus: () => this.setState({ qty: Math.max(1, q - 1) }),
+      plus: () => this.setState({ qty: Math.min(8, q + 1) }) };
+  }
+}
+</script>
+</body>
+</html>

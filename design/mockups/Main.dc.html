@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Tadaa! móvil · Home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+.tx{background:#1238FF url(/_blob/c238803f93edbcfca0600e4470e86b80) center top/cover}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #EEF1F7; font-family: 'Plus Jakarta Sans', sans-serif; color: #08091A">
+
+  <section class="tx" style="color: #FFFFFF; padding: 58px 20px 26px; border-radius: 0 0 36px 36px; display: flex; flex-direction: column; gap: 18px">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <a href="MCuenta.dc.html" style="display: flex; align-items: center; gap: 10px">
+        <span style="position: relative; width: 44px; height: 44px; border-radius: 50%; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 800; font-size: 18px; box-shadow: 0 0 0 3px rgba(214,255,53,.35)">{{ini}}</span>
+        <span style="display: flex; flex-direction: column">
+          <span style="font-size: 12px; color: #D9E0FF">{{hello}}</span>
+          <span style="display: flex; align-items: center; gap: 4px; font-weight: 700; font-size: 14px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Ciudad de México
+          </span>
+        </span>
+      </a>
+      <button aria-label="Notificaciones" style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.1); backdrop-filter: blur(8px); color: #FFFFFF; display: grid; place-items: center; position: relative">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg>
+        <span style="position: absolute; top: 10px; right: 11px; width: 8px; height: 8px; border-radius: 50%; background: #D6FF35"></span>
+      </button>
+    </div>
+
+    <h1 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 44px; line-height: .98; letter-spacing: -1.5px">¿Qué plan<br><span style="color: #D6FF35">hay hoy?</span></h1>
+
+    <sc-if value="{{hasNext}}">
+    <a href="MPase.dc.html" style="position: relative; display: flex; align-items: center; gap: 12px; background: #FFFFFF; color: #08091A; border-radius: 24px; padding: 10px 12px 10px 10px">
+      <img src="{{next.img}}" alt="" style="width: 66px; height: 66px; border-radius: 16px; object-fit: cover">
+      <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; border-left: 2px dashed #C9D1EA; padding-left: 12px">
+        <span style="font-size: 11px; color: #5A6178; font-weight: 600">{{next.kicker}}</span>
+        <span style="font-family: Outfit, sans-serif; font-weight: 700; font-size: 18px; line-height: 1.1">{{next.title}}</span>
+        <span style="align-self: flex-start; display: flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 800; letter-spacing: .04em; color: #08091A; background: #D6FF35; border-radius: 99px; padding: 4px 8px">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: #08091A"></span>{{next.status}}
+        </span>
+      </div>
+      <span style="width: 44px; height: 44px; border-radius: 50%; background: #08091A; display: grid; place-items: center; flex: 0 0 44px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D6FF35" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM17 20h4v-3"/></svg>
+      </span>
+      <span style="position: absolute; left: 82px; top: -9px; width: 18px; height: 18px; border-radius: 50%; background: #1A3BF0"></span>
+      <span style="position: absolute; left: 82px; bottom: -9px; width: 18px; height: 18px; border-radius: 50%; background: #1535E0"></span>
+    </a>
+    </sc-if>
+    <sc-if value="{{noNext}}">
+    <a href="MExplorar.dc.html" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #FFFFFF; color: #08091A; border-radius: 24px; padding: 16px 16px 16px 18px"><span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 11px; color: #5A6178; font-weight: 600">{{cta.kicker}}</span><span style="font-family: Outfit, sans-serif; font-weight: 700; font-size: 18px; line-height: 1.1">{{cta.title}}</span></span><span style="height: 44px; padding: 0 16px; border-radius: 99px; background: #08091A; color: #D6FF35; display: flex; align-items: center; font-weight: 800; font-size: 13px">{{cta.btn}}</span></a>
+    </sc-if>
+  </section>
+
+<sc-if value="{{hasNow}}">
+  <a href="MRush.dc.html" style="margin: 16px 20px 0; display: flex; align-items: center; gap: 12px; background: #08091A; color: #FFFFFF; border-radius: 22px; padding: 10px 10px 10px 14px">
+    <span style="width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(100deg, #FF3D8B, #FF8A3D); display: grid; place-items: center; flex: 0 0 40px">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#08091A" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
+    </span>
+    <span style="flex: 1; display: flex; flex-direction: column">
+      <b style="font-size: 14px">{{nowb.title}}</b>
+      <span style="font-size: 12px; color: #AEB6D6">{{nowb.sub}}</span>
+    </span>
+    <span style="height: 40px; padding: 0 14px; border-radius: 99px; background: linear-gradient(100deg, #FF3D8B, #FF8A3D); color: #08091A; display: flex; align-items: center; font-weight: 800; font-size: 12px">{{nowb.btn}}</span>
+  </a>
+</sc-if>
+
+  <div style="display: flex; align-items: baseline; justify-content: space-between; padding: 18px 20px 10px">
+    <h2 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 22px; letter-spacing: -.5px">Populares ahora</h2>
+    <a href="MExplorar.dc.html" style="font-size: 13px; font-weight: 700; color: #1238FF">Ver todo</a>
+  </div>
+
+  <div style="display: flex; gap: 12px; padding: 0 20px 4px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none">
+    <sc-for list="{{popular}}" as="p">
+    <a href="MEvento.dc.html" style="position: relative; flex: 0 0 262px; height: 232px; border-radius: 28px; overflow: hidden; color: #FFFFFF; display: block; background: #08091A">
+      <sc-if value="{{p.video}}"><video src="{{p.video}}" poster="{{p.img}}" autoplay muted loop playsinline style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></video></sc-if><sc-if value="{{p.photo}}"><img src="{{p.img}}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: {{p.pos}}"></sc-if>
+      <span style="position: absolute; left: 14px; top: 14px; display: flex; align-items: center; gap: 6px; background: rgba(8,9,26,.55); backdrop-filter: blur(8px); border-radius: 99px; padding: 7px 11px; font-size: 11px; font-weight: 700">
+        <sc-if value="{{p.video}}"><svg width="10" height="10" viewBox="0 0 24 24" fill="#D6FF35" aria-hidden="true"><path d="M6 4v16l14-8z"/></svg>Video · </sc-if>{{p.cat}}
+      </span>
+      <div style="position: absolute; left: 10px; right: 10px; bottom: 10px; background: rgba(8,9,26,.62); backdrop-filter: blur(12px); border-radius: 20px; padding: 12px 12px 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 8px">
+        <div style="display: flex; flex-direction: column; gap: 3px; min-width: 0">
+          <div style="display: flex; gap: 6px; margin-bottom: 2px"><sc-if value="{{p.now}}"><span title="Now! disponible" role="img" aria-label="Now! disponible" style="width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, #FF3D8B, #FF8A3D); display: grid; place-items: center"><svg width="12" height="12" viewBox="0 0 24 24" fill="#0B0A1C" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span></sc-if><sc-if value="{{p.golden}}"><span title="Golden Ticket activo" role="img" aria-label="Golden Ticket activo" style="width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, #FFE9A3, #E2B23C 55%, #B8860B); display: grid; place-items: center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2A1A00" stroke-width="2.2" aria-hidden="true"><path d="M3 7h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4z"/></svg></span></sc-if></div><span style="font-family: Outfit, sans-serif; font-weight: 700; font-size: 19px">{{p.title}}</span>
+          <span style="font-size: 11px; color: #D9E0FF">{{p.when}}</span>
+          <span style="font-size: 12px; font-weight: 700">{{p.price}} <span style="color: #D6FF35">{{p.pct}}</span></span>
+        </div>
+        <span style="width: 40px; height: 40px; border-radius: 50%; background: #FFFFFF; display: grid; place-items: center; flex: 0 0 40px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#08091A" stroke-width="2.4" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </span>
+      </div>
+    </a>
+    </sc-for>
+  </div>
+  <div style="height: 120px"></div>
+  <nav aria-label="Navegación principal" style="position: absolute; left: 20px; right: 20px; bottom: 26px; height: 68px; border-radius: 99px; background: rgba(8,9,26,.92); backdrop-filter: blur(14px); display: flex; align-items: center; justify-content: space-between; padding: 0 10px; box-shadow: 0 18px 40px rgba(8,9,26,.3)">
+    <a href="Main.dc.html" aria-label="Inicio" style="height: 50px; padding: 0 18px; border-radius: 99px; background: #D6FF35; color: #08091A; display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 13px">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 11 12 4l9 7v9h-6v-6H9v6H3z"/></svg>Inicio
+    </a>
+    <a href="MExplorar.dc.html" aria-label="Explorar" style="width: 50px; height: 50px; border-radius: 50%; color: #FFFFFF; display: grid; place-items: center">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    </a>
+    <a href="MWallet.dc.html" aria-label="Mi Wallet" style="width: 50px; height: 50px; border-radius: 50%; color: #FFFFFF; display: grid; place-items: center">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4z"/><path d="M14 7v12" stroke-dasharray="2 2"/></svg>
+    </a>
+    <a href="MRush.dc.html" aria-label="Now!" style="width: 50px; height: 50px; border-radius: 50%; color: #FFFFFF; display: grid; place-items: center">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
+    </a>
+    <a href="MCuenta.dc.html" aria-label="Mi cuenta" style="width: 50px; height: 50px; border-radius: 50%; color: #FFFFFF; display: grid; place-items: center">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

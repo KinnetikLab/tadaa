@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>TADAA! Staff · Acceso</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+.cam{background:radial-gradient(80% 50% at 50% 40%, #2A2D52, #08091A)}
+.grain{background-image:url(/_blob/3deff8146b80bb3fb1485ea91d6f55e6);background-size:256px}
+.scan{animation:scan 2.2s ease-in-out infinite alternate}
+@keyframes scan{from{top:24px}to{top:232px}}
+</style>
+</helmet>
+<div class="cam" style="width: 390px; height: 844px; position: relative; overflow: hidden; font-family: 'Plus Jakarta Sans', sans-serif; color: #FFFFFF">
+  <div class="grain" style="position: absolute; inset: 0; opacity: .5"></div>
+
+  <header style="position: relative; padding: 54px 20px 0; display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; justify-content: space-between; align-items: center">
+      <span style="display: flex; flex-direction: column">
+        <span style="font-size: 11px; font-weight: 800; letter-spacing: .12em; color: #D6FF35">TADAA! STAFF · PUERTA 2</span>
+        <b style="font-family: Outfit, sans-serif; font-size: 22px">{{evt}}</b>
+      </span>
+      <span style="display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,.1); border-radius: 99px; padding: 8px 12px; font-size: 12px; font-weight: 700"><span style="width: 7px; height: 7px; border-radius: 50%; background: #D6FF35"></span>{{inside}} / 480</span>
+    </div>
+    <div role="tablist" aria-label="Modo" style="display: flex; gap: 4px; background: rgba(255,255,255,.08); border-radius: 99px; padding: 4px">
+      <sc-for list="{{modes}}" as="m" hint-placeholder-count="2"><button role="tab" aria-selected="{{m.on}}" onClick="{{m.pick}}" style="{{m.style}}">{{m.label}}</button></sc-for>
+    </div>
+  </header>
+
+  <sc-if value="{{isScan}}" hint-placeholder-val="{{ true }}">
+    <div style="position: absolute; left: 65px; top: 200px; width: 260px; height: 260px">
+      <span style="position: absolute; left: 0; top: 0; width: 54px; height: 54px; border-left: 5px solid {{frame}}; border-top: 5px solid {{frame}}; border-radius: 22px 0 0 0"></span>
+      <span style="position: absolute; right: 0; top: 0; width: 54px; height: 54px; border-right: 5px solid {{frame}}; border-top: 5px solid {{frame}}; border-radius: 0 22px 0 0"></span>
+      <span style="position: absolute; left: 0; bottom: 0; width: 54px; height: 54px; border-left: 5px solid {{frame}}; border-bottom: 5px solid {{frame}}; border-radius: 0 0 0 22px"></span>
+      <span style="position: absolute; right: 0; bottom: 0; width: 54px; height: 54px; border-right: 5px solid {{frame}}; border-bottom: 5px solid {{frame}}; border-radius: 0 0 22px 0"></span>
+      <span class="scan" style="position: absolute; left: 20px; right: 20px; height: 3px; border-radius: 3px; background: {{frame}}; box-shadow: 0 0 18px {{frame}}"></span>
+    </div>
+    <span style="position: absolute; left: 0; right: 0; top: 476px; text-align: center; font-size: 13px; color: #AEB6D6">Escanea el QR dinámico del boleto final</span>
+    <div style="{{cardStyle}}">
+      <span style="{{iconStyle}}">{{icon}}</span>
+      <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+        <b style="font-family: Outfit, sans-serif; font-size: 21px; line-height: 1.05">{{title}}</b>
+        <span style="font-size: 12px">{{sub}}</span>
+      </span>
+    </div>
+    <div role="group" aria-label="Demo: simular lectura" style="position: absolute; left: 20px; right: 20px; bottom: 30px; display: flex; gap: 6px">
+      <sc-for list="{{sims}}" as="s" hint-placeholder-count="4"><button onClick="{{s.pick}}" style="{{s.style}}">{{s.label}}</button></sc-for>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{isVerify}}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; left: 20px; right: 20px; top: 194px; display: flex; flex-direction: column; gap: 12px">
+      <label style="display: flex; align-items: center; gap: 10px; height: 54px; border-radius: 99px; background: #FFFFFF; color: #08091A; padding: 0 6px 0 18px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5A6178" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input value="TD-2611-0051" aria-label="Folio, nombre o QR provisional" readonly style="flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: inherit; font-size: 14px; font-weight: 700">
+        <span style="height: 42px; padding: 0 14px; border-radius: 99px; background: #08091A; color: #FFFFFF; display: flex; align-items: center; font-size: 12px; font-weight: 800">QR pase</span>
+      </label>
+
+      <article style="background: #FFFFFF; color: #08091A; border-radius: 26px; padding: 16px">
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <span style="font-size: 10px; font-weight: 800; letter-spacing: .06em; color: #4A5068; border: 1.5px dashed #8C93B5; border-radius: 99px; padding: 4px 9px">PASE PROVISIONAL · PAGADO</span>
+          <span style="font-family: monospace; font-size: 12px; color: #4A5068">TD-2611-0051</span>
+        </div>
+        <b style="display: block; font-family: Outfit, sans-serif; font-size: 22px; margin-top: 10px">Luis Martínez</b>
+        <span style="font-size: 13px; color: #4A5068">Morat · Zona C × 2 · boletera externa</span>
+        <div style="margin: 14px -16px 0; border-top: 2px dashed #D5DBEA"></div>
+        <span style="display: block; font-size: 11px; font-weight: 800; letter-spacing: .1em; color: #1238FF; margin-top: 12px">ADD-ONS POR ENTREGAR</span>
+        <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 8px">
+          <sc-for list="{{addons}}" as="a" hint-placeholder-count="2">
+            <button onClick="{{a.toggle}}" aria-pressed="{{a.done}}" style="{{a.style}}">
+              <span style="{{a.box}}">✓</span>
+              <span style="flex: 1; text-align: left; font-size: 14px; font-weight: 700">{{a.name}}</span>
+              <span style="font-size: 12px; color: #4A5068">{{a.status}}</span>
+            </button>
+          </sc-for>
+        </div>
+      </article>
+      <span style="font-size: 12px; line-height: 1.5; color: #AEB6D6; text-align: center">Para eventos de boleteras externas: verifica la compra, entrega add-ons y marca el acceso.</span>
+    </div>
+    <div style="position: absolute; left: 20px; right: 20px; bottom: 30px">
+      <button onClick="{{grant}}" style="{{grantStyle}}">{{grantLabel}}</button>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { mode: 'scan', r: 'ok', inside: 312, add: { a1: true, a2: false }, granted: false }; }
+  renderVals() {
+    const st = this.state;
+    const modeBase = 'flex: 1; height: 44px; border: 0; border-radius: 99px; font-family: inherit; font-weight: 800; font-size: 13px; ';
+    const modes = [['scan', 'Escanear QR'], ['verify', 'Verificar compra']].map(([id, label]) => ({ label, on: st.mode === id, pick: () => this.setState({ mode: id }),
+      style: modeBase + (st.mode === id ? 'background: #FFFFFF; color: #08091A;' : 'background: transparent; color: #FFFFFF;') }));
+    const R = {
+      ok: ['#D6FF35', '✓', 'Acceso válido · 2 personas', 'Ana Rodríguez · Mezzanine G 8–9'],
+      gold: ['#E2B23C', '★', 'Golden Ticket · upgrade', 'Diego H. · pásalo a Orquesta A 1–2'],
+      used: ['#FF5C6C', '!', 'Ya ingresó a las 18:42', 'Se usó en Puerta 1. Revisa identificación.'],
+      exp: ['#FFD25A', '↻', 'QR vencido', 'Pide al asistente refrescar su boleto.']
+    }[st.r];
+    const simBase = 'flex: 1; height: 44px; border-radius: 99px; font-family: inherit; font-weight: 700; font-size: 11px; ';
+    const sims = [['ok', 'Válido'], ['gold', 'Golden'], ['used', 'Usado'], ['exp', 'Vencido']].map(([id, label]) => ({ label,
+      pick: () => this.setState({ r: id, inside: id === 'ok' || id === 'gold' ? st.inside + 2 : st.inside }),
+      style: simBase + (st.r === id ? 'border: 0; background: #FFFFFF; color: #08091A;' : 'border: 1px solid rgba(255,255,255,.2); background: transparent; color: #FFFFFF;') }));
+    const A = [['a1', 'Programa de mano × 2'], ['a2', 'Combo dulcería × 2']];
+    const addons = A.map(([id, name]) => { const done = st.add[id]; return { name, done, status: done ? 'Entregado' : 'Pendiente',
+      toggle: () => this.setState({ add: { ...st.add, [id]: !done } }),
+      style: 'display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 12px; border-radius: 16px; border: 0; font-family: inherit; color: #08091A; ' + (done ? 'background: #F2FFD0;' : 'background: #EEF1F7;'),
+      box: 'width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; font-size: 13px; font-weight: 800; ' + (done ? 'background: #08091A; color: #D6FF35;' : 'background: #FFFFFF; color: transparent; box-shadow: inset 0 0 0 2px #C9D1EA;') }; });
+    return { evt: st.mode === 'scan' ? 'Matilda · Sáb 19:00' : 'Morat · Lun 20:00', modes, isScan: st.mode === 'scan', isVerify: st.mode === 'verify', inside: st.inside,
+      frame: R[0], icon: R[1], title: R[2], sub: R[3], sims,
+      cardStyle: 'position: absolute; left: 20px; right: 20px; top: 512px; display: flex; align-items: center; gap: 14px; border-radius: 26px; padding: 16px; color: #08091A; background: ' + R[0] + ';',
+      iconStyle: 'width: 52px; height: 52px; flex: 0 0 52px; border-radius: 50%; background: #08091A; color: ' + R[0] + '; display: grid; place-items: center; font-size: 24px; font-weight: 800;',
+      addons, grant: () => this.setState({ granted: !st.granted, inside: st.granted ? st.inside : st.inside + 2 }),
+      grantLabel: st.granted ? '✓ Acceso registrado · 2 personas' : 'Dar acceso · 2 personas',
+      grantStyle: 'width: 100%; height: 60px; border-radius: 99px; border: 0; font-family: inherit; font-weight: 800; font-size: 15px; ' + (st.granted ? 'background: #FFFFFF; color: #08091A;' : 'background: #D6FF35; color: #08091A;') };
+  }
+}
+</script>
+</body>
+</html>

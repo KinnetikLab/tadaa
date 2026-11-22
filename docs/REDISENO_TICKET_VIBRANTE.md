@@ -59,3 +59,12 @@ Todos son opcionales; si faltan, la interfaz muestra un texto de respaldo.
 **Pruebas:** `npm test` (14 unitarias) y una prueba end-to-end contra Postgres 16 local con 51 verificaciones (Now!, Golden, add-ons, RFC, staff, portales, oferta de baja).
 **Otros cambios:** `Permissions-Policy` permite `camera=(self)` para Staff; `/staff.html` redirige a `/experience/staff.html`; login acepta `?next=staff.html`.
 **Pendiente:** la app Expo sigue siendo prototipo local (sin Now!/Golden reales); emisión de pases provisionales para eventos de boletera externa sigue el flujo actual de solicitud.
+
+## Fase 3 — sitio fiel a los mockups
+
+- `design/mockups/*.dc.html` son las pantallas aprobadas (escritorio D*, móvil M*), con huecos `{{…}}` para datos reales.
+- `node tools/build-vibrante.mjs` las convierte en `web/experience/tv-screens.js` (CI verifica que esté al día).
+- `index.html` es la nueva app: `tv-app.js` (motor de plantillas, rutas `#inicio`, `#explorar`, `#evento/<slug>`, `#addons`, `#asientos`, `#now`, `#wallet`, `#pase/<id>`, `#golden/<id>`, `#cuenta`, `#baja`) y `tv-adapters.js` (datos de la API, compra con Clip o simulador, Now!, QR dinámico real, Golden, RFC).
+- Escritorio ≥ 900 px usa las pantallas D*; celular usa las M* escaladas al ancho del teléfono.
+- Si no hay eventos publicados se muestran los eventos de muestra del diseño, sin venta.
+- Páginas anteriores: `inicio-clasico.html`, `evento-clasico.html`; portales de productor/empresa y admin siguen en `app.html` y `admin.html`.

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Tadaa! móvil · Add-ons y combos</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+.tx{background:#1238FF url(/_blob/c238803f93edbcfca0600e4470e86b80) center top/cover}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #EEF1F7; font-family: 'Plus Jakarta Sans', sans-serif; color: #08091A">
+
+  <header class="tx" style="color: #FFFFFF; padding: 54px 20px 18px; border-radius: 0 0 32px 32px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; align-items: center; gap: 12px">
+      <a href="MEvento.dc.html" aria-label="Volver" style="width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.14); display: grid; place-items: center; flex: 0 0 44px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      </a>
+      <span style="display: flex; flex-direction: column"><b style="font-family: Outfit, sans-serif; font-size: 20px">{{evTitle}}</b><span style="font-size: 12px; color: #D9E0FF">{{evSub}}</span></span>
+    </div>
+    <ol aria-label="Pasos" style="list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; font-size: 11px; font-weight: 800">
+      <li style="flex: 1; display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,.14); border-radius: 99px; padding: 7px 10px"><span style="color: #D6FF35">✓</span>Boletos</li>
+      <li style="flex: 1; display: flex; align-items: center; gap: 6px; background: #FFFFFF; color: #08091A; border-radius: 99px; padding: 7px 10px"><span style="color: #1238FF">2</span>Add-ons</li>
+      <li style="flex: 1; display: flex; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,.3); border-radius: 99px; padding: 6px 10px">3 Pago</li>
+    </ol>
+  </header>
+
+  <div style="padding: 18px 20px 0">
+    <h1 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 26px; letter-spacing: -.5px">Haz tu día completo</h1>
+    <p style="margin: 4px 0 0; font-size: 13px; color: #4A5068">Añádelo ahora y recógelo en el evento con el mismo QR.</p>
+  </div>
+
+  <div style="padding: 14px 20px 0; display: flex; flex-direction: column; gap: 10px">
+    <sc-if value="{{hasCombos}}"><span style="font-size: 11px; font-weight: 800; letter-spacing: .12em; color: #1238FF">COMBOS</span></sc-if>
+    <sc-for list="{{combos}}" as="a" hint-placeholder-count="2">
+      <div style="{{a.card}}">
+        <span style="width: 54px; height: 54px; flex: 0 0 54px; border-radius: 16px; background: {{a.bg}}; display: grid; place-items: center">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#08091A" stroke-width="2" aria-hidden="true"><path d="{{a.icon}}"/></svg>
+        </span>
+        <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+          <b style="font-size: 14px">{{a.name}}</b>
+          <span style="font-size: 11px; color: #4A5068">{{a.desc}}</span>
+          <b style="font-family: Outfit, sans-serif; font-size: 16px">{{a.price}}</b>
+        </span>
+        <span style="display: flex; align-items: center; gap: 2px; background: #EEF1F7; border-radius: 99px; padding: 3px">
+          <button onClick="{{a.minus}}" aria-label="Quitar {{a.name}}" style="width: 44px; height: 44px; border: 0; border-radius: 50%; background: #FFFFFF; font-size: 18px; color: #08091A">−</button>
+          <b style="min-width: 18px; text-align: center">{{a.q}}</b>
+          <button onClick="{{a.plus}}" aria-label="Agregar {{a.name}}" style="width: 44px; height: 44px; border: 0; border-radius: 50%; background: #08091A; color: #FFFFFF; font-size: 18px">+</button>
+        </span>
+      </div>
+    </sc-for>
+    <sc-if value="{{hasMerch}}"><span style="margin-top: 4px; font-size: 11px; font-weight: 800; letter-spacing: .12em; color: #1238FF">MERCH</span></sc-if>
+    <div style="display: flex; gap: 10px">
+      <sc-for list="{{merch}}" as="m" hint-placeholder-count="2">
+        <button onClick="{{m.toggle}}" aria-pressed="{{m.on}}" style="{{m.card}}">
+          <span style="height: 76px; border-radius: 14px; background: {{m.bg}}; display: grid; place-items: center">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#08091A" stroke-width="1.8" aria-hidden="true"><path d="{{m.icon}}"/></svg>
+          </span>
+          <b style="font-size: 13px; text-align: left">{{m.name}}</b>
+          <span style="display: flex; justify-content: space-between; align-items: center"><b style="font-family: Outfit, sans-serif">{{m.price}}</b><span style="{{m.badge}}">{{m.mark}}</span></span>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 16px; right: 16px; bottom: 26px; background: #08091A; color: #FFFFFF; border-radius: 28px; padding: 14px 14px 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 10px">
+    <span style="display: flex; flex-direction: column"><span style="font-size: 11px; color: #AEB6D6">Boletos {{ticketsTotal}} + add-ons {{extras}}</span><b style="font-family: Outfit, sans-serif; font-size: 24px">{{total}}</b></span>
+    <button onClick="{{pay}}" style="height: 54px; padding: 0 22px; border-radius: 99px; background: #D6FF35; color: #08091A; display: flex; align-items: center; font-weight: 800; font-size: 14px">{{payLabel}}</button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { q: { comida: 2, fast: 0 }, m: { peluche: true, termo: false } }; }
+  renderVals() {
+    const mx = n => '$' + n.toLocaleString('en-US');
+    const C = [
+      { id: 'comida', name: 'Combo Safari', desc: 'Hamburguesa, papas y bebida', p: 189, bg: '#D6FF35', icon: 'M4 11h16M5 11a7 7 0 0 1 14 0M4 15h16l-1 4H5z' },
+      { id: 'fast', name: 'Fast pass atracciones', desc: 'Fila rápida en 3 atracciones', p: 249, bg: '#FFB86B', icon: 'M13 2 4 14h7l-1 8 9-12h-7z' }
+    ];
+    const q = this.state.q;
+    const combos = C.map(c => ({ ...c, price: mx(c.p) + ' c/u', q: q[c.id],
+      card: 'display: flex; align-items: center; gap: 12px; background: #FFFFFF; border-radius: 22px; padding: 10px; ' + (q[c.id] ? 'box-shadow: inset 0 0 0 2px #1238FF;' : ''),
+      minus: () => this.setState({ q: { ...q, [c.id]: Math.max(0, q[c.id] - 1) } }),
+      plus: () => this.setState({ q: { ...q, [c.id]: Math.min(8, q[c.id] + 1) } }) }));
+    const M = [
+      { id: 'peluche', name: 'Peluche jirafa', p: 249, bg: '#B9C7FF', icon: 'M8 21v-6M16 21v-6M6 15h12l-2-7H8zM10 8V4M14 8V4' },
+      { id: 'termo', name: 'Termo BioParque', p: 199, bg: '#FFE9A8', icon: 'M8 3h8M9 3v3l-1 2v13h8V8l-1-2V3' }
+    ];
+    const m = this.state.m;
+    const merch = M.map(x => ({ ...x, price: mx(x.p), on: m[x.id], mark: m[x.id] ? '✓ Agregado' : '+ Agregar',
+      toggle: () => this.setState({ m: { ...m, [x.id]: !m[x.id] } }),
+      badge: 'font-size: 11px; font-weight: 800; border-radius: 99px; padding: 4px 8px; ' + (m[x.id] ? 'background: #08091A; color: #D6FF35;' : 'background: #EEF1F7; color: #08091A;'),
+      card: 'flex: 1; display: flex; flex-direction: column; gap: 8px; background: #FFFFFF; border-radius: 22px; padding: 10px; font-family: inherit; color: #08091A; border: 0; ' + (m[x.id] ? 'box-shadow: inset 0 0 0 2px #1238FF;' : '') }));
+    const extras = C.reduce((a, c) => a + c.p * q[c.id], 0) + M.reduce((a, x) => a + (m[x.id] ? x.p : 0), 0);
+    return { combos, merch, extras: mx(extras), total: mx(760 + extras) };
+  }
+}
+</script>
+</body>
+</html>

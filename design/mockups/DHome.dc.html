@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Tadaa! escritorio · Home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+.txw{background:#1238FF url(/_blob/e0912ca8104f4784a21d635acba18e3a) center/cover}
+.grain{background-image:url(/_blob/3deff8146b80bb3fb1485ea91d6f55e6);background-size:256px}
+.glit{background-image:url(/_blob/3a212457537b9f51ea6f7346c385439c);background-size:300px;animation:tw 7s linear infinite}
+@keyframes tw{from{background-position:0 0}to{background-position:300px -300px}}
+.ink{background:radial-gradient(60% 80% at 85% 0%, rgba(91,60,255,.35), transparent 70%), #08091A}
+.kb{animation:kb 12s ease-out both}
+@keyframes kb{from{transform:scale(1.08)}to{transform:scale(1)}}
+.marq{animation:marq 30s linear infinite}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.prog{animation:prog 7s linear both}
+@keyframes prog{from{width:0}to{width:100%}}
+.outline{-webkit-text-stroke:3px #1238FF;color:transparent}
+.inferno{background:#140608 url(/_blob/26994cc14f5434330e2908761d2a8099) center 35%/cover}
+</style>
+</helmet>
+<div style="width: 100%; background: #EEF1F7; font-family: 'Plus Jakarta Sans', sans-serif; color: #08091A">
+
+  <section class="txw" style="position: relative; color: #FFFFFF; overflow: hidden; border-radius: 0 0 48px 48px">
+    <div style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(6,14,90,.85) 0%, rgba(6,14,90,.25) 45%, transparent 75%)"></div>
+    <div class="grain" style="position: absolute; inset: 0; opacity: .25"></div>
+
+    <header style="position: relative; max-width: 1280px; margin: 0 auto; padding: 22px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="Tadaa!" style="height: 38px; width: auto">
+      <nav aria-label="Principal" style="display: flex; flex-wrap: wrap; gap: 4px; background: rgba(8,9,26,.28); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.14); border-radius: 99px; padding: 5px">
+        <a href="DHome.dc.html" style="padding: 11px 18px; border-radius: 99px; background: #FFFFFF; color: #08091A; font-weight: 800; font-size: 13px">Inicio</a>
+        <a href="DExplorar.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Cartelera</a>
+        <a href="DRush.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Now!</a>
+        <a href="DWallet.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Mi Wallet</a>
+        <a href="app.html#/membresia" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Membresía</a>
+      </nav>
+      <div style="display: flex; gap: 10px; align-items: center">
+        <button aria-label="Notificaciones" style="position: relative; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.1); display: grid; place-items: center">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg>
+          <span style="position: absolute; top: 10px; right: 11px; width: 8px; height: 8px; border-radius: 50%; background: #D6FF35"></span>
+        </button>
+        <a href="DCuenta.dc.html" style="display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 16px 0 4px; border-radius: 99px; background: rgba(8,9,26,.28); border: 1px solid rgba(255,255,255,.14)">
+          <span style="width: 40px; height: 40px; border-radius: 50%; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 800">{{TVini}}</span>
+          <span style="display: flex; flex-direction: column; line-height: 1.15"><b style="font-size: 13px">{{hdr.name}}</b><span style="font-size: 11px; color: #D9E0FF">{{hdr.sub}}</span></span>
+        </a>
+      </div>
+    </header>
+
+    <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: 36px 0 64px 32px; display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start">
+      <div style="flex: 1 1 440px; max-width: 520px; min-width: 0; display: flex; flex-direction: column; gap: 22px; padding-right: 32px">
+        <span style="align-self: flex-start; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #D9E0FF">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D6FF35" stroke-width="2.2" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Ciudad de México · {{today}}
+        </span>
+        <h1 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: clamp(64px, 7.6vw, 116px); line-height: .88; letter-spacing: -4.5px">¿Qué plan<br><span style="color: #D6FF35">hay hoy?</span></h1>
+        <label style="display: flex; align-items: center; gap: 10px; background: #FFFFFF; color: #08091A; border-radius: 99px; padding: 6px 6px 6px 22px; box-shadow: 0 20px 40px rgba(8,9,26,.25)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5A6178" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input placeholder="Busca un evento, artista o recinto" aria-label="Buscar" onKeyDown="{{searchKey}}" style="flex: 1; min-width: 0; border: 0; outline: 0; font: inherit; font-size: 14px">
+          <span style="width: 46px; height: 46px; border-radius: 50%; background: #1238FF; display: grid; place-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg></span>
+        </label>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <a href="DExplorar.dc.html" style="height: 42px; padding: 0 16px; border-radius: 99px; background: #08091A; color: #D6FF35; display: flex; align-items: center; font-weight: 800; font-size: 13px">Todo</a>
+          <a href="DExplorar.dc.html" style="height: 42px; padding: 0 16px; border-radius: 99px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25); display: flex; align-items: center; font-weight: 700; font-size: 13px">Conciertos</a>
+          <a href="DExplorar.dc.html" style="height: 42px; padding: 0 16px; border-radius: 99px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25); display: flex; align-items: center; font-weight: 700; font-size: 13px">Teatro</a>
+          <a href="DExplorar.dc.html" style="height: 42px; padding: 0 16px; border-radius: 99px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25); display: flex; align-items: center; font-weight: 700; font-size: 13px">Paseos</a>
+          <a href="DExplorar.dc.html" style="height: 42px; padding: 0 16px; border-radius: 99px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25); display: flex; align-items: center; font-weight: 700; font-size: 13px">Próximamente</a>
+        </div>
+
+<sc-if value="{{hasNext}}">        <a href="DWallet.dc.html" style="position: relative; display: flex; align-items: center; gap: 14px; background: #FFFFFF; color: #08091A; border-radius: 26px; padding: 10px 12px 10px 10px; margin-top: 6px">
+          <img src="{{next.img}}" alt="" style="width: 72px; height: 72px; border-radius: 18px; object-fit: cover">
+          <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; border-left: 2px dashed #C9D1EA; padding-left: 14px">
+            <span style="font-size: 11px; color: #5A6178; font-weight: 600">{{next.kicker}}</span>
+            <b style="font-family: Outfit, sans-serif; font-size: 20px; line-height: 1.1">{{next.title}}</b>
+            <span style="align-self: flex-start; display: flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 800; letter-spacing: .04em; background: #D6FF35; border-radius: 99px; padding: 4px 8px"><span style="width: 6px; height: 6px; border-radius: 50%; background: #08091A"></span>{{next.status}}</span>
+          </span>
+          <span style="width: 48px; height: 48px; border-radius: 50%; background: #08091A; display: grid; place-items: center; flex: 0 0 48px">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D6FF35" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM17 20h4v-3"/></svg>
+          </span>
+          <span style="position: absolute; left: 88px; top: -10px; width: 20px; height: 20px; border-radius: 50%; background: #1A3BF0"></span>
+          <span style="position: absolute; left: 88px; bottom: -10px; width: 20px; height: 20px; border-radius: 50%; background: #10279E"></span>
+        </a></sc-if><sc-if value="{{noNext}}"><a href="DExplorar.dc.html" style="display: flex; align-items: center; justify-content: space-between; gap: 14px; background: #FFFFFF; color: #08091A; border-radius: 26px; padding: 18px 14px 18px 22px; margin-top: 6px"><span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 11px; color: #5A6178; font-weight: 600">{{cta.kicker}}</span><b style="font-family: Outfit, sans-serif; font-size: 20px; line-height: 1.1">{{cta.title}}</b></span><span style="height: 48px; padding: 0 20px; border-radius: 99px; background: #08091A; color: #D6FF35; display: flex; align-items: center; font-weight: 800; font-size: 14px">{{cta.btn}}</span></a></sc-if>
+<sc-if value="{{hasNow}}">        <a href="DRush.dc.html" style="display: flex; align-items: center; gap: 12px; background: #08091A; border-radius: 22px; padding: 10px 10px 10px 14px">
+          <span style="width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(180deg, #FF3D8B, #FF8A3D); display: grid; place-items: center; flex: 0 0 40px"><svg width="20" height="20" viewBox="0 0 24 24" fill="#08091A" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span>
+          <span style="flex: 1; display: flex; flex-direction: column"><b style="font-size: 14px">{{nowb.title}}</b><span style="font-size: 12px; color: #AEB6D6">{{nowb.sub}}</span></span>
+          <span style="height: 40px; padding: 0 16px; border-radius: 99px; background: linear-gradient(100deg, #FF3D8B, #FF8A3D); color: #08091A; display: flex; align-items: center; font-weight: 800; font-size: 12px">{{nowb.btn}}</span>
+        </a></sc-if>
+      </div>
+
+      <div style="flex: 1 1 560px; min-width: 0; overflow: hidden; display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; padding-right: 32px">
+          <h2 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 26px; letter-spacing: -.5px">Populares ahora</h2>
+          <a href="DExplorar.dc.html" style="font-size: 13px; font-weight: 700; color: #D6FF35">Ver todo</a>
+        </div>
+        <div style="{{track}}">
+          <sc-for list="{{cards}}" as="c" hint-placeholder-count="4">
+            <a href="DEvento.dc.html" style="{{c.style}}">
+              <sc-if value="{{c.video}}" hint-placeholder-val="{{ false }}"><video src="/_blob/9bb3a5e0fcd00cd42c2ddaf0ca39bac7" poster="{{c.img}}" autoplay muted loop playsinline aria-label="Video de {{c.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></video></sc-if>
+              <sc-if value="{{c.photo}}" hint-placeholder-val="{{ true }}"><img src="{{c.img}}" alt="{{c.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: {{c.pos}}"></sc-if>
+              <span style="position: absolute; left: 16px; top: 16px; display: flex; gap: 6px; flex-wrap: wrap">
+                <span style="background: rgba(8,9,26,.55); backdrop-filter: blur(8px); border-radius: 99px; padding: 7px 12px; font-size: 11px; font-weight: 700">{{c.cat}}</span>
+              </span>
+              <span style="position: absolute; right: 16px; top: 14px; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.22); backdrop-filter: blur(8px); display: grid; place-items: center">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
+              </span>
+              <div style="position: absolute; left: 12px; right: 12px; bottom: 12px; background: rgba(8,9,26,.6); backdrop-filter: blur(14px); border-radius: 22px; padding: 14px 14px 14px 18px; display: flex; align-items: center; justify-content: space-between; gap: 10px">
+                <span style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+                  <span style="display: flex; gap: 6px; margin-bottom: 8px"><sc-if value="{{c.rush}}" hint-placeholder-val="{{ false }}"><span title="Now! disponible" role="img" aria-label="Now! disponible" style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #FF3D8B, #FF8A3D); display: grid; place-items: center; box-shadow: 0 4px 12px rgba(255,61,139,.4)"><svg width="14" height="14" viewBox="0 0 24 24" fill="#0B0A1C" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span></sc-if><sc-if value="{{c.golden}}" hint-placeholder-val="{{ false }}"><span title="Puede salir Golden Ticket" role="img" aria-label="Golden Ticket activo" style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #FFE9A3, #E2B23C 55%, #B8860B); display: grid; place-items: center; box-shadow: 0 4px 12px rgba(226,178,60,.45)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2A1A00" stroke-width="2.2" aria-hidden="true"><path d="M3 7h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4z"/><path d="M13 7v12" stroke-dasharray="2 2"/></svg></span></sc-if><sc-if value="{{c.original}}" hint-placeholder-val="{{ false }}"><span title="TADAA! Original" role="img" aria-label="TADAA! Original" style="width: 28px; height: 28px; border-radius: 9px; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 900; font-size: 12px">t!</span></sc-if></span><b style="font-family: Outfit, sans-serif; font-size: 24px; line-height: 1.05">{{c.title}}</b>
+                  <span style="font-size: 12px; color: #D9E0FF">{{c.when}}</span>
+                  <span style="font-size: 13px; font-weight: 700">{{c.price}} <span style="color: #D6FF35">{{c.pct}}</span></span>
+                </span>
+                <span style="width: 46px; height: 46px; flex: 0 0 46px; border-radius: 50%; background: #FFFFFF; display: grid; place-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#08091A" stroke-width="2.4" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding-right: 32px">
+          <div style="display: flex; gap: 8px">
+            <sc-for list="{{dots}}" as="d" hint-placeholder-count="6"><button onClick="{{d.pick}}" aria-label="{{d.aria}}" style="{{d.style}}"></button></sc-for>
+          </div>
+          <div style="display: flex; gap: 10px">
+            <button onClick="{{prev}}" aria-label="Anterior" style="width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); background: rgba(8,9,26,.25); color: #FFFFFF; font-size: 22px">‹</button>
+            <button onClick="{{next}}" aria-label="Siguiente" style="width: 52px; height: 52px; border-radius: 50%; border: 0; background: #D6FF35; color: #08091A; font-size: 22px">›</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width: 1280px; margin: 0 auto; padding: 80px 32px 24px">
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 30px">
+      <div>
+        <span style="font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #1238FF">LO QUE MÁS SE ESTÁ PIDIENDO</span>
+        <h2 style="margin: 6px 0 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: 56px; letter-spacing: -2.5px; line-height: .95">Top de la semana</h2>
+      </div>
+      <a href="DExplorar.dc.html" style="height: 48px; padding: 0 20px; border-radius: 99px; background: #08091A; color: #FFFFFF; display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 13px">Ver toda la cartelera <span style="color: #D6FF35">→</span></a>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px">
+      <sc-for list="{{top}}" as="c" hint-placeholder-count="4">
+        <a href="DEvento.dc.html" style="position: relative; display: flex; align-items: flex-end; padding-left: 64px">
+          <span class="outline" aria-hidden="true" style="position: absolute; left: -6px; bottom: 76px; font-family: Outfit, sans-serif; font-weight: 900; font-size: 210px; line-height: .8; letter-spacing: -12px">{{c.n}}</span>
+          <div style="position: relative; flex: 1; min-width: 0; background: #FFFFFF; border-radius: 26px; padding: 8px; box-shadow: 0 20px 50px rgba(18,56,255,.12)">
+            <div style="position: relative; height: 300px; border-radius: 20px; overflow: hidden; background: #08091A">
+              <sc-if value="{{c.video}}" hint-placeholder-val="{{ false }}"><video src="/_blob/9bb3a5e0fcd00cd42c2ddaf0ca39bac7" poster="{{c.img}}" autoplay muted loop playsinline aria-label="Video de {{c.title}}" style="width: 100%; height: 100%; object-fit: cover"></video></sc-if>
+              <sc-if value="{{c.photo}}" hint-placeholder-val="{{ true }}"><img src="{{c.img}}" alt="{{c.title}}" style="width: 100%; height: 100%; object-fit: cover"></sc-if>
+              <span style="position: absolute; left: 10px; top: 10px; display: flex; gap: 6px">
+                <sc-if value="{{c.video}}" hint-placeholder-val="{{ false }}"><span style="display: flex; align-items: center; gap: 5px; background: rgba(8,9,26,.6); color: #FFFFFF; backdrop-filter: blur(8px); border-radius: 99px; padding: 6px 10px; font-size: 11px; font-weight: 700"><svg width="10" height="10" viewBox="0 0 24 24" fill="#D6FF35" aria-hidden="true"><path d="M6 4v16l14-8z"/></svg>Video</span></sc-if>
+              </span>
+              <span style="position: absolute; right: 10px; top: 10px; background: #D6FF35; color: #08091A; border-radius: 99px; padding: 6px 10px; font-size: 11px; font-weight: 800">{{c.pct}}</span>
+            </div>
+            <div style="position: relative; margin: 10px -8px 0; border-top: 2px dashed #D5DBEA">
+              <span style="position: absolute; left: -10px; top: -11px; width: 20px; height: 20px; border-radius: 50%; background: #EEF1F7"></span>
+              <span style="position: absolute; right: -10px; top: -11px; width: 20px; height: 20px; border-radius: 50%; background: #EEF1F7"></span>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center; padding: 12px 6px 6px">
+              <span style="width: 54px; height: 58px; flex: 0 0 54px; border-radius: 14px; background: #1238FF; color: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1"><b style="font-family: Outfit, sans-serif; font-size: 22px">{{c.d}}</b><span style="font-size: 10px; font-weight: 800; color: #D6FF35">{{c.m}}</span></span>
+              <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+                <span style="display: flex; gap: 6px; margin-bottom: 4px"><sc-if value="{{c.rush}}" hint-placeholder-val="{{ false }}"><span title="Now! disponible" role="img" aria-label="Now! disponible" style="width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, #FF3D8B, #FF8A3D); display: grid; place-items: center; box-shadow: 0 4px 12px rgba(255,61,139,.4)"><svg width="12" height="12" viewBox="0 0 24 24" fill="#0B0A1C" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span></sc-if><sc-if value="{{c.golden}}" hint-placeholder-val="{{ false }}"><span title="Puede salir Golden Ticket" role="img" aria-label="Golden Ticket activo" style="width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, #FFE9A3, #E2B23C 55%, #B8860B); display: grid; place-items: center; box-shadow: 0 4px 12px rgba(226,178,60,.45)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2A1A00" stroke-width="2.2" aria-hidden="true"><path d="M3 7h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4z"/><path d="M13 7v12" stroke-dasharray="2 2"/></svg></span></sc-if><sc-if value="{{c.original}}" hint-placeholder-val="{{ false }}"><span title="TADAA! Original" role="img" aria-label="TADAA! Original" style="width: 24px; height: 24px; border-radius: 9px; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 900; font-size: 11px">t!</span></sc-if></span><b style="font-family: Outfit, sans-serif; font-size: 19px; line-height: 1.1">{{c.title}}</b>
+                <span style="font-size: 12px; color: #4A5068">{{c.venue}} · <b style="color: #08091A">{{c.price}}</b></span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="originals" style="max-width: 1280px; margin: 0 auto; padding: 48px 32px 8px">
+    <div class="inferno" style="position: relative; border-radius: 44px; overflow: hidden; min-height: 460px; color: #FFFFFF; display: flex; align-items: flex-end">
+      <div style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(10,4,6,.95) 0%, rgba(10,4,6,.4) 50%, transparent 80%)"></div>
+      <div class="grain" style="position: absolute; inset: 0; opacity: .3"></div>
+      <div style="position: relative; width: 100%; padding: 48px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 28px">
+        <div style="display: flex; flex-direction: column; gap: 14px; max-width: 620px">
+          <span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; background: #08091A; border-radius: 10px; padding: 6px 12px 6px 6px"><span style="width: 26px; height: 26px; border-radius: 7px; background: #D6FF35; color: #08091A; font-family: Outfit, sans-serif; font-weight: 900; font-size: 15px; display: grid; place-items: center">t!</span><span style="font-size: 11px; font-weight: 800; letter-spacing: .22em">ORIGINAL</span></span>
+          <h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 96px; letter-spacing: .38em; line-height: .9">INFERNO</h2>
+          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #E8CFCB">Sins awaken. Nueve círculos, nueve artistas sellados. El primer festival que producimos y vendemos nosotros: boleto final, QR dinámico y probabilidad de Golden Ticket.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-end">
+          <span style="font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #FF6A55">LA FECHA SE REVELA EL 1 DE ENERO</span>
+          <a href="#" style="height: 58px; padding: 0 26px; border-radius: 99px; background: #FFFFFF; color: #14060A; display: flex; align-items: center; font-weight: 800; font-size: 15px">Registrarme a la preventa</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 56px 32px">
+    <div class="ink" style="position: relative; border-radius: 48px; overflow: hidden; color: #FFFFFF; padding: 56px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center">
+      <div class="grain" style="position: absolute; inset: 0; opacity: .35"></div>
+      <div style="position: relative; flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+        <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #D6FF35">TU BENEFICIO EN 3 PASOS</span>
+        <h2 style="margin: 0 0 10px; font-family: Outfit, sans-serif; font-weight: 800; font-size: 52px; letter-spacing: -2px; line-height: 1">Así de fácil.</h2>
+        <sc-for list="{{steps}}" as="st" hint-placeholder-count="3">
+          <button onClick="{{st.pick}}" aria-pressed="{{st.on}}" style="{{st.style}}">
+            <span style="{{st.numStyle}}">{{st.n}}</span>
+            <span style="display: flex; flex-direction: column; gap: 4px; text-align: left">
+              <b style="font-family: Outfit, sans-serif; font-size: 22px">{{st.title}}</b>
+              <span style="font-size: 14px; line-height: 1.5; opacity: .8">{{st.text}}</span>
+            </span>
+          </button>
+        </sc-for>
+      </div>
+
+      <div style="position: relative; flex: 1 1 360px; min-width: 0; display: flex; justify-content: center">
+        <div style="position: absolute; width: 380px; height: 380px; border-radius: 50%; top: 80px; background: radial-gradient(circle, rgba(18,56,255,.6), transparent 70%)"></div>
+        <div style="position: relative; width: 300px; height: 620px; border-radius: 52px; background: #1C1E36; padding: 10px; box-shadow: 0 0 0 2px #3A3E66, 0 50px 90px rgba(0,0,0,.5); transform: rotate(4deg)">
+          <div class="txw" style="position: relative; width: 100%; height: 100%; border-radius: 44px; overflow: hidden; padding: 46px 16px 16px; display: flex; flex-direction: column; gap: 12px">
+            <span style="position: absolute; left: 50%; top: 12px; margin-left: -45px; width: 90px; height: 26px; border-radius: 99px; background: #08091A"></span>
+
+            <sc-if value="{{p1}}" hint-placeholder-val="{{ true }}">
+              <b style="font-family: Outfit, sans-serif; font-size: 28px; line-height: 1">Verifica tu<br><span style="color: #D6FF35">convenio</span></b>
+              <div style="background: #FFFFFF; color: #08091A; border-radius: 22px; padding: 14px; display: flex; flex-direction: column; gap: 10px">
+                <span style="font-size: 11px; color: #5A6178">Institución</span>
+                <span style="height: 42px; border-radius: 12px; background: #EEF1F7; display: flex; align-items: center; padding: 0 12px; font-size: 13px; font-weight: 700">Empresa Demo Norte</span>
+                <span style="font-size: 11px; color: #5A6178">Número de colaborador</span>
+                <span style="height: 42px; border-radius: 12px; background: #EEF1F7; display: flex; align-items: center; padding: 0 12px; font-size: 13px; font-weight: 700">EMP-1001</span>
+                <span style="height: 44px; border-radius: 99px; background: #D6FF35; display: grid; place-items: center; font-weight: 800; font-size: 13px">Validar</span>
+              </div>
+              <span style="align-self: center; display: flex; align-items: center; gap: 8px; background: #08091A; border-radius: 99px; padding: 8px 14px; font-size: 12px; font-weight: 700"><span style="color: #D6FF35">✓</span> Convenio activo</span>
+            </sc-if>
+
+            <sc-if value="{{p2}}" hint-placeholder-val="{{ false }}">
+              <img src="/_blob/bf23baed004bb85668937804b7d495cc" alt="" style="width: 100%; height: 150px; object-fit: cover; border-radius: 22px">
+              <b style="font-family: Outfit, sans-serif; font-size: 24px; line-height: 1">Matilda</b>
+              <div style="background: #FFFFFF; color: #08091A; border-radius: 22px; padding: 8px; display: flex; flex-direction: column; gap: 6px">
+                <span style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-radius: 14px; background: #1238FF; color: #FFFFFF; font-size: 13px"><b>Mezzanine 1</b><b>$700 <span style="background: #D6FF35; color: #08091A; border-radius: 99px; padding: 2px 6px; font-size: 10px">−61%</span></b></span>
+                <span style="display: flex; justify-content: space-between; padding: 10px; font-size: 13px"><b>Orquesta 1</b><b>$1,400</b></span>
+                <span style="display: flex; justify-content: space-between; padding: 10px; font-size: 13px"><b>VIP Oro</b><b>$1,800</b></span>
+              </div>
+              <span style="height: 46px; border-radius: 99px; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-weight: 800; font-size: 13px">Solicitar · sin pagar aún</span>
+            </sc-if>
+
+            <sc-if value="{{p3}}" hint-placeholder-val="{{ false }}">
+              <b style="font-family: Outfit, sans-serif; font-size: 22px; text-align: center">Tu boleto</b>
+              <div style="background: #FFFFFF; color: #08091A; border-radius: 26px; padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 10px">
+                <span style="background: #D6FF35; border-radius: 99px; padding: 4px 9px; font-size: 9px; font-weight: 800">BOLETO FINAL</span>
+                <b style="font-family: Outfit, sans-serif; font-size: 18px">Matilda · Sáb 19:00</b>
+                <div aria-hidden="true" style="width: 170px; height: 170px; border-radius: 14px; background: conic-gradient(#08091A 25%, #FFFFFF 0 50%, #08091A 0 75%, #FFFFFF 0) 0 0/24px 24px; box-shadow: inset 0 0 0 10px #FFFFFF"></div>
+                <span style="font-size: 11px; color: #4A5068">Se renueva en 0:42</span>
+              </div>
+              <span style="height: 46px; border-radius: 99px; background: rgba(255,255,255,.18); display: grid; place-items: center; font-weight: 700; font-size: 13px">Agregar a Wallet</span>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="membresia" style="max-width: 1280px; margin: 0 auto; padding: 24px 32px 56px">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 28px">
+      <h2 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 48px; letter-spacing: -2px; line-height: 1">¿Sin convenio?<br><span style="color: #1238FF">También entras.</span></h2>
+      <p style="margin: 0; max-width: 420px; font-size: 15px; line-height: 1.6; color: #4A5068">Si tu empresa o escuela aún no está afiliada, activa la membresía TADAA! y accede a las mismas tarifas.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px">
+      <div style="background: #FFFFFF; border-radius: 32px; padding: 32px; display: flex; flex-direction: column; gap: 16px">
+        <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #1238FF">POR CONVENIO</span>
+        <b style="font-family: Outfit, sans-serif; font-size: 44px; letter-spacing: -1px">Gratis</b>
+        <span style="font-size: 14px; color: #4A5068">Tu empresa, universidad o colegio te da acceso.</span>
+        <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px">
+          <li>✓ Tarifas de convenio en toda la cartelera</li><li>✓ Now! y Golden Ticket</li><li>✓ Niveles, badges y cashback</li>
+        </ul>
+        <a href="#" style="margin-top: auto; height: 56px; border-radius: 99px; border: 1.5px solid #08091A; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px">Verificar mi convenio</a>
+      </div>
+      <div class="txw" style="position: relative; color: #FFFFFF; border-radius: 32px; padding: 32px; display: flex; flex-direction: column; gap: 16px; overflow: hidden">
+        <span style="position: absolute; right: 24px; top: 24px; background: #D6FF35; color: #08091A; border-radius: 99px; padding: 6px 12px; font-size: 11px; font-weight: 800">PARA TODOS</span>
+        <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #D6FF35">MEMBRESÍA TADAA!</span>
+        <b style="font-family: Outfit, sans-serif; font-size: 44px; letter-spacing: -1px">$100 <span style="font-size: 18px; font-weight: 600">/ mes</span></b>
+        <span style="font-size: 14px; color: #D9E0FF">Sin convenio, con los mismos beneficios. Cancela cuando quieras.</span>
+        <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px">
+          <li>✓ Todo lo del convenio</li><li>✓ Renovación solo si tú la confirmas</li><li>✓ Avisos 7, 3 y 1 día antes de vencer</li>
+        </ul>
+        <a href="#" style="margin-top: auto; height: 56px; border-radius: 99px; background: #D6FF35; color: #08091A; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px">Hacerme miembro</a>
+      </div>
+      <div style="background: #08091A; color: #FFFFFF; border-radius: 32px; padding: 32px; display: flex; flex-direction: column; gap: 16px">
+        <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #FF4F93">GÁNALA COMPRANDO</span>
+        <b style="font-family: Outfit, sans-serif; font-size: 44px; letter-spacing: -1px">30 días</b>
+        <span style="font-size: 14px; color: #C7CDE6">Compra en un evento vendido por TADAA! Tickets y te regalamos un mes de membresía.</span>
+        <div style="margin-top: auto; display: flex; align-items: center; gap: 12px; background: #161833; border-radius: 22px; padding: 12px">
+          <img src="/_blob/bf23baed004bb85668937804b7d495cc" alt="" style="width: 56px; height: 56px; border-radius: 14px; object-fit: cover">
+          <span style="display: flex; flex-direction: column"><b style="font-size: 14px">Matilda · El Musical</b><span style="font-size: 12px; color: #D6FF35">Incluye +30 días</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section id="empresas" style="max-width: 1280px; margin: 0 auto; padding: 0 32px 80px">
+    <div class="txw" style="position: relative; color: #FFFFFF; border-radius: 40px; padding: 48px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: space-between; overflow: hidden">
+      <div style="position: relative; flex: 1 1 420px; min-width: 0">
+        <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #D6FF35">PARA EMPRESAS, ESCUELAS Y PRODUCTORES</span>
+        <h2 style="margin: 12px 0 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 44px; letter-spacing: -1.5px; line-height: 1.02">Un beneficio que tu equipo sí va a usar.</h2>
+      </div>
+      <div style="position: relative; display: flex; flex-wrap: wrap; gap: 12px">
+        <a href="DPitch.dc.html" style="height: 56px; padding: 0 24px; border-radius: 99px; background: #D6FF35; color: #08091A; display: flex; align-items: center; font-weight: 800; font-size: 14px">Ser Early Partner</a>
+        <a href="DPartner.dc.html" style="height: 56px; padding: 0 24px; border-radius: 99px; border: 1px solid rgba(255,255,255,.4); display: flex; align-items: center; font-weight: 700; font-size: 14px">Soy productor</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="ink" style="position: relative; color: #FFFFFF; overflow: hidden">
+    <div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: -14px; height: 28px; background: radial-gradient(circle at 14px 14px, #EEF1F7 12px, transparent 13px) 0 0/40px 28px repeat-x"></div>
+    <div class="grain" style="position: absolute; inset: 0; opacity: .3"></div>
+    <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: 72px 32px 0; display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between">
+      <div style="flex: 1 1 380px; max-width: 440px; display: flex; flex-direction: column; gap: 16px">
+        <h3 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 34px; line-height: 1.05; letter-spacing: -1px">Entérate primero de cada Now!, preventa y Original.</h3>
+        <label style="display: flex; align-items: center; gap: 8px; background: #161833; border: 1px solid #2A2D52; border-radius: 99px; padding: 6px 6px 6px 20px">
+          <input type="email" placeholder="tu@correo.com" aria-label="Correo electrónico" style="flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: #FFFFFF; font: inherit; font-size: 14px">
+          <span style="height: 46px; padding: 0 20px; border-radius: 99px; background: #D6FF35; color: #08091A; display: flex; align-items: center; font-weight: 800; font-size: 13px">Suscribirme</span>
+        </label>
+        <div style="display: flex; gap: 10px">
+          <a href="#" style="height: 50px; padding: 0 18px; border-radius: 14px; border: 1px solid #3A3E66; display: flex; flex-direction: column; justify-content: center; line-height: 1.1"><span style="font-size: 10px; color: #AEB6D6">Descarga en</span><b style="font-size: 14px">App Store</b></a>
+          <a href="#" style="height: 50px; padding: 0 18px; border-radius: 14px; border: 1px solid #3A3E66; display: flex; flex-direction: column; justify-content: center; line-height: 1.1"><span style="font-size: 10px; color: #AEB6D6">Disponible en</span><b style="font-size: 14px">Google Play</b></a>
+        </div>
+      </div>
+      <nav aria-label="Pie de página" style="flex: 1 1 520px; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 24px; font-size: 14px">
+        <div style="display: flex; flex-direction: column; gap: 12px"><b style="font-size: 12px; letter-spacing: .14em; color: #D6FF35">EXPLORA</b><a href="DExplorar.dc.html">Cartelera</a><a href="#">Now!</a><a href="#originals">Originals</a><a href="#">Golden Ticket</a></div>
+        <div style="display: flex; flex-direction: column; gap: 12px"><b style="font-size: 12px; letter-spacing: .14em; color: #D6FF35">TU CUENTA</b><a href="DWallet.dc.html">Mi Wallet</a><a href="DCuenta.dc.html">Niveles y badges</a><a href="#membresia">Membresía</a><a href="#">Ayuda</a></div>
+        <div style="display: flex; flex-direction: column; gap: 12px"><b style="font-size: 12px; letter-spacing: .14em; color: #D6FF35">ALIADOS</b><a href="DPitch.dc.html">Early Partners</a><a href="DPartner.dc.html">Productores</a><a href="#empresas">Empresas</a><a href="#">Escuelas</a></div>
+        <div style="display: flex; flex-direction: column; gap: 12px"><b style="font-size: 12px; letter-spacing: .14em; color: #D6FF35">LEGAL</b><a href="#">Términos</a><a href="#">Privacidad</a><a href="#">Devoluciones</a></div>
+      </nav>
+    </div>
+    <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: 40px 32px 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 12px; color: #8C93B5">
+      <span>© 2026 TADAA! · Hecho en CDMX</span>
+      <span style="display: flex; gap: 16px"><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">X</a><a href="#">Facebook</a></span>
+    </div>
+    <div aria-hidden="true" style="position: relative; text-align: center; font-family: Outfit, sans-serif; font-weight: 900; font-size: clamp(140px, 24vw, 360px); line-height: .78; letter-spacing: -14px; margin-top: 24px; margin-bottom: -40px; color: #1238FF">tadaa<span style="color: #D6FF35">!</span></div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3600}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { i: 0, step: 0 }; }
+  componentDidMount(){ this.t = setInterval(() => this.setState({ i: (this.state.i + 1) % 6 }), 6000); }
+  componentWillUnmount(){ clearInterval(this.t); }
+  renderVals() {
+    const i = this.state.i;
+    const data = [
+      { title: 'Matilda · El Musical', cat: 'Musical', when: 'Vie a dom · Teatro 1', price: 'Desde $700', pct: '−61%', img: '/_blob/bf23baed004bb85668937804b7d495cc', pos: 'center 30%', video: false, rush: false, original: false, golden: true },
+      { title: 'Morat', cat: 'Concierto', when: '17 nov · Palacio de los Deportes', price: 'Desde $2,100', pct: '−13%', img: '/_blob/8e0bcf402dffa7cdf67f5b3be9f05c08', pos: 'center', video: true, rush: false, original: false },
+      { title: 'Nocturno', cat: 'Teatro', when: 'Hoy 20:00 · Teatro 2', price: 'Desde $850', pct: '−31%', img: '/_blob/638dbc29de26c4783746a0bef23bebdd', pos: 'center 25%', video: false, rush: true, original: false, golden: true },
+      { title: 'INFERNO', cat: 'Festival · Preventa', when: '2027 · fecha por revelar', price: 'Regístrate', pct: '', img: '/_blob/26994cc14f5434330e2908761d2a8099', pos: 'center 30%', video: false, rush: false, original: true, golden: true },
+      { title: 'Bruno Mars', cat: 'Concierto', when: '11 dic · Estadio GNP', price: 'Desde $1,550', pct: '−14%', img: '/_blob/ae1aa772d43572f219610f484bc3660c', pos: 'center', video: false, rush: false, original: false },
+      { title: 'BioParque Estrella', cat: 'Paseo', when: 'Fecha abierta', price: 'Desde $380', pct: '−19%', img: '/_blob/bf2a75752b07f383213ec9a4d48dc00d', pos: 'center', video: false, rush: false, original: false }
+    ];
+    const n = data.length;
+    const cards = data.map((c, k) => ({ golden: false, ...c, photo: !c.video,
+      style: 'position: relative; flex: 0 0 ' + (k === i ? 360 : 300) + 'px; height: ' + (k === i ? 500 : 440) + 'px; border-radius: 32px; overflow: hidden; display: block; color: #FFFFFF; background: #08091A; transition: all .5s cubic-bezier(.2,.8,.2,1); box-shadow: ' + (k === i ? '0 40px 80px rgba(6,14,90,.55)' : 'none') + '; opacity: ' + (k < i ? 0 : 1) + ';' }));
+    const track = 'display: flex; align-items: flex-end; gap: 18px; height: 500px; transition: transform .5s cubic-bezier(.2,.8,.2,1); transform: translateX(-' + (i * 318) + 'px);';
+    const dots = data.map((x, k) => ({ aria: 'Ir a ' + x.title, pick: () => this.setState({ i: k }),
+      style: 'height: 8px; border: 0; padding: 0; border-radius: 99px; transition: width .3s; ' + (k === i ? 'width: 44px; background: #D6FF35;' : 'width: 14px; background: rgba(255,255,255,.4);') }));
+    const st = this.state.step;
+    const stepsData = [
+      ['01', 'Verifica tu convenio', 'Regístrate con tu número de colaborador o estudiante. ¿Sin convenio? Activa la membresía.'],
+      ['02', 'Elige y solicita', 'Compara tarifas por zona, o inscríbete a Now! de último minuto.'],
+      ['03', 'Paga y entra', 'Tu boleto vive en Mi Wallet con un QR que se renueva cada minuto.']
+    ];
+    const steps = stepsData.map(([n, title, text], k) => ({ n, title, text, on: k === st, pick: () => this.setState({ step: k }),
+      style: 'display: flex; gap: 18px; align-items: flex-start; padding: 18px; border-radius: 24px; font-family: inherit; color: #FFFFFF; ' + (k === st ? 'border: 1px solid rgba(214,255,53,.6); background: rgba(214,255,53,.08);' : 'border: 1px solid transparent; background: transparent;'),
+      numStyle: 'font-family: Outfit, sans-serif; font-weight: 800; font-size: 34px; line-height: 1; ' + (k === st ? 'color: #D6FF35;' : 'color: #3A3E66;') }));
+    const top = [
+      { n: '1', img: '/_blob/8e0bcf402dffa7cdf67f5b3be9f05c08', title: 'Morat', venue: 'Palacio de los Deportes', d: '17', m: 'NOV', price: 'desde $2,100', pct: '−13%', video: true, rush: false },
+      { n: '2', img: '/_blob/bf23baed004bb85668937804b7d495cc', title: 'Matilda · El Musical', venue: 'Teatro 1', d: '29', m: 'NOV', price: 'desde $700', pct: '−61%', video: false, rush: false },
+      { n: '3', img: '/_blob/638dbc29de26c4783746a0bef23bebdd', title: 'Nocturno', venue: 'Teatro 2', d: '21', m: 'NOV', price: 'desde $850', pct: '−31%', video: false, rush: true },
+      { n: '4', img: '/_blob/ae1aa772d43572f219610f484bc3660c', title: 'Bruno Mars', venue: 'Estadio GNP', d: '11', m: 'DIC', price: 'desde $1,550', pct: '−14%', video: false, rush: false }
+    ].map(c => ({ original: false, ...c, golden: ['Matilda · El Musical', 'Nocturno'].includes(c.title), photo: !c.video }));
+    return { cards, track, dots, prev: () => this.setState({ i: (i + n - 1) % n }), next: () => this.setState({ i: (i + 1) % n }), steps, p1: st === 0, p2: st === 1, p3: st === 2, top };
+  }
+}
+</script>
+</body>
+</html>

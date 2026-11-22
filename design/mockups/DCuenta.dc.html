@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Tadaa! escritorio · Mi cuenta</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+.txw{background:#1238FF url(/_blob/e0912ca8104f4784a21d635acba18e3a) center/cover}
+.grain{background-image:url(/_blob/3deff8146b80bb3fb1485ea91d6f55e6);background-size:256px}
+</style>
+</helmet>
+<div style="width: 100%; background: #EEF1F7; font-family: 'Plus Jakarta Sans', sans-serif; color: #08091A">
+
+  <section class="txw" style="position: relative; color: #FFFFFF; border-radius: 0 0 48px 48px; overflow: hidden">
+    <div style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(6,14,90,.85), transparent 70%)"></div>
+    <div class="grain" style="position: absolute; inset: 0; opacity: .25"></div>
+    <header style="position: relative; max-width: 1280px; margin: 0 auto; padding: 22px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="Tadaa!" style="height: 38px; width: auto">
+      <nav aria-label="Principal" style="display: flex; flex-wrap: wrap; gap: 4px; background: rgba(8,9,26,.28); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.14); border-radius: 99px; padding: 5px">
+        <a href="DHome.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Inicio</a>
+        <a href="DExplorar.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Cartelera</a>
+        <a href="DWallet.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Mi Wallet</a>
+        <a href="DCuenta.dc.html" style="padding: 11px 18px; border-radius: 99px; background: #FFFFFF; color: #08091A; font-weight: 800; font-size: 13px">Mi cuenta</a>
+      </nav>
+      <span style="width: 44px; height: 44px; border-radius: 50%; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 800">{{TVini}}</span>
+    </header>
+
+    <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: 24px 32px 48px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px">
+      <div style="display: flex; align-items: center; gap: 28px; flex-wrap: wrap">
+        <div style="position: relative; width: 240px; height: 140px">
+          <svg viewBox="0 0 240 130" width="240" height="130" aria-hidden="true" style="position: absolute; left: 0; top: 0">
+            <path d="M14 124 A106 106 0 0 1 226 124" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="10" stroke-linecap="round"/>
+            <path d="M14 124 A106 106 0 0 1 226 124" fill="none" stroke="#D6FF35" stroke-width="10" stroke-linecap="round" stroke-dasharray="140 400"/>
+          </svg>
+          <span style="position: absolute; left: 70px; top: 40px; width: 100px; height: 100px; border-radius: 50%; border: 4px solid #FFFFFF; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 900; font-size: 42px">{{ini}}</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="align-self: flex-start; background: #FFFFFF; color: #08091A; border-radius: 99px; padding: 5px 12px; font-size: 12px; font-weight: 800">{{levelLine}}</span>
+          <h1 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: 64px; letter-spacing: -2.5px; line-height: .95">{{name}}</h1>
+          <span style="font-size: 14px; color: #D9E0FF">{{memberLine}}</span>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+        <span style="background: rgba(8,9,26,.3); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.14); border-radius: 22px; padding: 14px 18px"><span style="display: block; font-size: 12px; color: #D9E0FF">Planes 2026</span><b style="font-family: Outfit, sans-serif; font-size: 30px">{{plans}}</b></span>
+        <span style="background: rgba(8,9,26,.3); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.14); border-radius: 22px; padding: 14px 18px"><span style="display: block; font-size: 12px; color: #D9E0FF">XP</span><b style="font-family: Outfit, sans-serif; font-size: 30px">{{xp}}</b></span>
+        <span style="background: rgba(8,9,26,.3); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.14); border-radius: 22px; padding: 14px 18px"><span style="display: block; font-size: 12px; color: #D9E0FF">Golden</span><b style="font-family: Outfit, sans-serif; font-size: 30px; color: #D6FF35">{{golden}}</b></span>
+      </div>
+    </div>
+  </section>
+
+  <div style="max-width: 1280px; margin: 0 auto; padding: 32px 32px 80px; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+    <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+      <section style="background: #08091A; color: #FFFFFF; border-radius: 32px; padding: 26px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px">
+          <h2 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 28px">Badges <span style="color: #8C93B5; font-size: 16px; font-weight: 600">{{badgeCount}}</span></h2>
+          <a href="MLogro.dc.html" style="font-size: 13px; font-weight: 700; color: #D6FF35">Ver último logro</a>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 18px">
+          <sc-for list="{{badges}}" as="b" hint-placeholder-count="8">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center">
+              <span style="{{b.shape}}"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="{{b.ink}}" stroke-width="2" aria-hidden="true"><path d="{{b.icon}}"/></svg></span>
+              <b style="font-size: 12px; color: {{b.label}}">{{b.name}}</b>
+              <span style="font-size: 11px; color: #8C93B5">{{b.how}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="background: #FFFFFF; border-radius: 32px; padding: 26px">
+        <h2 style="margin: 0 0 16px; font-family: Outfit, sans-serif; font-weight: 800; font-size: 28px">Niveles</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px">
+          <sc-for list="{{levels}}" as="l" hint-placeholder-count="4">
+            <div style="{{l.card}}">
+              <span style="font-size: 11px; font-weight: 800; letter-spacing: .12em; opacity: .75">{{l.req}}</span>
+              <b style="font-family: Outfit, sans-serif; font-size: 26px">{{l.name}}</b>
+              <span style="font-size: 12px; line-height: 1.5">{{l.perks}}</span>
+              <span style="{{l.tagStyle}}">{{l.tag}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </div>
+
+    <div style="flex: 1 1 340px; max-width: 420px; display: flex; flex-direction: column; gap: 16px">
+      <section style="background: #FFFFFF; border-radius: 32px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; justify-content: space-between; align-items: center"><h2 style="margin: 0; font-family: Outfit, sans-serif; font-size: 22px">Acceso a beneficios</h2><span style="background: #D6FF35; border-radius: 99px; padding: 5px 10px; font-size: 11px; font-weight: 800">{{accessTag}}</span></div>
+        <div style="background: #EEF1F7; border-radius: 18px; padding: 14px; display: flex; flex-direction: column; gap: 4px">
+          <span style="font-size: 12px; color: #5A6178">{{accessKind}}</span><b style="font-size: 15px">{{accessName}}</b><span style="font-size: 12px; color: #4A5068">{{accessSub}}</span>
+        </div>
+        <p style="margin: 0; font-size: 12px; line-height: 1.5; color: #4A5068">Si tu empresa te da de baja, tu cuenta y tus badges se quedan. Solo cambia tu acceso a tarifas; puedes seguir con la membresía.</p>
+        <a href="app.html#/membresia" style="height: 48px; border-radius: 99px; border: 1px solid #D5DBEA; display: grid; place-items: center; font-weight: 700; font-size: 13px">Ver planes de membresía</a>
+      </section>
+
+      <section style="background: #FFFFFF; border-radius: 32px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <h2 style="margin: 0; font-family: Outfit, sans-serif; font-size: 22px">Mis datos</h2>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A5068">Correo<input value="{{email}}" readonly style="height: 46px; border: 1px solid #D5DBEA; border-radius: 14px; padding: 0 14px; font: inherit; font-size: 14px; color: #08091A"></label>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A5068">Celular (WhatsApp)<input value="{{phone}}" readonly style="height: 46px; border: 1px solid #D5DBEA; border-radius: 14px; padding: 0 14px; font: inherit; font-size: 14px; color: #08091A"></label>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A5068">RFC
+          <span style="display: flex; align-items: center; gap: 8px; height: 46px; border: 2px solid #1238FF; border-radius: 14px; padding: 0 14px"><input value="{{rfc}}" placeholder="Escribe tu RFC" aria-label="RFC" onChange="{{rfcInput}}" style="flex: 1; min-width: 0; border: 0; outline: 0; font: inherit; font-size: 14px; letter-spacing: .06em; color: #08091A"><span style="font-size: 11px; font-weight: 800; color: #0B7A3B"><button onClick="{{saveRfc}}" style="border: 0; background: transparent; font: inherit; color: inherit; font-weight: 800; cursor: pointer">{{rfcTag}}</button></span></span>
+        </label>
+        <p style="margin: 0; font-size: 12px; line-height: 1.5; color: #4A5068">Tu RFC es tu identificador único: si otra empresa te afilia, reactivamos esta misma cuenta en lugar de crear una nueva. También lo usamos para tus facturas.</p>
+      </section>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const B = [
+      ['Primera función', '#D6FF35', true, 'M5 4h14v6a7 7 0 0 1-14 0zM9 21h6M12 17v4', 'Tu primer plan'],
+      ['Noche de rock', '#FF8A3D', true, 'M9 18V5l12-2v13M9 18a3 3 0 1 1-3-3 3 3 0 0 1 3 3zM21 16a3 3 0 1 1-3-3 3 3 0 0 1 3 3z', '1 concierto'],
+      ['Teatrero', '#7FA0FF', true, 'M4 4h16v6a8 8 0 0 1-16 0zM9 9h.01M15 9h.01M9 13a4 4 0 0 0 6 0', '3 obras'],
+      ['Explorador', '#B9C7FF', true, 'M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z', '2 sedes nuevas'],
+      ['Familiar', '#FFE9A8', true, 'M8 21v-6M16 21v-6M6 15h12l-2-7H8z', '1 paseo'],
+      ['Madrugador', '#D6FF35', true, 'M12 2v4M4.9 4.9l2.8 2.8M2 12h4M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8z', 'Compra en preventa'],
+      ['Now! veloz', '#3A3E66', false, 'M13 2 4 14h7l-1 8 9-12h-7z', 'Gana un Now!'],
+      ['Golden', '#3A3E66', false, 'M3 7h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4z', 'Recibe un Golden']
+    ];
+    const badges = B.map(([name, bg, on, icon, how]) => ({ name, icon, how, ink: on ? '#08091A' : '#AEB6D6', label: on ? '#FFFFFF' : '#8C93B5',
+      shape: 'width: 76px; height: 84px; display: grid; place-items: center; background: ' + bg + '; border-radius: 22px 22px 38px 38px; ' + (on ? 'box-shadow: 0 0 0 3px #08091A, 0 0 0 5px ' + bg + ';' : 'opacity: .55;') }));
+    const L = [
+      ['0 PLANES', 'Curioso', 'Tarifas de convenio y Now!', 'done'],
+      ['2 PLANES', 'Fan', '1% cashback · badges', 'now'],
+      ['6 PLANES', 'Asiduo', '3% cashback · Now! anticipado 30 min · 2 entradas extra Golden', 'next'],
+      ['16 PLANES', 'Leyenda', '5% cashback · preestrenos · WhatsApp prioritario', 'next']
+    ];
+    const levels = L.map(([req, name, perks, s]) => ({ req, name, perks,
+      tag: s === 'done' ? 'Superado' : s === 'now' ? 'Tu nivel' : 'Bloqueado',
+      card: 'display: flex; flex-direction: column; gap: 6px; border-radius: 24px; padding: 18px; ' + (s === 'now' ? 'background: #1238FF; color: #FFFFFF;' : s === 'done' ? 'background: #EEF1F7; color: #08091A;' : 'background: #FFFFFF; color: #08091A; border: 2px dashed #D5DBEA;'),
+      tagStyle: 'align-self: flex-start; margin-top: 6px; border-radius: 99px; padding: 4px 10px; font-size: 11px; font-weight: 800; ' + (s === 'now' ? 'background: #D6FF35; color: #08091A;' : s === 'done' ? 'background: #08091A; color: #FFFFFF;' : 'background: #EEF1F7; color: #4A5068;') }));
+    return { badges, levels };
+  }
+}
+</script>
+</body>
+</html>

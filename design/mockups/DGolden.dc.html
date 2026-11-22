@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Tadaa! escritorio · Golden Ticket</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+.gold{background:#E2B23C url(/_blob/52c32ef55d42f15d56b0cfb34f1a15f6) center/cover}
+.inferno{background:#140608 url({{g.img}}) center 35%/cover}
+.rays{background:repeating-conic-gradient(from 0deg, rgba(255,214,102,.22) 0deg 8deg, transparent 8deg 22deg);animation:spin 24s linear infinite;-webkit-mask:radial-gradient(circle, #000 15%, transparent 65%);mask:radial-gradient(circle, #000 15%, transparent 65%)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.bokeh{background:radial-gradient(circle at 18% 30%,rgba(255,214,102,.3) 0 60px,transparent 140px),radial-gradient(circle at 82% 20%,rgba(255,233,163,.2) 0 50px,transparent 120px),radial-gradient(circle at 72% 82%,rgba(226,178,60,.25) 0 70px,transparent 160px);filter:blur(8px);animation:breathe 5s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:.6}50%{opacity:1}}
+.flip{animation:flip 1.6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes flip{0%{transform:perspective(1200px) rotateY(0) scale(.9)}45%{transform:perspective(1200px) rotateY(90deg)}100%{transform:perspective(1200px) rotateY(0) rotate(-5deg)}}
+.bluefade{animation:fadeout 1.6s both}
+@keyframes fadeout{0%,44%{opacity:1}46%,100%{opacity:0}}
+.pop{animation:pop .7s 1.2s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes pop{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.shine{background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.7) 50%,transparent 65%);background-size:260% 100%;animation:sweep 3s 1.4s ease-in-out infinite}
+@keyframes sweep{from{background-position:130% 0}to{background-position:-130% 0}}
+.goldtext{background:linear-gradient(100deg,#FFE9A3,#E2B23C 40%,#FFF4CC 55%,#C8901F);-webkit-background-clip:text;background-clip:text;color:transparent}
+</style>
+</helmet>
+<div style="position: relative; width: 100%; min-height: 960px; overflow: hidden; background: radial-gradient(60% 60% at 35% 45%, #3A2A08, #0B0905 75%); font-family: 'Plus Jakarta Sans', sans-serif; color: #FFFFFF">
+  <div class="rays" style="position: absolute; left: 35%; top: 45%; width: 1400px; height: 1400px; margin: -700px 0 0 -700px"></div>
+  <div class="bokeh" style="position: absolute; inset: 0"></div>
+
+  <header style="position: relative; max-width: 1280px; margin: 0 auto; padding: 22px 32px; display: flex; justify-content: space-between; align-items: center">
+    <img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="Tadaa!" style="height: 36px; width: auto">
+    <a href="DWallet.dc.html" style="height: 46px; padding: 0 18px; border-radius: 99px; border: 1px solid rgba(255,233,163,.35); color: #FFE9A3; display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 13px">Cerrar · volver a Mi Wallet</a>
+  </header>
+
+  <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: 40px 32px 80px; display: flex; flex-wrap: wrap; align-items: center; gap: 64px">
+    <div style="flex: 1 1 380px; display: flex; justify-content: center; min-height: 560px; align-items: center">
+      <div class="flip" style="position: relative; width: 340px; height: 500px">
+        <div class="gold" style="position: absolute; inset: 0; border-radius: 36px; padding: 12px; overflow: hidden; box-shadow: 0 40px 100px rgba(226,178,60,.5); color: #2A1A00">
+          <div class="inferno" style="position: relative; height: 230px; border-radius: 26px">
+            <sc-if value="{{g.original}}"><span style="position: absolute; left: 12px; top: 12px; display: inline-flex; align-items: center; gap: 6px; background: #08091A; color: #FFFFFF; border-radius: 8px; padding: 4px 8px 4px 4px"><span style="width: 20px; height: 20px; border-radius: 5px; background: #D6FF35; color: #08091A; font-family: Outfit, sans-serif; font-weight: 900; font-size: 12px; display: grid; place-items: center">t!</span><span style="font-size: 9px; font-weight: 800; letter-spacing: .18em">ORIGINAL</span></span></sc-if>
+          </div>
+          <div style="text-align: center; padding-top: 16px">
+            <div style="font-size: 11px; font-weight: 800; letter-spacing: .26em">GOLDEN TICKET</div>
+            <div style="font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 44px; letter-spacing: .38em; margin-top: 4px">{{g.event}}</div>
+            <div style="margin: 14px -12px 0; border-top: 2px dashed rgba(42,26,0,.35)"></div>
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 14px 10px 0; font-size: 12px; text-align: left">
+              <span><span style="display: block; opacity: .7">Fecha</span><b>{{g.when}}</b></span>
+              <span style="text-align: right"><span style="display: block; opacity: .7">Acceso</span><b>{{g.access}}</b></span>
+            </div>
+          </div>
+          <span class="shine" style="position: absolute; inset: 0"></span>
+        </div>
+        <div class="bluefade" style="position: absolute; inset: 0; border-radius: 36px; background: #FFFFFF; padding: 12px">
+          <div class="inferno" style="height: 230px; border-radius: 26px"></div>
+          <div style="text-align: center; padding-top: 22px; color: #08091A; font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 40px; letter-spacing: 3px">{{g.event}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pop" style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+      <span style="font-size: 12px; font-weight: 800; letter-spacing: .22em; color: #FFE9A3">1 DE CADA {{g.odds}} BOLETOS</span>
+      <h1 class="goldtext" style="margin: 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: clamp(48px, 5.5vw, 80px); line-height: .92; letter-spacing: -2.5px">¡Tu boleto se convirtió en Golden Ticket!</h1>
+      <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #E8DDBF; max-width: 520px">Te tocó la suerte en {{g.event}}. Desbloqueaste un beneficio exclusivo que ya está aplicado a tu QR.</p>
+      <div style="background: rgba(255,233,163,.08); border: 1px solid rgba(255,233,163,.22); border-radius: 28px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
+        <span style="font-size: 11px; font-weight: 800; letter-spacing: .14em; color: #FFE9A3">TU BENEFICIO GOLDEN</span>
+        <b style="font-family: Outfit, sans-serif; font-size: 30px">{{g.title}}</b>
+        <span style="font-size: 14px; line-height: 1.5; color: #E8DDBF">{{g.detail}}</span>
+        <span style="font-size: 13px; color: #BFB49A; margin-top: 6px">Cada evento define su premio Golden: upgrade de sección, meet &amp; greet o un boleto para otro evento.</span>
+      </div>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap">
+        <a href="DWallet.dc.html" class="gold" style="position: relative; overflow: hidden; height: 60px; padding: 0 30px; border-radius: 99px; color: #2A1A00; display: flex; align-items: center; font-weight: 800; font-size: 15px"><span class="shine" style="position: absolute; inset: 0"></span><span style="position: relative">Ver mi boleto</span></a>
+        <button style="height: 60px; padding: 0 26px; border-radius: 99px; border: 1px solid rgba(255,233,163,.4); background: transparent; color: #FFE9A3; font-family: inherit; font-weight: 800; font-size: 15px">Compartir</button>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

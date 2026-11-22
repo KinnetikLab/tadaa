@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Tadaa! escritorio · Matilda El Musical</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+.grain{background-image:url(/_blob/3deff8146b80bb3fb1485ea91d6f55e6);background-size:256px}
+.gold{background:#E2B23C url(/_blob/52c32ef55d42f15d56b0cfb34f1a15f6) center/cover}
+</style>
+</helmet>
+<div style="width: 100%; background: #EEF1F7; font-family: 'Plus Jakarta Sans', sans-serif; color: #08091A">
+
+  <section style="position: relative; color: #FFFFFF; border-radius: 0 0 48px 48px; overflow: hidden; min-height: 640px; background: #08091A">
+    <img src="{{ev.img}}" alt="{{ev.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%">
+    <div style="position: absolute; inset: 0; background: linear-gradient(0deg, #0E2BD9 0%, rgba(18,56,255,.88) 22%, rgba(18,56,255,.35) 52%, rgba(8,9,26,.2) 78%, rgba(8,9,26,.45) 100%)"></div>
+    <div class="grain" style="position: absolute; inset: 0; opacity: .25"></div>
+    <header style="position: relative; max-width: 1280px; margin: 0 auto; padding: 22px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="Tadaa!" style="height: 38px; width: auto">
+      <nav aria-label="Principal" style="display: flex; flex-wrap: wrap; gap: 4px; background: rgba(8,9,26,.3); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.14); border-radius: 99px; padding: 5px">
+        <a href="DHome.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Inicio</a>
+        <a href="DExplorar.dc.html" style="padding: 11px 18px; border-radius: 99px; background: #FFFFFF; color: #08091A; font-weight: 800; font-size: 13px">Cartelera</a>
+        <a href="DRush.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Now!</a>
+        <a href="DWallet.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Mi Wallet</a>
+      </nav>
+      <a href="DCuenta.dc.html" aria-label="Mi cuenta" style="width: 44px; height: 44px; border-radius: 50%; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 800">{{TVini}}</a>
+    </header>
+    <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: 200px 32px 120px; display: flex; flex-direction: column; gap: 18px">
+      <div style="display: flex; gap: 8px">
+        <sc-if value="{{ev.original}}"><span title="TADAA! Original" role="img" aria-label="TADAA! Original" style="width: 44px; height: 44px; border-radius: 50%; background: #D6FF35; color: #08091A; display: grid; place-items: center; font: 800 15px Outfit, sans-serif">t!</span></sc-if><sc-if value="{{ev.golden}}"><span title="Golden Ticket activo: 1 de cada {{ev.odds}} boletos" role="img" aria-label="Golden Ticket activo" style="width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, #FFE9A3, #E2B23C 55%, #B8860B); display: grid; place-items: center; box-shadow: 0 6px 18px rgba(226,178,60,.5)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A1A00" stroke-width="2.2" aria-hidden="true"><path d="M3 7h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4z"/><path d="M13 7v12" stroke-dasharray="2 2"/></svg></span></sc-if><sc-if value="{{ev.now}}"><span title="Now! disponible " role="img" aria-label="Now! disponible" style="width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, #FF3D8B, #FF8A3D); display: grid; place-items: center; box-shadow: 0 6px 18px rgba(255,61,139,.45)"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0B0A1C" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span></sc-if>
+      </div>
+      <h1 aria-label="{{ev.title}}" style="margin: 0"><sc-if value="{{ev.logo}}"><img src="{{ev.logo}}" alt="" style="display: block; max-width: 520px; max-height: 190px; object-fit: contain; object-position: left center; filter: drop-shadow(0 10px 30px rgba(0,0,0,.45))"></sc-if><sc-if value="{{ev.noLogo}}"><span style="display: block; font-family: Outfit, sans-serif; font-weight: 900; font-size: {{ev.titleSizeD}}; line-height: .92; letter-spacing: -3px; color: #FFFFFF; text-shadow: 0 6px 30px rgba(0,0,0,.35)">{{ev.title}}</span></sc-if></h1>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px">
+        <span style="background: #D6FF35; color: #08091A; font-size: 12px; font-weight: 800; padding: 8px 12px; border-radius: 99px">{{ev.chip}}</span>
+        <span style="background: #FFFFFF; color: #08091A; font-size: 12px; font-weight: 800; padding: 8px 12px; border-radius: 99px">{{ev.mode}}</span>
+        <sc-if value="{{ev.rating}}"><span style="background: rgba(255,255,255,.16); font-size: 12px; font-weight: 800; padding: 8px 12px; border-radius: 99px">{{ev.rating}}</span></sc-if>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px">
+        <span style="height: 44px; padding: 0 16px; border-radius: 99px; background: rgba(255,255,255,.16); backdrop-filter: blur(10px); display: flex; align-items: center; font-size: 14px; font-weight: 700">{{ev.when}}</span>
+        <span style="height: 44px; padding: 0 16px; border-radius: 99px; background: rgba(255,255,255,.16); backdrop-filter: blur(10px); display: flex; align-items: center; font-size: 14px; font-weight: 700">{{ev.venue}}</span>
+        <sc-if value="{{ev.score}}"><span style="height: 44px; padding: 0 16px; border-radius: 99px; background: rgba(255,255,255,.16); backdrop-filter: blur(10px); display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700"><span style="color: #D6FF35">★</span> {{ev.score}} TADAA!</span></sc-if>
+        <button style="height: 44px; padding: 0 18px; border-radius: 99px; border: 0; background: #FFFFFF; color: #08091A; display: flex; align-items: center; gap: 8px; font: inherit; font-size: 14px; font-weight: 800"><svg width="14" height="14" viewBox="0 0 24 24" fill="#08091A" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>Ver promo</button>
+      </div>
+    </div>
+  </section>
+
+  <div style="max-width: 1280px; margin: 0 auto; padding: 0 32px 40px; display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start">
+    <div style="flex: 999 1 560px; min-width: 0; padding-top: 44px; display: flex; flex-direction: column; gap: 22px">
+      <section style="display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+          <h2 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 36px; letter-spacing: -1.5px">Precios por zona</h2>
+          <div style="display: flex; gap: 6px">
+            <sc-for list="{{funcs}}" as="f" hint-placeholder-count="3"><button onClick="{{f.pick}}" aria-pressed="{{f.on}}" style="{{f.style}}"><b>{{f.d}}</b> <span style="opacity: .7">{{f.h}}</span></button></sc-for>
+          </div>
+        </div>
+        <div style="background: #FFFFFF; border-radius: 28px; padding: 8px">
+          <sc-for list="{{rows}}" as="r" hint-placeholder-count="4">
+            <button onClick="{{r.pick}}" aria-pressed="{{r.on}}" style="{{r.style}}">
+              <span style="font-weight: 800; font-size: 16px">{{r.name}}</span>
+              <span style="font-size: 14px; text-decoration: line-through; opacity: .6">{{r.regular}}</span>
+              <span style="font-family: Outfit, sans-serif; font-weight: 800; font-size: 24px">{{r.price}}</span>
+              <sc-if value="{{r.pct}}"><span style="justify-self: end; background: #D6FF35; color: #08091A; font-size: 12px; font-weight: 800; padding: 6px 10px; border-radius: 99px">{{r.pct}}</span></sc-if>
+            </button>
+          </sc-for>
+          <sc-if value="{{noZones}}"><div style="padding: 18px 20px; border-radius: 22px; background: #FFFFFF; color: #4A5068; font-size: 14px">{{noZonesMsg}}</div></sc-if>
+        </div>
+      </section>
+
+      <section style="background: #FFFFFF; border-radius: 30px; padding: 8px 8px 24px">
+        <div role="tablist" aria-label="Información del evento" style="display: flex; flex-wrap: wrap; gap: 4px; background: #EEF1F7; border-radius: 22px; padding: 5px">
+          <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4"><button role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button></sc-for>
+        </div>
+
+        <sc-if value="{{tSin}}" hint-placeholder-val="{{ true }}">
+          <div style="padding: 22px 18px 0; display: flex; flex-wrap: wrap; gap: 24px">
+            <div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 12px; font-size: 15px; line-height: 1.7; color: #2A2F48">
+              <h3 style="margin: 0; font-family: Outfit, sans-serif; font-size: 26px; color: #08091A">{{ev.tagline}}</h3>
+              <p style="margin: 0">{{ev.desc}}</p>
+            </div>
+            <div style="flex: 1 1 280px; position: relative; height: 220px; border-radius: 22px; overflow: hidden; background: #08091A">
+              <video src="{{ev.video}}" poster="{{ev.img}}" muted loop playsinline aria-label="Tráiler" style="width: 100%; height: 100%; object-fit: cover; opacity: .85"></video>
+              <span style="position: absolute; left: 50%; top: 50%; margin: -32px 0 0 -32px; width: 64px; height: 64px; border-radius: 50%; background: #D6FF35; display: grid; place-items: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="#08091A" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg></span>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{tRep}}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 22px 18px 0; display: flex; flex-direction: column; gap: 20px">
+            <span style="align-self: flex-start; font-size: 11px; font-weight: 800; letter-spacing: .1em; color: #4A5068; border: 1.5px dashed #8C93B5; border-radius: 99px; padding: 4px 10px">{{castLabel}}</span>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px">
+              <sc-for list="{{cast}}" as="c" hint-placeholder-count="5">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center">
+                  <span style="{{c.av}}">{{c.ini}}</span>
+                  <b style="font-size: 14px">{{c.name}}</b>
+                  <span style="font-size: 12px; color: #4A5068">{{c.role}}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="border-top: 1px solid #EEF1F7; padding-top: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 13px">
+              <sc-for list="{{crew}}" as="w"><span><span style="display: block; color: #5A6178; font-size: 12px">{{w.role}}</span><b>{{w.name}}</b></span></sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{tInfo}}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 22px 18px 0; display: flex; flex-wrap: wrap; gap: 22px">
+            <div style="flex: 1 1 300px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px">
+              <span style="background: #EEF1F7; border-radius: 18px; padding: 14px"><span style="display: block; font-size: 12px; color: #5A6178">Sede</span><b style="font-size: 15px">{{ev.venue}}</b></span>
+              <span style="background: #EEF1F7; border-radius: 18px; padding: 14px"><span style="display: block; font-size: 12px; color: #5A6178">Duración</span><b style="font-size: 15px">{{ev.duration}}</b></span>
+              <span style="background: #EEF1F7; border-radius: 18px; padding: 14px"><span style="display: block; font-size: 12px; color: #5A6178">Clasificación</span><b style="font-size: 15px">{{ev.ratingLong}}</b></span>
+              <span style="background: #EEF1F7; border-radius: 18px; padding: 14px"><span style="display: block; font-size: 12px; color: #5A6178">Acceso</span><b style="font-size: 15px">{{ev.access}}</b></span>
+              <div style="grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px">
+                <sc-for list="{{ev.tags}}" as="tg"><span style="border: 1px solid #D5DBEA; border-radius: 99px; padding: 6px 12px; font-size: 12px; font-weight: 700">#{{tg}}</span></sc-for>
+              </div>
+            </div>
+            <div style="flex: 1 1 300px; position: relative; min-height: 240px; border-radius: 22px; overflow: hidden; background: #DCE3F5">
+              <div aria-hidden="true" style="position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent 0 38px, #FFFFFF 38px 46px), repeating-linear-gradient(90deg, transparent 0 58px, #FFFFFF 58px 66px)"></div>
+              <span style="position: absolute; left: 50%; top: 42%; margin-left: -22px; width: 44px; height: 44px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: #1238FF; box-shadow: 0 10px 20px rgba(18,56,255,.4)"></span>
+              <span style="position: absolute; left: 12px; bottom: 12px; right: 12px; background: #FFFFFF; border-radius: 16px; padding: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 13px"><b>{{ev.venue}}</b><a href="{{ev.maps}}" target="_blank" rel="noopener" <span style="color: #1238FF; font-weight: 800">Cómo llegar →</a></span>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{tRes}}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 22px 18px 0; display: flex; flex-wrap: wrap; gap: 24px">
+            <div style="flex: 0 1 240px; display: flex; flex-direction: column; gap: 10px">
+              <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #1238FF">CALIFICACIÓN TADAA!</span>
+              <b style="font-family: Outfit, sans-serif; font-size: 64px; line-height: .9">{{ev.scoreBig}}</b>
+              <span style="font-size: 13px; color: #4A5068">De asistentes verificados</span>
+              <sc-for list="{{stars}}" as="s" hint-placeholder-count="5">
+                <span style="display: flex; align-items: center; gap: 8px; font-size: 12px"><b style="width: 12px">{{s.n}}</b><span style="flex: 1; height: 6px; border-radius: 9px; background: #EEF1F7; overflow: hidden"><span style="{{s.bar}}"></span></span></span>
+              </sc-for>
+            </div>
+            <div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 12px">
+              <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #5A6178">MEDIOS</span>
+              <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px"><sc-for list="{{media}}" as="r"><div style="background: #08091A; color: #FFFFFF; border-radius: 20px; padding: 16px"><span style="color: #D6FF35">{{r.stars}}</span><p style="margin: 8px 0; font-family: Outfit, sans-serif; font-size: 17px; line-height: 1.3">{{r.text}}</p><span style="font-size: 12px; color: #AEB6D6">{{r.source}}</span></div></sc-for></div>
+              <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #5A6178; margin-top: 6px">PÚBLICO</span>
+              <div style="display: flex; flex-direction: column; gap: 8px"><sc-for list="{{public}}" as="r"><div style="border: 1px solid #E1E6F2; border-radius: 18px; padding: 14px; font-size: 14px"><b>{{r.who}}</b> <span style="color: #1238FF">{{r.stars}}</span><p style="margin: 6px 0 0; color: #2A2F48">{{r.text}}</p></div></sc-for></div>
+            </div>
+          </div>
+        </sc-if>
+      </section>
+    </div>
+
+    <aside aria-label="Tus boletos" style="flex: 1 1 360px; max-width: 420px; margin-top: -90px; position: relative; display: flex; flex-direction: column; gap: 14px">
+      <div style="background: #FFFFFF; border-radius: 32px; padding: 26px 22px 22px; box-shadow: 0 30px 70px rgba(18,56,255,.18)">
+        <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #1238FF">HAZ TU PLAN</span>
+        <h2 style="margin: 6px 0 16px; font-family: Outfit, sans-serif; font-weight: 800; font-size: 28px">Tus boletos</h2>
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; justify-content: space-between; align-items: center; background: #EEF1F7; border-radius: 18px; padding: 14px 16px"><span style="font-size: 12px; color: #4A5068">Función</span><b style="font-size: 14px">{{funcName}}</b></div>
+          <div style="display: flex; justify-content: space-between; align-items: center; background: #EEF1F7; border-radius: 18px; padding: 14px 16px"><span style="font-size: 12px; color: #4A5068">Zona</span><b style="font-size: 14px">{{zoneName}}</b></div>
+          <div style="display: flex; justify-content: space-between; align-items: center; background: #EEF1F7; border-radius: 18px; padding: 8px 8px 8px 16px">
+            <span style="font-size: 12px; color: #4A5068">Boletos</span>
+            <span style="display: flex; align-items: center; gap: 6px">
+              <button onClick="{{minus}}" aria-label="Restar boleto" style="width: 44px; height: 44px; border: 0; border-radius: 50%; background: #FFFFFF; font-size: 20px; font-weight: 700; color: #08091A">−</button>
+              <b style="min-width: 24px; text-align: center; font-family: Outfit, sans-serif; font-size: 18px">{{qty}}</b>
+              <button onClick="{{plus}}" aria-label="Sumar boleto" style="width: 44px; height: 44px; border: 0; border-radius: 50%; background: #08091A; color: #FFFFFF; font-size: 20px; font-weight: 700">+</button>
+            </span>
+          </div>
+        </div>
+        <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px">
+          <sc-if value="{{hasAddons}}"><span style="font-size: 12px; font-weight: 800; letter-spacing: .1em; color: #5A6178">AGREGA A TU PLAN</span></sc-if>
+          <sc-for list="{{addons}}" as="a" hint-placeholder-count="2">
+            <button onClick="{{a.toggle}}" aria-pressed="{{a.on}}" style="{{a.style}}">
+              <span style="width: 40px; height: 40px; flex: 0 0 40px; border-radius: 12px; background: {{a.bg}}; display: grid; place-items: center; overflow: hidden"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#08091A" stroke-width="2" aria-hidden="true"><path d="{{a.icon}}"/></svg></span>
+              <span style="flex: 1; display: flex; flex-direction: column; text-align: left"><b style="font-size: 13px">{{a.name}}</b><span style="font-size: 11px; color: #4A5068">{{a.desc}}</span></span>
+              <b style="font-size: 13px">{{a.price}}</b>
+              <span style="{{a.check}}">✓</span>
+            </button>
+          </sc-for>
+        </div>
+        <div style="position: relative; margin: 20px -22px 0; border-top: 2px dashed #C9D1EA">
+          <span style="position: absolute; left: -12px; top: -13px; width: 24px; height: 24px; border-radius: 50%; background: #EEF1F7"></span>
+          <span style="position: absolute; right: -12px; top: -13px; width: 24px; height: 24px; border-radius: 50%; background: #EEF1F7"></span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; padding: 18px 0 4px">
+          <span style="font-size: 13px; color: #4A5068">Total</span>
+          <b style="font-family: Outfit, sans-serif; font-size: 36px; letter-spacing: -1px">{{total}}</b>
+        </div>
+        <sc-if value="{{hasSave}}"><div style="font-size: 13px; font-weight: 700; color: #0B7A3B; text-align: right">Ahorras {{save}}</div></sc-if>
+        <button onClick="{{buy}}" aria-disabled="{{buyDisabled}}" style="width: 100%; border: 0; font-family: inherit; cursor: pointer; margin-top: 16px; height: 60px; border-radius: 99px; background: #D6FF35; color: #08091A; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 800; font-size: 15px">{{ctaLabel}}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#08091A" stroke-width="2.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <sc-if value="{{ev.golden}}"><div class="gold" style="margin-top: 12px; border-radius: 18px; padding: 12px 14px; color: #2A1A00; display: flex; gap: 10px; align-items: center">
+          <b style="font-family: Outfit, sans-serif; font-size: 22px">1/{{ev.odds}}</b>
+          <span style="font-size: 12px; line-height: 1.4; font-weight: 600">Tu boleto puede convertirse en <b>Golden Ticket</b>: {{ev.goldenBenefit}}.</span>
+        </div></sc-if>
+      </div>
+
+      <div style="background: #08091A; color: #FFFFFF; border-radius: 28px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
+        <h3 style="margin: 0; font-family: Outfit, sans-serif; font-size: 20px">Antes de comprar</h3>
+        <span style="font-size: 13px; line-height: 1.6; color: #C7CDE6">• Tus lugares se apartan 10 minutos mientras pagas con Clip.</span>
+        <span style="font-size: 13px; line-height: 1.6; color: #C7CDE6">• Boleto final con QR dinámico en Mi Wallet; las capturas no sirven.</span>
+        <span style="font-size: 13px; line-height: 1.6; color: #C7CDE6">• {{ev.extraNote}}</span>
+      </div>
+    </aside>
+  </div>
+
+  <section style="max-width: 1280px; margin: 0 auto; padding: 24px 32px 80px">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px">
+      <h2 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 36px; letter-spacing: -1.5px">Si te gustó {{ev.short}}</h2>
+      <a href="DExplorar.dc.html" style="font-size: 13px; font-weight: 700; color: #1238FF">Ver cartelera</a>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px">
+      <sc-for list="{{similar}}" as="e" hint-placeholder-count="4">
+        <a href="DEvento.dc.html" style="position: relative; height: 300px; border-radius: 28px; overflow: hidden; color: #FFFFFF; display: block; background: #08091A">
+          <img src="{{e.img}}" alt="{{e.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .92">
+          <span style="position: absolute; left: 14px; top: 14px; background: #D6FF35; color: #08091A; border-radius: 99px; padding: 7px 11px; font-size: 11px; font-weight: 800">{{e.price}}</span>
+          <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 50px 16px 16px; background: linear-gradient(transparent, rgba(8,9,26,.92))">
+            <div style="font-family: Outfit, sans-serif; font-weight: 800; font-size: 24px; line-height: 1">{{e.title}}</div>
+            <div style="font-size: 12px; color: #D9E0FF; margin-top: 6px">{{e.meta}}</div>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2400}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { zone: 'mez', qty: 2, fn: 'sab', tab: 'sin', add: { prog: true, dulce: false } }; }
+  renderVals() {
+    const mx = n => '$' + n.toLocaleString('en-US');
+    const st = this.state;
+    const Z = [
+      { id: 'vip', name: 'VIP Oro', regular: 3596, price: 1800 },
+      { id: 'orq', name: 'Orquesta 1', regular: 2796, price: 1400 },
+      { id: 'pla', name: 'Platea', regular: 2396, price: 1200 },
+      { id: 'mez', name: 'Mezzanine 1', regular: 1798, price: 700 }
+    ];
+    const rowBase = 'width: 100%; min-height: 66px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 80px; align-items: center; gap: 12px; padding: 10px 20px; border-radius: 22px; border: 0; font-family: inherit; text-align: left; ';
+    const rows = Z.map(z => ({ name: z.name, regular: mx(z.regular), price: mx(z.price), pct: '−' + Math.round((1 - z.price / z.regular) * 100) + '%', on: st.zone === z.id,
+      pick: () => this.setState({ zone: z.id }), style: rowBase + (st.zone === z.id ? 'background: #1238FF; color: #FFFFFF;' : 'background: #FFFFFF; color: #08091A;') }));
+    const FN = [['vie', 'Vie 28', '20:00'], ['sab', 'Sáb 29', '19:00'], ['dom', 'Dom 30', '17:00']];
+    const funcs = FN.map(([id, d, h]) => ({ d, h, on: st.fn === id, pick: () => this.setState({ fn: id }),
+      style: 'height: 42px; padding: 0 14px; border-radius: 99px; font-family: inherit; font-size: 13px; ' + (st.fn === id ? 'border: 0; background: #08091A; color: #D6FF35;' : 'border: 1px solid #D5DBEA; background: #FFFFFF; color: #08091A;') }));
+    const T = [['sin', 'Sinopsis'], ['rep', 'Reparto y producción'], ['info', 'Info del evento'], ['res', 'Reseñas']];
+    const tabs = T.map(([id, label]) => ({ label, on: st.tab === id, pick: () => this.setState({ tab: id }),
+      style: 'flex: 1; min-width: 120px; height: 46px; border: 0; border-radius: 18px; font-family: inherit; font-weight: 800; font-size: 13px; ' + (st.tab === id ? 'background: #FFFFFF; color: #08091A; box-shadow: 0 4px 12px rgba(8,9,26,.08);' : 'background: transparent; color: #4A5068;') }));
+    const roles = [['Matilda', '#D6FF35'], ['Miss Trunchbull', '#FF8A3D'], ['Miss Honey', '#B9C7FF'], ['Sr. Wormwood', '#FFE9A8'], ['Sra. Wormwood', '#FFB3CF']];
+    const names = ['Valentina Ríos', 'Rodrigo Salas', 'Camila Ortega', 'Andrés Lugo', 'Paola Reyes'];
+    const cast = roles.map(([role, bg], i) => ({ role, name: names[i], ini: role.split(' ').pop()[0],
+      av: 'width: 96px; height: 96px; border-radius: 50%; background: ' + bg + '; display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 900; font-size: 34px; color: #08091A;' }));
+    const stars = [[5, 82], [4, 12], [3, 4], [2, 1], [1, 1]].map(([n, p]) => ({ n, bar: 'display: block; height: 100%; width: ' + p + '%; background: #1238FF;' }));
+    const A = [
+      { id: 'prog', name: 'Programa de mano', desc: 'Recógelo en taquilla', p: 150, bg: '#D6FF35', icon: 'M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4zM8 8h8M8 12h6' },
+      { id: 'dulce', name: 'Combo dulcería', desc: 'Palomitas + 2 bebidas', p: 189, bg: '#FFB86B', icon: 'M6 8h12l-1.5 12h-9zM8 8l1-4M16 8l-1-4' }
+    ];
+    const addons = A.map(a => ({ ...a, price: '+' + mx(a.p), on: st.add[a.id], toggle: () => this.setState({ add: { ...st.add, [a.id]: !st.add[a.id] } }),
+      style: 'display: flex; align-items: center; gap: 12px; width: 100%; padding: 8px 12px 8px 8px; border-radius: 18px; font-family: inherit; color: #08091A; text-align: left; ' + (st.add[a.id] ? 'background: #EEF2FF; border: 2px solid #1238FF;' : 'background: #FFFFFF; border: 2px solid #E1E6F2;'),
+      check: 'width: 24px; height: 24px; flex: 0 0 24px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 800; ' + (st.add[a.id] ? 'background: #1238FF; color: #FFFFFF;' : 'background: #EEF1F7; color: transparent;') }));
+    const sel = Z.find(z => z.id === st.zone), q = st.qty;
+    const addTotal = A.reduce((s, a) => s + (st.add[a.id] ? a.p : 0), 0);
+    const fsel = FN.find(f => f[0] === st.fn);
+    return { rows, funcs, tabs, cast, stars, addons, qty: q, zoneName: sel.name, funcName: fsel[1] + ' · ' + fsel[2],
+      total: mx(sel.price * q + addTotal), save: mx((sel.regular - sel.price) * q),
+      minus: () => this.setState({ qty: Math.max(1, q - 1) }), plus: () => this.setState({ qty: Math.min(8, q + 1) }),
+      tSin: st.tab === 'sin', tRep: st.tab === 'rep', tInfo: st.tab === 'info', tRes: st.tab === 'res',
+      similar: [
+        { title: 'Hoy No Me Puedo Levantar', meta: 'Musical · Teatro 1', price: 'Desde $2,650', img: '/_blob/fd6d958733bf058344285c28d805e194' },
+        { title: 'Nocturno', meta: 'Teatro · Teatro 2', price: 'Desde $850', img: '/_blob/638dbc29de26c4783746a0bef23bebdd' },
+        { title: 'BioParque Estrella', meta: 'Plan familiar', price: 'Desde $380', img: '/_blob/bf2a75752b07f383213ec9a4d48dc00d' },
+        { title: 'God Save The Queen', meta: 'Concierto tributo', price: 'Desde $410', img: '/_blob/c9fbaa4f64161be324e770b5cd19f7f4' }
+      ] };
+  }
+}
+</script>
+</body>
+</html>

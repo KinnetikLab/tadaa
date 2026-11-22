@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Tadaa! móvil · Promo al dejar el convenio</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+.tx{background:#1238FF url(/_blob/c238803f93edbcfca0600e4470e86b80) center/cover}
+.bob{animation:bob 2.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-8px) rotate(3deg)}}
+</style>
+</helmet>
+<div class="tx" style="width: 390px; height: 844px; position: relative; overflow: hidden; font-family: 'Plus Jakarta Sans', sans-serif; color: #FFFFFF">
+
+  <div style="position: absolute; left: 20px; right: 20px; top: 54px; display: flex; justify-content: flex-end">
+    <a href="Main.dc.html" aria-label="Cerrar" style="width: 44px; height: 44px; border-radius: 50%; background: rgba(8,9,26,.3); display: grid; place-items: center">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </a>
+  </div>
+
+  <svg class="bob" width="150" height="130" viewBox="0 0 150 130" aria-hidden="true" style="position: absolute; left: 120px; top: 100px">
+    <ellipse cx="78" cy="72" rx="48" ry="40" fill="#D6FF35"/>
+    <circle cx="104" cy="44" r="26" fill="#D6FF35"/>
+    <circle cx="111" cy="40" r="5" fill="#08091A"/>
+    <path d="M128 46 L146 52 L128 56 Z" fill="#FF8A3D"/>
+    <path d="M44 66 Q20 50 8 70 Q28 74 44 86 Z" fill="#B7E21E"/>
+    <path d="M70 70 Q84 92 106 80" fill="none" stroke="#08091A" stroke-width="4" stroke-linecap="round" opacity=".2"/>
+    <path d="M66 110 L62 124 M86 110 L90 124" stroke="#FF8A3D" stroke-width="4" stroke-linecap="round"/>
+  </svg>
+
+  <div style="position: absolute; left: 24px; right: 24px; top: 250px; display: flex; flex-direction: column; gap: 12px">
+    <h1 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: 40px; line-height: .95; letter-spacing: -1.5px">Un pajarito<br>nos contó…</h1>
+    <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #E1E6F5">…que ya no estás en <b>{{b.company}}</b>. Tranqui: tu cuenta, tus {{b.badges}} badges y tu nivel {{b.level}} se quedan contigo.</p>
+  </div>
+
+  <article style="position: absolute; left: 20px; right: 20px; top: 446px; background: #FFFFFF; color: #08091A; border-radius: 28px; padding: 18px 18px 16px">
+    <span style="font-size: 11px; font-weight: 800; letter-spacing: .12em; color: #1238FF">NOS RIFAMOS CONTIGO</span>
+    <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 6px">
+      <b style="font-family: Outfit, sans-serif; font-weight: 900; font-size: 64px; letter-spacing: -3px; line-height: .9">{{b.pct}}%</b>
+      <span style="font-size: 14px; font-weight: 700; line-height: 1.3">de descuento en tu<br>membresía por {{b.months}} meses</span>
+    </div>
+    <div style="position: relative; margin: 14px -18px 0; border-top: 2px dashed #C9D1EA">
+      <span style="position: absolute; left: -11px; top: -12px; width: 22px; height: 22px; border-radius: 50%; background: #1535E6"></span>
+      <span style="position: absolute; right: -11px; top: -12px; width: 22px; height: 22px; border-radius: 50%; background: #1535E6"></span>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 12px; font-size: 13px">
+      <span style="color: #4A5068">Membresía mensual</span>
+      <span><s style="color: #8C93B5">$100</s> <b style="font-size: 16px">{{b.price}} al mes</b></span>
+    </div>
+    <span style="display: block; margin-top: 6px; font-size: 11px; color: #4A5068">Oferta válida 14 días · después, precio regular · cancela cuando quieras.</span>
+  </article>
+
+  <div style="position: absolute; left: 20px; right: 20px; bottom: 30px; display: flex; flex-direction: column; gap: 10px">
+    <button onClick="{{keep}}" style="height: 60px; border-radius: 99px; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-weight: 800; font-size: 15px">Mantener mis beneficios</button>
+    <a href="Main.dc.html" style="height: 48px; border-radius: 99px; display: grid; place-items: center; font-weight: 700; font-size: 14px; color: #E1E6F5">Ahora no</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
