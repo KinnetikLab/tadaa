@@ -3,35 +3,67 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Evento · TADAA!</title>
-<meta name="theme-color" content="#050505">
+<meta name="theme-color" content="#1238FF">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="curtain.css">
+<link rel="stylesheet" href="tv.css?v=1">
 <style>
-:root{--lime:#d6ff35;--bg:#050505;--card:#101010;--line:rgba(255,255,255,.12);--mut:#aaa;--font:'Plus Jakarta Sans',system-ui,sans-serif}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f7f7f7;font-family:var(--font);line-height:1.55}
-a{color:inherit;text-decoration:none}.wrap{max-width:1160px;margin:auto;padding:26px}
-header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:16px 0}
-.logo{font-size:30px;font-weight:800;letter-spacing:-.06em}.logo b{color:var(--lime)}
-.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;border-radius:14px;background:var(--lime);color:#050505;font-weight:800}
-.btn.ghost{background:#171717;color:#fff;border:1px solid var(--line)}
-.hero{margin-top:30px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:34px;align-items:center}
-.hero img{width:100%;display:block;border-radius:26px;border:1px solid var(--line);box-shadow:0 28px 80px #000}
-.kicker{color:var(--lime);font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
-h1{font-size:clamp(38px,5.4vw,66px);line-height:.98;letter-spacing:-.055em;margin:12px 0}
-.muted{color:var(--mut)}.meta{display:grid;gap:12px;margin:24px 0}.meta div{padding:14px 16px;background:var(--card);border:1px solid var(--line);border-radius:14px}
-.meta small{display:block;color:var(--mut);font-size:11px;letter-spacing:.12em;text-transform:uppercase}.meta b{display:block;margin-top:3px}
-.notice{margin-top:28px;padding:18px 20px;border:1px solid rgba(214,255,53,.28);border-radius:18px;background:rgba(214,255,53,.055);color:#ddd;font-size:13px}
-.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
-footer{margin:60px 0 20px;padding-top:22px;border-top:1px solid var(--line);color:var(--mut);font-size:12px}
-@media(max-width:760px){.wrap{padding:18px}.hero{grid-template-columns:1fr}.hero img{max-height:480px;object-fit:cover}.hero>div:first-child{order:2}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--tv-paper);color:var(--tv-ink);font-family:var(--tv-body);line-height:1.55}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+.ev-hero{position:relative;color:#fff;min-height:620px;border-radius:0 0 48px 48px;overflow:hidden;background:var(--tv-ink)}
+.ev-hero>img.bg{position:absolute;z-index:0;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.ev-hero::before{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(0deg,#0E2BD9 0%,rgba(18,56,255,.88) 22%,rgba(18,56,255,.35) 52%,rgba(8,9,26,.2) 78%,rgba(8,9,26,.45) 100%)}
+.ev-hero::after{content:"";position:absolute;z-index:1;inset:0;opacity:.25;background:url(img/tv/grain.png) 0 0/256px;pointer-events:none}
+.ev-top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0}
+.ev-logo-brand{font:800 30px var(--tv-body);letter-spacing:-.06em}.ev-logo-brand b{color:var(--tv-lime)}
+.ev-nav{display:flex;gap:4px;background:rgba(8,9,26,.3);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:5px}
+.ev-nav a{padding:10px 16px;border-radius:999px;font-weight:700;font-size:13px}
+.ev-nav a.on{background:#fff;color:var(--tv-ink)}
+.ev-head{position:relative;z-index:2;padding:170px 0 120px;display:flex;flex-direction:column;gap:16px}
+.ev-title{margin:0;font:900 clamp(64px,9vw,140px)/.84 var(--tv-display);letter-spacing:-.05em}
+.ev-pills{display:flex;flex-wrap:wrap;gap:10px}
+.ev-pills span{min-height:44px;padding:0 16px;border-radius:999px;background:rgba(255,255,255,.16);backdrop-filter:blur(10px);display:inline-flex;align-items:center;font-size:14px;font-weight:700}
+.ev-body{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start;padding-bottom:40px}
+.ev-main{flex:999 1 560px;min-width:0;padding-top:44px;display:flex;flex-direction:column;gap:22px}
+.ev-aside{flex:1 1 340px;max-width:420px;margin-top:-90px;position:relative;z-index:3;display:flex;flex-direction:column;gap:14px}
+.h2{margin:0;font:800 36px var(--tv-display);letter-spacing:-.04em}
+.zones{background:#fff;border-radius:28px;padding:8px}
+.zone{width:100%;min-height:66px;display:grid;grid-template-columns:1.4fr 1fr auto;align-items:center;gap:12px;padding:10px 20px;border-radius:22px;border:0;background:#fff;color:var(--tv-ink);font:inherit;text-align:left;cursor:pointer}
+.zone.on{background:var(--tv-blue);color:#fff}
+.zone b.n{font-size:16px}.zone small{opacity:.7}.zone .p{font:800 24px var(--tv-display)}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;background:var(--tv-paper);border-radius:22px;padding:5px}
+.tabs button{flex:1;min-width:120px;height:46px;border:0;border-radius:18px;background:transparent;color:var(--tv-mut);font:800 13px var(--tv-body);cursor:pointer}
+.tabs button.on{background:#fff;color:var(--tv-ink);box-shadow:0 4px 12px rgba(8,9,26,.08)}
+.panel{background:#fff;border-radius:30px;padding:8px 8px 24px}
+.pane{padding:22px 18px 0;font-size:15px;color:#2A2F48}
+.cast{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px;text-align:center}
+.cast .av{width:88px;height:88px;margin:0 auto 8px;border-radius:50%;display:grid;place-items:center;font:900 30px var(--tv-display);color:var(--tv-ink);background:var(--tv-lime);overflow:hidden}
+.cast .av img{width:100%;height:100%;object-fit:cover}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.facts div{background:var(--tv-paper);border-radius:18px;padding:14px}.facts small{display:block;color:#5A6178;font-size:12px}.facts b{font-size:15px;color:var(--tv-ink)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}.tags span{border:1px solid #D5DBEA;border-radius:999px;padding:6px 12px;font-size:12px;font-weight:700}
+.reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.review{background:var(--tv-ink);color:#fff;border-radius:20px;padding:16px}.review p{margin:8px 0;font:600 17px/1.3 var(--tv-display)}.review span{font-size:12px;color:var(--tv-mut-dk)}
+.score{font:900 64px/.9 var(--tv-display)}
+.book{background:#fff;border-radius:32px;padding:26px 22px 22px;box-shadow:0 30px 70px rgba(18,56,255,.18)}
+.book .row{display:flex;justify-content:space-between;align-items:center;background:var(--tv-paper);border-radius:18px;padding:14px 16px;margin-top:10px;font-size:14px}
+.book .row span{font-size:12px;color:var(--tv-mut)}
+.book .total{display:flex;justify-content:space-between;align-items:flex-end;padding:18px 0 4px}.book .total b{font:800 34px var(--tv-display)}
+.golden-note{margin-top:12px;border-radius:18px;padding:12px 14px;color:#2A1A00;display:flex;gap:10px;align-items:center;background:#E2B23C url(img/tv/gold.webp) center/cover;font-size:12px;font-weight:600}
+.golden-note b{font:800 22px var(--tv-display)}
+.before{background:var(--tv-ink);color:#fff;border-radius:28px;padding:22px;font-size:13px;line-height:1.6;color:#C7CDE6}
+.before h3{margin:0 0 8px;color:#fff;font:800 20px var(--tv-display)}
+.similar{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;padding:12px 0 80px}
+.empty{color:var(--tv-mut);font-size:14px}
+.ev-footer{padding:30px 0 40px;color:var(--tv-mut);font-size:12px}
+@media(max-width:760px){.wrap{padding:0 18px}.ev-nav{display:none}.ev-head{padding:120px 0 90px}.ev-aside{margin-top:0;max-width:none}.zone{grid-template-columns:1fr auto}.zone small{display:none}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header><a class="logo" href="index.html">tadaa<b>!</b></a><a class="btn ghost" href="index.html#hoy">← Volver a cartelera</a></header>
-<main id="event" aria-live="polite"><p class="muted">Cargando ficha del evento…</p></main>
-<footer>© 2026 TADAA! · Información editorial consultada el 19 de noviembre de 2026. Confirma siempre horarios, precios y disponibilidad con el recinto o la boletera oficial.</footer>
-</div>
-<script src="api.js"></script><script src="event-live.js"></script>
+<main id="event" aria-live="polite"><div class="wrap" style="padding-top:40px"><p class="empty">Cargando ficha del evento…</p></div></main>
+<div class="wrap ev-footer">© 2026 TADAA! · Confirma horarios, precios y disponibilidad con el recinto o la boletera oficial cuando el evento usa boletera externa.</div>
+<script src="api.js"></script><script src="event-live.js?v=2"></script>
 </body></html>

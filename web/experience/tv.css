@@ -1,0 +1,70 @@
+/* TADAA! · Sistema visual "Ticket vibrante"
+   Tokens y componentes compartidos por portada, ficha de evento y app de usuario.
+   Se carga después de los estilos de cada página y sobrescribe su piel visual sin tocar la lógica. */
+:root{
+  --tv-blue:#1238FF; --tv-blue-deep:#0A1A8C; --tv-navy:#060E5A;
+  --tv-lime:#D6FF35; --tv-ink:#08091A; --tv-ink2:#161833; --tv-line-dk:#2A2D52;
+  --tv-paper:#EEF1F7; --tv-white:#FFFFFF; --tv-mut:#4A5068; --tv-mut-dk:#AEB6D6;
+  --tv-now:linear-gradient(100deg,#FF3D8B,#FF8A3D);
+  --tv-gold:linear-gradient(135deg,#FFE9A3,#E2B23C 55%,#B8860B);
+  --tv-display:'Outfit','Plus Jakarta Sans',system-ui,sans-serif;
+  --tv-body:'Plus Jakarta Sans',system-ui,sans-serif;
+  --tv-r-lg:32px; --tv-r-md:24px; --tv-r-sm:16px;
+}
+
+/* ---------- Texturas ---------- */
+.tv-tex{background:var(--tv-blue) url(img/tv/blue-wide.webp) center/cover;position:relative;isolation:isolate}
+.tv-tex::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(0deg,rgba(6,14,90,.85) 0%,rgba(6,14,90,.25) 45%,transparent 75%)}
+.tv-tex::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.25;background:url(img/tv/grain.png) 0 0/256px}
+.tv-tex-tall{background-image:url(img/tv/blue-tall.webp)}
+
+/* ---------- Tipografía ---------- */
+.tv-display{font-family:var(--tv-display);font-weight:900;letter-spacing:-.045em;line-height:.88}
+.tv-eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--tv-lime)}
+
+/* ---------- Botones y chips ---------- */
+.tv-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;border:0;background:var(--tv-lime);color:var(--tv-ink);font:800 14px var(--tv-body);cursor:pointer;text-decoration:none;transition:transform .25s,box-shadow .25s}
+.tv-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(214,255,53,.35)}
+.tv-btn.ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(10px)}
+.tv-btn.dark{background:var(--tv-ink);color:#fff}
+.tv-btn.now{background:var(--tv-now);color:var(--tv-ink)}
+.tv-chip{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 15px;border-radius:999px;font-size:13px;font-weight:700;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.12);color:#fff;cursor:pointer}
+.tv-chip.on{background:var(--tv-ink);color:var(--tv-lime);border-color:transparent}
+.tv-tag{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.04em}
+.tv-tag.lime{background:var(--tv-lime);color:var(--tv-ink)}
+.tv-tag.white{background:#fff;color:var(--tv-ink)}
+.tv-tag.prov{border:1.5px dashed currentColor;background:transparent}
+.tv-tag.deliv{background:#FFE9A8;color:#5A3D00}
+
+/* ---------- Iconos de evento (encima del nombre) ---------- */
+.tv-icons{display:flex;gap:6px;margin-bottom:8px}
+.tv-ic{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none}
+.tv-ic svg{width:15px;height:15px}
+.tv-ic.now{background:var(--tv-now);box-shadow:0 4px 12px rgba(255,61,139,.4)}
+.tv-ic.gold{background:var(--tv-gold);box-shadow:0 4px 12px rgba(226,178,60,.45)}
+.tv-ic.orig{border-radius:9px;background:var(--tv-lime);color:var(--tv-ink);font:900 13px var(--tv-display)}
+.tv-icons.lg .tv-ic{width:46px;height:46px}.tv-icons.lg .tv-ic svg{width:22px;height:22px}
+
+/* ---------- Boleto (componente firma) ---------- */
+.tv-ticket{position:relative;background:#fff;color:var(--tv-ink);border-radius:var(--tv-r-lg);padding:12px}
+.tv-perf{position:relative;margin:16px -12px 0;border-top:2px dashed #C9D1EA}
+.tv-perf::before,.tv-perf::after{content:"";position:absolute;top:-13px;width:24px;height:24px;border-radius:50%;background:var(--tv-notch,var(--tv-paper))}
+.tv-perf::before{left:-12px}.tv-perf::after{right:-12px}
+
+/* ---------- Tarjeta de evento estilo app ---------- */
+.tv-card{position:relative;display:block;border-radius:30px;overflow:hidden;background:var(--tv-ink);color:#fff;text-decoration:none;min-height:340px}
+.tv-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.tv-card:hover img{transform:scale(1.05)}
+.tv-card .tv-price{position:absolute;left:14px;top:14px;z-index:2}
+.tv-card .tv-body{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:60px 18px 18px;background:linear-gradient(transparent,rgba(8,9,26,.92))}
+.tv-card h3{margin:0;font:800 28px/1 var(--tv-display);letter-spacing:-.03em}
+.tv-card .tv-meta{display:flex;justify-content:space-between;gap:10px;margin-top:8px;font-size:13px;color:#D9E0FF}
+.tv-card .tv-meta b{color:#fff;white-space:nowrap}
+
+/* ---------- Placeholder de logo ---------- */
+.tv-logo-slot{display:inline-flex;flex-direction:column;justify-content:center;position:relative;min-width:min(460px,100%);min-height:150px;padding:18px 26px 14px;border:2px dashed rgba(255,255,255,.7);border-radius:28px;background:rgba(255,255,255,.06)}
+.tv-logo-slot small{position:absolute;left:18px;top:10px;font-size:10px;font-weight:800;letter-spacing:.14em;color:#D9E0FF}
+.tv-logo-slot b{font:900 clamp(48px,7vw,84px)/.9 var(--tv-display);letter-spacing:-.04em}
+.tv-logo-img{max-width:min(520px,90%);max-height:200px;object-fit:contain;filter:drop-shadow(0 10px 30px rgba(0,0,0,.35))}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

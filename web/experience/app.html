@@ -1,5 +1,5 @@
 <!doctype html><html lang="es"><head>
-<base href="/experience/"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mi cuenta — TADAA!</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="curtain.css?v=3.0.0-beta1"><style>
+<base href="/experience/"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mi cuenta — TADAA!</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="curtain.css?v=3.0.0-beta1"><style>
 :root{--lime:#d6ff35;--ink:#050505;--ink2:#0b0b0b;--card:#0f0f0f;--card2:#151515;--line:rgba(255,255,255,.1);--mut:#9a9a9a;--w:#f7f7f7;
   --amber:#ffc24d;--green:#6df0a6;--red:#ff7070;--font:'Plus Jakarta Sans',system-ui,sans-serif;--ease:cubic-bezier(.2,.7,.2,1)}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -284,7 +284,32 @@ h2.sh a{font-size:13px;font-weight:600;color:var(--lime);letter-spacing:0;displa
 .producer-ticket-type{display:grid;grid-template-columns:1.3fr .8fr .6fr auto;gap:7px;margin-top:12px}
 .producer-ticket-type input{min-width:0;padding:9px 10px;border-radius:9px;background:#080808;border:1px solid var(--line);color:white}
 @media(max-width:700px){.producer-ticket-type{grid-template-columns:1fr 1fr}.producer-ticket-type input:first-child{grid-column:1/-1}}
-</style></head><body><script src="curtain.js?v=8"></script><div class="app"><aside class="side"><a href="index.html" class="logo" style="font-size:34px;padding:8px 14px 25px">tadaa<b>!</b></a>
+</style><link rel="stylesheet" href="tv.css?v=1">
+<style id="tv-app">
+/* Piel "Ticket vibrante" para la app de usuario */
+:root{--ink:#08091A;--ink2:#0E1028;--card:#161833;--card2:#1D2044;--line:rgba(255,255,255,.12)}
+body{background:var(--tv-ink)}
+.side{background:var(--tv-blue) url(img/tv/blue-tall.webp) center/cover;border-right:0;border-radius:0 32px 32px 0}
+.nl{color:#fff;border-radius:14px}
+.nl:hover{background:rgba(255,255,255,.14)}
+.nl.on{background:#fff;color:var(--tv-ink);box-shadow:none}
+.nl .bd{background:var(--tv-lime)}
+.who{background:rgba(8,9,26,.35);border-color:rgba(255,255,255,.16)}
+.top{background:rgba(8,9,26,.82)}
+.sbar input{border-radius:999px}
+.sbar input:focus{border-color:var(--tv-lime)}
+.btn{border-radius:999px;font-weight:800}
+.btn.sm{border-radius:999px}
+.eb{color:var(--tv-lime)}
+h1.pt,h2.sh{font-family:var(--tv-display);font-weight:900}
+.show{border-radius:30px;border:0}
+.show h3{font-family:var(--tv-display);text-transform:none;letter-spacing:-.03em}
+.chip.on{background:var(--tv-blue);color:#fff}
+.stat{border-radius:24px}
+.pass,.tk{border-radius:32px}
+@media(max-width:900px){.side{border-radius:0}}
+</style>
+</head><body><script src="curtain.js?v=8"></script><div class="app"><aside class="side"><a href="index.html" class="logo" style="font-size:34px;padding:8px 14px 25px">tadaa<b>!</b></a>
 <button class="nl" data-r="inicio">⌂ &nbsp; Inicio</button><button class="nl" data-r="explorar">◉ &nbsp; Explorar</button><button class="nl" data-r="intereses">♡ &nbsp; Me interesa</button><button class="nl" data-r="reservas">▤ &nbsp; Mis reservas</button><button class="nl" data-r="boletos">▣ &nbsp; Mis boletos</button><button class="nl" data-r="membresia">✦ &nbsp; Membresía</button><button class="nl" data-r="wallet">◈ &nbsp; Wallet y cashback</button><button class="nl" data-r="golden">✧ &nbsp; Experiencias exclusivas</button><button class="nl" data-r="merch">▣ &nbsp; Tienda</button><button class="nl" data-r="perfil">◌ &nbsp; Mi perfil</button><button id="orgNav" class="nl" data-r="empresa" hidden>▦ &nbsp; Portal de empresa</button><div class="sp"></div><div class="who"><div class="av" id="avatar">T</div><div><b id="userName">TADAA!</b><span id="userEmail">Cargando cuenta</span></div><button class="out" id="logout" title="Cerrar sesión">↗</button></div></aside>
 <div class="main"><header class="top"><a class="logo" href="index.html" style="font-size:29px">tadaa<b>!</b></a><div class="sbar"><input id="search" placeholder="Busca artistas, eventos o experiencias…" aria-label="Buscar"></div><span class="sp"></span><a class="pillc" href="index.html">↗ &nbsp; Web TADAA!</a><button class="ib" id="refresh" title="Actualizar">↻</button></header><main class="page" id="view"><p>Cargando tu experiencia…</p></main></div></div>
 <nav class="tabbar" id="bottom"><button data-r="inicio">⌂<span>Inicio</span></button><button data-r="explorar">◉<span>Explorar</span></button><button data-r="reservas">▤<span>Reservas</span></button><button data-r="boletos">▣<span>Boletos</span></button><button data-r="perfil">◌<span>Perfil</span></button></nav><div id="message" role="status"></div>
