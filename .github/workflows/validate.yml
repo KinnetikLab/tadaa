@@ -38,6 +38,9 @@ jobs:
           node --check web/experience/curtain.js
           node --check web/experience/staff-live.js
           node --check web/experience/tv-motion.js
+          node --check web/experience/tv-app.js
+          node --check web/experience/tv-adapters.js
+          node tools/build-vibrante.mjs && git diff --exit-code web/experience/tv-screens.js
           node --check server/src/features.mjs
           test -s server/migrations/004_now_golden_addons_rfc.sql
           test -s server/migrations/002_beta2_core.sql

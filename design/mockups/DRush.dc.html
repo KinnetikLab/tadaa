@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Tadaa! escritorio · Now!</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+.rushart{background:linear-gradient(180deg,#FF3D8B 0%,#FF5C6C 45%,#FF8A3D 100%);background-size:100% 200%;animation:flow 7s ease-in-out infinite alternate}
+@keyframes flow{from{background-position:0 0}to{background-position:0 100%}}
+.speed{background:repeating-linear-gradient(100deg,transparent 0 46px,rgba(255,255,255,.16) 46px 48px,transparent 48px 120px);animation:dash 2.4s linear infinite;-webkit-mask:linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent);mask:linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent)}
+@keyframes dash{from{background-position:0 0}to{background-position:-240px 0}}
+.grain{background-image:url(/_blob/3deff8146b80bb3fb1485ea91d6f55e6);background-size:256px}
+.halo{background:radial-gradient(45% 50% at 50% 50%,rgba(255,255,255,.3),transparent 70%)}
+.rushtext{background:linear-gradient(100deg,#FF3D8B,#FF8A3D);-webkit-background-clip:text;background-clip:text;color:transparent}
+</style>
+</helmet>
+<div style="width: 100%; background: #0B0A1C; font-family: 'Plus Jakarta Sans', sans-serif; color: #FFFFFF">
+
+  <section class="rushart" style="position: relative; overflow: hidden; border-radius: 0 0 48px 48px">
+    <div class="halo" style="position: absolute; inset: 0"></div>
+    <div class="speed" style="position: absolute; inset: 0"></div>
+    <div class="grain" style="position: absolute; inset: 0; opacity: .3"></div>
+    <header style="position: relative; max-width: 1280px; margin: 0 auto; padding: 22px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="Tadaa!" style="height: 38px; width: auto">
+      <nav aria-label="Principal" style="display: flex; flex-wrap: wrap; gap: 4px; background: rgba(11,10,28,.75); border-radius: 99px; padding: 5px">
+        <a href="DHome.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Inicio</a>
+        <a href="DExplorar.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Cartelera</a>
+        <a href="DRush.dc.html" style="padding: 11px 18px; border-radius: 99px; background: #FFFFFF; color: #0B0A1C; font-weight: 800; font-size: 13px">Now!</a>
+        <a href="DWallet.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Mi Wallet</a>
+      </nav>
+      <a href="DCuenta.dc.html" aria-label="Mi cuenta" style="width: 44px; height: 44px; border-radius: 50%; background: #0B0A1C; color: #FFFFFF; display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 800">{{TVini}}</a>
+    </header>
+    <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: 40px 32px 90px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px">
+      <span style="display: flex; align-items: center; gap: 8px; background: #0B0A1C; border-radius: 99px; padding: 9px 15px; font-size: 12px; font-weight: 800; letter-spacing: .12em">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="#FF8A3D" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>BOLETOS DE ÚLTIMO MINUTO
+      </span>
+      <h1 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 900; font-style: italic; font-size: clamp(140px, 20vw, 300px); line-height: .78; letter-spacing: -12px; color: #FFFFFF; text-shadow: 0 20px 60px rgba(120,20,80,.35)">NOW!</h1>
+      <p style="margin: 6px 0 0; max-width: 560px; font-size: 19px; line-height: 1.5; font-weight: 700; color: #0B0A1C">Inscríbete gratis. Horas antes de la función abrimos la venta solo para inscritos. Los primeros en pagar se lo llevan.</p>
+    </div>
+  </section>
+
+  <div style="max-width: 1280px; margin: -60px auto 0; padding: 0 32px; position: relative">
+<sc-if value="{{hasC}}">
+    <article style="background: #15142E; border: 1px solid #2A2852; border-radius: 36px; overflow: hidden; display: flex; flex-wrap: wrap; box-shadow: 0 40px 80px rgba(0,0,0,.4)">
+      <div style="position: relative; flex: 1 1 420px; min-height: 360px">
+        <img src="{{c.img}}" alt="{{c.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 25%">
+        <div style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(21,20,46,.9), transparent 60%)"></div>
+        <span style="position: absolute; left: 20px; top: 20px; background: linear-gradient(100deg, #FF3D8B, #FF8A3D); color: #0B0A1C; border-radius: 99px; padding: 8px 14px; font-size: 12px; font-weight: 800">{{c.kicker}}</span>
+        <div style="position: absolute; left: 24px; bottom: 22px">
+          <b style="font-family: Outfit, sans-serif; font-weight: 900; font-size: 56px; letter-spacing: -2px; line-height: .9">{{c.title}}</b>
+          <div style="font-size: 14px; color: #C7CDE6; margin-top: 6px">{{c.when}}</div>
+        </div>
+      </div>
+      <div style="flex: 1 1 420px; padding: 32px; display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap">
+          <span style="display: flex; flex-direction: column"><span style="font-size: 12px; color: #AEB6D6">Precio Now!</span><b class="rushtext" style="font-family: Outfit, sans-serif; font-size: 56px; letter-spacing: -2px; line-height: 1">{{c.price}}</b><span style="font-size: 12px; color: #8C93B5">Convenio desde <s>{{c.regular}}</s></span></span>
+          <span style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+            <span style="background: #0B0A1C; border-radius: 16px; padding: 10px 14px"><span style="display: block; font-size: 11px; color: #AEB6D6">Cupo</span><b style="font-size: 20px">{{c.quota}}</b></span>
+            <span style="background: #0B0A1C; border-radius: 16px; padding: 10px 14px"><span style="display: block; font-size: 11px; color: #AEB6D6">Inscritos</span><b style="font-size: 20px">{{c.signups}}</b></span>
+          </span>
+        </div>
+        <div style="background: #0B0A1C; border-radius: 24px; padding: 18px; display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap">
+          <span style="font-size: 13px; color: #C7CDE6">{{status}}</span>
+          <b class="rushtext" style="font-family: Outfit, sans-serif; font-size: 40px; letter-spacing: -1px">{{clock}}</b>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap">
+          <button onClick="{{toggle}}" style="{{ctaStyle}}">{{cta}}</button>
+          <a href="DEvento.dc.html" data-tv-slug="{{c.slug}}" style="height: 60px; padding: 0 22px; border-radius: 99px; border: 1px solid #3A3E66; display: flex; align-items: center; font-weight: 700; font-size: 14px">Ver evento</a>
+        </div>
+        <span style="font-size: 12px; color: #8C93B5">Máximo {{c.maxPerUser}} boletos por persona. Inscribirte no garantiza boleto.</span>
+      </div>
+    </article>
+</sc-if><sc-if value="{{noC}}"><article style="max-width: 1280px; margin: -60px auto 0; position: relative; padding: 40px; border-radius: 32px; background: #161833; color: #FFFFFF; text-align: center"><b style="font-family: Outfit, sans-serif; font-size: 30px">No hay Now! abierto en este momento</b><p style="color: #AEB6D6">Cuando un evento active su venta de último minuto, aquí podrás inscribirte. Mira los próximos abajo.</p></article></sc-if>
+  </div>
+
+  <section style="max-width: 1280px; margin: 0 auto; padding: 64px 32px 24px">
+    <h2 style="margin: 0 0 22px; font-family: Outfit, sans-serif; font-weight: 800; font-size: 40px; letter-spacing: -1.5px">Próximos Now!</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px">
+      <sc-for list="{{next}}" as="e" hint-placeholder-count="3">
+        <div style="background: #15142E; border: 1px solid #2A2852; border-radius: 28px; padding: 8px; display: flex; flex-direction: column; gap: 12px">
+          <div style="position: relative; height: 200px; border-radius: 22px; overflow: hidden">
+            <img src="{{e.img}}" alt="{{e.title}}" style="width: 100%; height: 100%; object-fit: cover">
+            <span style="position: absolute; left: 12px; top: 12px; background: rgba(11,10,28,.8); border-radius: 99px; padding: 7px 12px; font-size: 11px; font-weight: 800">{{e.opens}}</span>
+          </div>
+          <div style="padding: 0 10px 10px; display: flex; justify-content: space-between; align-items: center; gap: 10px">
+            <span style="display: flex; flex-direction: column; gap: 2px"><b style="font-family: Outfit, sans-serif; font-size: 22px">{{e.title}}</b><span style="font-size: 12px; color: #AEB6D6">{{e.when}}</span></span>
+            <button onClick="{{e.pick}}" style="{{e.btn}}">{{e.label}}</button>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width: 1280px; margin: 0 auto; padding: 48px 32px 90px">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px">
+      <div style="border-top: 3px solid #FF3D8B; padding-top: 18px"><b class="rushtext" style="font-family: Outfit, sans-serif; font-size: 44px">01</b><h3 style="margin: 6px 0; font-family: Outfit, sans-serif; font-size: 22px">Inscríbete</h3><p style="margin: 0; font-size: 14px; line-height: 1.6; color: #C7CDE6">Es gratis y puedes cancelar. Eliges 1 o 2 boletos.</p></div>
+      <div style="border-top: 3px solid #FF5C6C; padding-top: 18px"><b class="rushtext" style="font-family: Outfit, sans-serif; font-size: 44px">02</b><h3 style="margin: 6px 0; font-family: Outfit, sans-serif; font-size: 22px">Te avisamos</h3><p style="margin: 0; font-size: 14px; line-height: 1.6; color: #C7CDE6">Push y WhatsApp en el momento en que abre la venta.</p></div>
+      <div style="border-top: 3px solid #FF8A3D; padding-top: 18px"><b class="rushtext" style="font-family: Outfit, sans-serif; font-size: 44px">03</b><h3 style="margin: 6px 0; font-family: Outfit, sans-serif; font-size: 22px">Gana quien paga primero</h3><p style="margin: 0; font-size: 14px; line-height: 1.6; color: #C7CDE6">Sin apartados. Tu boleto final llega a Mi Wallet al instante.</p></div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1600}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { in: false, secs: 2 * 3600 + 14 * 60 + 36, picks: { q: false, m: true } }; }
+  componentDidMount(){ this.t = setInterval(() => this.setState({ secs: Math.max(0, this.state.secs - 1) }), 1000); }
+  componentWillUnmount(){ clearInterval(this.t); }
+  renderVals() {
+    const pad = n => String(n).padStart(2, '0'), s = this.state.secs;
+    const base = 'height: 60px; padding: 0 28px; border-radius: 99px; border: 0; font-family: inherit; font-weight: 800; font-size: 15px; ';
+    const P = this.state.picks;
+    const next = [
+      { id: 'q', title: 'God Save The Queen', when: 'Mié 19 nov · 21:00', opens: 'Abre 3 h antes', img: '/_blob/c9fbaa4f64161be324e770b5cd19f7f4' },
+      { id: 'm', title: 'Matilda', when: 'Dom 30 nov · 17:00', opens: 'Abre 3 h antes', img: '/_blob/bf23baed004bb85668937804b7d495cc' },
+      { id: 'b', title: 'BioParque Estrella', when: 'Sáb 6 dic', opens: 'Abre 24 h antes', img: '/_blob/bf2a75752b07f383213ec9a4d48dc00d' }
+    ].map(e => ({ ...e, label: P[e.id] ? '✓ Inscrito' : 'Inscribirme', pick: () => this.setState({ picks: { ...P, [e.id]: !P[e.id] } }),
+      btn: 'height: 44px; padding: 0 16px; border-radius: 99px; font-family: inherit; font-weight: 800; font-size: 13px; white-space: nowrap; ' + (P[e.id] ? 'border: 1px solid #D6FF35; background: transparent; color: #D6FF35;' : 'border: 0; background: linear-gradient(100deg, #FF3D8B, #FF8A3D); color: #0B0A1C;') }));
+    return { clock: pad(Math.floor(s / 3600)) + ':' + pad(Math.floor(s % 3600 / 60)) + ':' + pad(s % 60),
+      status: this.state.in ? 'Estás inscrito con 2 boletos · abre en' : 'La venta para inscritos abre en',
+      cta: this.state.in ? '✓ Inscrito · cancelar' : 'Inscribirme gratis',
+      ctaStyle: base + (this.state.in ? 'background: transparent; color: #D6FF35; border: 1px solid #D6FF35;' : 'background: linear-gradient(100deg, #FF3D8B, #FF8A3D); color: #0B0A1C;'),
+      toggle: () => this.setState({ in: !this.state.in }), next };
+  }
+}
+</script>
+</body>
+</html>

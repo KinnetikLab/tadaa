@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>TADAA! Partners · Productores</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+.txw{background:#1238FF url(/_blob/c238803f93edbcfca0600e4470e86b80) center/cover}
+.gold{background:#E2B23C url(/_blob/52c32ef55d42f15d56b0cfb34f1a15f6) center/cover}
+.rushg{background:linear-gradient(100deg,#FF3D8B,#FF8A3D)}
+</style>
+</helmet>
+<div style="width: 100%; background: #EEF1F7; font-family: 'Plus Jakarta Sans', sans-serif; color: #08091A; display: flex; flex-wrap: wrap; align-items: stretch">
+
+  <aside class="txw" aria-label="Menú de partners" style="flex: 1 1 240px; max-width: 260px; color: #FFFFFF; padding: 26px 16px; display: flex; flex-direction: column; gap: 4px; border-radius: 0 32px 32px 0">
+    <div style="display: flex; align-items: center; gap: 8px; padding: 0 10px 18px">
+      <img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="Tadaa!" style="height: 30px; width: auto">
+      <span style="font-size: 10px; font-weight: 800; letter-spacing: .18em; color: #D6FF35">PRODUCTORES</span>
+    </div>
+    <div style="margin: 0 4px 14px; background: rgba(8,9,26,.35); border-radius: 18px; padding: 12px; display: flex; align-items: center; gap: 10px">
+      <span style="width: 38px; height: 38px; border-radius: 12px; background: #FFFFFF; color: #1238FF; display: grid; place-items: center; font-weight: 900">PD</span>
+      <span style="display: flex; flex-direction: column"><b style="font-size: 13px">Productora Demo</b><span style="font-size: 11px; color: #D9E0FF">3 eventos activos</span></span>
+    </div>
+    <sc-for list="{{nav}}" as="n" hint-placeholder-count="5">
+      <button onClick="{{n.pick}}" aria-current="{{n.on}}" style="{{n.style}}">{{n.label}}<span style="{{n.badgeStyle}}">{{n.badge}}</span></button>
+    </sc-for>
+    <a href="MCheckin.dc.html" style="margin-top: auto; height: 50px; border-radius: 99px; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-weight: 800; font-size: 13px">Abrir app Staff</a>
+  </aside>
+
+  <main style="flex: 999 1 640px; min-width: 0; padding: 30px 32px 56px; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+      <div>
+        <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #1238FF">MATILDA · EL MUSICAL ▾</span>
+        <h1 style="margin: 6px 0 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: 46px; letter-spacing: -2px; line-height: 1">{{title}}</h1>
+      </div>
+      <div style="display: flex; gap: 6px; background: #FFFFFF; border-radius: 99px; padding: 4px">
+        <span style="height: 38px; padding: 0 14px; border-radius: 99px; background: #08091A; color: #FFFFFF; display: flex; align-items: center; font-size: 12px; font-weight: 800">Todas las funciones</span>
+        <span style="height: 38px; padding: 0 14px; border-radius: 99px; display: flex; align-items: center; font-size: 12px; font-weight: 700">Sáb 29 · 19:00</span>
+      </div>
+    </div>
+
+    <sc-if value="{{vRes}}" hint-placeholder-val="{{ true }}">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px">
+        <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Vendido</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">$171,200</b><span style="font-size: 12px; font-weight: 700; color: #0B7A3B">+22% vs semana pasada</span></div>
+        <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Boletos emitidos</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">162</b><span style="font-size: 12px; color: #4A5068">de 336 en 4 funciones</span></div>
+        <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Add-ons vendidos</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">58</b><span style="font-size: 12px; color: #4A5068">programas y combos</span></div>
+        <div class="gold" style="border-radius: 24px; padding: 18px; color: #2A1A00"><span style="font-size: 12px">Golden entregados</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">2</b><span style="font-size: 12px; font-weight: 700">Upgrade a Orquesta</span></div>
+      </div>
+      <section style="background: #FFFFFF; border-radius: 28px; padding: 24px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 style="margin: 0; font-family: Outfit, sans-serif; font-size: 22px">Boletos por día</h2><span style="font-size: 12px; color: #5A6178">Últimos 14 días</span></div>
+        <div style="height: 200px; display: flex; align-items: flex-end; gap: 8px; margin-top: 18px; border-bottom: 1px solid #E1E6F2">
+          <sc-for list="{{bars}}" as="b" hint-placeholder-count="14"><span style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end"><span style="font-size: 10px; color: #5A6178">{{b.v}}</span><span style="{{b.style}}"></span></span></sc-for>
+        </div>
+        <div style="display: flex; gap: 16px; margin-top: 12px; font-size: 12px; color: #4A5068">
+          <span style="display: flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 4px; background: #1238FF"></span>Convenio</span>
+          <span style="display: flex; align-items: center; gap: 6px"><span class="rushg" style="width: 12px; height: 12px; border-radius: 4px"></span>Día con Now!</span>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{vCom}}" hint-placeholder-val="{{ false }}">
+      <section style="background: #FFFFFF; border-radius: 28px; padding: 22px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 12px">
+          <label style="display: flex; align-items: center; gap: 8px; height: 46px; padding: 0 16px; border-radius: 99px; border: 1px solid #D5DBEA; flex: 0 1 360px">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5A6178" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input placeholder="Buscar comprador o folio" aria-label="Buscar comprador o folio" style="flex: 1; min-width: 0; border: 0; outline: 0; font: inherit; font-size: 13px">
+          </label>
+          <div style="display: flex; gap: 8px">
+            <span style="height: 40px; padding: 0 14px; border-radius: 99px; background: #08091A; color: #FFFFFF; display: flex; align-items: center; font-size: 12px; font-weight: 700">Todos · 86</span>
+            <span style="height: 40px; padding: 0 14px; border-radius: 99px; border: 1px solid #D5DBEA; display: flex; align-items: center; font-size: 12px; font-weight: 700">Con add-ons</span>
+            <a href="#" style="height: 40px; padding: 0 14px; border-radius: 99px; border: 1px solid #D5DBEA; display: flex; align-items: center; font-size: 12px; font-weight: 700">Exportar CSV</a>
+          </div>
+        </div>
+        <div style="overflow-x: auto">
+          <table style="width: 100%; min-width: 820px; border-collapse: collapse; font-size: 13px">
+            <thead><tr style="text-align: left; color: #5A6178; font-size: 11px; letter-spacing: .06em">
+              <th style="padding: 10px 8px">COMPRADOR</th><th style="padding: 10px 8px">FOLIO</th><th style="padding: 10px 8px">FUNCIÓN</th><th style="padding: 10px 8px">ASIENTOS</th><th style="padding: 10px 8px">ADD-ONS</th><th style="padding: 10px 8px">CANAL</th><th style="padding: 10px 8px">ACCESO</th>
+            </tr></thead>
+            <tbody>
+              <sc-for list="{{buyers}}" as="r" hint-placeholder-count="6">
+                <tr style="border-top: 1px solid #EEF1F7">
+                  <td style="padding: 12px 8px"><b>{{r.name}}</b><br><span style="font-size: 12px; color: #5A6178">{{r.mail}}</span></td>
+                  <td style="padding: 12px 8px; font-family: monospace">{{r.folio}}</td>
+                  <td style="padding: 12px 8px">{{r.fn}}</td>
+                  <td style="padding: 12px 8px">{{r.seats}}</td>
+                  <td style="padding: 12px 8px">{{r.addons}}</td>
+                  <td style="padding: 12px 8px"><span style="{{r.chStyle}}">{{r.ch}}</span></td>
+                  <td style="padding: 12px 8px"><span style="{{r.accStyle}}">{{r.acc}}</span></td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{vRG}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-wrap: wrap; gap: 20px">
+        <section style="flex: 1 1 380px; min-width: 0; background: #0B0A1C; color: #FFFFFF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; justify-content: space-between; align-items: center">
+            <span style="display: flex; align-items: center; gap: 10px"><span class="rushg" style="width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="#0B0A1C" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><b style="font-family: Outfit, sans-serif; font-size: 24px">Now!</b></span>
+            <button role="switch" aria-checked="{{rushOn}}" aria-label="Activar Now!" onClick="{{tRush}}" style="{{rushTrack}}"><span style="{{rushKnob}}"></span></button>
+          </div>
+          <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #C7CDE6">Libera un cupo de último minuto. Tu tarifa de convenio no cambia.</p>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; font-size: 12px">
+            <span style="background: #15142E; border-radius: 16px; padding: 12px"><span style="display: block; color: #AEB6D6">Función</span><b style="font-size: 14px">Dom 30 · 17:00</b></span>
+            <span style="background: #15142E; border-radius: 16px; padding: 12px"><span style="display: block; color: #AEB6D6">Abre</span><b style="font-size: 14px">3 h antes</b></span>
+            <span style="background: #15142E; border-radius: 16px; padding: 12px"><span style="display: block; color: #AEB6D6">Cupo</span><b style="font-size: 14px">30 boletos</b></span>
+            <span style="background: #15142E; border-radius: 16px; padding: 12px"><span style="display: block; color: #AEB6D6">Precio Now!</span><b style="font-size: 14px">$[precio]</b></span>
+          </div>
+          <span style="font-size: 12px; color: #8C93B5">{{rushNote}}</span>
+        </section>
+
+        <section style="flex: 1 1 380px; min-width: 0; background: #FFFFFF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; justify-content: space-between; align-items: center">
+            <span style="display: flex; align-items: center; gap: 10px"><span class="gold" style="width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 900; color: #2A1A00">G</span><b style="font-family: Outfit, sans-serif; font-size: 24px">Golden Ticket</b></span>
+            <button role="switch" aria-checked="{{goldOn}}" aria-label="Activar Golden Ticket" onClick="{{tGold}}" style="{{goldTrack}}"><span style="{{goldKnob}}"></span></button>
+          </div>
+          <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #4A5068">1 de cada 100 boletos finales se convierte en Golden al emitirse. Tú defines el beneficio.</p>
+          <div role="radiogroup" aria-label="Beneficio Golden" style="display: flex; flex-direction: column; gap: 8px">
+            <sc-for list="{{benefits}}" as="b" hint-placeholder-count="3">
+              <button role="radio" aria-checked="{{b.on}}" onClick="{{b.pick}}" style="{{b.style}}">
+                <span style="{{b.dot}}"></span>
+                <span style="display: flex; flex-direction: column; text-align: left"><b style="font-size: 14px">{{b.title}}</b><span style="font-size: 12px; color: #4A5068">{{b.desc}}</span></span>
+              </button>
+            </sc-for>
+          </div>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A5068">Mensaje para el ganador<input value="{{msg}}" readonly style="height: 46px; border: 1px solid #D5DBEA; border-radius: 14px; padding: 0 14px; font: inherit; font-size: 14px; color: #08091A"></label>
+          <span style="font-size: 12px; color: #4A5068">Probabilidad fija 1/100 · máx. 4 Golden por función · TADAA! revisa antes de publicar.</span>
+        </section>
+      </div>
+    </sc-if>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1300}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { v: 'com', rush: true, gold: true, ben: 'up' }; }
+  renderVals() {
+    const st = this.state;
+    const N = [['res', 'Resumen', ''], ['com', 'Compras', '86'], ['rg', 'Now! y Golden', '●'], ['inv', 'Inventario', ''], ['liq', 'Liquidación', '']];
+    const nav = N.map(([id, label, badge]) => ({ label, badge, on: st.v === id, pick: () => this.setState({ v: id === 'inv' || id === 'liq' ? st.v : id }),
+      style: 'height: 46px; padding: 0 14px; border: 0; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; font-family: inherit; font-weight: 700; font-size: 13px; text-align: left; ' + (st.v === id ? 'background: #FFFFFF; color: #08091A;' : 'background: transparent; color: #FFFFFF;'),
+      badgeStyle: badge ? 'background: ' + (id === 'rg' ? 'linear-gradient(100deg,#FF3D8B,#FF8A3D)' : 'rgba(8,9,26,.3)') + '; color: ' + (id === 'rg' ? '#0B0A1C' : 'inherit') + '; border-radius: 99px; padding: 2px 8px; font-size: 11px;' : 'display: none;' }));
+    const titles = { res: 'Resumen', com: 'Compras', rg: 'Now! y Golden' };
+    const vals = [12, 18, 9, 22, 31, 44, 38, 14, 20, 17, 26, 35, 48, 41], rushDays = [5, 12], max = 48;
+    const bars = vals.map((v, i) => ({ v, style: 'width: 100%; border-radius: 8px 8px 3px 3px; height: ' + Math.round(v / max * 160) + 'px; background: ' + (rushDays.includes(i) ? 'linear-gradient(180deg,#FF3D8B,#FF8A3D)' : '#1238FF') + ';' }));
+    const chip = (bg, fg, extra) => 'display: inline-block; border-radius: 99px; padding: 4px 9px; font-size: 11px; font-weight: 800; background: ' + bg + '; color: ' + fg + ';' + (extra || '');
+    const buyers = [
+      ['Ana Rodríguez', 'an•••@correo.com', 'TD-2611-0063', 'Sáb 29', 'Mezz. G 8–9', 'Programa', 'Convenio', 'in'],
+      ['Luis Martínez', 'lu•••@empresa.mx', 'TD-2611-0071', 'Sáb 29', 'Orq. C 4–7', 'Combo × 2', 'Convenio', 'in'],
+      ['Sofía Pérez', 'so•••@uni.mx', 'TD-2611-0074', 'Dom 30', 'Platea E 10', '—', 'Now!', 'pend'],
+      ['Diego Hernández', 'di•••@correo.com', 'TD-2611-0080', 'Sáb 29', 'Orq. A 1–2', 'Programa', 'Golden', 'pend'],
+      ['Mariana López', 'ma•••@empresa.mx', 'TD-2611-0082', 'Vie 28', 'Mezz. H 3–6', 'Combo × 4', 'Membresía', 'in'],
+      ['Jorge Castillo', 'jo•••@correo.com', 'TD-2611-0090', 'Dom 30', 'Platea D 7–8', '—', 'Convenio', 'pend']
+    ].map(([name, mail, folio, fn, seats, addons, ch, acc]) => ({ name, mail, folio, fn, seats, addons, ch,
+      chStyle: ch === 'Now!' ? chip('linear-gradient(100deg,#FF3D8B,#FF8A3D)', '#0B0A1C') : ch === 'Golden' ? chip('#E2B23C', '#2A1A00') : ch === 'Membresía' ? chip('#1238FF', '#FFFFFF') : chip('#EEF1F7', '#08091A'),
+      acc: acc === 'in' ? '✓ Ingresó' : 'Pendiente', accStyle: acc === 'in' ? chip('#D6FF35', '#08091A') : chip('transparent', '#4A5068', ' border: 1.5px dashed #8C93B5;') }));
+    const sw = (on, onBg) => ({ track: 'width: 56px; height: 32px; border-radius: 99px; border: 0; position: relative; padding: 0; background: ' + (on ? onBg : '#D5DBEA') + ';',
+      knob: 'position: absolute; top: 4px; width: 24px; height: 24px; border-radius: 50%; background: #FFFFFF; ' + (on ? 'right: 4px;' : 'left: 4px;') });
+    const r = sw(st.rush, 'linear-gradient(100deg,#FF3D8B,#FF8A3D)'), g = sw(st.gold, '#E2B23C');
+    const BEN = [['up', 'Upgrade de sección', 'Mezzanine o Platea → Orquesta', '¡Tu lugar subió a Orquesta!'], ['mg', 'Meet & greet', 'Saludo con el elenco al final de la función', '¡Conoce al elenco después de la función!'], ['other', 'Boleto para otro evento', 'Elige un evento de tu cartelera', '¡Ganaste un boleto para Nocturno!']];
+    const benefits = BEN.map(([id, title, desc]) => ({ title, desc, on: st.ben === id, pick: () => this.setState({ ben: id }),
+      style: 'display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 18px; font-family: inherit; color: #08091A; ' + (st.ben === id ? 'background: #FFF6DA; border: 2px solid #E2B23C;' : 'background: #FFFFFF; border: 2px solid #E1E6F2;'),
+      dot: 'width: 20px; height: 20px; flex: 0 0 20px; border-radius: 50%; ' + (st.ben === id ? 'background: #E2B23C; box-shadow: inset 0 0 0 4px #FFF6DA;' : 'border: 2px solid #C9D1EA;') }));
+    return { nav, title: titles[st.v], vRes: st.v === 'res', vCom: st.v === 'com', vRG: st.v === 'rg', bars, buyers,
+      rushOn: st.rush, rushTrack: r.track, rushKnob: r.knob, tRush: () => this.setState({ rush: !st.rush }),
+      goldOn: st.gold, goldTrack: g.track, goldKnob: g.knob, tGold: () => this.setState({ gold: !st.gold }),
+      benefits, msg: BEN.find(b => b[0] === st.ben)[3],
+      rushNote: st.rush ? 'Activo · 96 inscritos para el domingo.' : 'Desactivado · los inscritos recibirán un aviso.' };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Tadaa! escritorio · Cartelera</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+.txw{background:#1238FF url(/_blob/e0912ca8104f4784a21d635acba18e3a) center/cover}
+.grain{background-image:url(/_blob/3deff8146b80bb3fb1485ea91d6f55e6);background-size:256px}
+.fade{animation:fade .6s ease both}
+@keyframes fade{from{opacity:.2;transform:scale(1.03)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+<div style="width: 100%; background: #EEF1F7; font-family: 'Plus Jakarta Sans', sans-serif; color: #08091A">
+
+  <section class="txw" style="position: relative; color: #FFFFFF; border-radius: 0 0 44px 44px; overflow: hidden">
+    <div style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(6,14,90,.85) 0%, rgba(6,14,90,.2) 55%, transparent 80%)"></div>
+    <div class="grain" style="position: absolute; inset: 0; opacity: .25"></div>
+    <header style="position: relative; max-width: 1280px; margin: 0 auto; padding: 22px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="Tadaa!" style="height: 38px; width: auto">
+      <nav aria-label="Principal" style="display: flex; flex-wrap: wrap; gap: 4px; background: rgba(8,9,26,.28); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.14); border-radius: 99px; padding: 5px">
+        <a href="DHome.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Inicio</a>
+        <a href="DExplorar.dc.html" style="padding: 11px 18px; border-radius: 99px; background: #FFFFFF; color: #08091A; font-weight: 800; font-size: 13px">Cartelera</a>
+        <a href="DRush.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Now!</a>
+        <a href="DWallet.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Mi Wallet</a>
+      </nav>
+      <a href="DCuenta.dc.html" aria-label="Mi cuenta" style="width: 44px; height: 44px; border-radius: 50%; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 800">{{TVini}}</a>
+    </header>
+
+    <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: 20px 32px 34px; display: flex; flex-direction: column; gap: 22px">
+      <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px">
+        <div style="display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap">
+          <h1 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: clamp(56px, 6.5vw, 96px); letter-spacing: -4px; line-height: .9">Cartelera</h1>
+          <button style="display: flex; align-items: center; gap: 6px; height: 44px; padding: 0 16px; border-radius: 99px; border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1); color: #FFFFFF; font: inherit; font-weight: 700; font-size: 13px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D6FF35" stroke-width="2.2" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>CDMX ▾
+          </button>
+        </div>
+        <label style="flex: 0 1 480px; display: flex; align-items: center; gap: 10px; background: #FFFFFF; color: #08091A; border-radius: 99px; padding: 6px 6px 6px 22px; box-shadow: 0 20px 40px rgba(8,9,26,.25)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5A6178" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input placeholder="Busca un evento, artista o recinto" aria-label="Buscar" style="flex: 1; min-width: 0; border: 0; outline: 0; font: inherit; font-size: 14px">
+          <span style="width: 46px; height: 46px; border-radius: 50%; background: #1238FF; display: grid; place-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg></span>
+        </label>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px">
+        <sc-for list="{{cats}}" as="c" hint-placeholder-count="6"><button onClick="{{c.pick}}" aria-pressed="{{c.on}}" style="{{c.style}}">{{c.label}}</button></sc-for>
+      </div>
+      <div role="group" aria-label="Elegir día" style="display: flex; gap: 8px; overflow: hidden">
+        <span style="flex: 0 0 auto; writing-mode: vertical-rl; transform: rotate(180deg); font-size: 11px; font-weight: 800; letter-spacing: .14em; color: #D9E0FF; text-align: center">NOV</span>
+        <sc-for list="{{days}}" as="d" hint-placeholder-count="14">
+          <button onClick="{{d.pick}}" aria-pressed="{{d.on}}" style="{{d.style}}">
+            <span style="font-size: 11px; font-weight: 700">{{d.w}}</span>
+            <b style="font-family: Outfit, sans-serif; font-size: 24px; line-height: 1">{{d.n}}</b>
+            <span style="{{d.dot}}"></span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <div style="max-width: 1280px; margin: 0 auto; padding: 30px 32px 80px; display: flex; flex-direction: column; gap: 30px">
+
+    <a href="DEvento.dc.html" style="position: relative; display: block; height: 380px; border-radius: 36px; overflow: hidden; color: #FFFFFF; background: #08091A">
+      <sc-for list="{{feat}}" as="f" hint-placeholder-count="1">
+        <img class="fade" src="{{f.img}}" alt="{{f.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: {{f.pos}}">
+        <div style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(8,9,26,.9) 0%, rgba(8,9,26,.25) 55%, transparent 80%)"></div>
+        <span style="position: absolute; left: 24px; top: 22px; background: #D6FF35; color: #08091A; border-radius: 99px; padding: 8px 14px; font-size: 11px; font-weight: 800; letter-spacing: .1em">DESTACADO</span>
+        <div style="position: absolute; left: 24px; right: 24px; bottom: 22px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 18px">
+          <span style="display: flex; flex-direction: column; gap: 6px">
+            <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #D6FF35">{{f.cat}}</span>
+            <b style="font-family: Outfit, sans-serif; font-weight: 900; font-size: 64px; letter-spacing: -2.5px; line-height: .9">{{f.title}}</b>
+            <span style="font-size: 15px; color: #E1E6F5">{{f.when}}</span>
+          </span>
+          <span style="display: flex; align-items: center; gap: 12px; background: rgba(8,9,26,.55); backdrop-filter: blur(12px); border-radius: 99px; padding: 6px 6px 6px 20px">
+            <span style="display: flex; flex-direction: column; line-height: 1.15"><span style="font-size: 11px; color: #D9E0FF">Convenio desde</span><b style="font-family: Outfit, sans-serif; font-size: 22px">{{f.price}} <span style="color: #D6FF35; font-size: 15px">{{f.pct}}</span></b></span>
+            <span style="width: 52px; height: 52px; border-radius: 50%; background: #D6FF35; display: grid; place-items: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#08091A" stroke-width="2.4" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </span>
+        </div>
+      </sc-for>
+      <span style="position: absolute; right: 24px; top: 26px; display: flex; gap: 6px">
+        <sc-for list="{{fdots}}" as="d" hint-placeholder-count="3"><span style="{{d}}"></span></sc-for>
+      </span>
+    </a>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px">
+      <div role="tablist" aria-label="Secciones" style="display: flex; gap: 4px; background: #FFFFFF; border-radius: 99px; padding: 5px">
+        <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3"><button role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}} <span style="opacity: .6">{{t.count}}</span></button></sc-for>
+      </div>
+      <button style="height: 46px; padding: 0 18px; border-radius: 99px; border: 1px solid #D5DBEA; background: #FFFFFF; font: inherit; font-weight: 700; font-size: 13px; color: #08091A; display: flex; align-items: center; gap: 8px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#08091A" stroke-width="2" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Más filtros
+      </button>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px">
+      <sc-for list="{{events}}" as="e" hint-placeholder-count="6">
+        <a href="DEvento.dc.html" style="position: relative; height: 340px; border-radius: 30px; overflow: hidden; color: #FFFFFF; display: block; background: #08091A">
+          <sc-if value="{{e.video}}" hint-placeholder-val="{{ false }}"><video src="/_blob/9bb3a5e0fcd00cd42c2ddaf0ca39bac7" poster="{{e.img}}" autoplay muted loop playsinline aria-label="Video de {{e.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .92"></video></sc-if>
+          <sc-if value="{{e.photo}}" hint-placeholder-val="{{ true }}"><img src="{{e.img}}" alt="{{e.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: {{e.pos}}; opacity: .92"></sc-if>
+          <span style="{{e.chipStyle}}">{{e.chip}}</span>
+          <span style="position: absolute; right: 14px; top: 14px; display: flex; gap: 6px">
+            <sc-if value="{{e.video}}" hint-placeholder-val="{{ false }}"><span style="display: flex; align-items: center; gap: 5px; background: rgba(8,9,26,.55); backdrop-filter: blur(8px); border-radius: 99px; padding: 7px 10px; font-size: 11px; font-weight: 700"><svg width="10" height="10" viewBox="0 0 24 24" fill="#D6FF35" aria-hidden="true"><path d="M6 4v16l14-8z"/></svg>0:15</span></sc-if>
+          </span>
+          <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 60px 18px 18px; background: linear-gradient(transparent, rgba(8,9,26,.92))">
+            <span style="display: flex; gap: 6px; margin-bottom: 8px"><sc-if value="{{e.rush}}" hint-placeholder-val="{{ false }}"><span title="Now! disponible" role="img" aria-label="Now! disponible" style="width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, #FF3D8B, #FF8A3D); display: grid; place-items: center; box-shadow: 0 4px 12px rgba(255,61,139,.4)"><svg width="15" height="15" viewBox="0 0 24 24" fill="#0B0A1C" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span></sc-if><sc-if value="{{e.golden}}" hint-placeholder-val="{{ false }}"><span title="Puede salir Golden Ticket" role="img" aria-label="Golden Ticket activo" style="width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, #FFE9A3, #E2B23C 55%, #B8860B); display: grid; place-items: center; box-shadow: 0 4px 12px rgba(226,178,60,.45)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2A1A00" stroke-width="2.2" aria-hidden="true"><path d="M3 7h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4z"/><path d="M13 7v12" stroke-dasharray="2 2"/></svg></span></sc-if><sc-if value="{{e.original}}" hint-placeholder-val="{{ false }}"><span title="TADAA! Original" role="img" aria-label="TADAA! Original" style="width: 30px; height: 30px; border-radius: 9px; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 900; font-size: 13px">t!</span></sc-if></span>
+            <div style="font-family: Outfit, sans-serif; font-weight: 800; font-size: 28px; line-height: 1">{{e.title}}</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 8px; font-size: 13px; color: #D9E0FF">
+              <span>{{e.venue}}</span><b style="color: #FFFFFF; white-space: nowrap">{{e.when}}</b>
+            </div>
+            <sc-if value="{{e.soon}}" hint-placeholder-val="{{ false }}">
+              <span style="margin-top: 12px; height: 42px; border-radius: 99px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3); display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 800">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D6FF35" stroke-width="2.2" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/></svg>{{e.cta}}
+              </span>
+            </sc-if>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1700}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { cat: 'Todo', day: 21, tab: 'now', f: 0 }; }
+  componentDidMount(){ this.t = setInterval(() => this.setState({ f: (this.state.f + 1) % 3 }), 5000); }
+  componentWillUnmount(){ clearInterval(this.t); }
+  renderVals() {
+    const chip = on => 'height: 42px; padding: 0 16px; border-radius: 99px; font-family: inherit; font-weight: 700; font-size: 13px; ' + (on ? 'border: 0; background: #08091A; color: #D6FF35;' : 'border: 1px solid rgba(255,255,255,.28); background: rgba(255,255,255,.12); color: #FFFFFF;');
+    const cats = ['Todo','Conciertos','Teatro','Festivales','Paseos','Familia','Now!'].map(label => ({ label, on: this.state.cat === label, pick: () => this.setState({ cat: label }), style: chip(this.state.cat === label) }));
+    const ws = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+    const busy = [17, 19, 21, 22, 23, 29, 30];
+    const days = Array.from({ length: 14 }, (_, k) => {
+      const n = 17 + k, on = this.state.day === n;
+      return { n, w: ws[k % 7], on, pick: () => this.setState({ day: n }),
+        style: 'flex: 0 0 66px; height: 84px; border-radius: 99px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-family: inherit; ' + (on ? 'border: 0; background: #08091A; color: #D6FF35;' : 'border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.08); color: #FFFFFF;'),
+        dot: 'width: 5px; height: 5px; border-radius: 50%; background: ' + (busy.includes(n) ? (on ? '#D6FF35' : '#FFFFFF') : 'transparent') + ';' };
+    });
+    const F = [
+      { title: 'Matilda · El Musical', cat: 'MUSICAL · TADAA! TICKETS', when: 'Viernes a domingo · Centro Cultural Teatro 1', price: '$700', pct: '−61%', img: '/_blob/bf23baed004bb85668937804b7d495cc', pos: 'center 30%' },
+      { title: 'Morat', cat: 'CONCIERTO', when: 'Lun 17 nov · Palacio de los Deportes', price: '$2,100', pct: '−13%', img: '/_blob/8e0bcf402dffa7cdf67f5b3be9f05c08', pos: 'center 40%' },
+      { title: 'BioParque Estrella', cat: 'PASEO · COMBOS DISPONIBLES', when: 'Fecha abierta · Chapa de Mota', price: '$380', pct: '−19%', img: '/_blob/bf2a75752b07f383213ec9a4d48dc00d', pos: 'center' }
+    ];
+    const f = this.state.f;
+    const feat = [F[f]];
+    const fdots = F.map((x, k) => 'height: 6px; border-radius: 99px; ' + (k === f ? 'width: 30px; background: #D6FF35;' : 'width: 12px; background: rgba(255,255,255,.5);'));
+    const all = [
+      { s: 'now', k: 'Conciertos', title: 'Morat', venue: 'Palacio de los Deportes', when: '17 nov · 20:00', price: 'Desde $2,100', img: '/_blob/8e0bcf402dffa7cdf67f5b3be9f05c08', pos: 'center', video: true },
+      { s: 'now', k: 'Teatro', title: 'Nocturno', venue: 'Teatro 2', when: 'Hoy · 20:00', price: 'Desde $850', img: '/_blob/638dbc29de26c4783746a0bef23bebdd', pos: 'center 25%', rush: true },
+      { s: 'now', k: 'Teatro', title: 'Matilda · El Musical', venue: 'Teatro 1', when: 'Vie a dom', price: 'Desde $700', img: '/_blob/bf23baed004bb85668937804b7d495cc', pos: 'center 30%' },
+      { s: 'now', k: 'Conciertos', title: 'God Save The Queen', venue: 'Arena CDMX', when: '19 nov · 21:00', price: 'Desde $410', img: '/_blob/c9fbaa4f64161be324e770b5cd19f7f4', pos: 'center', rush: true },
+      { s: 'now', k: 'Paseos', title: 'BioParque Estrella', venue: 'Chapa de Mota', when: 'Fecha abierta', price: 'Desde $380', img: '/_blob/bf2a75752b07f383213ec9a4d48dc00d', pos: 'center' },
+      { s: 'now', k: 'Conciertos', title: 'Bruno Mars', venue: 'Estadio GNP Seguros', when: '11 dic · 20:30', price: 'Desde $1,550', img: '/_blob/ae1aa772d43572f219610f484bc3660c', pos: 'center' },
+      { s: 'soon', k: 'Teatro', title: 'Hoy No Me Puedo Levantar', venue: 'Teatro 1', when: 'Nueva temporada', price: 'PRÓXIMAMENTE', img: '/_blob/fd6d958733bf058344285c28d805e194', pos: 'center', video: true, cta: 'Avisarme cuando salga' },
+      { s: 'soon', k: 'Festivales', title: 'INFERNO', venue: 'Sede por revelar', when: '2027', price: 'PRÓXIMAMENTE', img: '/_blob/26994cc14f5434330e2908761d2a8099', pos: 'center 30%', original: true, cta: 'Avisarme · fecha el 1 de enero' },
+      { s: 'pre', k: 'Festivales', title: 'INFERNO', venue: 'Sede por revelar', when: 'Registro abierto', price: 'PREVENTA', img: '/_blob/26994cc14f5434330e2908761d2a8099', pos: 'center 30%', original: true, cta: 'Registrarme a la preventa' },
+      { s: 'pre', k: 'Conciertos', title: 'Bruno Mars', venue: 'Estadio GNP Seguros', when: 'Preventa convenio · 2 días', price: 'PREVENTA', img: '/_blob/ae1aa772d43572f219610f484bc3660c', pos: 'center', cta: 'Entrar a la preventa' }
+    ];
+    const chipBase = 'position: absolute; left: 14px; top: 14px; border-radius: 99px; padding: 7px 12px; font-size: 11px; font-weight: 800; ';
+    const tabsData = [['now', 'En cartelera'], ['soon', 'Próximamente'], ['pre', 'En preventa']];
+    const tabs = tabsData.map(([id, label]) => ({ label, on: this.state.tab === id, count: all.filter(e => e.s === id).length, pick: () => this.setState({ tab: id }),
+      style: 'height: 42px; padding: 0 18px; border: 0; border-radius: 99px; font-family: inherit; font-weight: 800; font-size: 13px; ' + (this.state.tab === id ? 'background: #1238FF; color: #FFFFFF;' : 'background: transparent; color: #08091A;') }));
+    let events = all.filter(e => e.s === this.state.tab);
+    const c = this.state.cat;
+    if (c === 'Now!') events = events.filter(e => e.rush); else if (c !== 'Todo') events = events.filter(e => e.k === c);
+    const G = ['Matilda · El Musical', 'Nocturno', 'INFERNO', 'Hoy No Me Puedo Levantar', 'BioParque Estrella'];
+    events = events.map(e => ({ rush: false, original: false, video: false, cta: '', ...e, golden: G.includes(e.title), photo: !e.video, soon: e.s !== 'now', chip: e.price,
+      chipStyle: chipBase + (e.s === 'now' ? 'background: #D6FF35; color: #08091A;' : e.s === 'soon' ? 'background: #FFFFFF; color: #08091A;' : 'background: #1238FF; color: #FFFFFF;') }));
+    return { cats, days, feat, fdots, tabs, events };
+  }
+}
+</script>
+</body>
+</html>

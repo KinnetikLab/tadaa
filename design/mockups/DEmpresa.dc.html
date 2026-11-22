@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>TADAA! Partners · Empresas</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+.ink{background:radial-gradient(60% 50% at 0% 0%, rgba(18,56,255,.5), transparent 70%), #08091A}
+</style>
+</helmet>
+<div style="width: 100%; background: #EEF1F7; font-family: 'Plus Jakarta Sans', sans-serif; color: #08091A; display: flex; flex-wrap: wrap; align-items: stretch">
+
+  <aside class="ink" aria-label="Menú de empresas" style="flex: 1 1 240px; max-width: 260px; color: #FFFFFF; padding: 26px 16px; display: flex; flex-direction: column; gap: 4px; border-radius: 0 32px 32px 0">
+    <div style="display: flex; align-items: center; gap: 8px; padding: 0 10px 18px">
+      <img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="Tadaa!" style="height: 30px; width: auto">
+      <span style="font-size: 10px; font-weight: 800; letter-spacing: .18em; color: #D6FF35">EMPRESAS</span>
+    </div>
+    <div style="margin: 0 4px 14px; background: #161833; border-radius: 18px; padding: 12px; display: flex; align-items: center; gap: 10px">
+      <span style="width: 38px; height: 38px; border-radius: 12px; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-weight: 900">ED</span>
+      <span style="display: flex; flex-direction: column"><b style="font-size: 13px">Empresa Demo Norte</b><span style="font-size: 11px; color: #AEB6D6">Convenio activo · 450 lugares</span></span>
+    </div>
+    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Resumen</a>
+    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; background: #FFFFFF; color: #08091A; display: flex; align-items: center; justify-content: space-between; font-weight: 800; font-size: 13px">Colaboradores <span style="background: #EEF1F7; border-radius: 99px; padding: 2px 8px; font-size: 11px">412</span></a>
+    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Reportes de uso</a>
+    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Comunicación interna</a>
+    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Facturación</a>
+    <div style="margin-top: auto; background: #161833; border-radius: 18px; padding: 14px; font-size: 12px; line-height: 1.5; color: #C7CDE6">
+      <b style="display: block; color: #D6FF35">Solo ves datos agregados</b>Las compras de cada colaborador son privadas.
+    </div>
+  </aside>
+
+  <main style="flex: 999 1 640px; min-width: 0; padding: 30px 32px 56px; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+      <div>
+        <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #1238FF">NOVIEMBRE 2026</span>
+        <h1 style="margin: 6px 0 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: 46px; letter-spacing: -2px; line-height: 1">Tu equipo, saliendo más.</h1>
+      </div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap">
+        <a href="#" style="height: 48px; padding: 0 18px; border-radius: 99px; border: 1px solid #D5DBEA; background: #FFFFFF; display: flex; align-items: center; font-weight: 700; font-size: 13px">Subir CSV</a>
+        <button onClick="{{openAdd}}" style="height: 48px; padding: 0 20px; border-radius: 99px; border: 0; background: #08091A; color: #FFFFFF; display: flex; align-items: center; gap: 8px; font-family: inherit; font-weight: 800; font-size: 13px"><span style="color: #D6FF35; font-size: 18px">+</span> Dar de alta</button>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px">
+      <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Colaboradores activos</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">{{active}}</b><span style="font-size: 12px; color: #4A5068">de 450 lugares</span></div>
+      <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Usaron el beneficio</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">68%</b><span style="font-size: 12px; font-weight: 700; color: #0B7A3B">+9 pts este mes</span></div>
+      <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Planes realizados</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">531</b><span style="font-size: 12px; color: #4A5068">en 2026</span></div>
+      <div style="background: #1238FF; color: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #D9E0FF">Ahorro generado al equipo</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">$412k</b><span style="font-size: 12px; color: #D6FF35; font-weight: 700">vs precio regular</span></div>
+    </div>
+
+    <sc-if value="{{adding}}" hint-placeholder-val="{{ false }}">
+      <section style="background: #FFFFFF; border-radius: 28px; padding: 22px; display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-end; box-shadow: inset 0 0 0 2px #1238FF">
+        <label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A5068">Nombre<input value="Ana Rodríguez" readonly style="height: 46px; border: 1px solid #D5DBEA; border-radius: 14px; padding: 0 14px; font: inherit; font-size: 14px; color: #08091A"></label>
+        <label style="flex: 1 1 140px; display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A5068">No. colaborador<input value="EMP-1001" readonly style="height: 46px; border: 1px solid #D5DBEA; border-radius: 14px; padding: 0 14px; font: inherit; font-size: 14px; color: #08091A"></label>
+        <label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A5068">RFC<input value="ROAA900101XX0" readonly style="height: 46px; border: 2px solid #1238FF; border-radius: 14px; padding: 0 14px; font: inherit; font-size: 14px; letter-spacing: .05em; color: #08091A"></label>
+        <button onClick="{{closeAdd}}" style="height: 46px; padding: 0 20px; border-radius: 99px; border: 0; background: #D6FF35; font-family: inherit; font-weight: 800; font-size: 13px; color: #08091A">Vincular cuenta</button>
+        <div style="flex: 1 1 100%; display: flex; gap: 12px; align-items: center; background: #EEF2FF; border-radius: 18px; padding: 12px 14px; font-size: 13px">
+          <span style="width: 30px; height: 30px; flex: 0 0 30px; border-radius: 50%; background: #1238FF; color: #FFFFFF; display: grid; place-items: center; font-weight: 800">i</span>
+          <span>Este RFC ya tiene cuenta TADAA! (de un convenio anterior). <b>La reactivamos con su historial, badges y nivel</b>; no se crea una cuenta nueva.</span>
+        </div>
+      </section>
+    </sc-if>
+
+    <section style="background: #FFFFFF; border-radius: 28px; padding: 22px">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 10px">
+        <h2 style="margin: 0; font-family: Outfit, sans-serif; font-size: 22px">Colaboradores</h2>
+        <label style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px; border-radius: 99px; border: 1px solid #D5DBEA; flex: 0 1 320px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5A6178" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input placeholder="Buscar por nombre, número o RFC" aria-label="Buscar colaborador" style="flex: 1; min-width: 0; border: 0; outline: 0; font: inherit; font-size: 13px">
+        </label>
+      </div>
+      <div style="overflow-x: auto">
+        <table style="width: 100%; min-width: 760px; border-collapse: collapse; font-size: 13px">
+          <thead><tr style="text-align: left; color: #5A6178; font-size: 11px; letter-spacing: .06em">
+            <th style="padding: 10px 8px">COLABORADOR</th><th style="padding: 10px 8px">NO.</th><th style="padding: 10px 8px">RFC</th><th style="padding: 10px 8px">ÚLTIMO USO</th><th style="padding: 10px 8px">BENEFICIOS</th><th style="padding: 10px 8px"></th>
+          </tr></thead>
+          <tbody>
+            <sc-for list="{{people}}" as="p" hint-placeholder-count="6">
+              <tr style="border-top: 1px solid #EEF1F7">
+                <td style="padding: 12px 8px"><b>{{p.name}}</b><br><span style="font-size: 12px; color: #5A6178">{{p.mail}}</span></td>
+                <td style="padding: 12px 8px">{{p.no}}</td>
+                <td style="padding: 12px 8px; font-family: monospace; letter-spacing: .04em">{{p.rfc}}</td>
+                <td style="padding: 12px 8px">{{p.last}}</td>
+                <td style="padding: 12px 8px"><span style="{{p.chip}}">{{p.state}}</span></td>
+                <td style="padding: 12px 8px; text-align: right"><button onClick="{{p.toggle}}" style="{{p.btn}}">{{p.action}}</button></td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
+      <div style="flex: 1 1 360px; background: #08091A; color: #FFFFFF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+        <span style="font-size: 11px; font-weight: 800; letter-spacing: .14em; color: #D6FF35">¿QUÉ PASA AL DAR DE BAJA?</span>
+        <h3 style="margin: 0; font-family: Outfit, sans-serif; font-size: 24px">Solo se inactivan sus beneficios</h3>
+        <p style="margin: 0; font-size: 13px; line-height: 1.6; color: #C7CDE6">Su cuenta TADAA!, historial y boletos se quedan. Le ofrecemos seguir con la membresía al 50% por 3 meses. Si otra empresa lo afilia, su RFC reactiva la misma cuenta.</p>
+      </div>
+      <div style="flex: 1 1 320px; background: #FFFFFF; border-radius: 28px; padding: 18px; display: flex; gap: 14px; align-items: center">
+        <span style="width: 54px; height: 54px; flex: 0 0 54px; border-radius: 16px; background: #1238FF; display: grid; place-items: center"><img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="" style="width: 40px"></span>
+        <span style="display: flex; flex-direction: column; gap: 4px"><b style="font-size: 13px">Vista previa del aviso al colaborador</b><span style="font-size: 13px; color: #2A2F48">"Un pajarito nos contó que ya no estás en Empresa Demo Norte. Nos rifamos contigo: 3 meses de membresía al 50%."</span><a href="MBaja.dc.html" style="font-size: 12px; font-weight: 800; color: #1238FF">Ver pantalla →</a></span>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { off: { e4: true }, adding: true }; }
+  renderVals() {
+    const P = [
+      ['e1', 'Ana Rodríguez', 'an•••@empresa.mx', 'EMP-1001', 'ROAA900101XX0', 'Hace 2 días'],
+      ['e2', 'Luis Martínez', 'lu•••@empresa.mx', 'EMP-1002', 'MAPL880312XX1', 'Hace 1 semana'],
+      ['e3', 'Mariana López', 'ma•••@empresa.mx', 'EMP-1007', 'LOGM920620XX4', 'Ayer'],
+      ['e4', 'Carlos Ruiz', 'ca•••@empresa.mx', 'EMP-1013', 'RUCC850915XX2', 'Hace 3 meses'],
+      ['e5', 'Fernanda Díaz', 'fe•••@empresa.mx', 'EMP-1021', 'DIAF950228XX7', 'Nunca']
+    ];
+    const off = this.state.off;
+    const people = P.map(([id, name, mail, no, rfc, last]) => {
+      const inactive = !!off[id];
+      return { name, mail, no, rfc, last, state: inactive ? 'Inactivo' : 'Activo', action: inactive ? 'Reactivar' : 'Dar de baja',
+        chip: 'display: inline-block; border-radius: 99px; padding: 4px 10px; font-size: 11px; font-weight: 800; ' + (inactive ? 'border: 1.5px dashed #8C93B5; color: #4A5068;' : 'background: #D6FF35; color: #08091A;'),
+        btn: 'height: 38px; padding: 0 14px; border-radius: 99px; font-family: inherit; font-weight: 700; font-size: 12px; ' + (inactive ? 'border: 0; background: #08091A; color: #FFFFFF;' : 'border: 1px solid #D5DBEA; background: #FFFFFF; color: #08091A;'),
+        toggle: () => this.setState({ off: { ...off, [id]: !inactive } }) };
+    });
+    return { people, active: 412 - Object.values(off).filter(Boolean).length + 1, adding: this.state.adding,
+      openAdd: () => this.setState({ adding: true }), closeAdd: () => this.setState({ adding: false }) };
+  }
+}
+</script>
+</body>
+</html>

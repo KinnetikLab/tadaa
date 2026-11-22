@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tadaa! — Esta noche todavía alcanzas</title>
+<meta name="description" content="Boletos de último momento para teatro, conciertos y experiencias. Tu próxima gran experiencia comienza aquí.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curtain.css?v=3">
+<style>
+:root{
+  --lime:#d6ff35; --ink:#050505; --ink2:#0d0d0d; --ink3:#151515;
+  --line:rgba(255,255,255,.11); --mut:#9a9a9a; --w:#f7f7f7;
+  --purple:#7b3cff; --pink:#ff4fb0; --orange:#ff9330;
+  --font:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--ink)}
+body{font-family:var(--font);color:var(--w);background:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.5}
+body.lock{overflow:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:.07;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding:0 28px}
+.logo{font-weight:800;letter-spacing:-.06em;font-size:30px;line-height:1;display:inline-flex;align-items:baseline}
+.logo b{color:var(--lime);display:inline-block;transform:rotate(8deg);margin-left:1px;font-weight:800}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 24px;border-radius:15px;border:0;background:var(--lime);color:#0b0b0b;font-weight:700;font-size:14px;letter-spacing:-.01em;cursor:pointer;position:relative;overflow:hidden;transition:transform .3s var(--ease),box-shadow .3s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(214,255,53,.38)}
+.btn.ghost{background:rgba(255,255,255,.06);color:var(--w);border:1px solid var(--line);backdrop-filter:blur(10px)}
+.btn.ghost:hover{background:rgba(255,255,255,.12);box-shadow:none}
+.btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.eyebrow{font-size:12px;letter-spacing:.22em;font-weight:700;color:var(--lime);text-transform:uppercase}
+.h2{font-size:clamp(36px,5vw,68px);font-weight:800;letter-spacing:-.045em;line-height:.98}
+.h2 em{font-style:normal;color:var(--lime)}
+.mut{color:var(--mut)}
+.sec{padding:120px 0;position:relative}
+
+
+/* ---------- Header ---------- */
+header{position:fixed;inset:0 0 auto 0;z-index:100;padding:20px 0;transition:padding .35s,background .35s,backdrop-filter .35s;border-bottom:1px solid transparent}
+header.scrolled{padding:12px 0;background:rgba(5,5,5,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-color:var(--line)}
+.nav{display:flex;align-items:center;gap:36px}
+nav{display:flex;gap:30px;margin-right:auto}
+nav a{font-size:14px;font-weight:500;color:#cfcfcf;position:relative;padding:6px 0;transition:color .25s;white-space:nowrap}
+nav a:hover{color:#fff}
+nav a::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--lime);border-radius:2px;transition:width .3s var(--ease)}
+nav a:hover::after{width:100%}
+.city{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#ddd;white-space:nowrap}
+.city svg{width:16px;height:16px;stroke:var(--lime);fill:none;stroke-width:2}
+.nav .btn{padding:11px 20px;font-size:13px}
+.burger{display:none;width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);cursor:pointer;position:relative}
+.burger span{position:absolute;left:11px;right:11px;height:2px;background:#fff;border-radius:2px;transition:.3s}
+.burger span:nth-child(1){top:15px}.burger span:nth-child(2){top:26px}
+.burger.open span:nth-child(1){top:20px;transform:rotate(45deg)}.burger.open span:nth-child(2){top:20px;transform:rotate(-45deg)}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;height:100svh;min-height:780px;overflow:hidden;display:flex;align-items:center}
+.hero{background:#050505}
+#beams{position:absolute;inset:-40px;width:calc(100% + 80px);height:calc(100% + 80px);display:block;filter:blur(30px);opacity:.95}
+#stage{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 30% 55%,transparent 30%,rgba(0,0,0,.55) 100%),linear-gradient(180deg,rgba(0,0,0,.5),transparent 22%,transparent 70%,var(--ink))}
+.hero-in{position:relative;z-index:3;width:100%;padding-top:70px}
+.hero .eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.hero .eyebrow::before{content:"";width:44px;height:2px;background:var(--lime)}
+.hero h1{font-size:clamp(54px,9.4vw,142px);font-weight:800;letter-spacing:-.055em;line-height:.9;max-width:1100px}
+.hero h1 span{display:block;overflow:hidden;padding-bottom:.06em}
+.hero h1 span i{display:block;font-style:normal;transform:translateY(110%);transition:transform 1.2s var(--ease)}
+.hero h1 em{font-style:normal;color:var(--lime)}
+.hero h1{word-spacing:.05em}
+.ready .hero h1 span i{transform:none}
+.ready .hero h1 span:nth-child(2) i{transition-delay:.12s}
+.hero .sub{max-width:520px;margin:30px 0 36px;font-size:clamp(16px,1.5vw,19px);color:#cdcdcd;opacity:0;transform:translateY(20px);transition:.9s .45s var(--ease)}
+.ready .hero .sub{opacity:1;transform:none}
+.search{display:flex;align-items:stretch;gap:8px;max-width:860px;padding:8px;border-radius:22px;background:rgba(255,255,255,.97);box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.4);opacity:0;transform:translateY(24px);transition:.9s .6s var(--ease);color:#0b0b0b}
+.ready .search{opacity:1;transform:none}
+.search label{display:flex;align-items:center;gap:12px;padding:0 16px;flex:1;min-width:0}
+.search label+label{flex:0 0 auto;border-left:1px solid #e5e5e5}
+.search svg{width:20px;height:20px;flex:none;stroke:#0b0b0b;fill:none;stroke-width:2;stroke-linecap:round}
+.search input,.search select{border:0;outline:0;background:transparent;font:600 15px var(--font);color:#0b0b0b;width:100%;padding:16px 0;appearance:none;-webkit-appearance:none;cursor:pointer}
+.search input{cursor:text}.search input::placeholder{color:#8a8a8a;font-weight:500}
+.search select{padding-right:6px}
+.search .btn{padding:0 30px;border-radius:15px;font-size:15px}
+.live{display:flex;flex-wrap:wrap;gap:12px 26px;margin-top:26px;font-size:13.5px;color:#cfcfcf;opacity:0;transition:.9s .8s var(--ease)}
+.ready .live{opacity:1}
+.live span{display:inline-flex;align-items:center;gap:10px;font-weight:500}
+.live b{color:#fff;font-weight:700;font-variant-numeric:tabular-nums}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 0 rgba(214,255,53,.7);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 12px rgba(214,255,53,0)}100%{box-shadow:0 0 0 0 rgba(214,255,53,0)}}
+.scroll{position:absolute;z-index:3;right:28px;bottom:34px;display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.3em;color:var(--mut);writing-mode:vertical-rl}
+.scroll::after{content:"";width:1px;height:60px;background:linear-gradient(var(--lime),transparent);animation:sc 2.2s infinite}
+@keyframes sc{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- Marquee ---------- */
+.marq{border-block:1px solid var(--line);overflow:hidden;padding:22px 0;background:var(--ink)}
+.marq div{display:flex;width:max-content;animation:mq 38s linear infinite}
+.marq span{font-size:clamp(28px,4.2vw,56px);font-weight:800;letter-spacing:-.03em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.28);padding-right:.9em;white-space:nowrap}
+.marq span::after{content:"✦";color:var(--lime);-webkit-text-stroke:0;margin-left:.9em;font-size:.6em;vertical-align:middle}
+.marq span:nth-child(3n){color:var(--lime);-webkit-text-stroke:0}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ---------- Cartelera ---------- */
+.board-h{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:38px}
+.board-h p{max-width:470px;margin-top:18px;font-size:15px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:30px;align-items:center}
+.tab{padding:12px 22px;border-radius:40px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#ddd;font:600 13.5px var(--font);cursor:pointer;transition:.3s var(--ease)}
+.tab:hover{background:rgba(255,255,255,.1)}
+.tab.on{background:var(--lime);color:#0b0b0b;border-color:transparent;box-shadow:0 8px 30px rgba(214,255,53,.3)}
+.filt{display:none;align-items:center;gap:10px;margin-left:8px;padding:8px 8px 8px 16px;border-radius:40px;border:1px solid rgba(214,255,53,.5);color:var(--lime);font-size:13px;font-weight:600}
+.filt.on{display:inline-flex}
+.filt button{width:26px;height:26px;border-radius:50%;border:0;background:var(--lime);color:#000;cursor:pointer;font-weight:800;line-height:1}
+.railwrap{position:relative}
+.rail{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 28px;padding:6px 28px 30px;margin:0 -28px;scrollbar-width:none;perspective:1400px}
+.rail::-webkit-scrollbar{display:none}
+.arrows{display:flex;gap:10px}
+.arr{width:50px;height:50px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;cursor:pointer;display:grid;place-items:center;transition:.3s var(--ease)}
+.arr:hover{background:var(--lime);color:#000;transform:scale(1.08)}
+.arr svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.show{position:relative;flex:0 0 min(300px,76vw);aspect-ratio:3/4.3;border-radius:28px;overflow:hidden;scroll-snap-align:start;background:#0a0a0a;border:1px solid var(--line);cursor:pointer;isolation:isolate;transition:transform .45s var(--ease),border-color .3s,box-shadow .4s;--mx:50%;--my:30%;transform-style:preserve-3d;will-change:transform}
+.show:hover{border-color:rgba(214,255,53,.55);box-shadow:0 30px 70px rgba(0,0,0,.6),0 0 60px rgba(214,255,53,.12)}
+.art{position:absolute;inset:0;z-index:-3;background:radial-gradient(120% 80% at 78% -8%,var(--a),transparent 62%),radial-gradient(110% 70% at -5% 105%,var(--b),transparent 62%),#0a0a0a;transition:transform .9s var(--ease)}
+.art::after{content:"";position:absolute;inset:-20% -40%;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.1) 48%,transparent 56%);transform:translateX(-40%);transition:transform 1.2s var(--ease)}
+.show:hover .art{transform:scale(1.08)}.show:hover .art::after{transform:translateX(40%)}
+.art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.show .glow{position:absolute;inset:0;z-index:-2;opacity:0;transition:opacity .4s;background:radial-gradient(circle at var(--mx) var(--my),rgba(214,255,53,.28),transparent 46%);mix-blend-mode:screen}
+.show:hover .glow{opacity:1}
+.show .shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.4),transparent 28%,rgba(0,0,0,.35) 52%,rgba(0,0,0,.92) 88%)}
+.show-in{position:absolute;inset:0;padding:20px;display:flex;flex-direction:column}
+.badges{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.pill{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:7px 12px;border-radius:30px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(8px)}
+.off{font-size:14px;font-weight:800;padding:8px 12px;border-radius:12px;background:var(--lime);color:#000;letter-spacing:-.02em;box-shadow:0 6px 24px rgba(214,255,53,.4)}
+.show h3{margin-top:auto;font-size:clamp(30px,2.6vw,38px);font-weight:800;letter-spacing:-.05em;line-height:.92;text-transform:uppercase;text-shadow:0 4px 30px rgba(0,0,0,.5)}
+.show .sub2{font-size:12.5px;color:#d5d5d5;margin-top:8px;font-weight:500}
+.when{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:12.5px;font-weight:700;color:#fff}
+.when svg{width:15px;height:15px;stroke:var(--lime);fill:none;stroke-width:2.2;stroke-linecap:round}
+.when .left{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-weight:600;color:#ffd9a6}
+.when .left i{width:7px;height:7px;border-radius:50%;background:var(--orange);animation:pulse 1.8s infinite}
+.foot{display:flex;align-items:flex-end;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.18)}
+.price small{display:block;font-size:11px;color:#bbb;font-weight:500}
+.price b{font-size:26px;font-weight:800;letter-spacing:-.04em}
+.price s{font-size:13px;color:#999;margin-left:8px;font-weight:500}
+.go{width:46px;height:46px;border-radius:50%;background:#fff;color:#000;display:grid;place-items:center;transition:.4s var(--ease)}
+.go svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.show:hover .go{background:var(--lime);transform:rotate(-45deg) scale(1.1)}
+.drop{position:absolute;left:20px;top:62px;font-size:11px;font-weight:700;color:var(--lime);display:flex;align-items:center;gap:6px}
+.none{display:none;padding:70px 0;text-align:center;color:var(--mut)}.none.on{display:block}.none b{display:block;font-size:30px;color:#fff;letter-spacing:-.03em;margin-bottom:6px}
+.demo{font-size:11.5px;color:#6d6d6d;margin-top:6px}
+
+/* ---------- Cómo funciona ---------- */
+.how{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:start}
+.steps{padding-bottom:20vh}
+.step{min-height:56vh;display:flex;flex-direction:column;justify-content:center;opacity:.28;transition:opacity .5s;padding-right:30px}
+.step.on{opacity:1}
+.step .n{font-size:13px;font-weight:700;letter-spacing:.2em;color:var(--lime);margin-bottom:16px;display:flex;align-items:center;gap:14px}
+.step .n::after{content:"";height:1px;width:60px;background:var(--lime);opacity:.5}
+.step h3{font-size:clamp(34px,4.2vw,58px);font-weight:800;letter-spacing:-.045em;line-height:1}
+.step p{margin-top:18px;max-width:430px;color:#bdbdbd;font-size:17px}
+.step .tag{display:inline-flex;margin-top:22px;padding:9px 16px;border-radius:30px;border:1px solid var(--line);font-size:13px;font-weight:600;color:#ddd;align-self:flex-start}
+.step .tag i{width:8px;height:8px;border-radius:50%;margin:auto 10px auto 0;background:var(--orange)}
+.pw{position:sticky;top:max(80px,calc(50vh - 330px));display:grid;place-items:center;padding:20px 0}
+.pw::before{content:"";position:absolute;inset:6% 0;border-radius:50%;background:radial-gradient(circle,rgba(214,255,53,.2),transparent 62%);filter:blur(30px)}
+.phone{position:relative;width:310px;height:640px;border-radius:50px;background:#000;border:11px solid #1b1b1b;box-shadow:0 0 0 2px #2c2c2c,0 50px 100px rgba(0,0,0,.7),inset 0 0 0 2px #000;overflow:hidden;transform:rotate(-3deg);transition:transform .8s var(--ease)}
+.pw:hover .phone{transform:rotate(0)}
+.phone::before{content:"";position:absolute;top:10px;left:50%;width:88px;height:25px;margin-left:-44px;border-radius:20px;background:#000;z-index:20}
+.sc{position:absolute;inset:0;opacity:0;transform:scale(.97) translateY(10px);transition:opacity .6s,transform .7s var(--ease);padding:50px 18px 20px;display:flex;flex-direction:column;pointer-events:none}
+.sc.on{opacity:1;transform:none}
+.sc.dark{background:#080808;color:#fff}.sc.light{background:#f4f4f2;color:#0b0b0b}
+.stt{position:absolute;top:14px;left:26px;right:26px;display:flex;justify-content:space-between;font-size:12px;font-weight:700;z-index:21}
+.sc .logo{font-size:22px}
+.mini-s{margin:12px 0 10px;background:#1a1a1a;border-radius:12px;padding:9px 12px;font-size:11px;color:#888}
+.mini-c{display:flex;gap:6px;margin-bottom:12px}.mini-c span{font-size:10px;font-weight:600;padding:6px 11px;border-radius:20px;background:#1a1a1a;color:#bbb}.mini-c span:first-child{background:var(--lime);color:#000}
+.mh{font-size:13px;font-weight:700;margin-bottom:10px;display:flex;justify-content:space-between}.mh small{font-weight:500;color:#888;font-size:10.5px}
+.mc{border-radius:16px;padding:14px;margin-bottom:10px;height:128px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;background:radial-gradient(120% 90% at 80% 0,var(--a),transparent 60%),radial-gradient(100% 80% at 0 100%,var(--b),transparent 60%),#111}
+.mc b{font-size:17px;font-weight:800;letter-spacing:-.04em;text-transform:uppercase;line-height:1}.mc small{font-size:10px;color:#ddd}
+.mc i{position:absolute;top:10px;right:10px;font-style:normal;font-size:10px;font-weight:800;background:var(--lime);color:#000;padding:4px 8px;border-radius:8px}
+.tbar{margin-top:auto;display:flex;justify-content:space-around;padding-top:10px;border-top:1px solid #1d1d1d;font-size:9px;color:#777}.tbar span:first-child{color:var(--lime)}
+.sc h4{font-size:20px;font-weight:800;letter-spacing:-.04em;margin:8px 0 2px}
+.sc .meta{font-size:11px;color:#777;margin-bottom:14px}
+.zone{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #e3e3e0;font-size:12px}
+.zone b{display:block;font-size:13px}.zone small{color:#777;font-size:10.5px}
+.qty{display:flex;align-items:center;gap:10px;font-weight:700}.qty i{width:24px;height:24px;border-radius:50%;border:1px solid #cfcfcc;display:grid;place-items:center;font-style:normal;font-size:14px}
+.qty i.pl{background:#0b0b0b;color:#fff;border-color:#0b0b0b}
+.total{display:flex;justify-content:space-between;align-items:center;margin:16px 0;font-size:12px}.total b{font-size:22px;letter-spacing:-.04em}
+.pbtn{margin-top:auto;background:var(--lime);color:#000;text-align:center;font-weight:800;font-size:13px;padding:15px;border-radius:14px}
+.pbtn.dk{background:#0b0b0b;color:#fff}
+.band{margin:2px -18px 12px;padding:12px 18px;font-size:11px;font-weight:800;letter-spacing:.14em;text-align:center}
+.band.y{background:#ffd966;color:#3b2a00}.band.g{background:#9fe8a8;color:#0b3a14}
+.band small{display:block;font-weight:600;letter-spacing:0;font-size:10.5px;margin-top:2px;opacity:.8}
+.qr{width:128px;height:128px;margin:10px auto;padding:8px;background:#fff;border-radius:12px;border:1px solid #e3e3e0}
+.qr svg{display:block;width:100%;height:100%}
+.chip2{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;padding:9px 12px;border-radius:12px;margin-top:6px}
+.chip2.y{background:#fff1c9;color:#6b4a00}.chip2.g{background:#dcf7df;color:#115d1e}
+.chip2 i{width:8px;height:8px;border-radius:50%;background:currentColor}
+.note{font-size:10.5px;color:#777;text-align:center;margin-top:10px}
+.notif{position:absolute;left:12px;right:12px;top:48px;z-index:15;background:rgba(255,255,255,.96);color:#000;border-radius:18px;padding:12px 14px;font-size:11px;display:flex;gap:10px;align-items:center;box-shadow:0 14px 40px rgba(0,0,0,.35);transform:translateY(-140%);transition:transform .8s .5s var(--ease)}
+.notif .logo{font-size:15px;background:#000;padding:6px 8px;border-radius:8px;color:#fff}.notif b{display:block;font-size:11.5px}
+.sc.on .notif{transform:none}
+
+/* ---------- Categorías ---------- */
+.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px}
+.cat{position:relative;padding:34px 30px 30px;border-radius:28px;border:1px solid var(--line);background:linear-gradient(160deg,#121212,#080808);overflow:hidden;cursor:pointer;min-height:230px;display:flex;flex-direction:column;transition:.45s var(--ease);--mx:50%;--my:50%;text-align:left;color:inherit}
+.cat::before{content:"";position:absolute;inset:0;background:radial-gradient(circle 240px at var(--mx) var(--my),rgba(214,255,53,.2),transparent 70%);opacity:0;transition:opacity .4s}
+.cat:hover{border-color:rgba(214,255,53,.55);transform:translateY(-6px)}.cat:hover::before{opacity:1}
+.cat svg{width:46px;height:46px;stroke:var(--lime);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;position:relative;transition:transform .5s var(--ease)}
+.cat:hover svg{transform:scale(1.15) rotate(-6deg)}
+.cat h3{position:relative;margin-top:auto;font-size:30px;font-weight:800;letter-spacing:-.045em;line-height:1}
+.cat p{position:relative;font-size:13.5px;color:var(--mut);margin-top:8px;display:flex;align-items:center;gap:8px}
+.cat .ar{position:absolute;top:30px;right:30px;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:.4s var(--ease)}
+.cat .ar svg{width:16px;height:16px;stroke:#fff;stroke-width:2.2}
+.cat:hover .ar{background:var(--lime);border-color:var(--lime);transform:rotate(-45deg)}.cat:hover .ar svg{stroke:#000;transform:none}
+
+/* ---------- Más que boletos ---------- */
+.more{display:grid;grid-template-columns:1fr 1.2fr;gap:70px;align-items:center}
+.ben{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:28px;overflow:hidden}
+.ben div{background:var(--ink);padding:34px 30px;transition:background .4s}
+.ben div:hover{background:#0f130a}
+.ben svg{width:34px;height:34px;stroke:var(--lime);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-bottom:22px}
+.ben h4{font-size:19px;font-weight:700;letter-spacing:-.03em}.ben p{font-size:14px;color:var(--mut);margin-top:6px}
+
+/* ---------- CTA / alertas ---------- */
+.cta{position:relative;overflow:hidden;border-top:1px solid var(--line)}
+.cta::before{content:"";position:absolute;left:50%;top:-30%;width:1100px;height:1100px;margin-left:-550px;border-radius:50%;background:radial-gradient(circle,rgba(214,255,53,.18),rgba(255,255,240,.05) 42%,transparent 66%);filter:blur(10px)}
+.cta .box{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+.cta h2{font-size:clamp(40px,6vw,86px)}
+.cta p.l{margin-top:22px;max-width:470px;color:#bdbdbd;font-size:17px}
+.form{padding:34px;border-radius:30px;background:rgba(255,255,255,.05);border:1px solid var(--line);backdrop-filter:blur(20px);display:grid;gap:18px}
+.form h4{font-size:20px;font-weight:700;letter-spacing:-.03em}
+.fchips{display:flex;flex-wrap:wrap;gap:8px}
+.fchips button{padding:10px 16px;border-radius:30px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#ddd;font:600 13px var(--font);cursor:pointer;transition:.25s}
+.fchips button.on{background:var(--lime);color:#000;border-color:transparent}
+.form input{width:100%;padding:17px 20px;border-radius:15px;border:1px solid var(--line);background:rgba(0,0,0,.4);color:#fff;font:500 15px var(--font);outline:0;transition:.25s}
+.form input:focus{border-color:var(--lime);box-shadow:0 0 0 4px rgba(214,255,53,.15)}
+.form .msg{font-size:13px;color:var(--lime);min-height:18px}
+.stores{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.store{display:flex;align-items:center;gap:12px;padding:12px 22px;border-radius:16px;border:1px solid rgba(255,255,255,.25);background:#000;transition:.3s var(--ease)}
+.store:hover{border-color:var(--lime);transform:translateY(-3px)}
+.store svg{width:26px;height:26px;fill:#fff}.store small{display:block;font-size:10px;color:#aaa;line-height:1}.store b{font-size:16px;letter-spacing:-.02em;line-height:1.2}
+
+/* ---------- Footer ---------- */
+footer{border-top:1px solid var(--line);padding:70px 0 0;overflow:hidden;position:relative}
+.fcols{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:40px;padding-bottom:50px}
+.fcols h5{font-size:12px;letter-spacing:.2em;color:var(--mut);margin-bottom:18px;font-weight:600}
+.fcols a{display:block;font-size:14.5px;color:#ddd;padding:5px 0;transition:.25s}.fcols a:hover{color:var(--lime);transform:translateX(4px)}
+.fcols p{color:var(--mut);font-size:14.5px;margin-top:14px;max-width:260px}
+.soc{display:flex;gap:10px;margin-top:20px}
+.soc a{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;padding:0}
+.soc a:hover{background:var(--lime);transform:translateY(-3px)}.soc a:hover svg{fill:#000}
+.soc svg{width:18px;fill:#fff}
+.legal{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px;color:#777;padding:22px 0;border-top:1px solid var(--line)}
+.big{font-weight:800;letter-spacing:-.075em;line-height:.8;font-size:clamp(110px,27vw,430px);text-align:center;color:#0f0f0f;white-space:nowrap;margin:20px 0 -.12em;user-select:none;background:linear-gradient(180deg,#1b1b1b,#070707);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.big b{-webkit-text-fill-color:var(--lime);display:inline-block;transform:rotate(8deg);filter:drop-shadow(0 0 36px rgba(214,255,53,.3))}
+
+/* ---------- Toast + reveal ---------- */
+.toast{position:fixed;left:50%;bottom:30px;z-index:260;transform:translate(-50%,300%);opacity:0;visibility:hidden;background:#fff;color:#000;padding:15px 24px;border-radius:16px;font-size:14px;font-weight:600;box-shadow:0 20px 60px rgba(0,0,0,.6);transition:transform .6s var(--ease),opacity .4s,visibility .4s;max-width:calc(100% - 40px);display:flex;gap:12px;align-items:center}
+.toast.on{transform:translate(-50%,0);opacity:1;visibility:visible}.toast i{width:10px;height:10px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 3px #000}
+.rv{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+
+/* ---------- Responsive ---------- */
+@media(max-width:1100px){
+  nav{position:fixed;inset:0 0 0 auto;width:min(340px,84vw);flex-direction:column;gap:6px;background:#0a0a0a;padding:110px 30px 30px;border-left:1px solid var(--line);transform:translateX(100%);transition:transform .45s var(--ease);margin:0}
+  nav.open{transform:none}nav a{font-size:22px;font-weight:700;padding:10px 0}
+  .burger{display:block;margin-left:auto;z-index:130}.city{display:none}.nav .btn.hide-m{display:none}
+  .how{grid-template-columns:1fr;gap:0}.pw{order:-1;top:62px;z-index:5;padding:10px 0 20px;background:linear-gradient(var(--ink) 82%,transparent)}
+  .phone{zoom:.6;transform:none}.pw:hover .phone{transform:none}.pw{padding-bottom:34px}.step{min-height:46vh;padding-right:0}.steps{padding-bottom:6vh}
+  .cats{grid-template-columns:repeat(2,1fr)}.more,.cta .box{grid-template-columns:1fr;gap:40px}
+  .fcols{grid-template-columns:1fr 1fr}
+}
+@media(max-width:700px){
+  .sec{padding:84px 0}
+  .search{flex-direction:column;border-radius:22px}.search label+label{border-left:0;border-top:1px solid #e5e5e5}.search .btn{padding:17px}
+  .cats{grid-template-columns:1fr}.cat{min-height:190px}.ben{grid-template-columns:1fr}
+  .scroll{display:none}.hero{min-height:700px}.arrows{display:none}
+  .mani{height:240vh}.fcols{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.hero .sub,.search,.live{opacity:1;transform:none}.hero h1 span i{transform:none}.curtain{display:none}}
+
+
+
+/* TADAA! Home refresh: imagen primero, jerarquía tipográfica más contenida. */
+body{overflow-x:hidden}
+body.ready{overflow-x:hidden}
+.hero{min-height:740px;height:min(900px,100svh)}
+.hero-in{width:min(1280px,100%);padding-top:48px;padding-right:42%;z-index:4}
+.hero-in .eyebrow{margin-bottom:20px}
+.hero h1{font-size:clamp(48px,6.4vw,94px);max-width:700px;line-height:.96}
+.hero .sub{max-width:490px;margin:24px 0 28px;font-size:clamp(15px,1.25vw,18px)}
+.hero .search{max-width:760px}
+.hero-gallery{position:absolute;z-index:2;right:max(3.5vw,calc((100vw - 1440px)/2));top:15%;width:min(41vw,560px);height:70%;pointer-events:none}
+.hero-art{position:absolute;overflow:hidden;border:1px solid rgba(255,255,255,.18);border-radius:22px;background:#111;box-shadow:0 28px 90px #000b}
+.hero-art img{width:100%;height:100%;display:block;object-fit:cover}
+.hero-art-main{width:48%;height:82%;right:24%;top:7%;transform:rotate(2deg);z-index:2}
+.hero-art-top{width:36%;height:61%;right:0;top:0;transform:rotate(8deg);z-index:1;opacity:.9}
+ .hero-art-bottom{width:34%;height:57%;left:0;bottom:2%;transform:rotate(-8deg);z-index:3}
+/* Hero gallery: movimiento continuo, lento y coordinado. */
+.hero-gallery{pointer-events:auto;perspective:1200px;isolation:isolate}
+.hero-art{will-change:transform;backface-visibility:hidden;transform-style:preserve-3d}
+.hero-art-main{--hero-tilt:2deg;animation:heroFloatMain 8.4s ease-in-out infinite}
+.hero-art-top{--hero-tilt:8deg;animation:heroFloatTop 9.6s ease-in-out infinite;animation-delay:-2.1s}
+.hero-art-bottom{--hero-tilt:-8deg;animation:heroFloatBottom 8.9s ease-in-out infinite;animation-delay:-4.2s}
+.hero-art img{animation:heroImageDrift 19s ease-in-out infinite alternate;transform-origin:center}
+.hero-art-top img{animation-delay:-5s}.hero-art-bottom img{animation-delay:-9s}
+@keyframes heroFloatMain{0%,100%{transform:translate3d(0,0,0) rotate(2deg)}50%{transform:translate3d(0,-15px,0) rotate(-.2deg)}}
+@keyframes heroFloatTop{0%,100%{transform:translate3d(0,0,0) rotate(8deg)}50%{transform:translate3d(7px,17px,0) rotate(5deg)}}
+@keyframes heroFloatBottom{0%,100%{transform:translate3d(0,0,0) rotate(-8deg)}50%{transform:translate3d(-7px,-13px,0) rotate(-5deg)}}
+@keyframes heroImageDrift{from{transform:scale(1)}to{transform:scale(1.075)}}
+.hero-art:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(118deg,transparent 28%,rgba(255,255,255,.13) 48%,transparent 64%);transform:translateX(-125%);animation:heroCardSheen 9s ease-in-out infinite}
+.hero-art-top:after{animation-delay:2.7s}.hero-art-bottom:after{animation-delay:5.4s}
+@keyframes heroCardSheen{0%,62%,100%{transform:translateX(-125%)}78%{transform:translateX(125%)}}
+@media(prefers-reduced-motion:reduce){.hero-art,.hero-art img,.hero-art:after{animation:none!important}.hero-art-main{transform:rotate(2deg)}.hero-art-top{transform:rotate(8deg)}.hero-art-bottom{transform:rotate(-8deg)}}
+.hero-gallery-caption{position:absolute;right:4%;bottom:0;color:#aaa;font-size:10px;letter-spacing:.18em;font-weight:800;display:flex;align-items:center;gap:9px}
+.hero-live-dot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 14px var(--lime)}
+/* No ocultar contenido si un script de animación tarda o falla. */
+.hero h1 span i,.hero .sub,.search,.live,.rv{opacity:1;transform:none}
+.hero h1 span i{transform:none}
+.rv{transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.rv.in{opacity:1;transform:none}
+/* El manifiesto fue retirado; se conserva el ritmo editorial entre secciones. */
+.join-section{border-top:1px solid var(--line);background:linear-gradient(180deg,#080808,#050505)}
+.join-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:35px;margin-bottom:38px}
+.join-heading .h2{margin-top:16px}
+.join-heading>p{max-width:390px;font-size:15px;line-height:1.65;margin-bottom:5px}
+.join-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
+.join-card{position:relative;min-height:390px;border:1px solid var(--line);border-radius:24px;overflow:hidden;padding:25px;display:flex;flex-direction:column;isolation:isolate;background:#111;transition:transform .4s var(--ease),border-color .3s,box-shadow .4s}
+.join-card>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:.35;transition:transform .8s var(--ease),opacity .4s}
+.join-card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,5,5,.25),rgba(5,5,5,.72) 45%,#050505 100%)}
+.join-card:hover{transform:translateY(-7px);border-color:rgba(214,255,53,.55);box-shadow:0 25px 65px #0009}
+.join-card:hover>img{transform:scale(1.07);opacity:.48}
+.join-icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:var(--lime);color:#050505;font-size:22px;font-weight:800}
+.join-kicker{font-size:10px;letter-spacing:.16em;color:var(--lime);font-weight:800;margin-top:28px}
+.join-card h3{font-size:clamp(25px,2.3vw,34px);line-height:.98;letter-spacing:-.055em;margin:12px 0}
+.join-card p{font-size:13px;color:#c3c3c3;line-height:1.55;max-width:260px;margin-top:0}
+.join-link{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:20px;border-top:1px solid #ffffff2b;font-size:12px;font-weight:800;color:#fff}
+.join-link b{color:var(--lime);font-size:19px}
+.event-dialog[hidden]{display:none}
+.event-dialog{position:fixed;inset:0;z-index:400;display:grid;place-items:center;padding:24px}
+.event-dialog-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(12px);animation:dialogFade .2s ease both}
+.event-dialog-panel{position:relative;width:min(920px,100%);max-height:min(88vh,900px);overflow:auto;background:#0c0c0c;border:1px solid #ffffff24;border-radius:26px;box-shadow:0 35px 110px #000c;animation:dialogRise .28s var(--ease) both}
+.event-dialog-close{position:sticky;float:right;top:14px;margin:14px 14px -52px 0;z-index:5;width:40px;height:40px;border:1px solid #ffffff30;border-radius:50%;background:#080808dd;color:#fff;font-size:25px;cursor:pointer}
+.event-modal-hero{height:300px;position:relative;overflow:hidden;background:#151515}
+.event-modal-hero img{width:100%;height:100%;object-fit:cover;display:block}
+.event-modal-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#0c0c0c 0%,transparent 65%)}
+.event-modal-body{padding:0 34px 34px;position:relative;margin-top:-28px}
+.event-modal-kicker{font-size:10px;letter-spacing:.18em;color:var(--lime);font-weight:800}
+.event-modal-body h2{font-size:clamp(30px,4vw,48px);line-height:1;letter-spacing:-.055em;margin:10px 0 14px}
+.event-modal-meta{display:flex;flex-wrap:wrap;gap:10px 20px;color:#c7c7c7;font-size:13px;margin-bottom:20px}
+.event-modal-meta span{display:inline-flex;align-items:center;gap:7px}
+.event-modal-body p{color:#c8c8c8;line-height:1.65;font-size:14px}
+.event-modal-columns{display:grid;grid-template-columns:1.2fr .8fr;gap:26px;margin-top:22px}
+.event-modal-info{padding:20px;border:1px solid var(--line);border-radius:18px;background:#ffffff05}
+.event-modal-info h3{font-size:14px;margin:0 0 10px}
+.event-modal-info ul{margin:0;padding-left:18px;color:#bdbdbd;font-size:13px;line-height:1.7}
+.event-modal-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.event-modal-actions .btn{display:inline-flex;align-items:center;gap:8px}
+.event-modal-note{font-size:11px!important;color:#888!important;margin-top:16px}
+@keyframes dialogFade{from{opacity:0}to{opacity:1}}
+@keyframes dialogRise{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+@media(max-width:1050px){.hero-gallery{right:1%;width:42vw;opacity:.88}.hero-in{max-width:58%;padding-right:0}.join-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){
+ .hero{min-height:850px;height:auto;padding:110px 0 40px;align-items:flex-start}
+ .hero-in{max-width:none;padding-top:0;padding-right:0}
+ .hero h1{font-size:clamp(43px,11vw,64px);max-width:100%}
+ .hero .sub{max-width:100%;font-size:15px;margin:20px 0}
+ .hero-gallery{position:relative;right:auto;top:auto;width:90%;height:280px;margin:28px auto 0;opacity:1}
+ .hero-art-main{height:88%;width:39%;right:30%;top:0}
+ .hero-art-top{height:68%;width:31%;right:7%;top:5%}
+ .hero-art-bottom{height:66%;width:30%;left:7%;bottom:0}
+ .hero-gallery-caption{right:8%;bottom:-4px;font-size:8px}
+ .join-heading{display:block}.join-heading>p{margin-top:18px}
+ .join-grid{grid-template-columns:1fr 1fr;gap:10px}
+ .join-card{min-height:310px;padding:17px;border-radius:18px}
+ .join-card h3{font-size:25px}
+ .join-card p{font-size:12px}
+ .event-dialog{padding:10px}
+ .event-dialog-panel{max-height:94vh;border-radius:19px}
+ .event-modal-hero{height:220px}
+ .event-modal-body{padding:0 19px 24px}
+ .event-modal-columns{grid-template-columns:1fr}
+}
+@media(max-width:420px){.join-grid{grid-template-columns:1fr}.join-card{min-height:260px}}
+
+</style>
+<link rel="stylesheet" href="tv.css?v=1">
+<style id="tv-site">
+/* Piel "Ticket vibrante" para la portada */
+:root{--ink:#08091A;--ink2:#0E1028;--ink3:#161833;--line:rgba(255,255,255,.12)}
+body{background:var(--tv-ink)}
+.btn{border-radius:999px;font-weight:800}
+.btn:hover{box-shadow:0 14px 34px rgba(214,255,53,.35)}
+header .wrap.nav{gap:20px}
+nav{background:rgba(8,9,26,.28);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:5px;gap:4px;margin-right:auto}
+nav a{padding:10px 16px;border-radius:999px;font-weight:700;font-size:13px;color:#fff}
+nav a::after{display:none}
+nav a:hover{background:#fff;color:var(--tv-ink)}
+header.scrolled{background:rgba(10,24,140,.82)}
+.hero{background:var(--tv-blue) url(img/tv/blue-wide.webp) center/cover}
+.hero #beams,.hero #stage{display:none}
+.hero::after{background:linear-gradient(0deg,rgba(6,14,90,.9) 0%,rgba(6,14,90,.3) 45%,transparent 75%),url(img/tv/grain.png) 0 0/256px;opacity:1}
+.hero .eyebrow{color:var(--tv-lime)}
+.hero h1{font-family:var(--tv-display);font-weight:900;letter-spacing:-.05em;line-height:.86}
+.hero h1 em{color:var(--tv-lime)}
+.hero .sub{color:#E1E6F5}
+.search{border-radius:999px;padding:6px}
+.search .btn{border-radius:999px}
+.live{color:#D9E0FF}
+.hero-art{border:6px solid #fff;border-radius:26px;box-shadow:0 40px 90px rgba(6,14,90,.55)}
+.hero-gallery-caption{color:#D9E0FF}
+.marq{background:var(--tv-lime);border:0;padding:14px 0}
+.marq span{color:var(--tv-ink);-webkit-text-stroke:0;font-family:var(--tv-display);font-weight:900;font-size:clamp(22px,2.6vw,34px)}
+.marq span::after{color:var(--tv-ink)}
+.marq span:nth-child(3n){color:var(--tv-blue)}
+.h2{font-family:var(--tv-display);font-weight:900}
+.h2 em{color:var(--tv-lime)}
+.tab{border-radius:999px;font-weight:700}
+.tab.on{background:var(--tv-blue);color:#fff;box-shadow:0 8px 24px rgba(18,56,255,.4)}
+.show{border-radius:30px;border:0;aspect-ratio:3/4.1}
+.show:hover{border-color:transparent;box-shadow:0 30px 70px rgba(0,0,0,.6)}
+.show .shade{background:linear-gradient(180deg,rgba(8,9,26,.25),transparent 30%,rgba(8,9,26,.35) 55%,rgba(8,9,26,.95) 90%)}
+.show h3{font-family:var(--tv-display);text-transform:none;font-weight:800;letter-spacing:-.035em;font-size:clamp(26px,2.2vw,32px)}
+.show .tv-icons+h3{margin-top:0}
+.show .tv-icons{margin-top:auto}
+.pill{background:rgba(8,9,26,.55)}
+.off{border-radius:999px;font-size:12px}
+.go{background:var(--tv-lime)}
+.step .n{color:var(--tv-lime)}.step h3{font-family:var(--tv-display);font-weight:900}
+.cat{border-radius:30px;background:linear-gradient(160deg,var(--tv-ink3),var(--tv-ink))}
+.cat h3,.join-card h3,.cta h2{font-family:var(--tv-display);font-weight:900}
+.cat:hover .ar{background:var(--tv-lime)}
+.join-card{border-radius:30px}
+.join-icon{border-radius:12px}
+.cta::before{background:radial-gradient(circle,rgba(18,56,255,.35),rgba(18,56,255,.08) 42%,transparent 66%)}
+.form{border-radius:30px}.form input{border-radius:999px}
+footer{background:radial-gradient(60% 80% at 85% 0%,rgba(91,60,255,.25),transparent 70%),var(--tv-ink)}
+@media(max-width:900px){nav{background:rgba(8,9,26,.96);border-radius:24px}}
+</style>
+<link rel="stylesheet" href="tv-motion.css">
+</head>
+<body class="ready">
+
+<script src="curtain.js?v=8"></script>
+
+<header id="hd">
+  <div class="wrap nav">
+    <a href="#" class="logo" aria-label="tadaa!">tadaa<b>!</b></a>
+    <nav id="nav" aria-label="Navegación principal">
+      <a href="#hoy">Cartelera</a>
+      <a href="#categorias">Experiencias</a>
+      <a href="#como">Cómo funciona</a>
+      <a href="#unete">Únete</a>
+      <a class="mobile-login-link" href="login.html" data-curtain-login>Iniciar sesión</a>
+    </nav>
+    <span class="city"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>CDMX</span>
+    <a href="login.html" class="btn ghost hide-m" data-curtain-login>Iniciar sesión</a>
+    <a href="#hoy" class="btn">Explorar cartelera</a>
+    <button class="burger" id="burger" aria-label="Menú"><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <canvas id="beams" aria-hidden="true"></canvas>
+  <canvas id="stage" aria-hidden="true"></canvas>
+  <div class="wrap hero-in">
+    <div class="eyebrow">Descubre · Reserva · Vive</div>
+    <h1><span><i>¿Qué plan</i></span><span><i><em>hay hoy?</em></i></span></h1>
+    <p class="sub">Conciertos, teatro, cultura y experiencias para vivir más. Accede con tu membresía o los beneficios de tu empresa.</p>
+    <form class="search" id="sf" role="search">
+      <label><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="sq" placeholder="Buscar eventos, artistas o experiencias…" aria-label="Buscar"></label>
+      <label><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><select aria-label="Ciudad"><option>CDMX</option><option>Guadalajara</option><option>Monterrey</option></select></label>
+      <label><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><select id="sd" aria-label="Cuándo"><option value="hoy">Esta noche</option><option value="manana">Mañana</option><option value="proximos">Próximos días</option></select></label>
+      <button class="btn" type="submit">Buscar</button>
+    </form>
+    <div class="live">
+      <span><i class="dot"></i><b id="liveCount">0</b> experiencias publicadas</span>
+      <span>Descubre experiencias <b id="cd">en tu ciudad</b></span>
+      <span>Programación y enlaces <b>oficiales</b></span>
+    </div>
+  </div>
+  <div class="hero-gallery" aria-label="Producciones destacadas de TADAA!">
+    <div class="hero-art hero-art-main"><img src="img/catalogo/el-rey-leon.svg" alt="Arte editorial de El Rey León"></div>
+    <div class="hero-art hero-art-top"><img src="img/catalogo/matilda.svg" alt="Arte editorial de Matilda"></div>
+    <div class="hero-art hero-art-bottom"><img src="img/catalogo/buena-vista.svg" alt="Arte editorial de Buena Vista Social Club"></div>
+    <div class="hero-gallery-caption"><span class="hero-live-dot"></span> TEATRO · MUSICALES · EXPERIENCIAS</div>
+  </div>
+  <div class="scroll">DESLIZA</div>
+</section>
+
+<div class="marq" aria-hidden="true"><div id="mq"></div></div>
+
+<!-- CARTELERA REAL POSTGRESQL -->
+<section class="sec" id="hoy">
+  <div class="wrap">
+    <div class="board-h">
+      <div class="rv"><div class="eyebrow">En cartelera</div><h2 class="h2" style="margin-top:16px">Lo que se está<br>viviendo <em>ahora.</em></h2>
+        <p class="mut">Eventos y experiencias publicados por aliados de TADAA!.</p></div>
+      <div class="arrows rv"><button class="arr" id="pv" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M20 12H4M10 6l-6 6 6 6"/></svg></button><button class="arr" id="nx" aria-label="Siguiente"><svg viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></svg></button></div>
+    </div>
+    <div class="tabs rv" id="tabs">
+      <button class="tab on" data-t="hoy">Esta noche</button>
+      <button class="tab" data-t="manana">Mañana</button>
+      <button class="tab" data-t="proximos">Próximos días</button>
+      <span class="filt" id="filt"><span id="filtx"></span><button id="filtc" aria-label="Quitar filtro">✕</button></span>
+    </div>
+    <div class="railwrap"><div class="rail" id="rail"></div></div>
+    <div class="none" id="none"><b>Sin funciones por ahora</b>Prueba con otra búsqueda o activa tus alertas de último minuto.</div>
+    
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section class="sec" id="como" style="padding-top:60px">
+  <div class="wrap">
+    <div class="rv" style="max-width:720px"><div class="eyebrow">Cómo funciona</div><h2 class="h2" style="margin-top:16px">Del “¿hacemos algo?” a tu butaca, <em>en minutos.</em></h2></div>
+    <div class="how" style="margin-top:40px">
+      <div class="steps" id="steps">
+        <div class="step on" data-s="0"><div class="n">01 · DESCUBRE</div><h3>Encuentra qué hay esta noche.</h3><p>Teatro, conciertos, planes y experiencias cerca de ti, ordenados por lo que empieza primero y por lo mejor que se está moviendo.</p></div>
+        <div class="step" data-s="1"><div class="n">02 · RESERVA</div><h3>Elige tus lugares y pide disponibilidad.</h3><p>Selecciona zona y cantidad. Sin pagar todavía: nosotros confirmamos que los lugares sigan libres.</p></div>
+        <div class="step" data-s="2"><div class="n">03 · PASE PROVISIONAL</div><h3>Reserva y recibe seguimiento de tu solicitud.</h3><p>El sistema registra tu reserva y confirma la disponibilidad antes de emitir cualquier entrada.</p><span class="tag"><i></i>En revisión de disponibilidad</span></div>
+        <div class="step" data-s="3"><div class="n">04 · CONFIRMA Y VIVE</div><h3>Te avisamos, pagas y listo.</h3><p>Cuando se confirma, te notificamos al instante. Pagas y tus boletos digitales viven en tu celular, listos para entrar.</p></div>
+      </div>
+      <div class="pw"><div class="phone" id="phone">
+        <div class="stt"><span>9:41</span><span>●●● ▮</span></div>
+        <!-- 1 -->
+        <div class="sc dark on" data-s="0"><span class="logo">tadaa<b>!</b></span>
+          <div class="mini-s">⌕  Buscar eventos, artistas o experiencias…</div>
+          <div class="mini-c"><span>Esta noche</span><span>Teatro</span><span>Conciertos</span></div>
+          <div class="mh">Recomendados para ti <small>Ver todos ›</small></div>
+          <div class="mc" style="--a:#ff9a2e;--b:#7a2b00"><i>-34%</i><b>Teatro en vivo</b><small>Hoy 20:00 · Teatro Telcel</small></div>
+          <div class="mc" style="--a:#ff4fb0;--b:#4a1a9a"><i>-33%</i><b>Concierto en vivo</b><small>Hoy 21:00 · Estadio GNP</small></div>
+          <div class="tbar"><span>● Inicio</span><span>Explorar</span><span>Mis reservas</span><span>Perfil</span></div></div>
+        <!-- 2 -->
+        <div class="sc light" data-s="1"><div style="font-size:11px;color:#777;margin-top:6px">‹ Volver</div>
+          <h4>Noche musical</h4><div class="meta">Teatro de la Ciudad · Hoy 20:00</div>
+          <div class="zone"><div><b>General</b><small>Desde</small></div><div class="qty"><i>−</i>0<i>+</i></div></div>
+          <div class="zone"><div><b>Preferente</b><small>$1,190 c/u</small></div><div class="qty"><i>−</i>2<i class="pl">+</i></div></div>
+          <div class="zone"><div><b>VIP</b><small>$2,100 c/u</small></div><div class="qty"><i>−</i>0<i>+</i></div></div>
+          <div class="total"><span>Total estimado</span><b>$2,380</b></div>
+          <div class="pbtn">Solicitar disponibilidad</div></div>
+        <!-- 3 -->
+        <div class="sc light" data-s="2"><div class="band y">PASE PROVISIONAL<small>En revisión de disponibilidad</small></div>
+          <h4>Noche musical</h4><div class="meta">Teatro de la Ciudad · 2 boletos · Preferente</div>
+          <div class="qr" style="display:grid;place-items:center;font-size:11px;font-weight:800;text-align:center;color:#555">ACCESO DIGITAL</div><div class="note">Folio TD-3K9L2P</div>
+          <div class="chip2 y"><i></i>En revisión · te avisamos en cuanto confirmemos</div>
+          <div class="pbtn dk" style="margin-top:auto">Ver estatus de mi reserva</div></div>
+        <!-- 4 -->
+        <div class="sc light" data-s="3"><div class="notif"><span class="logo">t!</span><div><b>¡Tus boletos están listos!</b>Wicked · Teatro de la Ciudad. Ver en app.</div></div>
+          <div class="band g" style="margin-top:92px">BOLETO CONFIRMADO<small>Pago aprobado ✓</small></div>
+          <h4>Noche musical</h4><div class="meta">Hoy 20:00 · Preferente · 2 boletos</div>
+          <div class="qr" style="display:grid;place-items:center;font-size:11px;font-weight:800;text-align:center;color:#555">ENTRADA DIGITAL</div>
+          <div class="chip2 g"><i></i>Entrada válida · disfruta tu función</div>
+          <div class="pbtn dk" style="margin-top:auto">Agregar a Apple Wallet</div></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORÍAS -->
+<section class="sec" id="categorias" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="rv" style="max-width:760px"><div class="eyebrow">Experiencias</div><h2 class="h2" style="margin-top:16px">Hay un plan para <em>cada ánimo.</em></h2></div>
+    <div class="cats" id="catgrid">
+      <button class="cat rv" data-c="Teatro"><span class="ar"><svg viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span><svg viewBox="0 0 24 24"><path d="M3 5h10v7a5 5 0 01-10 0zM8 9h.01M5.5 9h.01M6 13q2 1.2 4 0"/><path d="M13 8h8v7a5 5 0 01-8.6 3.4"/></svg><h3>Teatro</h3><p><i class="dot"></i>Musicales, drama y comedia</p></button>
+      <button class="cat rv" data-c="Conciertos" style="--d:.08s"><span class="ar"><svg viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><h3>Conciertos</h3><p><i class="dot"></i>Estadios, foros y clubes</p></button>
+      <button class="cat rv" data-c="Experiencias" style="--d:.16s"><span class="ar"><svg viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span><svg viewBox="0 0 24 24"><path d="M3 9V6a1 1 0 011-1h16a1 1 0 011 1v3a3 3 0 000 6v3a1 1 0 01-1 1H4a1 1 0 01-1-1v-3a3 3 0 000-6z"/><path d="M14 5v14" stroke-dasharray="2 2.4"/></svg><h3>Planes y experiencias</h3><p><i class="dot"></i>Lo que no sabías que querías</p></button>
+      <button class="cat rv" data-c="Familia"><span class="ar"><svg viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6M15 14.5c3 0 6 1.5 6 5"/></svg><h3>Familia</h3><p><i class="dot"></i>Para todas las edades</p></button>
+      <button class="cat rv" data-c="Gastronomía" style="--d:.08s"><span class="ar"><svg viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span><svg viewBox="0 0 24 24"><path d="M7 3v8M4 3v5a3 3 0 006 0V3M7 11v10M17 21V3c-3 2-4 5-4 8h4"/></svg><h3>Gastronomía</h3><p><i class="dot"></i>Mesas, catas y maridajes</p></button>
+      <button class="cat rv" data-c="Cultura" style="--d:.16s"><span class="ar"><svg viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span><svg viewBox="0 0 24 24"><path d="M3 10l9-6 9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg><h3>Cultura</h3><p><i class="dot"></i>Ballet, museos y más</p></button>
+    </div>
+  </div>
+</section>
+
+<!-- MÁS QUE BOLETOS -->
+<section class="sec" style="border-top:1px solid var(--line)">
+  <div class="wrap more">
+    <div class="rv"><div class="eyebrow">Más que boletos</div><h2 class="h2" style="margin-top:16px">Experiencias que <em>te conectan.</em></h2><p class="mut" style="margin-top:22px;font-size:17px;max-width:420px">Descubre nuevas formas de vivir tu ciudad: teatro, música, cultura y experiencias.</p></div>
+    <div class="ben rv" style="--d:.1s">
+      <div><svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><h4>Descubrimiento editorial</h4><p>Selecciones y producciones que vale la pena conocer.</p></div>
+      <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 15.5l7-7M9 9h.01M15 15h.01"/></svg><h4>Beneficios y campañas</h4><p>Conoce las promociones publicadas por nuestros aliados.</p></div>
+      <div><svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg><h4>Información de acceso</h4><p>Consulta recinto, programación y enlaces de boletaje oficial.</p></div>
+      <div><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9-9a5 5 0 019-2.5A5 5 0 0121 11c-2 4.6-9 9-9 9z"/></svg><h4>Tu ciudad, más viva</h4><p>Descubre planes que no sabías que estaban pasando.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ÚNETE A TADAA! -->
+<section class="sec join-section" id="unete">
+  <div class="wrap">
+    <div class="join-heading rv">
+      <div><div class="eyebrow">FORMA PARTE DE TADAA!</div>
+        <h2 class="h2">Hay una forma de entrar<br><em>para cada quien.</em></h2>
+      </div>
+      <p class="mut">Disfruta beneficios, activa un convenio o conecta tus producciones con nuevas audiencias.</p>
+    </div>
+    <div class="join-grid">
+      <a class="join-card join-member rv" href="login.html?register=1&mode=membership">
+        <img src="img/catalogo/matilda.svg" alt="" loading="lazy">
+        <span class="join-icon">✦</span><span class="join-kicker">PARA TI</span>
+        <h3>Quiero ser<br>miembro</h3><p>Accede a experiencias y beneficios por $100 MXN al mes.</p>
+        <span class="join-link">Conocer membresía <b>↗</b></span>
+      </a>
+      <a class="join-card join-company-user rv" href="login.html?register=1&mode=company">
+        <img src="img/catalogo/buena-vista.svg" alt="" loading="lazy">
+        <span class="join-icon">⌂</span><span class="join-kicker">TENGO UN CONVENIO</span>
+        <h3>Pertenezco a<br>una empresa</h3><p>Activa los beneficios de tu organización con tu ID de colaborador.</p>
+        <span class="join-link">Validar mi acceso <b>↗</b></span>
+      </a>
+      <a class="join-card join-business rv" href="partner.html?slug=general-cdmx-demo">
+        <img src="img/catalogo/mentiras.svg" alt="" loading="lazy">
+        <span class="join-icon">◇</span><span class="join-kicker">PARA ORGANIZACIONES</span>
+        <h3>Tengo una<br>empresa</h3><p>Acerca experiencias y beneficios a tus colaboradores.</p>
+        <span class="join-link">Explorar alianzas <b>↗</b></span>
+      </a>
+      <a class="join-card join-producer rv" href="partner.html?slug=productores-teatro-demo">
+        <img src="img/catalogo/agosto.svg" alt="" loading="lazy">
+        <span class="join-icon">✧</span><span class="join-kicker">PARA LA INDUSTRIA ESCÉNICA</span>
+        <h3>Soy productor<br>teatral</h3><p>Presenta tus obras, temporadas y próximos estrenos.</p>
+        <span class="join-link">Presentar mi producción <b>↗</b></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sec cta" id="alertas">
+  <div class="wrap box">
+    <div class="rv"><div class="eyebrow">Novedades TADAA!</div><h2 class="h2" style="margin-top:16px">Que el telón <em>te encuentre.</em></h2>
+      <p class="l">Registra las categorías que te interesan y mantente al tanto de las novedades y producciones que se incorporan a TADAA!.</p>
+      <div class="stores"><a href="login.html?register=1" class="store"><svg viewBox="0 0 24 24"><path d="M16.4 12.6c0-2.4 2-3.5 2.1-3.6-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9s-1.9-.9-3.200-.8c-1.600 0-3.100 1-4 2.400-1.700 3-.4 7.300 1.200 9.700.8 1.200 1.800 2.500 3 2.400 1.200 0 1.700-.8 3.100-.8s1.900.8 3.200.8 2.100-1.200 2.900-2.300c.9-1.300 1.300-2.600 1.300-2.700-.1 0-2.600-1-2.600-4.100zM14 5.500c.6-.8 1.100-1.900 1-3-1 0-2.100.6-2.800 1.400-.6.7-1.100 1.800-1 2.900 1.100.1 2.200-.5 2.800-1.300z"/></svg><span><small>Descárgala en</small><b>Regístrate</b></span></a>
+      <a href="login.html?register=1" class="store"><svg viewBox="0 0 24 24"><path d="M4 3.500v17c0 .5.5.8.9.5l15-8.500c.4-.2.4-.8 0-1l-15-8.500c-.4-.3-.9 0-.9.5z"/></svg><span><small>Disponible en</small><b>Conoce TADAA!</b></span></a></div></div>
+    <form class="form rv" id="af" style="--d:.12s"><h4>¿Qué te gustaría que te avisemos?</h4>
+      <div class="fchips" id="fc"><button type="button" class="on">Teatro</button><button type="button" class="on">Conciertos</button><button type="button">Familia</button><button type="button">Gastronomía</button><button type="button">Cultura</button><button type="button">Experiencias</button></div>
+      <input id="em" type="email" placeholder="Tu correo electrónico" required aria-label="Correo">
+      <button class="btn" type="submit">Activar alertas <svg viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></svg></button>
+      <div class="msg" id="fm" role="status"></div></form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fcols">
+      <div><a href="#" class="logo" style="padding:0">tadaa<b>!</b></a><p>Tu próxima gran experiencia comienza aquí.</p>
+        <div class="soc"><a href="login.html" aria-label="Acceder a TADAA!"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3zm5 3.500A4.500 4.500 0 1112 16.500 4.500 4.500 0 0112 7.500zm0 2A2.500 2.500 0 1014.500 12 2.500 2.500 0 0012 9.500zM17.500 6a1 1 0 11-1 1 1 1 0 011-1z"/></svg></a>
+        <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16 3c.3 2.300 1.700 3.700 4 3.900v3.100c-1.500 0-2.900-.5-4-1.300v6.300a6 6 0 11-6-6c.3 0 .7 0 1 .1v3.200a2.900 2.900 0 10 2 2.700V3z"/></svg></a>
+        <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.200 2H21l-6.500 7.400L22 22h-6l-4.700-6.200L5.900 22H3l7-8L2.500 2h6.100l4.200 5.600zm-1 18h1.600L7.900 3.900H6.200z"/></svg></a></div></div>
+      <div><h5>EXPLORAR</h5><a href="#hoy">Esta noche</a><a href="#categorias">Experiencias</a><a href="#como">Cómo funciona</a><a href="#alertas">Alertas</a></div>
+      <div><h5>TADAA!</h5><a href="#como">Nosotros</a><a href="partner.html?slug=productores-teatro-demo">Para productores</a><a href="#">Blog</a><a href="partner.html#solicitud">Contacto</a></div>
+      <div><h5>AYUDA</h5><a href="#">Preguntas frecuentes</a><a href="#">Política de reembolsos</a><span title="Documento legal en preparación">Términos y condiciones</span><span title="Documento legal en preparación">Aviso de privacidad</span></div>
+    </div>
+    <div class="legal"><span>© 2026 TADAA! Todos los derechos reservados.</span><span>Experiencias que te mueven.</span></div>
+  </div>
+  <div class="big" aria-hidden="true">tadaa<b>!</b></div>
+</footer>
+
+<div class="event-dialog" id="eventDialog" hidden aria-hidden="true">
+  <div class="event-dialog-backdrop" data-event-close></div>
+  <section class="event-dialog-panel" role="dialog" aria-modal="true" aria-labelledby="eventDialogTitle">
+    <button class="event-dialog-close" type="button" aria-label="Cerrar" data-event-close>×</button>
+    <div id="eventDialogContent"></div>
+  </section>
+</div>
+<div class="toast" id="toast" role="status"><i></i><span id="tt"></span></div>
+
+<script src="api.js"></script><script src="site-live.js?v=8"></script>
+
+
+<script src="tv-motion.js" defer></script>
+</body>
+</html>

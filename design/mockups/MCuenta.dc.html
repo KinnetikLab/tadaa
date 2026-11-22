@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Tadaa! móvil · Mi cuenta</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+.tx{background:#1238FF url(/_blob/c238803f93edbcfca0600e4470e86b80) center top/cover}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #08091A; font-family: 'Plus Jakarta Sans', sans-serif; color: #FFFFFF">
+
+  <section class="tx" style="position: relative; height: 392px; border-radius: 0 0 40px 40px; overflow: hidden">
+    <div style="position: absolute; left: 20px; right: 20px; top: 54px; display: flex; justify-content: space-between; align-items: center">
+      <span style="display: flex; align-items: center; gap: 6px; background: rgba(8,9,26,.3); backdrop-filter: blur(8px); border-radius: 99px; padding: 8px 12px; font-size: 11px; font-weight: 700">
+        <span style="width: 7px; height: 7px; border-radius: 50%; background: #D6FF35"></span>{{access}}
+      </span>
+      <button aria-label="Ajustes" style="width: 44px; height: 44px; border-radius: 50%; border: 0; background: #08091A; display: grid; place-items: center">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+      </button>
+    </div>
+
+    <svg viewBox="0 0 300 160" width="300" height="160" aria-hidden="true" style="position: absolute; left: 45px; top: 112px">
+      <path d="M20 150 A130 130 0 0 1 280 150" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M20 150 A130 130 0 0 1 150 20" fill="none" stroke="#D6FF35" stroke-width="10" stroke-linecap="round" stroke-dasharray="170 400"/>
+      <circle cx="150" cy="20" r="0" fill="#D6FF35"/>
+    </svg>
+    <span style="position: absolute; left: 40px; top: 262px; font-size: 12px; font-weight: 700; color: #D9E0FF">0</span>
+    <span style="position: absolute; left: 72px; top: 160px; font-size: 12px; font-weight: 700; color: #D9E0FF">2</span>
+    <span style="position: absolute; left: 186px; top: 106px; font-size: 12px; font-weight: 700; color: #D9E0FF">6</span>
+    <span style="position: absolute; right: 36px; top: 262px; font-size: 12px; font-weight: 700; color: #D9E0FF">16</span>
+
+    <div style="position: absolute; left: 0; right: 0; top: 172px; display: flex; flex-direction: column; align-items: center">
+      <span style="position: relative; width: 104px; height: 104px; border-radius: 50%; border: 4px solid #FFFFFF; background: #D6FF35; display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 800; font-size: 44px; color: #08091A; box-shadow: 0 16px 40px rgba(8,9,26,.35)">{{ini}}</span>
+      <span style="margin-top: -14px; position: relative; background: #FFFFFF; color: #08091A; border-radius: 99px; padding: 5px 14px; font-size: 12px; font-weight: 800">Nivel {{level}}</span>
+      <h1 style="margin: 10px 0 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 26px">{{name}}</h1>
+      <span style="font-size: 12px; color: #D9E0FF">{{nextLine}}</span>
+    </div>
+  </section>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 16px 16px 0; background: #161833; border-radius: 22px; padding: 14px 0">
+    <span style="display: flex; flex-direction: column; align-items: center; gap: 2px; border-right: 1px solid #2A2D52"><b style="font-family: Outfit, sans-serif; font-size: 22px">{{plans}}</b><span style="font-size: 11px; color: #AEB6D6">Planes</span></span>
+    <span style="display: flex; flex-direction: column; align-items: center; gap: 2px; border-right: 1px solid #2A2D52"><b style="font-family: Outfit, sans-serif; font-size: 22px">{{xp}}</b><span style="font-size: 11px; color: #AEB6D6">XP</span></span>
+    <span style="display: flex; flex-direction: column; align-items: center; gap: 2px"><b style="font-family: Outfit, sans-serif; font-size: 22px; color: #D6FF35">{{golden}}</b><span style="font-size: 11px; color: #AEB6D6">Golden</span></span>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 18px 20px 10px">
+    <h2 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 20px">Badges <span style="color: #8C93B5; font-weight: 600; font-size: 14px">{{badgeCount}}</span></h2>
+    <a href="MLogro.dc.html" style="font-size: 12px; font-weight: 700; color: #D6FF35">Ver todos</a>
+  </div>
+  <div style="display: flex; gap: 10px; padding: 0 20px; overflow: hidden">
+    <sc-for list="{{badges}}" as="b" hint-placeholder-count="5">
+      <div style="flex: 0 0 64px; display: flex; flex-direction: column; align-items: center; gap: 6px">
+        <span style="{{b.shape}}">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{b.ink}}" stroke-width="2" aria-hidden="true"><path d="{{b.icon}}"/></svg>
+        </span>
+        <span style="font-size: 10px; font-weight: 700; text-align: center; line-height: 1.2; color: {{b.label}}">{{b.name}}</span>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="margin: 16px 16px 0; display: flex; flex-direction: column; gap: 10px">
+    <sc-for list="{{tiers}}" as="t" hint-placeholder-count="2">
+      <div style="border-radius: 22px; overflow: hidden; border: 1px solid #2A2D52">
+        <button onClick="{{t.toggle}}" aria-expanded="{{t.open}}" style="{{t.head}}">
+          <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px">
+            <b style="font-family: Outfit, sans-serif; font-size: 20px">{{t.name}}</b>
+            <span style="font-size: 12px">{{t.sub}}</span>
+          </span>
+          <span style="font-size: 22px; font-weight: 400">{{t.sign}}</span>
+        </button>
+        <sc-if value="{{t.open}}" hint-placeholder-val="{{ true }}">
+          <ul style="list-style: none; margin: 0; padding: 4px 16px 8px; background: #0E1028">
+            <sc-for list="{{t.perks}}" as="p" hint-placeholder-count="3">
+              <li style="display: flex; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 1px solid #1D2044; font-size: 14px">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF4F93" stroke-width="2.2" aria-label="Bloqueado" role="img"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>{{p.text}}
+              </li>
+            </sc-for>
+          </ul>
+        </sc-if>
+      </div>
+    </sc-for>
+  </div>
+
+  <nav aria-label="Navegación principal" style="position: absolute; left: 20px; right: 20px; bottom: 26px; height: 68px; border-radius: 99px; background: rgba(22,24,51,.92); backdrop-filter: blur(14px); border: 1px solid #2A2D52; display: flex; align-items: center; justify-content: space-between; padding: 0 10px">
+    <a href="Main.dc.html" aria-label="Inicio" style="width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" aria-hidden="true"><path d="M3 11 12 4l9 7v9h-6v-6H9v6H3z"/></svg></a>
+    <a href="MExplorar.dc.html" aria-label="Explorar" style="width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+    <a href="MWallet.dc.html" aria-label="Mi Wallet" style="width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" aria-hidden="true"><path d="M3 7h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4z"/></svg></a>
+    <a href="MRush.dc.html" aria-label="Now!" style="width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></a>
+    <a href="MCuenta.dc.html" aria-label="Mi cuenta" style="height: 50px; padding: 0 18px; border-radius: 99px; background: #D6FF35; color: #08091A; display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 13px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Cuenta</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { open: 'asiduo' }; }
+  renderVals() {
+    const shape = (bg, on) => 'width: 60px; height: 66px; display: grid; place-items: center; background: ' + bg + '; border-radius: 18px 18px 30px 30px; ' + (on ? 'box-shadow: 0 0 0 3px #08091A, 0 0 0 5px ' + bg + ';' : 'opacity: .55;');
+    const badges = [
+      { name: 'Primera función', bg: '#D6FF35', on: true, icon: 'M5 4h14v6a7 7 0 0 1-14 0zM9 21h6M12 17v4' },
+      { name: 'Noche de rock', bg: '#FF4F93', on: true, icon: 'M9 18V5l12-2v13M9 18a3 3 0 1 1-3-3 3 3 0 0 1 3 3zM21 16a3 3 0 1 1-3-3 3 3 0 0 1 3 3z' },
+      { name: 'Teatrero', bg: '#7FA0FF', on: true, icon: 'M4 4h16v6a8 8 0 0 1-16 0zM9 9h.01M15 9h.01M9 13a4 4 0 0 0 6 0' },
+      { name: 'Now! veloz', bg: '#3A3E66', on: false, icon: 'M13 2 4 14h7l-1 8 9-12h-7z' },
+      { name: 'Golden Ticket', bg: '#3A3E66', on: false, icon: 'M3 7h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4z' }
+    ].map(b => ({ ...b, shape: shape(b.bg, b.on), ink: b.on ? '#08091A' : '#AEB6D6', label: b.on ? '#FFFFFF' : '#8C93B5' }));
+    const data = [
+      { id: 'asiduo', name: 'Asiduo', sub: 'Te faltan 2 planes para desbloquearlo', bg: 'linear-gradient(110deg, #1238FF, #5B3CFF)', fg: '#FFFFFF',
+        perks: [['3% de cashback en cada compra', false], ['Inscripción anticipada a Now! (30 min antes)', false], ['2 entradas extra al Golden Ticket', false]] },
+      { id: 'leyenda', name: 'Leyenda', sub: '16 planes al año', bg: 'linear-gradient(110deg, #D6FF35, #9BE15D)', fg: '#08091A',
+        perks: [['5% de cashback', false], ['Invitaciones a ensayos y preestrenos', false], ['Atención prioritaria por WhatsApp', false]] }
+    ];
+    const tiers = data.map(t => {
+      const open = this.state.open === t.id;
+      return { name: t.name, sub: t.sub, open, sign: open ? '−' : '+',
+        toggle: () => this.setState({ open: open ? '' : t.id }),
+        head: 'width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border: 0; font-family: inherit; text-align: left; background: ' + t.bg + '; color: ' + t.fg + ';',
+        perks: t.perks.map(([text]) => ({ text })) };
+    });
+    return { badges, tiers };
+  }
+}
+</script>
+</body>
+</html>

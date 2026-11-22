@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Tadaa! móvil · Mi Wallet</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #08091A; font-family: 'Plus Jakarta Sans', sans-serif; color: #FFFFFF">
+
+  <header style="padding: 58px 20px 0; display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <h1 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 34px; letter-spacing: -1px">Mi Wallet</h1>
+      <span style="font-size: 12px; font-weight: 700; color: #AEB6D6">{{countLabel}}</span>
+    </div>
+    <div role="tablist" aria-label="Filtrar" style="display: flex; gap: 6px; background: #161833; border-radius: 99px; padding: 5px">
+      <sc-for list="{{filters}}" as="t"><button role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button></sc-for>
+    </div>
+  </header>
+
+  <div style="{{stackStyle}}">
+    <sc-for list="{{stack}}" as="c">
+    <a href="MPase.dc.html" style="{{c.style}}">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <span style="{{c.chipStyle}}">{{c.chip}}</span>
+        <span style="font-size: 11px; opacity: .8">{{c.folio}}</span>
+      </div>
+      <div style="font-family: Outfit, sans-serif; font-weight: 800; font-size: 22px; margin-top: 8px">{{c.title}}</div>
+    </a>
+    </sc-for>
+    <sc-for list="{{front}}" as="f">
+    <a href="MPase.dc.html" style="{{f.style}}">
+      <div style="padding: 18px 20px 16px; display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <span style="font-size: 10px; font-weight: 800; letter-spacing: .06em; {{f.chipStyle}}">{{f.chip}}</span>
+          <span style="font-size: 11px">{{f.folio}}</span>
+        </div>
+        <div style="display: flex; gap: 14px; align-items: center">
+          <img src="{{f.img}}" alt="" style="width: 84px; height: 84px; border-radius: 18px; object-fit: cover">
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <span style="font-family: Outfit, sans-serif; font-weight: 800; font-size: 24px; line-height: 1">{{f.title}}</span>
+            <span style="font-size: 12px">{{f.date}}</span>
+            <span style="font-size: 12px; font-weight: 700">{{f.zone}}</span>
+          </div>
+        </div>
+      </div>
+      <div style="position: relative; border-top: 2px dashed rgba(8,9,26,.3)">
+        <span style="position: absolute; left: -11px; top: -11px; width: 22px; height: 22px; border-radius: 50%; background: #08091A"></span>
+        <span style="position: absolute; right: -11px; top: -11px; width: 22px; height: 22px; border-radius: 50%; background: #08091A"></span>
+      </div>
+      <div style="padding: 14px 20px 18px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+          <span style="display: flex; flex-direction: column"><span style="font-size: 10px; opacity: .7">Recinto</span><span style="font-size: 12px; font-weight: 800">{{f.venue}}</span></span>
+          <span style="display: flex; flex-direction: column"><span style="font-size: 10px; opacity: .7">Estado</span><span style="font-size: 12px; font-weight: 800">{{f.state}}</span></span>
+          <span style="display: flex; flex-direction: column"><span style="font-size: 10px; opacity: .7">Asiento</span><span style="font-size: 12px; font-weight: 800">{{f.seat}}</span></span>
+        </div>
+        <span style="height: 52px; border-radius: 99px; background: #08091A; color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 800; font-size: 14px">{{f.cta}}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6FF35" stroke-width="2.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </div>
+    </a>
+    </sc-for>
+    <sc-if value="{{empty}}">
+      <div style="border-radius: 28px; background: #161833; border: 1px solid #2A2D52; padding: 28px 22px; text-align: center"><div style="font-family: Outfit, sans-serif; font-weight: 800; font-size: 22px">Tu wallet está vacía</div><p style="color: #AEB6D6; font-size: 13px; margin: 8px 0 16px">Cuando compres o solicites un plan, aquí vive tu pase con QR dinámico.</p><a href="MExplorar.dc.html" style="display: inline-flex; height: 48px; align-items: center; padding: 0 22px; border-radius: 99px; background: #D6FF35; color: #08091A; font-weight: 800; font-size: 14px">Explorar cartelera</a></div>
+    </sc-if>
+  </div>
+  <p style="position: relative; margin: 18px 20px 120px; font-size: 10px; line-height: 1.5; color: #8C93B5; text-align: center">Los pases de Tadaa! son de seguimiento. Los accesos oficiales los entrega cada proveedor.</p>
+  <nav aria-label="Navegación principal" style="position: absolute; left: 20px; right: 20px; bottom: 26px; height: 68px; border-radius: 99px; background: rgba(8,9,26,.92); backdrop-filter: blur(14px); display: flex; align-items: center; justify-content: space-between; padding: 0 10px; box-shadow: 0 18px 40px rgba(8,9,26,.3)">
+    <a href="Main.dc.html" aria-label="Inicio" style="width: 50px; height: 50px; border-radius: 50%; color: #FFFFFF; display: grid; place-items: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 11 12 4l9 7v9h-6v-6H9v6H3z"/></svg></a>
+    <a href="MExplorar.dc.html" aria-label="Explorar" style="width: 50px; height: 50px; border-radius: 50%; color: #FFFFFF; display: grid; place-items: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+    <a href="MWallet.dc.html" aria-label="Wallet" style="height: 50px; padding: 0 18px; border-radius: 99px; background: #D6FF35; color: #08091A; display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 13px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 7h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4z"/></svg>Wallet</a>
+    <a href="MRush.dc.html" aria-label="Now!" style="width: 50px; height: 50px; border-radius: 50%; color: #FFFFFF; display: grid; place-items: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></a>
+    <a href="MCuenta.dc.html" aria-label="Cuenta" style="width: 50px; height: 50px; border-radius: 50%; color: #FFFFFF; display: grid; place-items: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
