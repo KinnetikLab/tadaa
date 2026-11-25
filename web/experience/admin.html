@@ -1,31 +1,324 @@
-<!doctype html><html lang="es"><head>
-<base href="/experience/"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TADAA! Studio — Administración</title><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
-:root{--blue:#1238FF;--navy:#08091A;--lime:#D6FF35;--bg:#EEF1F7;--ink:#08091A;--muted:#5A6178;--line:#D5DBEA;--white:#fff;--pink:#FF4F93;--font:'Plus Jakarta Sans',system-ui,sans-serif;--display:'Outfit',var(--font)}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:105px}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font)}a{color:var(--blue);text-decoration:none}a:hover{opacity:.82}
-header{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px clamp(18px,3vw,44px);background:var(--navy);color:#fff;box-shadow:0 8px 28px #08091a22}header .logo{font-family:var(--display);font-size:29px;font-weight:800;letter-spacing:-.07em}header .logo b{color:var(--lime)}header span:last-child{font-size:12px;color:#cbd1e5}header a{color:#fff}
-main{max-width:1760px;margin:0 auto;padding:28px clamp(16px,3vw,42px) 80px}h1,h2,h3,h4{font-family:var(--display);letter-spacing:-.045em;color:var(--ink)}h1{font-size:clamp(36px,4.4vw,58px);line-height:.98;margin:7px 0 14px}h2{font-size:23px;margin:0 0 17px}h3{font-size:19px}p{color:var(--muted);line-height:1.6}.eyebrow{font-size:11px;font-weight:800;letter-spacing:.16em;color:var(--blue);text-transform:uppercase}
-#auth{max-width:760px;margin:8vh auto;padding:clamp(24px,4vw,48px);background:#fff;border:1px solid var(--line);border-radius:30px;box-shadow:0 20px 70px #15265b12}#auth .card{max-width:520px!important;margin-top:26px;padding:24px;background:#f7f8fc;border:1px solid var(--line);border-radius:22px}#auth h1{max-width:650px}
-#workspace{display:block}#workspace>.eyebrow,#workspace>h1,#stats,#workspace>.notice{max-width:1500px}#workspace>.eyebrow{margin-top:6px}#workspace>h1{margin-bottom:24px}
-#stats,.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:13px;margin:18px 0}#stats .stat,.stats .stat{display:flex;flex-direction:column;align-items:flex-start;gap:7px;min-height:112px;padding:19px;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 5px 18px #101c4610}#stats .stat span,.stats .stat span{font-size:12px;color:var(--muted);font-weight:700;text-transform:capitalize}#stats .stat b,.stats .stat b{font-family:var(--display);font-size:34px;line-height:1;color:var(--navy)}
-.notice{padding:16px 19px;background:#e7edff;border:1px solid #c8d4ff;color:#25366f;border-radius:18px;margin:16px 0;line-height:1.6}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}.card{min-width:0;padding:22px;background:#fff;border:1px solid var(--line);border-radius:25px;box-shadow:0 7px 24px #101c460c}.card h2{display:flex;align-items:center;gap:10px}.card h2:before{content:'';width:7px;height:25px;border-radius:9px;background:var(--blue)}.card:nth-child(4n+1) h2:before{background:var(--lime)}.card p{font-size:13px}.field{display:grid;gap:7px;margin:12px 0}.field label{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.04em}.field input,.field select,.field textarea{width:100%;min-width:0;background:#f8f9fc;border:1px solid var(--line);padding:12px 14px;color:var(--ink);border-radius:12px;font:500 13px var(--font);outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px #1238ff16}.field select option{background:#fff}.field textarea{min-height:90px;resize:vertical}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;padding:13px 19px;background:var(--navy);color:#fff;font-weight:800;border-radius:99px;cursor:pointer;font:800 12px var(--font);transition:transform .18s,box-shadow .18s}.btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px #08091a22}.btn.ghost{color:var(--ink);background:#f1f3f9;border:1px solid var(--line)}.btn:disabled{opacity:.45;cursor:not-allowed}.chip{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;background:#f2f4fa;border:1px solid var(--line);border-radius:99px;font-size:11px;color:var(--muted);font-weight:700;margin:5px 5px 5px 0}.chip input{accent-color:var(--blue)}.hidden{display:none!important}.list{margin:12px 0;display:grid;gap:8px}.item{padding:12px 14px;background:#f7f8fc;border:1px solid #e5e9f3;border-radius:13px;font-size:13px;color:var(--ink)}.item small{color:var(--muted);display:block;margin-top:4px}.panel{margin-top:18px;padding:24px;background:#fff;border:1px solid var(--line);border-radius:25px;box-shadow:0 7px 24px #101c460c}.panel h2{margin-bottom:15px}.panel .two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.panel form{padding:18px;background:#f8f9fc;border:1px solid var(--line);border-radius:18px;margin:12px 0}.panel .stat{background:#f8f9fc;border-color:var(--line)}#ticketingStats .stats{margin:0 0 18px}#flash{position:fixed;right:22px;bottom:22px;max-width:min(420px,calc(100vw - 44px));background:var(--navy);color:#fff;border:1px solid var(--lime);padding:17px 20px;border-radius:17px;display:none;z-index:60;box-shadow:0 12px 40px #08091a33}.good{color:#087b45}.alert{color:#b42318}.studio-nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 22px;padding:10px;background:#fff;border:1px solid var(--line);border-radius:18px;position:sticky;top:72px;z-index:20;box-shadow:0 5px 18px #101c460b}.studio-nav a{padding:10px 14px;border-radius:99px;color:var(--muted);font-size:11px;font-weight:800}.studio-nav a:hover{background:#eef1ff;color:var(--blue)}.studio-nav a.primary{background:var(--blue);color:#fff}.tiny{font-size:11px;color:var(--muted)}
-@media(max-width:900px){.grid{grid-template-columns:1fr}.panel .two{grid-template-columns:1fr}.studio-nav{position:static}}
-@media(max-width:600px){header{padding:13px 16px;align-items:flex-start}header span:last-child{display:flex;flex-direction:column;gap:5px;text-align:right}main{padding:20px 13px 60px}#auth{margin:4vh auto;padding:22px;border-radius:22px}.card,.panel{padding:17px;border-radius:20px}.studio-nav{gap:3px}.studio-nav a{padding:9px 10px}}
-</style><link rel="stylesheet" href="tv-motion.css">
-</head><body><header><span class="logo">tadaa<b>!</b> <span style="font-size:11px;color:#D6FF35;letter-spacing:.16em">STUDIO</span></span><span><a href="/legacy.html#/admin">Integraciones anteriores</a>　·　<a href="index.html">← Volver a TADAA!</a></span></header><main>
-<section id="auth"><div class="eyebrow">Administración segura</div><h1>Control de la plataforma.</h1><p>Accede con la contraseña administrativa configurada en xCloud. No utilices datos reales en el entorno de pruebas.</p><form class="card" id="adminLogin" style="max-width:460px"><div class="field"><label>Contraseña administrativa</label><input id="adminPassword" type="password" required autocomplete="current-password"></div><button class="btn">Iniciar sesión</button></form></section>
-<section id="workspace" class="hidden"><nav class="studio-nav" aria-label="Secciones de administración"><a class="primary" href="#stats">Resumen</a><a href="#partnerForm">Partners</a><a href="#eventForm">Eventos</a><a href="#ticketForm">Boletera</a><a href="#scanForm">Accesos QR</a><a href="#payForm">Pagos</a><a href="#presentForm">Presentaciones</a><a href="#ticketingStats">Operación</a><a href="#goldenForm">Recompensas</a></nav><div class="eyebrow">GESTIÓN TADAA! · STUDIO</div><h1>Haz que suceda.</h1><p class="studio-intro">Control central de eventos, partners, ticketing y experiencias. Los indicadores y operaciones se cargan desde TADAA!.</p><div class="grid" id="stats"></div><p class="notice">La boletera propia y los boletos de prueba son operaciones persistentes en PostgreSQL. El cobro real no está activo. Los eventos nuevos se publican cuando el administrador lo autoriza.</p><div class="grid">
-<div class="card" id="orgCard"><h2>Partners y organizaciones</h2><form id="partnerForm"><div class="field"><label>Nombre</label><input id="partnerName" required></div><div class="field"><label>Slug único</label><input id="partnerSlug" placeholder="empresa-aliada" required></div><div class="field"><label>Modalidad</label><select id="partnerKind"><option value="company">Empresa</option><option value="institution">Institución</option><option value="producer">Productor</option></select></div><div class="field"><label>Correo del responsable (debe tener cuenta registrada)</label><input id="partnerOwner" type="email"></div><button class="btn">Crear organización y convenio</button></form><div id="orgList" class="list"></div></div>
-<div class="card" id="eventCard"><h2>Eventos y funciones</h2><form id="eventForm"><div class="field"><label>Nombre</label><input id="eventTitle" required></div><div class="field"><label>Slug único</label><input id="eventSlug" placeholder="concierto-2027" required></div><div class="field"><label>Descripción</label><textarea id="eventDesc"></textarea></div><div class="field"><label>Categoría</label><select id="eventCategory"><option>Conciertos</option><option>Teatro</option><option>Experiencias</option><option>Familia</option><option>Gastronomía</option><option>Cultura</option></select></div><div class="field"><label>Fecha y hora</label><input id="eventStart" type="datetime-local"></div><div class="field"><label>URL de cartel vertical (HTTPS)</label><input id="eventPoster" type="url"></div><div class="field"><label>URL de imagen horizontal (HTTPS)</label><input id="eventHero" type="url"></div><div class="field"><label>URL de Spotify (opcional)</label><input id="eventSpotify" type="url"></div><div class="field"><label>URL de Google Maps (opcional)</label><input id="eventMaps" type="url"></div><div class="field"><label>Boletera responsable</label><select id="eventTicketingMode"><option value="external">Externa (solo información y enlace oficial)</option><option value="tadaa">TADAA! Tickets (inventario propio)</option></select></div><label class="chip"><input type="checkbox" id="eventMembershipPromo"> Incluir 30 días de membresía por compra elegible TADAA!</label><div class="field"><label>Días de beneficio (1–90)</label><input id="eventPromoDays" type="number" min="1" max="90" value="30"></div><label class="chip"><input type="checkbox" id="eventPicks"> TADAA! Picks</label><label class="chip"><input type="checkbox" id="eventPublish"> Publicar ahora</label><p>Solo configura TADAA! Tickets si TADAA! administra el inventario y la venta. Publicar requiere autorización y datos confirmados.</p><button class="btn">Guardar evento</button></form><div id="eventsList" class="list"></div></div>
-<div class="card" id="ticketCard"><h2>Inventario de boletera</h2><form id="ticketForm"><div class="field"><label>Evento</label><select id="ticketEvent"></select></div><div class="field"><label>Tipo de boleto</label><input id="ticketName" placeholder="Preferente" required></div><div class="field"><label>Precio MXN</label><input id="ticketPrice" type="number" min="0" step=".01" required></div><div class="field"><label>Cupo disponible</label><input id="ticketStock" type="number" min="0" required></div><div class="field"><label>Sección / localidad</label><input id="ticketSection" placeholder="General, VIP, Preferente"></div><div class="field"><label>Cargo de servicio por boleto (MXN)</label><input id="ticketFee" type="number" min="0" step=".01" value="0"></div><div class="field"><label>Máximo por pedido</label><input id="ticketMax" type="number" min="1" max="20" value="8"></div><label class="chip"><input id="ticketMemberOnly" type="checkbox"> Solo membresía o convenio</label><button class="btn">Crear tipo de boleto</button></form></div>
-<div class="card" id="scanCard"><h2>Validación de entradas</h2><p>Pega el contenido del código QR temporal para verificarlo. Solo se acepta una vez y queda registrado.</p><form id="scanForm"><div class="field"><label>Código de acceso</label><textarea id="qrPayload" required></textarea></div><button class="btn">Validar y registrar entrada</button></form><div id="scanResult" class="notice"></div></div>
-<div class="card" id="paymentsCard"><h2>Pagos · Clip</h2><p>Entorno de pruebas interno activo. Las credenciales de Clip se guardan cifradas, pero el procesamiento bancario real está bloqueado hasta completar la integración certificada.</p><div id="payState" class="notice"></div><form id="payForm"><div class="field"><label>Modo de pagos</label><select id="payMode"><option value="test">Pruebas internas TADAA! (sin cargos bancarios)</option><option value="live">Clip Checkout real (cobra dinero)</option></select></div><div class="field"><label>API Key de Clip (producción)</label><input id="clipLiveKey" type="password" autocomplete="off"></div><p class="tiny">El modo de pruebas internas de TADAA! no genera cargos ni se conecta a Clip. La disponibilidad de Sandbox de Clip depende del producto y de las credenciales habilitadas en tu cuenta. El modo real solo se habilita tras validar cuenta, credenciales y webhook.</p><button class="btn">Guardar configuración de pagos</button></form><p class="chip">Producción bloqueada por seguridad hasta completar gateway y webhooks</p></div>
-<div class="card" id="presentCard"><h2>Presentaciones de partners</h2><form id="presentForm"><div class="field"><label>Título</label><input id="presTitle" required></div><div class="field"><label>Slug</label><input id="presSlug" placeholder="aliado-mexico" required></div><div class="field"><label>Subtítulo</label><input id="presSubtitle"></div><div class="field"><label>Diapositivas (una por renglón; título|descripción)</label><textarea id="slides" rows="7" placeholder="Bienvenidos|Construyamos juntos\nEl ecosistema|Conoce TADAA!\nBeneficios|Una alianza hecha para crecer\nÚnete|Inscríbete o solicita una videollamada"></textarea></div><label><input id="presPublish" type="checkbox" checked> Publicar presentación</label><p></p><button class="btn">Guardar presentación</button></form><a href="partner.html">Abrir vista de partners ↗</a></div>
-</div><h2>Solicitudes de partners</h2><div class="card" id="applications">Sin solicitudes.</div><button id="signout" class="btn ghost" style="margin-top:25px">Cerrar sesión administrativa</button></section><section class="panel" id="ticketingStatsPanel"><h2>Operación de boletera</h2><div id="ticketingStats">Cargando indicadores…</div><div id="refundQueue"></div></section><section class="panel" id="seatsPanel"><h2>Configurar asientos numerados</h2><p>Para eventos TADAA! con asientos asignados, pega un JSON de asientos con section, row, label y ticketTypeId opcional.</p><form id="seatForm"><div class="field"><label>Evento</label><select id="seatEvent"></select></div><div class="field"><label>Asientos JSON</label><textarea id="seatJson" rows="7" placeholder='[{"section":"VIP","row":"A","label":"1","ticketTypeId":"UUID"}]'></textarea></div><button class="btn">Cargar asientos</button></form></section><section class="panel" id="rewardsPanel"><h2>Experiencias, recompensas y tienda</h2><div id="goldenAdminList"></div><div id="awardReviewList"></div>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<base href="/experience/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#08091A">
+<title>TADAA! Studio · Administración</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tv-motion.css">
+<style>
+:root{--blue:#1238FF;--navy:#08091A;--lime:#D6FF35;--bg:#EEF1F7;--ink:#08091A;--muted:#5A6178;--line:#D5DBEA;--white:#fff;--pink:#FF4F93;--orange:#FF8A3D;--green:#0B7A3B;--font:'Plus Jakarta Sans',system-ui,sans-serif;--display:'Outfit',var(--font);--shadow:0 12px 34px rgba(19,32,77,.07)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);min-height:100vh}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+#auth{min-height:100vh;display:grid;place-items:center;padding:28px;background:radial-gradient(circle at 15% 15%,#dce5ff 0,transparent 34%),var(--bg)}
+.auth-card{width:min(520px,100%);background:#fff;border:1px solid var(--line);border-radius:30px;padding:clamp(24px,5vw,44px);box-shadow:var(--shadow)}
+.auth-brand{display:flex;align-items:center;gap:9px;margin-bottom:34px;font:800 30px var(--display);letter-spacing:-.075em}
+.auth-brand b{color:var(--blue)}
+.auth-brand span{font:800 10px var(--font);letter-spacing:.18em;color:var(--blue)}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.16em;color:var(--blue);text-transform:uppercase}
+h1,h2,h3,h4{font-family:var(--display);letter-spacing:-.045em;color:var(--ink)}
+h1{font-size:clamp(38px,4.5vw,58px);line-height:.98;margin:8px 0 12px}
+h2{font-size:24px;margin:0 0 18px}
+h3{font-size:19px;margin:0 0 14px}
+p{color:var(--muted);line-height:1.6}
+.field{display:grid;gap:7px;margin:12px 0}
+.field label{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.04em}
+.field input,.field select,.field textarea{width:100%;min-width:0;background:#F8F9FC;border:1px solid var(--line);padding:12px 14px;color:var(--ink);border-radius:12px;font:500 13px var(--font);outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px #1238FF18}
+.field select option{background:#fff}
+.field textarea{min-height:90px;resize:vertical}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;padding:13px 19px;background:var(--navy);color:#fff;font:800 12px var(--font);border-radius:99px;cursor:pointer;transition:transform .18s,box-shadow .18s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px #08091a22}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.lime{background:var(--lime);color:var(--navy)}
+.btn.ghost{color:var(--ink);background:#F1F3F9;border:1px solid var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.alert{padding:14px;border-radius:12px;background:#fff1f1;color:#a52626;border:1px solid #f2caca;font-size:13px}
+.studio-shell{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh}
+.studio-sidebar{position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column;gap:5px;padding:26px 15px 18px;color:#fff;background:radial-gradient(circle at 15% 4%,rgba(255,255,255,.18),transparent 26%),radial-gradient(circle at 100% 70%,rgba(214,255,53,.12),transparent 35%),linear-gradient(160deg,#1744ff 0%,#1238FF 46%,#0B238F 100%);border-radius:0 30px 30px 0;box-shadow:12px 0 32px rgba(8,9,26,.08);z-index:15}
+.studio-brand{display:flex;align-items:center;gap:8px;padding:0 10px 24px;font:800 31px var(--display);letter-spacing:-.075em;color:#fff}
+.studio-brand b{color:var(--lime)}
+.studio-brand span{font:800 10px var(--font);letter-spacing:.18em;color:var(--lime);margin-top:8px}
+.studio-nav{display:grid;gap:4px}
+.studio-nav button,.studio-nav a{width:100%;min-height:44px;display:flex;align-items:center;gap:11px;padding:0 13px;border:0;border-radius:13px;background:transparent;color:rgba(255,255,255,.92);font:700 12px var(--font);text-align:left;transition:background .16s,color .16s}
+.studio-nav button:hover,.studio-nav a:hover{background:rgba(255,255,255,.13);color:#fff}
+.studio-nav button.active{background:#fff;color:var(--navy);font-weight:800;box-shadow:0 5px 16px rgba(8,9,26,.12)}
+.nav-mark{width:8px;height:8px;flex:none;border:1.5px solid rgba(255,255,255,.72);border-radius:3px;transform:rotate(45deg)}
+.studio-nav button.active .nav-mark{background:var(--blue);border-color:var(--blue)}
+.sidebar-foot{margin-top:auto;padding-top:20px}
+.sidebar-status{padding:13px 14px;background:rgba(8,9,26,.3);border:1px solid rgba(255,255,255,.14);border-radius:16px;font-size:11px;line-height:1.55;color:#e5eaff}
+.sidebar-status b{display:block;color:var(--lime);font-size:11px;margin-bottom:3px}
+.sidebar-links{display:grid;gap:7px;margin-top:12px}
+.sidebar-links a,.sidebar-links button{display:block;width:100%;padding:9px 10px;text-align:left;background:transparent;border:0;color:#fff;font:700 11px var(--font);opacity:.85}
+.sidebar-links a:hover,.sidebar-links button:hover{opacity:1;color:var(--lime)}
+.studio-main{min-width:0;padding:28px clamp(18px,3vw,42px) 70px;max-width:1800px;width:100%;margin:0 auto}
+.studio-topbar{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:23px}
+.studio-topbar h1{font-size:clamp(38px,4vw,54px);margin:7px 0 8px}
+.studio-intro{margin:0;max-width:760px;font-size:14px}
+.top-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.searchbox{display:flex;align-items:center;gap:9px;height:46px;padding:0 14px;background:#fff;border:1px solid var(--line);border-radius:99px;min-width:260px}
+.searchbox input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--ink);font:500 12px var(--font)}
+.studio-view{display:none;animation:viewIn .22s ease}
+.studio-view.active{display:block}
+@keyframes viewIn{from{opacity:.55;transform:translateY(5px)}to{opacity:1;transform:none}
+.view-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin:8px 0 18px}
+.view-heading h2{font-size:27px;margin:0}
+.view-heading p{margin:4px 0 0;font-size:13px}
+#stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:18px 0}
+#stats .stat{min-height:118px;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:18px 20px;background:#fff;border:1px solid var(--line);border-radius:23px;box-shadow:var(--shadow)}
+#stats .stat span{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+#stats .stat b{font:800 36px/1 var(--display);color:var(--navy)}
+#stats .stat:nth-child(4){background:var(--navy);border-color:var(--navy)}
+#stats .stat:nth-child(4) span{color:#AEB6D6}
+#stats .stat:nth-child(4) b{color:#fff}
+.notice{padding:14px 17px;background:#E7EDFF;border:1px solid #C8D4FF;color:#25366F;border-radius:17px;margin:15px 0 20px;font-size:12px;line-height:1.6}
+.dashboard-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(270px,.8fr);gap:17px;align-items:start}
+.card,.panel{min-width:0;padding:22px;background:#fff;border:1px solid var(--line);border-radius:25px;box-shadow:var(--shadow)}
+.card h2,.panel h2{display:flex;align-items:center;gap:10px}
+.card h2:before,.panel h2:before{content:'';width:6px;height:25px;flex:none;border-radius:9px;background:var(--blue)}
+.card p,.panel p{font-size:12px}
+.card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+.quick-stack{display:grid;gap:14px}
+.quick-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow)}
+.quick-card.dark{background:var(--navy);color:#fff;border-color:var(--navy)}
+.quick-card h3{font-size:18px;margin:0 0 7px}
+.quick-card.dark h3{color:#fff}
+.quick-card p{font-size:11px;margin:0 0 12px}
+.quick-link{display:inline-flex;align-items:center;gap:6px;color:var(--blue);font-size:11px;font-weight:800}
+.quick-card.dark .quick-link{color:var(--lime)}
+.table-wrap{width:100%;overflow:auto}
+.data-table{width:100%;min-width:560px;border-collapse:collapse;font-size:12px}
+.data-table th{padding:11px 9px;text-align:left;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.08em;border-bottom:1px solid var(--line)}
+.data-table td{padding:13px 9px;border-bottom:1px solid #EEF1F7;vertical-align:middle}
+.data-table tr:last-child td{border-bottom:0}
+.event-title{font-weight:800;color:var(--ink)}
+.event-slug{display:block;margin-top:3px;color:var(--muted);font-size:10px}
+.status-pill{display:inline-flex;padding:5px 9px;border-radius:99px;background:#EEF1F7;color:var(--muted);font-size:10px;font-weight:800;text-transform:uppercase}
+.status-pill.published{background:#E5F7EC;color:#0B7A3B}
+.status-pill.draft{background:#FFF4D9;color:#8A5A00}
+.list{margin:12px 0;display:grid;gap:8px}
+.item{padding:12px 14px;background:#F7F8FC;border:1px solid #E5E9F3;border-radius:13px;font-size:12px;color:var(--ink)}
+.item small{color:var(--muted);display:block;margin-top:4px}
+.field{display:grid;gap:7px;margin:12px 0}
+.field label{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.04em}
+.field input,.field select,.field textarea{width:100%;min-width:0;background:#F8F9FC;border:1px solid var(--line);padding:12px 14px;color:var(--ink);border-radius:12px;font:500 13px var(--font);outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px #1238FF18}
+.field select option{background:#fff}
+.field textarea{min-height:90px;resize:vertical}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;padding:13px 19px;background:var(--navy);color:#fff;font:800 12px var(--font);border-radius:99px;cursor:pointer;transition:transform .18s,box-shadow .18s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px #08091a22}
+.btn.ghost{color:var(--ink);background:#F1F3F9;border:1px solid var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;background:#F2F4FA;border:1px solid var(--line);border-radius:99px;font-size:11px;color:var(--muted);font-weight:700;margin:5px 5px 5px 0}
+.chip input{accent-color:var(--blue)}
+.panel{margin:0}
+.panel .two,.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.panel form{padding:18px;background:#F8F9FC;border:1px solid var(--line);border-radius:18px;margin:12px 0}
+#ticketingStats .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:0 0 18px}
+#ticketingStats .stat{display:flex;flex-direction:column;gap:5px;padding:16px;background:#F8F9FC;border:1px solid var(--line);border-radius:16px}
+#ticketingStats .stat span{font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase}
+#ticketingStats .stat b{font:800 25px var(--display);color:var(--navy)}
+#flash{position:fixed;right:22px;bottom:22px;max-width:min(420px,calc(100vw - 44px));background:var(--navy);color:#fff;border:1px solid var(--lime);padding:16px 19px;border-radius:16px;display:none;z-index:80;box-shadow:0 12px 40px #08091a33}
+.tiny{font-size:11px;color:var(--muted)}
+.section-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.empty-state{padding:24px;text-align:center;color:var(--muted);font-size:12px}
+@media(max-width:1100px){.studio-shell{grid-template-columns:228px minmax(0,1fr)}.studio-sidebar{padding-inline:12px}.dashboard-grid{grid-template-columns:1fr}
+@media(max-width:760px){
+ .studio-shell{display:flex;flex-direction:column}
+ .studio-sidebar{position:relative;top:auto;height:auto;border-radius:0 0 24px 24px;padding:13px 14px 14px}
+ .studio-brand{padding:0 5px 12px;font-size:26px}
+ .studio-nav{display:flex;overflow-x:auto;gap:5px;padding-bottom:3px;scrollbar-width:thin}
+ .studio-nav button,.studio-nav a{width:auto;min-width:max-content;min-height:39px;padding:0 12px;font-size:11px}
+ .sidebar-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:10px}
+ .sidebar-status{display:none}
+ .sidebar-links{display:flex;gap:5px;margin:0}
+ .sidebar-links a,.sidebar-links button{width:auto;padding:7px 8px;font-size:10px}
+ .studio-main{padding:22px 14px 48px}
+ .studio-topbar{align-items:flex-start;flex-direction:column}
+ .top-actions{width:100%}
+ .searchbox{flex:1;min-width:0}
+ #stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ #stats .stat{min-height:96px;padding:14px}
+ #stats .stat b{font-size:30px}
+ .card-grid,.panel .two,.two{grid-template-columns:1fr}
+}
+@media(max-width:420px){.studio-nav button,.studio-nav a{font-size:10px;padding:0 10px}.data-table{min-width:510px}
+</style>
+</head>
+<body>
+<section id="auth">
+  <div class="auth-card">
+    <div class="auth-brand">tadaa<b>!</b><span>STUDIO</span></div>
+    <div class="eyebrow">Administración segura</div>
+    <h1>Control de la plataforma.</h1>
+    <p>Accede con la contraseña administrativa configurada en xCloud. No utilices datos reales en el entorno de pruebas.</p>
+    <form id="adminLogin">
+      <div class="field"><label for="adminPassword">Contraseña administrativa</label><input id="adminPassword" type="password" required autocomplete="current-password"></div>
+      <button class="btn primary" type="submit">Iniciar sesión</button>
+    </form>
+    <p class="tiny">Acceso restringido al equipo autorizado de TADAA!.</p>
+  </div>
+</section>
+
+<div id="workspace" class="studio-shell hidden">
+  <aside class="studio-sidebar" aria-label="Menú de Studio">
+    <div class="studio-brand">tadaa<b>!</b><span>STUDIO</span></div>
+    <nav class="studio-nav" aria-label="Navegación administrativa">
+      <button type="button" class="active" data-studio-view="overview"><span class="nav-mark"></span>Resumen</button>
+      <button type="button" data-studio-view="partners"><span class="nav-mark"></span>Partners y productores</button>
+      <button type="button" data-studio-view="events"><span class="nav-mark"></span>Eventos y funciones</button>
+      <button type="button" data-studio-view="ticketing"><span class="nav-mark"></span>Boletera</button>
+      <button type="button" data-studio-view="access"><span class="nav-mark"></span>Accesos QR</button>
+      <button type="button" data-studio-view="payments"><span class="nav-mark"></span>Pagos y devoluciones</button>
+      <button type="button" data-studio-view="presentations"><span class="nav-mark"></span>Presentaciones</button>
+      <button type="button" data-studio-view="operation"><span class="nav-mark"></span>Operación</button>
+      <button type="button" data-studio-view="rewards"><span class="nav-mark"></span>Recompensas</button>
+      <a href="/legacy.html#/admin"><span class="nav-mark"></span>Integraciones y API ↗</a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="sidebar-status"><b>Pagos: pruebas internas</b>Clip real bloqueado hasta completar el checklist de integración.</div>
+      <div class="sidebar-links">
+        <a href="index.html">← Volver a TADAA!</a>
+        <button type="button" id="signout">Cerrar sesión</button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="studio-main">
+    <div class="studio-topbar">
+      <div>
+        <div class="eyebrow">GESTIÓN TADAA! · STUDIO</div>
+        <h1>Haz que suceda.</h1>
+        <p class="studio-intro">Control central de eventos, partners, ticketing y experiencias. Los indicadores y operaciones se cargan desde TADAA!.</p>
+      </div>
+      <div class="top-actions">
+        <label class="searchbox" aria-label="Buscar en Studio">
+          <span aria-hidden="true">⌕</span>
+          <input id="adminSearch" type="search" placeholder="Buscar eventos, partners o solicitudes">
+        </label>
+        <button class="btn" type="button" data-open-studio-view="events">＋ Nuevo evento</button>
+      </div>
+    </div>
+
+    <section class="studio-view active" data-studio-page="overview" id="overviewPage">
+      <div id="stats"></div>
+      <div class="notice">La boletera propia y los boletos de prueba son operaciones persistentes en PostgreSQL. El cobro real no está activo. Los eventos nuevos se publican cuando el administrador lo autoriza.</div>
+      <div class="dashboard-grid">
+        <section class="card" id="eventTableCard">
+          <div class="section-toolbar"><div><h2>Eventos y funciones</h2><p>Inventario editorial y estado de publicación.</p></div><button type="button" class="btn ghost" data-open-studio-view="events">Crear evento</button></div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>EVENTO</th><th>SLUG</th><th>ESTADO</th><th>ACCIÓN</th></tr></thead>
+              <tbody id="eventsList"><tr><td colspan="4" class="empty-state">Cargando eventos…</td></tr></tbody>
+            </table>
+          </div>
+        </section>
+        <aside class="quick-stack">
+          <section class="quick-card dark">
+            <div class="eyebrow" style="color:var(--lime)">OPERACIÓN TADAA!</div>
+            <h3>Todo en un solo lugar.</h3>
+            <p style="color:#AEB6D6">Gestiona convenios, eventos, inventario, accesos y recompensas desde Studio.</p>
+            <a href="#partners" class="quick-link" data-open-studio-view="partners">Gestionar partners ↗</a>
+          </section>
+          <section class="quick-card">
+            <h3>Operación de boletera</h3>
+            <p>Consulta pedidos, venta de prueba, devoluciones y liquidaciones pendientes.</p>
+            <button type="button" class="btn ghost" data-open-studio-view="operation">Ver operación</button>
+          </section>
+          <section class="quick-card">
+            <h3>Presentaciones comerciales</h3>
+            <p>Administra las experiencias públicas para productores y aliados.</p>
+            <button type="button" class="btn ghost" data-open-studio-view="presentations">Gestionar presentaciones</button>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <section class="studio-view" data-studio-page="partners" id="partnersPage">
+      <div class="view-heading"><div><h2>Partners y organizaciones</h2><p>Empresas, instituciones y productores vinculados a TADAA!.</p></div></div>
+      <div class="card" id="orgCard"><h2>Partners y organizaciones</h2><form id="partnerForm"><div class="field"><label>Nombre</label><input id="partnerName" required=""/></div><div class="field"><label>Slug único</label><input id="partnerSlug" placeholder="empresa-aliada" required=""/></div><div class="field"><label>Modalidad</label><select id="partnerKind"><option value="company">Empresa</option><option value="institution">Institución</option><option value="producer">Productor</option></select></div><div class="field"><label>Correo del responsable (debe tener cuenta registrada)</label><input id="partnerOwner" type="email"/></div><button class="btn">Crear organización y convenio</button></form><div class="list" id="orgList"></div></div>
+      <section class="card" style="margin-top:16px"><h2>Solicitudes de partners</h2><div id="applications" class="list">Sin solicitudes.</div></section>
+    </section>
+
+    <section class="studio-view" data-studio-page="events" id="eventsPage">
+      <div class="view-heading"><div><h2>Eventos y funciones</h2><p>Registra producciones y controla su publicación.</p></div></div>
+      <section class="card" id="eventCard"><h2>Nuevo evento</h2><form id="eventForm"><div class="field"><label>Nombre</label><input id="eventTitle" required=""/></div><div class="field"><label>Slug único</label><input id="eventSlug" placeholder="concierto-2027" required=""/></div><div class="field"><label>Descripción</label><textarea id="eventDesc"></textarea></div><div class="field"><label>Categoría</label><select id="eventCategory"><option>Conciertos</option><option>Teatro</option><option>Experiencias</option><option>Familia</option><option>Gastronomía</option><option>Cultura</option></select></div><div class="field"><label>Fecha y hora</label><input id="eventStart" type="datetime-local"/></div><div class="field"><label>URL de cartel vertical (HTTPS)</label><input id="eventPoster" type="url"/></div><div class="field"><label>URL de imagen horizontal (HTTPS)</label><input id="eventHero" type="url"/></div><div class="field"><label>URL de Spotify (opcional)</label><input id="eventSpotify" type="url"/></div><div class="field"><label>URL de Google Maps (opcional)</label><input id="eventMaps" type="url"/></div><div class="field"><label>Boletera responsable</label><select id="eventTicketingMode"><option value="external">Externa (solo información y enlace oficial)</option><option value="tadaa">TADAA! Tickets (inventario propio)</option></select></div><label class="chip"><input id="eventMembershipPromo" type="checkbox"/> Incluir 30 días de membresía por compra elegible TADAA!</label><div class="field"><label>Días de beneficio (1–90)</label><input id="eventPromoDays" max="90" min="1" type="number" value="30"/></div><label class="chip"><input id="eventPicks" type="checkbox"/> TADAA! Picks</label><label class="chip"><input id="eventPublish" type="checkbox"/> Publicar ahora</label><p>Solo configura TADAA! Tickets si TADAA! administra el inventario y la venta. Publicar requiere autorización y datos confirmados.</p><button class="btn">Guardar evento</button></form></section>
+    </section>
+
+    <section class="studio-view" data-studio-page="ticketing" id="ticketingPage">
+      <div class="view-heading"><div><h2>Boletera TADAA!</h2><p>Configura tipos de boletos, cupos y condiciones de acceso.</p></div></div>
+      <div class="card" id="ticketCard"><h2>Inventario de boletera</h2><form id="ticketForm"><div class="field"><label>Evento</label><select id="ticketEvent"></select></div><div class="field"><label>Tipo de boleto</label><input id="ticketName" placeholder="Preferente" required=""/></div><div class="field"><label>Precio MXN</label><input id="ticketPrice" min="0" required="" step=".01" type="number"/></div><div class="field"><label>Cupo disponible</label><input id="ticketStock" min="0" required="" type="number"/></div><div class="field"><label>Sección / localidad</label><input id="ticketSection" placeholder="General, VIP, Preferente"/></div><div class="field"><label>Cargo de servicio por boleto (MXN)</label><input id="ticketFee" min="0" step=".01" type="number" value="0"/></div><div class="field"><label>Máximo por pedido</label><input id="ticketMax" max="20" min="1" type="number" value="8"/></div><label class="chip"><input id="ticketMemberOnly" type="checkbox"/> Solo membresía o convenio</label><button class="btn">Crear tipo de boleto</button></form></div>
+    </section>
+
+    <section class="studio-view" data-studio-page="access" id="accessPage">
+      <div class="view-heading"><div><h2>Accesos y localidades</h2><p>Validación de entradas y configuración de asientos numerados.</p></div></div>
+      <div class="card-grid"><div class="card" id="scanCard"><h2>Validación de entradas</h2><p>Pega el contenido del código QR temporal para verificarlo. Solo se acepta una vez y queda registrado.</p><form id="scanForm"><div class="field"><label>Código de acceso</label><textarea id="qrPayload" required=""></textarea></div><button class="btn">Validar y registrar entrada</button></form><div class="notice" id="scanResult"></div></div><section class="panel" id="seatsPanel"><h2>Configurar asientos numerados</h2><p>Para eventos TADAA! con asientos asignados, pega un JSON de asientos con section, row, label y ticketTypeId opcional.</p><form id="seatForm"><div class="field"><label>Evento</label><select id="seatEvent"></select></div><div class="field"><label>Asientos JSON</label><textarea id="seatJson" placeholder='[{"section":"VIP","row":"A","label":"1","ticketTypeId":"UUID"}]' rows="7"></textarea></div><button class="btn">Cargar asientos</button></form></section></div>
+    </section>
+
+    <section class="studio-view" data-studio-page="payments" id="paymentsPage">
+      <div class="view-heading"><div><h2>Pagos y devoluciones</h2><p>Configuración de cobros y seguimiento de solicitudes.</p></div></div>
+      <div class="card" id="paymentsCard"><h2>Pagos · Clip</h2><p>Entorno de pruebas interno activo. Las credenciales de Clip se guardan cifradas, pero el procesamiento bancario real está bloqueado hasta completar la integración certificada.</p><div class="notice" id="payState"></div><form id="payForm"><div class="field"><label>Modo de pagos</label><select id="payMode"><option value="test">Pruebas internas TADAA! (sin cargos bancarios)</option><option value="live">Clip Checkout real (cobra dinero)</option></select></div><div class="field"><label>API Key de Clip (producción)</label><input autocomplete="off" id="clipLiveKey" type="password"/></div><p class="tiny">El modo de pruebas internas de TADAA! no genera cargos ni se conecta a Clip. La disponibilidad de Sandbox de Clip depende del producto y de las credenciales habilitadas en tu cuenta. El modo real solo se habilita tras validar cuenta, credenciales y webhook.</p><button class="btn">Guardar configuración de pagos</button></form><p class="chip">Producción bloqueada por seguridad hasta completar gateway y webhooks</p></div>
+    </section>
+
+    <section class="studio-view" data-studio-page="presentations" id="presentationsPage">
+      <div class="view-heading"><div><h2>Presentaciones de partners</h2><p>Gestiona los decks comerciales y sus enlaces públicos.</p></div></div>
+      <div class="card" id="presentCard"><h2>Presentaciones de partners</h2><form id="presentForm"><div class="field"><label>Título</label><input id="presTitle" required=""/></div><div class="field"><label>Slug</label><input id="presSlug" placeholder="aliado-mexico" required=""/></div><div class="field"><label>Subtítulo</label><input id="presSubtitle"/></div><div class="field"><label>Diapositivas (una por renglón; título|descripción)</label><textarea id="slides" placeholder="Bienvenidos|Construyamos juntos\nEl ecosistema|Conoce TADAA!\nBeneficios|Una alianza hecha para crecer\nÚnete|Inscríbete o solicita una videollamada" rows="7"></textarea></div><label><input checked="" id="presPublish" type="checkbox"/> Publicar presentación</label><p></p><button class="btn">Guardar presentación</button></form><a href="partner.html">Abrir vista de partners ↗</a></div>
+    </section>
+
+    <section class="studio-view" data-studio-page="operation" id="operationPage">
+      <div class="view-heading"><div><h2>Operación de boletera</h2><p>Indicadores de venta de prueba, devoluciones y liquidaciones.</p></div></div>
+      <section class="panel" id="ticketingStatsPanel"><h2>Operación de boletera</h2><div id="ticketingStats">Cargando indicadores…</div><div id="refundQueue"></div></section>
+    </section>
+
+    <section class="studio-view" data-studio-page="rewards" id="rewardsPage">
+      <div class="view-heading"><div><h2>Experiencias y recompensas</h2><p>Golden Ticket, cashback, Awards, campañas y merchandising.</p></div></div>
+      <section class="panel" id="rewardsPanel"><h2>Experiencias, recompensas y tienda</h2><div id="goldenAdminList"></div><div id="awardReviewList"></div>
 <div class="two">
-<form id="goldenForm"><h3>Golden Ticket</h3><div class="field"><label>Evento (opcional)</label><select id="goldenEvent"></select></div><div class="field"><label>Título</label><input id="goldenTitle" required></div><div class="field"><label>Descripción</label><textarea id="goldenDesc"></textarea></div><div class="field"><label>Premio</label><input id="goldenPrize" required></div><div class="field"><label>Ganadores</label><input id="goldenWinners" type="number" min="1" max="100" value="1"></div><div class="field"><label>Inicio</label><input id="goldenStart" type="datetime-local" required></div><div class="field"><label>Cierre</label><input id="goldenEnd" type="datetime-local" required></div><label class="chip"><input id="goldenPublish" type="checkbox"> Publicar campaña</label><button class="btn">Guardar Golden Ticket</button></form>
-<form id="cashbackForm"><h3>Regla de cashback</h3><div class="field"><label>Evento (opcional, vacío = todos)</label><select id="cashbackEvent"></select></div><div class="field"><label>Nombre</label><input id="cashbackName" required></div><div class="field"><label>Porcentaje (%)</label><input id="cashbackRate" type="number" min=".01" max="50" step=".01" required></div><div class="field"><label>Tope por compra (MXN, opcional)</label><input id="cashbackMax" type="number" min="0" step=".01"></div><label class="chip"><input id="cashbackActive" type="checkbox"> Activar regla</label><button class="btn">Guardar cashback</button></form>
-<form id="awardsForm"><h3>TADAA! Awards</h3><div class="field"><label>Nombre del programa</label><input id="awardsName" required></div><div class="field"><label>Slug</label><input id="awardsSlug" required></div><div class="field"><label>Estado</label><select id="awardsStatus"><option value="draft">Borrador</option><option value="nominations">Recibir nominaciones</option><option value="voting">Votación</option></select></div><div class="field"><label>Inicio</label><input id="awardsStart" type="datetime-local"></div><div class="field"><label>Cierre</label><input id="awardsEnd" type="datetime-local"></div><button class="btn">Crear programa</button></form>
-<form id="campaignForm"><h3>Campaña promocional</h3><div class="field"><label>Título</label><input id="campaignTitle" required></div><div class="field"><label>Slug</label><input id="campaignSlug" required></div><div class="field"><label>Tipo</label><select id="campaignType"><option value="seasonal">Temporada</option><option value="theater">Teatro</option><option value="cinema">Cine</option><option value="hot_sale">Hot Sale</option><option value="buen_fin">Buen Fin</option><option value="institutional">Institucional</option><option value="other">Otra</option></select></div><div class="field"><label>Descripción</label><textarea id="campaignDesc"></textarea></div><div class="field"><label>Estado</label><select id="campaignStatus"><option value="draft">Borrador</option><option value="scheduled">Programada</option><option value="active">Activa</option></select></div><button class="btn">Crear campaña</button></form>
-<form id="merchForm"><h3>Tienda de merchandising</h3><div class="field"><label>Evento (opcional)</label><select id="merchEvent"></select></div><div class="field"><label>Nombre del producto</label><input id="merchTitle" required></div><div class="field"><label>Descripción</label><textarea id="merchDesc"></textarea></div><div class="field"><label>Precio MXN</label><input id="merchPrice" type="number" min="0" step=".01" required></div><div class="field"><label>Stock</label><input id="merchStock" type="number" min="0" required></div><div class="field"><label>Imagen HTTPS</label><input id="merchImage" type="url"></div><label class="chip"><input id="merchPublish" type="checkbox"> Publicar</label><button class="btn">Guardar producto</button></form>
-</div></section></main><div id="flash" role="status"></div><script src="api.js?v=3.0.0-beta1"></script><script src="admin-live.js?v=3.0.0-beta1"></script><script src="tv-motion.js" defer></script>
-</body></html>
+<form id="goldenForm"><h3>Golden Ticket</h3><div class="field"><label>Evento (opcional)</label><select id="goldenEvent"></select></div><div class="field"><label>Título</label><input id="goldenTitle" required=""/></div><div class="field"><label>Descripción</label><textarea id="goldenDesc"></textarea></div><div class="field"><label>Premio</label><input id="goldenPrize" required=""/></div><div class="field"><label>Ganadores</label><input id="goldenWinners" max="100" min="1" type="number" value="1"/></div><div class="field"><label>Inicio</label><input id="goldenStart" required="" type="datetime-local"/></div><div class="field"><label>Cierre</label><input id="goldenEnd" required="" type="datetime-local"/></div><label class="chip"><input id="goldenPublish" type="checkbox"/> Publicar campaña</label><button class="btn">Guardar Golden Ticket</button></form>
+<form id="cashbackForm"><h3>Regla de cashback</h3><div class="field"><label>Evento (opcional, vacío = todos)</label><select id="cashbackEvent"></select></div><div class="field"><label>Nombre</label><input id="cashbackName" required=""/></div><div class="field"><label>Porcentaje (%)</label><input id="cashbackRate" max="50" min=".01" required="" step=".01" type="number"/></div><div class="field"><label>Tope por compra (MXN, opcional)</label><input id="cashbackMax" min="0" step=".01" type="number"/></div><label class="chip"><input id="cashbackActive" type="checkbox"/> Activar regla</label><button class="btn">Guardar cashback</button></form>
+<form id="awardsForm"><h3>TADAA! Awards</h3><div class="field"><label>Nombre del programa</label><input id="awardsName" required=""/></div><div class="field"><label>Slug</label><input id="awardsSlug" required=""/></div><div class="field"><label>Estado</label><select id="awardsStatus"><option value="draft">Borrador</option><option value="nominations">Recibir nominaciones</option><option value="voting">Votación</option></select></div><div class="field"><label>Inicio</label><input id="awardsStart" type="datetime-local"/></div><div class="field"><label>Cierre</label><input id="awardsEnd" type="datetime-local"/></div><button class="btn">Crear programa</button></form>
+<form id="campaignForm"><h3>Campaña promocional</h3><div class="field"><label>Título</label><input id="campaignTitle" required=""/></div><div class="field"><label>Slug</label><input id="campaignSlug" required=""/></div><div class="field"><label>Tipo</label><select id="campaignType"><option value="seasonal">Temporada</option><option value="theater">Teatro</option><option value="cinema">Cine</option><option value="hot_sale">Hot Sale</option><option value="buen_fin">Buen Fin</option><option value="institutional">Institucional</option><option value="other">Otra</option></select></div><div class="field"><label>Descripción</label><textarea id="campaignDesc"></textarea></div><div class="field"><label>Estado</label><select id="campaignStatus"><option value="draft">Borrador</option><option value="scheduled">Programada</option><option value="active">Activa</option></select></div><button class="btn">Crear campaña</button></form>
+<form id="merchForm"><h3>Tienda de merchandising</h3><div class="field"><label>Evento (opcional)</label><select id="merchEvent"></select></div><div class="field"><label>Nombre del producto</label><input id="merchTitle" required=""/></div><div class="field"><label>Descripción</label><textarea id="merchDesc"></textarea></div><div class="field"><label>Precio MXN</label><input id="merchPrice" min="0" required="" step=".01" type="number"/></div><div class="field"><label>Stock</label><input id="merchStock" min="0" required="" type="number"/></div><div class="field"><label>Imagen HTTPS</label><input id="merchImage" type="url"/></div><label class="chip"><input id="merchPublish" type="checkbox"/> Publicar</label><button class="btn">Guardar producto</button></form>
+</div></section>
+    </section>
+  </main>
+</div>
+
+<div id="flash" role="status" aria-live="polite"></div>
+<script src="api.js?v=3.0.0-beta1"></script>
+<script src="admin-live.js?v=3.0.0-beta2"></script>
+<script>
+(()=>{
+ const nav=[...document.querySelectorAll('[data-studio-view]')];
+ const pages=[...document.querySelectorAll('[data-studio-page]')];
+ function showView(name){
+  pages.forEach(p=>p.classList.toggle('active',p.dataset.studioPage===name));
+  nav.forEach(b=>b.classList.toggle('active',b.dataset.studioView===name));
+  const search=document.getElementById('adminSearch');
+  if(search){search.value='';filterAdmin('');}
+  window.scrollTo({top:0,behavior:'smooth'});
+ }
+ nav.forEach(b=>b.addEventListener('click',()=>showView(b.dataset.studioView)));
+ document.querySelectorAll('[data-open-studio-view]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();showView(b.dataset.openStudioView)}));
+ const search=document.getElementById('adminSearch');
+ function filterAdmin(q){
+  q=(q||'').toLocaleLowerCase('es');
+  document.querySelectorAll('#eventsList tr[data-search],#orgList .item[data-search],#applications .item[data-search]').forEach(el=>{
+   el.hidden=!!q&&!el.dataset.search.includes(q);
+  });
+ }
+ search.addEventListener('input',()=>filterAdmin(search.value));
+ window.TADAAStudio={showView,filterAdmin};
+})();
+</script>
+</body>
+</html>
