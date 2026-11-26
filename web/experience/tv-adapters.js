@@ -80,14 +80,25 @@ function homeState(){const u=TV.user;const valid=(TV.tickets||[]).filter(t=>t.st
 function loginLinks(root){if(TV.user)return;root.querySelectorAll('a[data-tv-link="explorar"],a[data-tv-link="cuenta"]').forEach(a=>{if(/Entrar/.test(a.textContent)){a.removeAttribute('data-tv-link');a.href='login.html?next=index.html'}})}
 A.Main=C=>class extends C{renderVals(){const h=homeState();return {...globals(),...h,popular:list().slice(0,8).map(e=>({...e,now:e.rush}))}}
  afterPaint(root){loginLinks(root);const n=root.querySelector('a[data-tv-link="pase"]');if(n){const h=homeState();if(h.next.id)n.__tvItem={id:h.next.id}}}};
-A.DHome=C=>class extends C{renderVals(){const i=this.state.i||0;const evs=list();const data=evs.slice(0,6);const n=Math.max(1,data.length);const ii=i%n;
- const cards=data.map((c,k)=>({...c,photo:!c.video,style:'position: relative; flex: 0 0 '+(k===ii?360:300)+'px; height: '+(k===ii?500:440)+'px; border-radius: 32px; overflow: hidden; display: block; color: #FFFFFF; background: #08091A; transition: all .5s cubic-bezier(.2,.8,.2,1); box-shadow: '+(k===ii?'0 40px 80px rgba(6,14,90,.55)':'none')+'; opacity: '+(k<ii?0:1)+';'}));
- const track='display: flex; align-items: flex-end; gap: 18px; height: 500px; transition: transform .5s cubic-bezier(.2,.8,.2,1); transform: translateX(-'+(ii*318)+'px);';
- const dots=data.map((x,k)=>({aria:'Ir a '+x.title,pick:()=>this.setState({i:k}),style:'height: 8px; border: 0; padding: 0; border-radius: 99px; transition: width .3s; '+(k===ii?'width: 44px; background: #D6FF35;':'width: 14px; background: rgba(255,255,255,.4);')}));
+A.DHome=C=>class extends C{renderVals(){const evs=list();const data=evs.slice(0,6);const n=Math.max(1,data.length);const j=this.state.j||0;const ii=j%n;const snap=!!this.state.snap;const tr=snap?'none':'all .6s cubic-bezier(.2,.8,.2,1)';
+ const loop=data.length>1?data.concat(data):data;
+ const cards=loop.map((c,k)=>({...c,photo:!c.video,style:'position: relative; flex: 0 0 '+(k===j?360:300)+'px; height: '+(k===j?500:440)+'px; border-radius: 32px; overflow: hidden; display: block; color: #FFFFFF; background: #08091A; transition: '+tr+'; box-shadow: '+(k===j?'0 40px 80px rgba(6,14,90,.55)':'none')+'; opacity: '+(k<j?0:1)+'; transform: scale('+(k<j?.9:1)+');'}));
+ const track='display: flex; align-items: flex-end; gap: 18px; height: 500px; transition: '+(snap?'none':'transform .6s cubic-bezier(.2,.8,.2,1)')+'; transform: translateX(-'+(j*318)+'px);';
+ const dots=data.map((x,k)=>({aria:'Ir a '+x.title,pick:()=>this.goTo(k),style:'height: 8px; border: 0; padding: 0; border-radius: 99px; cursor: pointer; transition: width .35s cubic-bezier(.2,.8,.2,1), background .35s; '+(k===ii?'width: 44px; background: #D6FF35;':'width: 14px; background: rgba(255,255,255,.4);')}));
  const base=super.renderVals();
  const top=evs.filter(e=>e.s==='now').slice(0,4).map((c,k)=>({...c,n:String(k+1),photo:!c.video}));
- const h=homeState();return {...globals(),...base,...h,cards,track,dots,prev:()=>this.setState({i:(ii+n-1)%n}),next:()=>this.setState({i:(ii+1)%n}),top}}
- afterPaint(root){loginLinks(root);const a=root.querySelector('header a[data-tv-link="cuenta"]');if(a&&!TV.user){a.removeAttribute('data-tv-link');a.href='login.html?next=index.html'}}};
+ const h=homeState();return {...globals(),...base,...h,cards,track,dots,prev:()=>this.step(-1,true),next:()=>this.step(1,true),top}}
+ n(){return Math.max(1,Math.min(6,list().length))}
+ snapTo(j,after){this.setState({j,snap:true});requestAnimationFrame(()=>requestAnimationFrame(()=>{this.state.snap=false;after?after():this.setState({})}))}
+ step(d,user){const n=this.n();if(n<2)return;if(user)this.restart();let j=this.state.j||0;
+  if(d<0&&j===0){this.snapTo(n,()=>this.setState({j:n-1}));return}
+  j+=d;this.setState({j});if(j>=n){clearTimeout(this._wrap);this._wrap=setTimeout(()=>this.snapTo(j-n),620)}}
+ goTo(k){this.restart();this.setState({j:k})}
+ restart(){clearInterval(this._auto);this._auto=setInterval(()=>{if(!document.hidden&&!this._hover)this.step(1)},5000)}
+ componentDidMount(){super.componentDidMount?.();this.restart()}
+ componentWillUnmount(){super.componentWillUnmount?.();clearInterval(this._auto);clearTimeout(this._wrap)}
+ afterPaint(root){loginLinks(root);const a=root.querySelector('header a[data-tv-link="cuenta"]');if(a&&!TV.user){a.removeAttribute('data-tv-link');a.href='login.html?next=index.html'}
+  const tk=root.querySelector('[data-tv-link="evento"]')?.parentElement;if(tk&&!tk.__hv){tk.__hv=1;tk.addEventListener('mouseenter',()=>{this._hover=true});tk.addEventListener('mouseleave',()=>{this._hover=false})}}};
 
 /* ───── Cartelera ───── */
 const CATS=['Todo','Conciertos','Teatro','Festivales','Paseos','Familia','Now!'];

@@ -73,6 +73,17 @@ function layout(){const host=$host(),root=host.firstElementChild;if(!root)return
  }else{root.style.width='100%';root.style.minHeight='100vh';if(mode==='M'){const z=vw/1280;if(z<1)host.style.zoom=String(z)}}
  root.querySelectorAll('*').forEach(e=>{const cs=e.style;if((cs.overflowX==='auto'||cs.overflow==='auto'||cs.overflowX==='scroll')&&!e.hasAttribute('data-tv-scroll'))e.setAttribute('data-tv-scroll','')})}
 
+/* ───── entrada de página: fade + elementos escalonados (Web Animations, no toca atributos) ───── */
+const REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function enter(host){if(REDUCE)return;host.animate([{opacity:0},{opacity:1}],{duration:280,easing:'ease-out'});
+ const root=host.firstElementChild;if(!root)return;const vh=innerHeight,vw=innerWidth,picks=[];
+ const walk=(el,depth)=>{for(const c of el.children){if(picks.length>=48)return;const r=c.getBoundingClientRect();if(r.width<24||r.height<16||r.bottom<0||r.top>vh*1.05)continue;const big=r.width*r.height>vw*vh*.28||(r.width>vw*.8&&r.height>160);if(big&&c.children.length&&depth<7){walk(c,depth+1);continue}if(/^(STYLE|SCRIPT|LINK)$/.test(c.tagName))continue;picks.push([c,r])}};
+ walk(root,0);picks.sort((a,b)=>(a[1].top-b[1].top)||(a[1].left-b[1].left));
+ const rise=(el,delay,y)=>{const o={duration:560,delay,easing:'cubic-bezier(.2,.8,.2,1)',fill:'backwards'};try{el.animate([{opacity:0}],o);el.animate([{transform:'translateY('+y+'px) scale(.985)'},{transform:'none'}],{...o,composite:'add'})}catch{}};
+ picks.forEach(([el],i)=>rise(el,Math.min(i*38,620),18));
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io.unobserve(e.target);rise(e.target,0,22)}),{rootMargin:'0px 0px -8% 0px'});
+ root.querySelectorAll('section, aside, article, h2').forEach(el=>{const r=el.getBoundingClientRect();if(r.top>vh*1.05)io.observe(el)})}
+
 /* ───── enrutador ───── */
 function parseHash(){const h=decodeURIComponent(location.hash.replace(/^#\/?/,''));const [r,...rest]=h.split('/');return {route:ROUTES[r]?r:(r?r:'inicio'),params:rest}}
 async function go(route,params=[],{replace=false}={}){
@@ -86,13 +97,15 @@ async function show(route,params){
  mode=document.documentElement.clientWidth<MOBILE_BP?'M':'D';
  if(AUTH.has(route)){await TV.session();if(!TV.user){location.href='login.html?next='+encodeURIComponent('index.html#'+[route,...params].join('/'));return}}
  const def=ROUTES[route];const name=def[mode]||def.D||def.M;
+ const hostEl=$host();const leaving=hostEl.firstElementChild&&!REDUCE?hostEl.animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateY(-6px)'}],{duration:180,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'}).finished.catch(()=>{}):null;
  try{await (window.TVAdapters?.load?.[name]||(()=>null))(TV,params)}catch(e){console.warn('[tv] datos',name,e)}
+ if(leaving)await leaving;
  if(tok!==navTok)return;
  comp?.componentWillUnmount?.();comp=null;cur=route;screenName=name;
  const c=compile(name);if(!c){$host().textContent='Pantalla no disponible';return}
  document.getElementById('tv-css').textContent=c.css;tplNode=c.node;comp=makeComponent(name,c.code,params);
- const host=$host();host.classList.remove('tv-enter');void host.offsetWidth;host.classList.add('tv-enter');
- paint(true);comp?.componentDidMount?.();document.body.classList.add('tv-ready');window.scrollTo({top:0,behavior:'instant'});
+ const host=$host();host.getAnimations().forEach(a=>a.cancel());
+ window.scrollTo({top:0,behavior:'instant'});paint(true);comp?.componentDidMount?.();document.body.classList.add('tv-ready');enter(host);
  document.title=(TV.titles[route]||'TADAA!')+' · TADAA!'}
 
 /* enlaces internos */
