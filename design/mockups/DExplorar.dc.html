@@ -46,14 +46,17 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
         </div>
         <label style="flex: 0 1 480px; display: flex; align-items: center; gap: 10px; background: #FFFFFF; color: #08091A; border-radius: 99px; padding: 6px 6px 6px 22px; box-shadow: 0 20px 40px rgba(8,9,26,.25)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5A6178" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-          <input placeholder="Busca un evento, artista o recinto" aria-label="Buscar" style="flex: 1; min-width: 0; border: 0; outline: 0; font: inherit; font-size: 14px">
+          <input placeholder="Busca un evento, película, museo o recinto" aria-label="Buscar" value="{{q}}" onInput="{{search}}" style="flex: 1; min-width: 0; border: 0; outline: 0; font: inherit; font-size: 14px">
           <span style="width: 46px; height: 46px; border-radius: 50%; background: #1238FF; display: grid; place-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg></span>
         </label>
+      </div>
+      <div role="tablist" aria-label="Tipo de plan" style="display: flex; gap: 4px; align-self: flex-start; background: rgba(8,9,26,.28); border: 1px solid rgba(255,255,255,.16); border-radius: 99px; padding: 5px">
+        <sc-for list="{{modes}}" as="mo"><button role="tab" aria-selected="{{mo.on}}" onClick="{{mo.pick}}" style="{{mo.style}}"><svg width="16" height="16" viewBox="0 0 256 256" aria-hidden="true"><path d="{{mo.icon}}" fill="currentColor"/></svg>{{mo.label}}<span style="{{mo.countStyle}}">{{mo.count}}</span></button></sc-for>
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 8px">
         <sc-for list="{{cats}}" as="c" hint-placeholder-count="6"><button onClick="{{c.pick}}" aria-pressed="{{c.on}}" style="{{c.style}}">{{c.label}}</button></sc-for>
       </div>
-      <div role="group" aria-label="Elegir día" style="display: flex; gap: 8px; overflow: hidden">
+      <sc-if value="{{withDates}}"><div role="group" aria-label="Elegir día" style="display: flex; gap: 8px; overflow: hidden">
         <span style="flex: 0 0 auto; writing-mode: vertical-rl; transform: rotate(180deg); font-size: 11px; font-weight: 800; letter-spacing: .14em; color: #D9E0FF; text-align: center">NOV</span>
         <sc-for list="{{days}}" as="d" hint-placeholder-count="14">
           <button onClick="{{d.pick}}" aria-pressed="{{d.on}}" style="{{d.style}}">
@@ -62,13 +65,14 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
             <span style="{{d.dot}}"></span>
           </button>
         </sc-for>
-      </div>
+      </div></sc-if>
+      <sc-if value="{{noDates}}"><span style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #D9E0FF"><svg width="18" height="18" viewBox="0 0 256 256" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm56,112H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48a8,8,0,0,1,0,16Z" fill="#D6FF35"/></svg>{{undatedNote}}</span></sc-if>
     </div>
   </section>
 
   <div style="max-width: 1280px; margin: 0 auto; padding: 30px 32px 80px; display: flex; flex-direction: column; gap: 30px">
 
-    <a href="DEvento.dc.html" style="position: relative; display: block; height: 380px; border-radius: 36px; overflow: hidden; color: #FFFFFF; background: #08091A">
+    <sc-if value="{{hasFeat}}">    <a href="DEvento.dc.html" style="position: relative; display: block; height: 380px; border-radius: 36px; overflow: hidden; color: #FFFFFF; background: #08091A">
       <sc-for list="{{feat}}" as="f" hint-placeholder-count="1">
         <img class="fade" src="{{f.img}}" alt="{{f.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: {{f.pos}}">
         <div style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(8,9,26,.9) 0%, rgba(8,9,26,.25) 55%, transparent 80%)"></div>
@@ -88,23 +92,27 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
       <span style="position: absolute; right: 24px; top: 26px; display: flex; gap: 6px">
         <sc-for list="{{fdots}}" as="d" hint-placeholder-count="3"><span style="{{d}}"></span></sc-for>
       </span>
-    </a>
+    </a></sc-if>
 
     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px">
-      <div role="tablist" aria-label="Secciones" style="display: flex; gap: 4px; background: #FFFFFF; border-radius: 99px; padding: 5px">
+      <sc-if value="{{withDates}}"><div role="tablist" aria-label="Secciones" style="display: flex; gap: 4px; background: #FFFFFF; border-radius: 99px; padding: 5px">
         <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3"><button role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}} <span style="opacity: .6">{{t.count}}</span></button></sc-for>
-      </div>
+      </div></sc-if>
+      <sc-if value="{{noDates}}"><b style="font-family: Outfit, sans-serif; font-size: 30px; letter-spacing: -1px">{{listTitle}}</b></sc-if>
       <button style="height: 46px; padding: 0 18px; border-radius: 99px; border: 1px solid #D5DBEA; background: #FFFFFF; font: inherit; font-weight: 700; font-size: 13px; color: #08091A; display: flex; align-items: center; gap: 8px">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#08091A" stroke-width="2" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Más filtros
       </button>
     </div>
 
+    <sc-for list="{{groups}}" as="g"><div style="display: flex; flex-direction: column; gap: 14px">
+    <sc-if value="{{g.label}}"><div style="display: flex; align-items: baseline; gap: 10px"><b style="font-family: Outfit, sans-serif; font-size: 24px; letter-spacing: -.5px">{{g.label}}</b><span style="font-size: 13px; color: #5A6178">{{g.sub}}</span></div></sc-if>
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px">
-      <sc-for list="{{events}}" as="e" hint-placeholder-count="6">
+      <sc-for list="{{g.items}}" as="e" hint-placeholder-count="6">
         <a href="DEvento.dc.html" style="position: relative; height: 340px; border-radius: 30px; overflow: hidden; color: #FFFFFF; display: block; background: #08091A">
           <sc-if value="{{e.video}}" hint-placeholder-val="{{ false }}"><video src="/_blob/9bb3a5e0fcd00cd42c2ddaf0ca39bac7" poster="{{e.img}}" autoplay muted loop playsinline aria-label="Video de {{e.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .92"></video></sc-if>
           <sc-if value="{{e.photo}}" hint-placeholder-val="{{ true }}"><img src="{{e.img}}" alt="{{e.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: {{e.pos}}; opacity: .92"></sc-if>
           <span style="{{e.chipStyle}}">{{e.chip}}</span>
+          <sc-if value="{{e.kindLabel}}"><span style="position: absolute; left: 14px; top: 50px; border-radius: 99px; padding: 6px 10px; font-size: 11px; font-weight: 800; background: rgba(8,9,26,.6); color: #FFFFFF; backdrop-filter: blur(8px)">{{e.kindLabel}}</span></sc-if>
           <span style="position: absolute; right: 14px; top: 14px; display: flex; gap: 6px">
             <sc-if value="{{e.video}}" hint-placeholder-val="{{ false }}"><span style="display: flex; align-items: center; gap: 5px; background: rgba(8,9,26,.55); backdrop-filter: blur(8px); border-radius: 99px; padding: 7px 10px; font-size: 11px; font-weight: 700"><svg width="10" height="10" viewBox="0 0 24 24" fill="#D6FF35" aria-hidden="true"><path d="M6 4v16l14-8z"/></svg>0:15</span></sc-if>
           </span>
@@ -112,7 +120,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
             <span style="display: flex; gap: 6px; margin-bottom: 8px"><sc-if value="{{e.rush}}" hint-placeholder-val="{{ false }}"><span title="Now! disponible" role="img" aria-label="Now! disponible" style="width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, #FF3D8B, #FF8A3D); display: grid; place-items: center; box-shadow: 0 4px 12px rgba(255,61,139,.4)"><svg width="15" height="15" viewBox="0 0 24 24" fill="#0B0A1C" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span></sc-if><sc-if value="{{e.golden}}" hint-placeholder-val="{{ false }}"><span title="Puede salir Golden Ticket" role="img" aria-label="Golden Ticket activo" style="width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, #FFE9A3, #E2B23C 55%, #B8860B); display: grid; place-items: center; box-shadow: 0 4px 12px rgba(226,178,60,.45)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2A1A00" stroke-width="2.2" aria-hidden="true"><path d="M3 7h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4z"/><path d="M13 7v12" stroke-dasharray="2 2"/></svg></span></sc-if><sc-if value="{{e.original}}" hint-placeholder-val="{{ false }}"><span title="TADAA! Original" role="img" aria-label="TADAA! Original" style="width: 30px; height: 30px; border-radius: 9px; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 900; font-size: 13px">t!</span></sc-if></span>
             <div style="font-family: Outfit, sans-serif; font-weight: 800; font-size: 28px; line-height: 1">{{e.title}}</div>
             <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 8px; font-size: 13px; color: #D9E0FF">
-              <span>{{e.venue}}</span><b style="color: #FFFFFF; white-space: nowrap">{{e.when}}</b>
+              <span>{{e.venue}}</span><b style="color: #FFFFFF; white-space: nowrap">{{e.whenLine}}</b>
             </div>
             <sc-if value="{{e.soon}}" hint-placeholder-val="{{ false }}">
               <span style="margin-top: 12px; height: 42px; border-radius: 99px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3); display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 800">
@@ -123,6 +131,8 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
         </a>
       </sc-for>
     </div>
+    </div></sc-for>
+    <sc-if value="{{empty}}"><div style="background: #FFFFFF; border-radius: 28px; padding: 32px; text-align: center; color: #4A5068; font-size: 15px">{{emptyMsg}}</div></sc-if>
   </div>
 </div>
 </x-dc>
