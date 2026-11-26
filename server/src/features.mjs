@@ -51,12 +51,21 @@ export async function issueTicket(c,{itemId,userId,seatId=null,eventId=null,rand
  if(eventId){const g=await c.query(`SELECT * FROM event_golden_config WHERE event_id=$1 AND enabled FOR UPDATE`,[eventId]);const cfg=g.rows[0];
   if(cfg){const won=await c.query(`SELECT count(*)::int n FROM tickets t JOIN order_items oi ON oi.id=t.order_item_id JOIN orders o ON o.id=oi.order_id JOIN reservations r ON r.id=o.reservation_id WHERE r.event_id=$1 AND t.golden`,[eventId]);
    if(won.rows[0].n<cfg.max_winners&&rollGolden(cfg.odds,rand)){golden=true;benefit={kind:cfg.benefit_kind,title:cfg.benefit_title,detail:cfg.benefit_detail||null,eventId:cfg.benefit_event_id||null};}}}
- const t=await c.query(`INSERT INTO tickets(order_item_id,owner_user_id,code_hash,seat_id,golden,golden_benefit) VALUES($1,$2,$3,$4,$5,$6) RETURNING id`,[itemId,userId,code,seatId,golden,benefit?JSON.stringify(benefit):null]);
+ let delivery='final';if(eventId){const m=await c.query('SELECT ticketing_mode FROM events WHERE id=$1',[eventId]);if(m.rows[0]?.ticketing_mode==='external')delivery='provisional'}
+ const t=await c.query(`INSERT INTO tickets(order_item_id,owner_user_id,code_hash,seat_id,golden,golden_benefit,delivery_status) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING id`,[itemId,userId,code,seatId,golden,benefit?JSON.stringify(benefit):null,delivery]);
  if(golden)await c.query(`INSERT INTO user_notifications(user_id,kind,title,message,action_url) VALUES($1,'golden_ticket','¡Te salió un Golden Ticket!','Uno de tus boletos se volvió dorado. Ábrelo para descubrir tu beneficio.','/experience/app.html#/boletos')`,[userId]);
  return {id:t.rows[0].id,golden};
 }
 /** Precio de membresía: $100/mes o el descuento de una oferta abierta (p. ej. salida de convenio). */
-export async function membershipQuote(c,userId,baseMinor=10000){
+/* Estrenos en cartelera: TMDB (API oficial) si hay TMDB_API_KEY; se cachea 6 h. Sin llave → null y el front usa la cartelera del evento. */
+let _est={at:0,data:null};
+async function estrenos(){if(Date.now()-_est.at<6*3600e3&&_est.data)return _est.data;const key=process.env.TMDB_API_KEY;if(!key)return {source:null,movies:[]};
+ try{const auth=key.length>40?{headers:{Authorization:'Bearer '+key}}:{};const q=key.length>40?'':'&api_key='+encodeURIComponent(key);
+  const r=await fetch('https://api.themoviedb.org/3/movie/now_playing?language=es-MX&region=MX&page=1'+q,{...auth,signal:AbortSignal.timeout(6000)});if(!r.ok)throw new Error('tmdb '+r.status);const d=await r.json();
+  const movies=(d.results||[]).filter(m=>m.poster_path).sort((a,b)=>String(b.release_date).localeCompare(String(a.release_date))).slice(0,4).map(m=>({title:m.title,genre:'',rating:'',runtime:'',release:m.release_date,score:m.vote_average?Math.round(m.vote_average*10)/10:null,poster:'https://image.tmdb.org/t/p/w500'+m.poster_path,overview:m.overview||''}));
+  _est={at:Date.now(),data:{source:'tmdb',movies}};return _est.data}catch(e){return _est.data||{source:null,movies:[]}}}
+export const MEMBERSHIP_PRICE_MINOR=Math.max(100,Number(process.env.MEMBERSHIP_PRICE_MINOR)||2500);
+export async function membershipQuote(c,userId,baseMinor=MEMBERSHIP_PRICE_MINOR){
  const r=await c.query(`SELECT id,discount_pct FROM membership_offers WHERE user_id=$1 AND months_used<months_total AND expires_at>now() ORDER BY discount_pct DESC LIMIT 1`,[userId]);const o=r.rows[0];
  return o?{priceMinor:discounted(baseMinor,o.discount_pct),offerId:o.id,discountPct:o.discount_pct}:{priceMinor:baseMinor,offerId:null,discountPct:0};
 }
@@ -239,6 +248,8 @@ export async function featureRequest(req,res,pathname,url,parts,ctx){
  // ── Admin TADAA! ──
  if(parts[2]==='admin'&&parts[3]==='events'&&uuid(parts[4])&&parts[5]==='flags'&&M==='PATCH'){requireAdmin(req);const d=await reqBody(req);const patch={};for(const k of META_KEYS)if(d[k]!==undefined)patch[k]=k==='tadaa_original'||k==='preventa'||k==='proximamente'?d[k]===true:d[k];if(patch.logo_url&&!/^(https:\/\/|\/|img\/)/.test(String(patch.logo_url)))throw invalid('Logo debe ser https o ruta relativa');
   const s=JSON.stringify(patch);if(s.length>60000)throw invalid('Metadata demasiado grande');const r=await p.query(`UPDATE events SET metadata=metadata||$1::jsonb,updated_at=now() WHERE id=$2 RETURNING metadata`,[s,parts[4]]);if(!r.rowCount)throw invalid('Evento no encontrado',404);if(typeof d.hero_url==='string'){const h=d.hero_url.trim().slice(0,500);if(h&&!/^(https:\/\/|\/|img\/)/.test(h))throw invalid('Imagen debe ser https o ruta relativa');await p.query(`INSERT INTO event_extras(event_id,hero_url,poster_url) VALUES($1,$2,$2) ON CONFLICT(event_id) DO UPDATE SET hero_url=EXCLUDED.hero_url,poster_url=COALESCE(NULLIF(EXCLUDED.poster_url,''),event_extras.poster_url)`,[parts[4],h])}return response(res,200,{ok:true,metadata:r.rows[0].metadata}),true}
+ if(pathname==='/api/v2/membership/plan'&&M==='GET'){const ss=await ctx.session(req).catch(()=>null);let quote=null;if(ss?.user_id){const c=await p.connect();try{quote=await membershipQuote(c,ss.user_id)}finally{c.release()}}return response(res,200,{priceMinor:MEMBERSHIP_PRICE_MINOR,currency:'MXN',period:'mes',quote}),true}
+ if(pathname==='/api/v2/cine/estrenos'&&M==='GET')return response(res,200,await estrenos()),true;
  if(parts[2]==='admin'&&parts[3]==='features'&&M==='GET'){requireAdmin(req);const r=await p.query(`SELECT (SELECT count(*)::int FROM now_campaigns WHERE enabled) now_active,(SELECT count(*)::int FROM now_signups) now_signups,(SELECT count(*)::int FROM event_golden_config WHERE enabled) golden_events,(SELECT count(*)::int FROM tickets WHERE golden) golden_issued,(SELECT count(*)::int FROM event_addons WHERE active) addons_active,(SELECT count(*)::int FROM membership_offers WHERE months_used<months_total) offers_open,(SELECT count(*)::int FROM events WHERE (metadata->>'tadaa_original')::boolean IS TRUE) originals`);return response(res,200,r.rows[0]),true}
  return false;
 }
