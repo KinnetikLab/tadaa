@@ -48,3 +48,27 @@ img.ticket-qr.tvm-refresh{opacity:.35;filter:blur(2px)}
 .tvm-skel{position:relative;color:transparent!important;border-radius:12px;background:linear-gradient(100deg,rgba(255,255,255,.06) 30%,rgba(255,255,255,.16) 50%,rgba(255,255,255,.06) 70%) 0 0/250% 100%;animation:tvm-skel 1.2s linear infinite}
 @keyframes tvm-skel{to{background-position:-250% 0}}
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.tvm-r{opacity:1;transform:none}}
+
+/* ───── diálogos de portales (Studio, productores, empresas, staff) ───── */
+.tv-modal{position:fixed;inset:0;z-index:5000;display:grid;place-items:center;padding:20px;background:rgba(8,9,26,0);backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0);transition:background .28s ease,backdrop-filter .28s ease}
+.tv-modal.on{background:rgba(8,9,26,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.tv-modal-card{width:min(460px,100%);max-height:calc(100vh - 40px);overflow:auto;background:#fff;color:#08091A;border-radius:28px;padding:26px;font-family:Outfit,system-ui,sans-serif;box-shadow:0 30px 80px rgba(8,9,26,.35);opacity:0;transform:translateY(18px) scale(.96);transition:opacity .22s ease,transform .38s cubic-bezier(.34,1.4,.64,1)}
+.tv-modal.on .tv-modal-card{opacity:1;transform:none}
+.tv-modal-card h2{margin:0 0 6px;font-size:24px;font-weight:800;letter-spacing:-.02em}
+.tv-modal-card>p{margin:0 0 14px;color:#4A5068;font-size:14px;line-height:1.45}
+.tv-modal-fields{display:flex;flex-direction:column;gap:12px}
+.tv-modal-fields label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:700;color:#4A5068}
+.tv-modal-fields input:not([type=checkbox]),.tv-modal-fields select,.tv-modal-fields textarea{font:inherit;font-size:15px;font-weight:600;color:#08091A;border:1.5px solid #D5DBEA;border-radius:14px;padding:11px 13px;background:#fff;transition:border-color .2s,box-shadow .2s}
+.tv-modal-fields input:focus,.tv-modal-fields select:focus,.tv-modal-fields textarea:focus{outline:0;border-color:#1238FF;box-shadow:0 0 0 4px rgba(18,56,255,.14)}
+.tv-modal-fields .chk{flex-direction:row;align-items:center;gap:10px;font-size:14px;color:#08091A;cursor:pointer}
+.tv-modal-fields .chk input{width:20px;height:20px;accent-color:#1238FF}
+.tv-modal-err{min-height:18px;margin:10px 0 0;color:#D2264B;font-size:13px;font-weight:700}
+.tv-modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
+.tv-modal-actions button{height:46px;padding:0 20px;border-radius:99px;border:0;font:inherit;font-weight:800;font-size:14px;cursor:pointer;background:#1238FF;color:#fff;transition:transform .15s ease,filter .2s,opacity .2s}
+.tv-modal-actions button:active{transform:scale(.96)}
+.tv-modal-actions button.ghost{background:#EEF1F7;color:#08091A}
+.tv-modal-actions button.danger{background:#D2264B}
+.tv-modal-actions button.busy{opacity:.6;pointer-events:none}
+.tv-modal-card.shake{animation:tvShake .36s cubic-bezier(.36,.07,.19,.97)}
+@keyframes tvShake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+@media (prefers-reduced-motion:reduce){.tv-modal,.tv-modal-card{transition:opacity .15s}.tv-modal-card{transform:none!important}.tv-modal-card.shake{animation:none}}

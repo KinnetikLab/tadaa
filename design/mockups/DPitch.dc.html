@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>TADAA! · Early Partners · Presentación</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+.txw{background:#1238FF url(/_blob/e0912ca8104f4784a21d635acba18e3a) center/cover}
+.grain{background-image:url(/_blob/3deff8146b80bb3fb1485ea91d6f55e6);background-size:256px}
+.enter{animation:enter .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes enter{from{opacity:0;transform:translateX(40px) scale(.98)}to{opacity:1;transform:none}}
+.rise{animation:rise .7s .15s cubic-bezier(.2,.8,.2,1) both}
+.rise2{animation:rise .7s .3s cubic-bezier(.2,.8,.2,1) both}
+.rise3{animation:rise .7s .45s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.pulse{animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(214,255,53,.6)}50%{box-shadow:0 0 0 12px rgba(214,255,53,0)}}
+.pop{animation:popin .35s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes popin{from{opacity:0;transform:scale(.9) translateY(6px)}to{opacity:1;transform:none}}
+.float{animation:float 5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-12px) rotate(-3deg)}}
+</style>
+</helmet>
+<div class="txw" style="position: relative; width: 100%; min-height: 900px; font-family: 'Plus Jakarta Sans', sans-serif; color: #FFFFFF; overflow: hidden">
+  <div style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(6,14,90,.9) 0%, rgba(6,14,90,.3) 50%, rgba(6,14,90,.1) 100%)"></div>
+  <div class="grain" style="position: absolute; inset: 0; opacity: .25"></div>
+
+  <header style="position: relative; max-width: 1280px; margin: 0 auto; padding: 20px 32px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap">
+    <span style="display: flex; align-items: center; gap: 12px">
+      <img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="Tadaa!" style="height: 34px; width: auto">
+      <span style="font-size: 11px; font-weight: 800; letter-spacing: .16em; color: #D6FF35">EARLY PARTNERS 2027</span>
+    </span>
+    <span style="display: flex; gap: 8px; align-items: center">
+      <span style="font-size: 11px; font-weight: 800; letter-spacing: .1em; border: 1.5px dashed rgba(255,255,255,.6); border-radius: 99px; padding: 6px 10px">DATOS PROVISIONALES</span>
+      <button onClick="{{toggleIndex}}" aria-expanded="{{indexOpen}}" style="height: 44px; padding: 0 16px; border-radius: 99px; border: 1px solid rgba(255,255,255,.35); background: rgba(8,9,26,.3); color: #FFFFFF; display: flex; align-items: center; gap: 8px; font-family: inherit; font-weight: 700; font-size: 13px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Índice
+      </button>
+    </span>
+  </header>
+
+  <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: 0 32px">
+    <div style="position: relative; width: 100%; aspect-ratio: 16 / 9; min-height: 560px; border-radius: 36px; overflow: hidden; background: #08091A; box-shadow: 0 40px 100px rgba(4,8,60,.6)">
+
+      <sc-if value="{{s1}}" hint-placeholder-val="{{ true }}">
+        <div class="enter txw" style="position: absolute; inset: 0; display: flex; align-items: center; padding: 6%">
+          <div style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(6,14,90,.85), transparent 70%)"></div>
+          <div style="position: relative; flex: 1; display: flex; flex-direction: column; gap: 22px">
+            <span class="rise" style="align-self: flex-start; background: #08091A; border-radius: 99px; padding: 8px 14px; font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #D6FF35">PROGRAMA EARLY PARTNERS</span>
+            <h1 class="rise2" style="margin: 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: clamp(56px, 7vw, 112px); line-height: .86; letter-spacing: -4px">Más gente<br>en tus <span style="color: #D6FF35">butacas.</span></h1>
+            <button class="rise3" onClick="{{next}}" style="align-self: flex-start; height: 60px; padding: 0 8px 0 26px; border-radius: 99px; border: 0; background: #D6FF35; color: #08091A; display: flex; align-items: center; gap: 16px; font-family: inherit; font-weight: 800; font-size: 15px">Empezar<span style="width: 46px; height: 46px; border-radius: 50%; background: #08091A; display: grid; place-items: center; color: #D6FF35; font-size: 20px">→</span></button>
+          </div>
+          <div class="float" style="position: relative; width: 300px; background: #FFFFFF; color: #08091A; border-radius: 30px; padding: 10px 10px 18px; box-shadow: 0 40px 80px rgba(8,9,26,.45)">
+            <img src="/_blob/bf23baed004bb85668937804b7d495cc" alt="" style="width: 100%; height: 170px; object-fit: cover; border-radius: 22px; display: block">
+            <div style="font-family: Outfit, sans-serif; font-weight: 800; font-size: 22px; text-align: center; margin-top: 12px">Tu evento aquí</div>
+            <div style="margin: 12px -10px 0; border-top: 2px dashed #9DAEF5"></div>
+            <div style="display: flex; justify-content: space-between; padding: 12px 12px 0; font-size: 12px"><span>Vendidos</span><b>+38% · provisional</b></div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
+        <div class="enter" style="position: absolute; inset: 0; padding: 6%; display: flex; flex-direction: column; gap: 26px; background: #08091A">
+          <span class="rise" style="font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #D6FF35">EL PROBLEMA</span>
+          <h2 class="rise2" style="margin: 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: clamp(40px, 5vw, 72px); line-height: .92; letter-spacing: -2.5px; max-width: 900px">Butacas vacías de un lado. Beneficios que nadie usa del otro.</h2>
+          <div class="rise3" style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: auto">
+            <sc-for list="{{probs}}" as="h" hint-placeholder-count="2">
+              <div style="position: relative; flex: 1 1 300px; background: #161833; border: 1px solid #2A2D52; border-radius: 28px; padding: 26px">
+                <b style="display: block; font-family: Outfit, sans-serif; font-size: 72px; line-height: .9; color: {{h.color}}">{{h.n}}</b>
+                <span style="font-size: 16px; color: #C7CDE6">{{h.t}}</span>
+                <button onClick="{{h.pick}}" aria-expanded="{{h.open}}" aria-label="Más información" class="pulse" style="position: absolute; right: 18px; top: 18px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #D6FF35; color: #08091A; font-size: 24px; font-weight: 800">+</button>
+                <sc-if value="{{h.open}}" hint-placeholder-val="{{ false }}">
+                  <div class="pop" style="position: absolute; right: 18px; top: 72px; width: 260px; background: #FFFFFF; color: #08091A; border-radius: 20px; padding: 16px; font-size: 13px; line-height: 1.5; box-shadow: 0 20px 40px rgba(0,0,0,.4); z-index: 2">{{h.more}}</div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{s3}}" hint-placeholder-val="{{ false }}">
+        <div class="enter" style="position: absolute; inset: 0; padding: 6%; background: radial-gradient(60% 60% at 50% 55%, #1A2A9E, #08091A 75%); display: flex; flex-direction: column; gap: 18px">
+          <span class="rise" style="font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #D6FF35">LA SOLUCIÓN</span>
+          <h2 class="rise2" style="margin: 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: clamp(36px, 4.4vw, 64px); letter-spacing: -2px; line-height: .95">TADAA! conecta a los dos.</h2>
+          <div class="rise3" style="flex: 1; position: relative; display: flex; align-items: center; justify-content: space-between; gap: 16px">
+            <div aria-hidden="true" style="position: absolute; left: 18%; right: 18%; top: 34%; border-top: 3px dashed rgba(214,255,53,.6)"></div>
+            <sc-for list="{{nodes}}" as="n" hint-placeholder-count="3">
+              <div style="position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
+                <button onClick="{{n.pick}}" aria-expanded="{{n.open}}" aria-label="Ver más sobre {{n.title}}" style="{{n.style}}">{{n.icon}}</button>
+                <b style="font-family: Outfit, sans-serif; font-size: 22px">{{n.title}}</b>
+                <span style="font-size: 13px; color: #C7CDE6; max-width: 220px">{{n.sub}}</span>
+                <sc-if value="{{n.open}}" hint-placeholder-val="{{ false }}">
+                  <div class="pop" style="position: absolute; top: -12px; left: 50%; margin-left: -140px; width: 280px; background: #FFFFFF; color: #08091A; border-radius: 20px; padding: 16px; font-size: 13px; line-height: 1.5; text-align: left; box-shadow: 0 20px 40px rgba(0,0,0,.4); z-index: 2">{{n.more}}</div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+          <span style="font-size: 12px; color: #AEB6D6; text-align: center">Toca cada círculo para ver más</span>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{s4}}" hint-placeholder-val="{{ false }}">
+        <div class="enter txw" style="position: absolute; inset: 0; padding: 6%; display: flex; flex-direction: column; gap: 24px">
+          <div style="display: flex; justify-content: space-between; align-items: center">
+            <span class="rise" style="font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #D6FF35">EN NÚMEROS</span>
+            <span style="font-size: 11px; font-weight: 800; letter-spacing: .1em; border: 1.5px dashed rgba(255,255,255,.6); border-radius: 99px; padding: 6px 10px">PROVISIONAL</span>
+          </div>
+          <div class="rise2" style="flex: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px">
+            <sc-for list="{{stats}}" as="x" hint-placeholder-count="4">
+              <div style="background: rgba(8,9,26,.35); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.16); border-radius: 28px; padding: 26px; display: flex; flex-direction: column; justify-content: flex-end">
+                <b style="font-family: Outfit, sans-serif; font-weight: 900; font-size: clamp(48px, 6vw, 92px); letter-spacing: -3px; line-height: .9; color: {{x.color}}">{{x.n}}</b>
+                <span style="font-size: 15px; color: #E1E6F5">{{x.t}}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{s5}}" hint-placeholder-val="{{ false }}">
+        <div class="enter" style="position: absolute; inset: 0; padding: 6%; background: #EEF1F7; color: #08091A; display: flex; flex-direction: column; gap: 20px">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap">
+            <h2 class="rise" style="margin: 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: clamp(36px, 4.4vw, 60px); letter-spacing: -2px; line-height: .95">Tres formas<br>de sumarte</h2>
+            <div role="tablist" aria-label="Tipo de partner" style="display: flex; gap: 4px; background: #FFFFFF; border-radius: 99px; padding: 5px">
+              <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3"><button role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button></sc-for>
+            </div>
+          </div>
+          <div class="rise2" style="flex: 1; display: flex; gap: 18px; min-height: 0">
+            <div style="flex: 1; background: #08091A; color: #FFFFFF; border-radius: 28px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+              <span style="font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #D6FF35">{{p.eyebrow}}</span>
+              <h3 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 34px; line-height: 1">{{p.title}}</h3>
+              <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #C7CDE6">{{p.text}}</p>
+              <a href="{{p.href}}" style="margin-top: auto; align-self: flex-start; height: 50px; padding: 0 20px; border-radius: 99px; background: #D6FF35; color: #08091A; display: flex; align-items: center; font-weight: 800; font-size: 14px">{{p.cta}}</a>
+            </div>
+            <div style="flex: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+              <sc-for list="{{p.points}}" as="x" hint-placeholder-count="4">
+                <div style="background: #FFFFFF; border-radius: 22px; padding: 18px; display: flex; flex-direction: column; gap: 6px">
+                  <b style="font-family: Outfit, sans-serif; font-size: 28px; color: #1238FF">{{x.n}}</b><b style="font-size: 15px">{{x.t}}</b><span style="font-size: 12px; line-height: 1.5; color: #4A5068">{{x.d}}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{s6}}" hint-placeholder-val="{{ false }}">
+        <div class="enter" style="position: absolute; inset: 0; padding: 6%; background: #08091A; display: flex; flex-direction: column; gap: 22px">
+          <span class="rise" style="font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #D6FF35">HERRAMIENTAS QUE VENDEN · TOCA CADA UNA</span>
+          <div class="rise2" style="flex: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px">
+            <sc-for list="{{tools}}" as="t" hint-placeholder-count="4">
+              <button onClick="{{t.pick}}" aria-expanded="{{t.open}}" style="{{t.style}}">
+                <b style="font-family: Outfit, sans-serif; font-weight: 900; font-size: 30px; line-height: 1; {{t.titleStyle}}">{{t.name}}</b>
+                <span style="font-size: 13px; line-height: 1.5; text-align: left; opacity: .9">{{t.body}}</span>
+                <span style="margin-top: auto; align-self: flex-start; font-size: 12px; font-weight: 800">{{t.hint}}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{s7}}" hint-placeholder-val="{{ false }}">
+        <div class="enter" style="position: absolute; inset: 0; padding: 6%; background: radial-gradient(60% 70% at 85% 10%, rgba(91,60,255,.4), transparent 70%), #08091A; display: flex; gap: 40px; align-items: center">
+          <div style="flex: 1">
+            <span class="rise" style="font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #D6FF35">SOLO PARA LOS PRIMEROS 20 · PROVISIONAL</span>
+            <h2 class="rise2" style="margin: 12px 0 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: clamp(40px, 5vw, 76px); line-height: .9; letter-spacing: -2.5px">Lo que gana un Early Partner</h2>
+          </div>
+          <ol class="rise3" style="flex: 1; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px">
+            <sc-for list="{{perks}}" as="k" hint-placeholder-count="4">
+              <li><button onClick="{{k.pick}}" aria-expanded="{{k.open}}" style="{{k.style}}"><b style="color: #D6FF35; font-family: Outfit, sans-serif; font-size: 22px">{{k.n}}</b><span style="flex: 1; text-align: left; display: flex; flex-direction: column; gap: 4px"><b style="font-size: 16px">{{k.t}}</b><sc-if value="{{k.open}}" hint-placeholder-val="{{ false }}"><span class="pop" style="font-size: 13px; line-height: 1.5; color: #C7CDE6">{{k.d}}</span></sc-if></span><span style="font-size: 22px; color: #D6FF35">{{k.sign}}</span></button></li>
+            </sc-for>
+          </ol>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{s8}}" hint-placeholder-val="{{ false }}">
+        <div class="enter txw" style="position: absolute; inset: 0; padding: 6%; display: flex; gap: 40px; align-items: center; flex-wrap: wrap">
+          <h2 class="rise" style="flex: 1 1 360px; margin: 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: clamp(44px, 5.5vw, 84px); line-height: .9; letter-spacing: -3px">¿Hablamos de tu próximo evento?</h2>
+          <form class="rise2" style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 10px">
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700">Nombre<input placeholder="Tu nombre" style="height: 52px; border: 0; border-radius: 16px; padding: 0 16px; font: inherit; font-size: 14px"></label>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700">Organización<input placeholder="Productora, empresa o escuela" style="height: 52px; border: 0; border-radius: 16px; padding: 0 16px; font: inherit; font-size: 14px"></label>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700">Correo<input type="email" placeholder="tu@organizacion.mx" style="height: 52px; border: 0; border-radius: 16px; padding: 0 16px; font: inherit; font-size: 14px"></label>
+            <button type="button" style="height: 58px; border-radius: 99px; border: 0; background: #D6FF35; color: #08091A; font-family: inherit; font-weight: 800; font-size: 15px">Quiero ser Early Partner</button>
+          </form>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{indexOpen}}" hint-placeholder-val="{{ false }}">
+        <div class="pop" style="position: absolute; inset: 0; background: rgba(8,9,26,.92); backdrop-filter: blur(10px); padding: 5%; display: flex; flex-direction: column; gap: 20px; z-index: 5">
+          <div style="display: flex; justify-content: space-between; align-items: center"><b style="font-family: Outfit, sans-serif; font-size: 32px">Índice</b><button onClick="{{toggleIndex}}" aria-label="Cerrar índice" style="width: 48px; height: 48px; border-radius: 50%; border: 0; background: #FFFFFF; color: #08091A; font-size: 20px">✕</button></div>
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px">
+            <sc-for list="{{thumbs}}" as="t" hint-placeholder-count="8">
+              <button onClick="{{t.go}}" style="{{t.style}}"><b style="font-family: Outfit, sans-serif; font-size: 34px; color: #D6FF35">{{t.n}}</b><span style="font-size: 15px; font-weight: 700; text-align: left">{{t.label}}</span></button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+
+    <nav aria-label="Navegación de la presentación" style="display: flex; align-items: center; gap: 16px; padding: 20px 0 36px">
+      <button onClick="{{prev}}" aria-label="Diapositiva anterior" style="width: 56px; height: 56px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); background: rgba(8,9,26,.3); color: #FFFFFF; font-size: 22px">←</button>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; gap: 6px">
+          <sc-for list="{{dots}}" as="d" hint-placeholder-count="8"><button onClick="{{d.go}}" aria-label="{{d.aria}}" aria-current="{{d.on}}" style="{{d.style}}"></button></sc-for>
+        </div>
+        <span style="font-size: 12px; font-weight: 700; color: #D9E0FF">{{counter}}</span>
+      </div>
+      <button onClick="{{next}}" aria-label="Siguiente diapositiva" style="height: 56px; padding: 0 24px; border-radius: 99px; border: 0; background: #D6FF35; color: #08091A; font-family: inherit; font-weight: 800; font-size: 15px">Siguiente →</button>
+    </nav>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = { i: 0, open: '', t: 'prod', idx: false }; }
+  renderVals() {
+    const st = this.state, N = 8, i = st.i;
+    const go = k => () => this.setState({ i: k, open: '', idx: false });
+    const tog = id => () => this.setState({ open: st.open === id ? '' : id });
+    const labels = ['Portada', 'El problema', 'La solución', 'En números', 'Para quién', 'Herramientas', 'Early Partner', 'Hablemos'];
+    const dots = labels.map((l, k) => ({ aria: 'Ir a ' + l, on: k === i, go: go(k),
+      style: 'flex: 1; height: 6px; border: 0; padding: 0; border-radius: 99px; ' + (k <= i ? 'background: #D6FF35;' : 'background: rgba(255,255,255,.25);') }));
+    const thumbs = labels.map((label, k) => ({ label, n: String(k + 1).padStart(2, '0'), go: go(k),
+      style: 'min-height: 120px; border-radius: 22px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; font-family: inherit; color: #FFFFFF; ' + (k === i ? 'background: #1238FF; border: 2px solid #D6FF35;' : 'background: #161833; border: 2px solid #2A2D52;') }));
+    const probs = [
+      { id: 'p1', n: '30%', color: '#FF8A3D', t: 'de butacas sin vender en una función promedio', more: 'Dato provisional: se reemplazará con datos de recintos aliados. Cada butaca vacía es ingreso que no regresa.' },
+      { id: 'p2', n: '7 de 10', color: '#D6FF35', t: 'colaboradores no usan sus beneficios culturales', more: 'Dato provisional. Los beneficios tradicionales son difíciles de canjear y nadie los recuerda.' }
+    ].map(h => ({ ...h, open: st.open === h.id, pick: tog(h.id) }));
+    const nodeBase = 'width: 120px; height: 120px; border-radius: 50%; border: 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: 34px; ';
+    const nodes = [
+      { id: 'n1', icon: 'E', title: 'Empresas y escuelas', sub: 'Dan un beneficio real a su gente', more: 'Afilian colaboradores o alumnos con número y RFC. Sin costo de afiliación (provisional).', bg: '#FFFFFF', fg: '#08091A' },
+      { id: 'n2', icon: 't!', title: 'TADAA!', sub: 'Cartelera, boletera, Now! y Golden', more: 'Verificamos convenios, vendemos con boleto final o pase provisional y movemos la demanda con Now! y Golden Ticket.', bg: '#D6FF35', fg: '#08091A' },
+      { id: 'n3', icon: 'P', title: 'Productores', sub: 'Llenan funciones con público nuevo', more: 'Publican tarifas de convenio, ven compras en vivo y liquidan cada periodo.', bg: '#1238FF', fg: '#FFFFFF' }
+    ].map(n => ({ ...n, open: st.open === n.id, pick: tog(n.id),
+      style: nodeBase + 'background: ' + n.bg + '; color: ' + n.fg + '; ' + (st.open === n.id ? 'box-shadow: 0 0 0 8px rgba(214,255,53,.35);' : 'box-shadow: 0 20px 40px rgba(0,0,0,.35);') }));
+    const stats = [
+      { n: '120+', t: 'empresas y escuelas afiliadas', color: '#D6FF35' },
+      { n: '48,000', t: 'personas con beneficio activo', color: '#FFFFFF' },
+      { n: '18', t: 'recintos y productores aliados', color: '#FFFFFF' },
+      { n: '4.8', t: 'calificación promedio de asistentes', color: '#D6FF35' }
+    ];
+    const P = {
+      prod: { label: 'Productores', eyebrow: 'PRODUCTORES Y RECINTOS', title: 'Vende a un público listo para salir.', text: 'Publica funciones con tarifa de convenio, activa Now! y Golden cuando lo necesites y sigue cada venta desde tu portal.', cta: 'Ver portal de productores', href: 'DPartner.dc.html',
+        points: [['1', 'Publica', 'Funciones, zonas y precios.'], ['2', 'Vende', 'Boletera propia o la tuya.'], ['3', 'Impulsa', 'Now! y Golden Ticket.'], ['4', 'Cobra', 'Liquidación por periodo.']] },
+      emp: { label: 'Empresas', eyebrow: 'EMPRESAS', title: 'Un beneficio que tu equipo sí usa.', text: 'Afilia a tu equipo con número y RFC. Ves uso agregado y das altas o bajas en un clic, sin ver sus compras.', cta: 'Ver portal de empresas', href: 'DEmpresa.dc.html',
+        points: [['$0', 'Afiliación', 'Provisional.'], ['1 clic', 'Altas y bajas', 'O sube un CSV.'], ['RFC', 'Sin duplicados', 'Se reactiva la misma cuenta.'], ['%', 'Reportes', 'Cuánto ahorra tu equipo.']] },
+      esc: { label: 'Escuelas', eyebrow: 'UNIVERSIDADES Y COLEGIOS', title: 'Cultura a precio de estudiante.', text: 'Tus alumnos verifican su matrícula y acceden a teatro, conciertos y paseos con tarifas de convenio y Now!.', cta: 'Hablemos', href: '#',
+        points: [['1', 'Matrícula', 'Altas por ciclo.'], ['2', 'Badges', 'Gamificación.'], ['3', 'Now!', 'Planes de último minuto.'], ['4', 'Reportes', 'Por carrera.']] }
+    };
+    const tabs = Object.keys(P).map(id => ({ label: P[id].label, on: st.t === id, pick: () => this.setState({ t: id }),
+      style: 'height: 44px; padding: 0 18px; border: 0; border-radius: 99px; font-family: inherit; font-weight: 800; font-size: 13px; ' + (st.t === id ? 'background: #1238FF; color: #FFFFFF;' : 'background: transparent; color: #08091A;') }));
+    const sel = P[st.t];
+    const TL = [
+      ['t1', 'Now!', 'Venta exprés de último minuto solo para inscritos.', 'Llena butacas a horas de la función sin tocar tu tarifa de convenio. Tú decides cupo, precio y cuándo abre.', 'background: linear-gradient(160deg, #FF3D8B, #FF8A3D); color: #0B0A1C;', 'font-style: italic;'],
+      ['t2', 'Golden Ticket', '1 de cada 100 boletos gana algo especial.', 'Upgrade de sección, meet & greet o un boleto para otro evento. Genera conversación y compras repetidas.', 'background: linear-gradient(160deg, #FFE9A3, #E2B23C 55%, #B8860B); color: #2A1A00;', ''],
+      ['t3', 'Boletera', 'Asientos numerados y QR dinámico.', 'QR que cambia cada minuto contra reventa, app Staff para el acceso y entrega de add-ons. O sigue con tu boletera actual.', 'background: #1238FF; color: #FFFFFF;', ''],
+      ['t4', 'Portal', 'Ventas y compradores en vivo.', 'Compras, add-ons, check-in y liquidaciones claras cada periodo.', 'background: #FFFFFF; color: #08091A;', '']
+    ];
+    const tools = TL.map(([id, name, short, long, bg, ts]) => { const o = st.open === id; return { name, open: o, body: o ? long : short, hint: o ? 'Cerrar −' : 'Ver más +', titleStyle: ts, pick: tog(id),
+      style: 'display: flex; flex-direction: column; gap: 12px; padding: 22px; border-radius: 26px; border: 0; font-family: inherit; text-align: left; transition: transform .3s; ' + bg + (o ? ' transform: translateY(-8px); box-shadow: 0 24px 50px rgba(0,0,0,.45);' : '') }; });
+    const PK = [['01', 'Comisión preferente por 12 meses', 'Dato provisional: tarifa fija menor a la estándar durante el primer año.'], ['02', 'Lugar destacado al lanzar', 'Banner principal de la cartelera y campaña en redes de TADAA!.'], ['03', 'Now! y Golden sin costo', 'Ambas herramientas activadas desde el día uno.'], ['04', 'Línea directa con el equipo', 'Un canal privado para proponer funciones y dar forma al producto.']];
+    const perks = PK.map(([n, t, d]) => { const id = 'k' + n, o = st.open === id; return { n, t, d, open: o, sign: o ? '−' : '+', pick: tog(id),
+      style: 'width: 100%; display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-radius: 20px; font-family: inherit; color: #FFFFFF; ' + (o ? 'background: #1238FF; border: 0;' : 'background: #161833; border: 1px solid #2A2D52;') }; });
+    const v = {}; for (let k = 0; k < N; k++) v['s' + (k + 1)] = i === k;
+    return { ...v, dots, thumbs, probs, nodes, stats, tabs, tools, perks,
+      p: { ...sel, points: sel.points.map(([n, t, d]) => ({ n, t, d })) },
+      counter: String(i + 1).padStart(2, '0') + ' / 0' + N + ' · ' + labels[i],
+      prev: go((i + N - 1) % N), next: go((i + 1) % N),
+      indexOpen: st.idx, toggleIndex: () => this.setState({ idx: !st.idx }) };
+  }
+}
+</script>
+</body>
+</html>

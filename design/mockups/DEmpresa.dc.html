@@ -24,11 +24,11 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
       <span style="font-size: 10px; font-weight: 800; letter-spacing: .18em; color: #D6FF35">EMPRESAS</span>
     </div>
     <div style="margin: 0 4px 14px; background: #161833; border-radius: 18px; padding: 12px; display: flex; align-items: center; gap: 10px">
-      <span style="width: 38px; height: 38px; border-radius: 12px; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-weight: 900">ED</span>
-      <span style="display: flex; flex-direction: column"><b style="font-size: 13px">Empresa Demo Norte</b><span style="font-size: 11px; color: #AEB6D6">Convenio activo · 450 lugares</span></span>
+      <span style="width: 38px; height: 38px; border-radius: 12px; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-weight: 900">{{orgIni}}</span>
+      <span style="display: flex; flex-direction: column"><b style="font-size: 13px">{{orgName}}</b><span style="font-size: 11px; color: #AEB6D6">{{orgSub}}</span></span>
     </div>
     <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Resumen</a>
-    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; background: #FFFFFF; color: #08091A; display: flex; align-items: center; justify-content: space-between; font-weight: 800; font-size: 13px">Colaboradores <span style="background: #EEF1F7; border-radius: 99px; padding: 2px 8px; font-size: 11px">412</span></a>
+    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; background: #FFFFFF; color: #08091A; display: flex; align-items: center; justify-content: space-between; font-weight: 800; font-size: 13px">Colaboradores <span style="background: #EEF1F7; border-radius: 99px; padding: 2px 8px; font-size: 11px">{{k.total}}</span></a>
     <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Reportes de uso</a>
     <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Comunicación interna</a>
     <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Facturación</a>
@@ -40,31 +40,31 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
   <main style="flex: 999 1 640px; min-width: 0; padding: 30px 32px 56px; display: flex; flex-direction: column; gap: 22px">
     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
       <div>
-        <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #1238FF">NOVIEMBRE 2026</span>
+        <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #1238FF">{{month}}</span>
         <h1 style="margin: 6px 0 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: 46px; letter-spacing: -2px; line-height: 1">Tu equipo, saliendo más.</h1>
       </div>
       <div style="display: flex; gap: 10px; flex-wrap: wrap">
-        <a href="#" style="height: 48px; padding: 0 18px; border-radius: 99px; border: 1px solid #D5DBEA; background: #FFFFFF; display: flex; align-items: center; font-weight: 700; font-size: 13px">Subir CSV</a>
+        <label style="height: 48px; padding: 0 18px; border-radius: 99px; border: 1px solid #D5DBEA; background: #FFFFFF; display: flex; align-items: center; font-weight: 700; font-size: 13px" style="cursor: pointer">Subir CSV<input type="file" accept=".csv,text/csv" onChange="{{uploadCsv}}" style="display: none"></label>
         <button onClick="{{openAdd}}" style="height: 48px; padding: 0 20px; border-radius: 99px; border: 0; background: #08091A; color: #FFFFFF; display: flex; align-items: center; gap: 8px; font-family: inherit; font-weight: 800; font-size: 13px"><span style="color: #D6FF35; font-size: 18px">+</span> Dar de alta</button>
       </div>
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px">
-      <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Colaboradores activos</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">{{active}}</b><span style="font-size: 12px; color: #4A5068">de 450 lugares</span></div>
-      <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Usaron el beneficio</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">68%</b><span style="font-size: 12px; font-weight: 700; color: #0B7A3B">+9 pts este mes</span></div>
-      <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Planes realizados</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">531</b><span style="font-size: 12px; color: #4A5068">en 2026</span></div>
-      <div style="background: #1238FF; color: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #D9E0FF">Ahorro generado al equipo</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">$412k</b><span style="font-size: 12px; color: #D6FF35; font-weight: 700">vs precio regular</span></div>
+      <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Colaboradores activos</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">{{active}}</b><span style="font-size: 12px; color: #4A5068">{{k.activeSub}}</span></div>
+      <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Usaron el beneficio</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">{{k.adoption}}</b><span style="font-size: 12px; font-weight: 700; color: #0B7A3B">{{k.adoptionSub}}</span></div>
+      <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Planes realizados</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">{{k.plans}}</b><span style="font-size: 12px; color: #4A5068">{{k.plansSub}}</span></div>
+      <div style="background: #1238FF; color: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #D9E0FF">Gasto del equipo (90 días)</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">{{k.spend}}</b><span style="font-size: 12px; color: #D6FF35; font-weight: 700">{{k.spendSub}}</span></div>
     </div>
 
     <sc-if value="{{adding}}" hint-placeholder-val="{{ false }}">
       <section style="background: #FFFFFF; border-radius: 28px; padding: 22px; display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-end; box-shadow: inset 0 0 0 2px #1238FF">
-        <label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A5068">Nombre<input value="Ana Rodríguez" readonly style="height: 46px; border: 1px solid #D5DBEA; border-radius: 14px; padding: 0 14px; font: inherit; font-size: 14px; color: #08091A"></label>
-        <label style="flex: 1 1 140px; display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A5068">No. colaborador<input value="EMP-1001" readonly style="height: 46px; border: 1px solid #D5DBEA; border-radius: 14px; padding: 0 14px; font: inherit; font-size: 14px; color: #08091A"></label>
-        <label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A5068">RFC<input value="ROAA900101XX0" readonly style="height: 46px; border: 2px solid #1238FF; border-radius: 14px; padding: 0 14px; font: inherit; font-size: 14px; letter-spacing: .05em; color: #08091A"></label>
-        <button onClick="{{closeAdd}}" style="height: 46px; padding: 0 20px; border-radius: 99px; border: 0; background: #D6FF35; font-family: inherit; font-weight: 800; font-size: 13px; color: #08091A">Vincular cuenta</button>
+        <label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A5068">Nombre<input value="{{form.name}}" onInput="{{form.setName}}" placeholder="Nombre" style="height: 46px; border: 1px solid #D5DBEA; border-radius: 14px; padding: 0 14px; font: inherit; font-size: 14px; color: #08091A"></label>
+        <label style="flex: 1 1 140px; display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A5068">No. colaborador<input value="{{form.code}}" onInput="{{form.setCode}}" placeholder="EMP-0001" style="height: 46px; border: 1px solid #D5DBEA; border-radius: 14px; padding: 0 14px; font: inherit; font-size: 14px; color: #08091A"></label>
+        <label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A5068">RFC<input value="{{form.rfc}}" onInput="{{form.setRfc}}" placeholder="XAXX010101000" style="height: 46px; border: 2px solid #1238FF; border-radius: 14px; padding: 0 14px; font: inherit; font-size: 14px; letter-spacing: .05em; color: #08091A"></label>
+        <button onClick="{{form.save}}" style="height: 46px; padding: 0 20px; border-radius: 99px; border: 0; background: #D6FF35; font-family: inherit; font-weight: 800; font-size: 13px; color: #08091A">{{form.label}}</button>
         <div style="flex: 1 1 100%; display: flex; gap: 12px; align-items: center; background: #EEF2FF; border-radius: 18px; padding: 12px 14px; font-size: 13px">
           <span style="width: 30px; height: 30px; flex: 0 0 30px; border-radius: 50%; background: #1238FF; color: #FFFFFF; display: grid; place-items: center; font-weight: 800">i</span>
-          <span>Este RFC ya tiene cuenta TADAA! (de un convenio anterior). <b>La reactivamos con su historial, badges y nivel</b>; no se crea una cuenta nueva.</span>
+          <span>{{form.note}}</span>
         </div>
       </section>
     </sc-if>
@@ -74,7 +74,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
         <h2 style="margin: 0; font-family: Outfit, sans-serif; font-size: 22px">Colaboradores</h2>
         <label style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px; border-radius: 99px; border: 1px solid #D5DBEA; flex: 0 1 320px">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5A6178" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-          <input placeholder="Buscar por nombre, número o RFC" aria-label="Buscar colaborador" style="flex: 1; min-width: 0; border: 0; outline: 0; font: inherit; font-size: 13px">
+          <input placeholder="Buscar por nombre, número o RFC" aria-label="Buscar colaborador" onInput="{{search}}" value="{{q}}" style="flex: 1; min-width: 0; border: 0; outline: 0; font: inherit; font-size: 13px">
         </label>
       </div>
       <div style="overflow-x: auto">
@@ -106,7 +106,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
       </div>
       <div style="flex: 1 1 320px; background: #FFFFFF; border-radius: 28px; padding: 18px; display: flex; gap: 14px; align-items: center">
         <span style="width: 54px; height: 54px; flex: 0 0 54px; border-radius: 16px; background: #1238FF; display: grid; place-items: center"><img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="" style="width: 40px"></span>
-        <span style="display: flex; flex-direction: column; gap: 4px"><b style="font-size: 13px">Vista previa del aviso al colaborador</b><span style="font-size: 13px; color: #2A2F48">"Un pajarito nos contó que ya no estás en Empresa Demo Norte. Nos rifamos contigo: 3 meses de membresía al 50%."</span><a href="MBaja.dc.html" style="font-size: 12px; font-weight: 800; color: #1238FF">Ver pantalla →</a></span>
+        <span style="display: flex; flex-direction: column; gap: 4px"><b style="font-size: 13px">Vista previa del aviso al colaborador</b><span style="font-size: 13px; color: #2A2F48">"Un pajarito nos contó que ya no estás en {{orgName}}. Nos rifamos contigo: 3 meses de membresía al 50%."</span><a href="MBaja.dc.html" style="font-size: 12px; font-weight: 800; color: #1238FF">Ver pantalla →</a></span>
       </div>
     </section>
   </main>
