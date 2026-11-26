@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kinky Boots · Función Family & Friends</title>
+<meta name="description" content="Minisitio de la función Family & Friends de Kinky Boots. Concepto de minisitio por TADAA!.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@500;800;900&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--oxblood:#4A0A14;--patent:#E3122B;--kraft:#C9A27E;--kraft-d:#9C7651;--bubble:#FF5FA8;--ink:#1A0B0F;--blush:#FFE9F1;--white:#FFFFFF;
+ --stencil:'Big Shoulders Stencil Display',Impact,sans-serif;--sans:'Instrument Sans',system-ui,sans-serif;--spring:cubic-bezier(.2,1.25,.4,1);--out:cubic-bezier(0,0,.2,1)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--oxblood);color:var(--blush);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--bubble);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+
+/* barra */
+.bar{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 28px;background:rgba(74,10,20,.82);backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%)}
+.bar b{font:900 22px/1 var(--stencil);letter-spacing:.02em}
+.bar nav{display:flex;gap:4px;flex-wrap:wrap}
+.bar nav a{text-decoration:none;font-size:14px;font-weight:600;padding:8px 12px;border-radius:99px;color:#F5C9D8;transition:background .2s var(--out),color .2s var(--out)}
+.bar nav a:hover{background:rgba(255,255,255,.08);color:#fff}
+.bar .go{background:var(--bubble);color:var(--ink);font-weight:700;padding:10px 16px;border-radius:99px;text-decoration:none;font-size:14px;transition:scale .1s ease-out}
+.bar .go:active{scale:.96}
+
+/* portada */
+.hero{position:relative;overflow:hidden;min-height:min(92vh,860px);display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:end;padding:40px 28px 0;max-width:1260px;margin:0 auto}
+.hero h1{margin:0 0 6px;font:900 clamp(96px,17vw,250px)/.78 var(--stencil);letter-spacing:-.01em;color:var(--white);text-transform:uppercase}
+.hero h1 span{display:block}
+.hero h1 .boots{color:var(--patent);-webkit-text-stroke:0}
+.hero .lede{max-width:46ch;margin:22px 0 0;font-size:19px;color:#F7D3DF}
+.ribbon{display:inline-flex;align-items:center;gap:12px;margin-top:26px;padding:12px 18px 12px 12px;background:var(--blush);color:var(--oxblood);border-radius:18px;font-weight:600;box-shadow:0 18px 40px rgba(0,0,0,.25)}
+.ribbon .stub{display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:var(--patent);color:#fff;font:900 20px var(--stencil)}
+.ribbon small{display:block;font-size:13px;font-weight:500;color:#7A2C3B}
+.heroL{padding-bottom:64px;position:relative;z-index:2}
+.bootWrap{position:relative;align-self:stretch;display:flex;align-items:flex-end;justify-content:center}
+.bootWrap svg{width:min(100%,460px);height:auto;filter:drop-shadow(0 40px 50px rgba(0,0,0,.45));transform-origin:50% 100%}
+.spot{position:absolute;inset:-10% -20% 0 0;background:radial-gradient(50% 55% at 60% 45%,rgba(255,95,168,.42),transparent 70%);pointer-events:none}
+.concept{position:absolute;right:28px;top:22px;font-size:12px;color:#E7A8BC;z-index:3}
+
+/* secciones */
+section{padding:96px 0}
+h2{margin:0 0 18px;font:900 clamp(48px,7vw,92px)/.86 var(--stencil);text-transform:uppercase;color:var(--white)}
+.story{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:start}
+.story p{margin:0 0 16px;max-width:60ch}
+.story .pull{font:800 clamp(30px,3.4vw,44px)/1.02 var(--stencil);color:var(--bubble);text-transform:uppercase;margin:0}
+
+/* canciones: tira de etiquetas de caja */
+.songs{background:var(--kraft);color:var(--ink);border-radius:36px 36px 0 0}
+.songs h2{color:var(--ink)}
+.songs .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+.tag{display:inline-flex;align-items:center;gap:10px;background:#E8CFB3;border:2px dashed var(--kraft-d);border-radius:14px;padding:12px 16px;font-weight:600;font-size:16px}
+.tag i{width:10px;height:10px;border-radius:50%;background:var(--patent);flex:0 0 10px}
+.songs .note{margin-top:22px;font-size:14px;color:#5A3A22}
+
+/* reparto */
+.cast{background:var(--kraft);color:var(--ink);padding-top:40px}
+.cast h2{color:var(--ink)}
+.labels{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.label{position:relative;background:var(--white);border-radius:6px;padding:18px 18px 16px;box-shadow:0 2px 0 var(--kraft-d),0 14px 26px rgba(74,10,20,.16);transform:rotate(var(--r,0deg));transition:transform .3s var(--spring)}
+.label:hover{transform:rotate(0) translateY(-4px)}
+.label .role{padding-right:64px;font:800 30px/1 var(--stencil);text-transform:uppercase;color:var(--patent)}
+.label .who{display:block;margin-top:6px;font-weight:600}
+.label .size{position:absolute;right:14px;top:14px;font-size:12px;color:#8A6A55}
+.label .bar-code{display:flex;gap:2px;height:22px;margin-top:14px}
+.label .bar-code span{background:var(--ink);width:2px}
+.cast .demo{margin-top:18px;font-size:14px;color:#5A3A22}
+
+/* info */
+.info{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;background:rgba(255,233,241,.18);border-radius:28px;overflow:hidden}
+.info div{background:var(--oxblood);padding:22px}
+.info dt{font-size:13px;color:#E7A8BC}
+.info dd{margin:4px 0 0;font:800 28px/1.05 var(--stencil);text-transform:uppercase;color:var(--white)}
+.dress{margin-top:22px;max-width:60ch;color:#F7D3DF}
+
+/* pases: la caja */
+.passes{background:var(--blush);color:var(--ink);border-radius:36px 36px 0 0;padding-bottom:120px}
+.passes h2{color:var(--oxblood)}
+.passes .sub{max-width:56ch;margin:0 0 34px;color:#5B2232}
+.box{position:relative;max-width:760px;margin:0 auto;perspective:1400px}
+.box-body{position:relative;background:var(--kraft);border-radius:18px;padding:30px;min-height:260px;box-shadow:inset 0 -12px 0 var(--kraft-d),0 30px 60px rgba(74,10,20,.25)}
+.box-lid{position:absolute;left:-14px;right:-14px;top:-10px;height:120px;z-index:4;background:var(--patent);border-radius:16px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;color:#fff;transform-origin:50% 0;transition:transform .7s var(--spring),opacity .3s var(--out) .35s;box-shadow:0 18px 30px rgba(74,10,20,.3)}
+.box-lid b{font:900 44px/1 var(--stencil);letter-spacing:.02em}
+.box-lid span{font-size:14px;font-weight:600;opacity:.9}
+.box.open .box-lid{transform:rotateX(-105deg) translateY(-30px);opacity:0;pointer-events:none}
+.open-btn{display:block;margin:150px auto 0;position:relative;z-index:5;height:56px;padding:0 26px;border:0;border-radius:99px;background:var(--ink);color:#fff;font:700 16px var(--sans);cursor:pointer;transition:scale .1s ease-out}
+.open-btn:active{scale:.96}
+.box.open .open-btn{display:none}
+.tickets{display:grid;gap:16px}
+.ticket{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center;background:var(--white);border-radius:20px;padding:20px;opacity:0;transform:translateY(60px) rotate(-2deg);
+ -webkit-mask:radial-gradient(circle 12px at 0 50%,#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle 12px at 100% 50%,#0000 97%,#000) right/51% 100% no-repeat;
+ mask:radial-gradient(circle 12px at 0 50%,#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle 12px at 100% 50%,#0000 97%,#000) right/51% 100% no-repeat}
+.box.open .ticket{animation:pop .7s var(--spring) forwards;animation-delay:calc(.45s + var(--i)*.12s)}
+@keyframes pop{to{opacity:1;transform:none}}
+.ticket .kind{font:900 34px/1 var(--stencil);text-transform:uppercase;color:var(--patent)}
+.ticket .meta{font-size:14px;color:#5B2232;margin-top:6px}
+.ticket .holder{font-weight:700;margin-top:10px}
+.ticket .qr{width:132px;height:132px;border-radius:12px;background:#F4F4F6;display:grid;place-items:center;overflow:hidden}
+.ticket .qr img{width:100%;height:100%;image-rendering:pixelated}
+.ticket .demo-qr{display:grid;grid-template-columns:repeat(11,1fr);gap:2px;width:108px;height:108px}
+.ticket .demo-qr span{border-radius:1px}
+.box .empty{text-align:center;padding:30px 10px;color:var(--ink)}
+.box .empty b{display:block;font:900 34px/1 var(--stencil);text-transform:uppercase;margin-bottom:8px}
+.after{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:26px}
+.after a{text-decoration:none;font-weight:700;padding:14px 20px;border-radius:99px;background:var(--oxblood);color:#fff;transition:scale .1s ease-out}
+.after a.ghost{background:transparent;color:var(--oxblood);box-shadow:inset 0 0 0 2px var(--oxblood)}
+.after a:active{scale:.96}
+footer{background:var(--ink);color:#C99AAA;font-size:14px;padding:28px 0}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* entrada orquestada: el título pisa fuerte, una vez */
+.stomp span{display:block;opacity:0;transform:translateY(40%) scaleY(1.25);transform-origin:50% 100%;animation:stomp .62s var(--spring) forwards}
+.stomp span:nth-child(2){animation-delay:.16s}
+@keyframes stomp{60%{opacity:1;transform:translateY(0) scaleY(.94)}100%{opacity:1;transform:none}}
+.boot-in{animation:bootIn .9s var(--spring) .32s both}
+@keyframes bootIn{from{opacity:0;transform:translateY(60px) rotate(8deg)}to{opacity:1;transform:none}}
+
+@media (max-width:860px){
+ .hero{grid-template-columns:1fr;min-height:auto;padding-top:24px}
+ .bootWrap{order:-1;height:300px}.bootWrap svg{width:200px}
+ .heroL{padding-bottom:40px}
+ .story{grid-template-columns:1fr;gap:20px}
+ .info{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .bar nav{display:none}
+ section{padding:64px 0}
+ .ticket{grid-template-columns:1fr}.ticket .qr{justify-self:center}
+}
+@media (prefers-reduced-motion:reduce){
+ .stomp span,.boot-in{animation:none;opacity:1;transform:none}
+ .box-lid{transition:opacity .2s}.box.open .box-lid{transform:none}
+ .box.open .ticket{animation:none;opacity:1;transform:none}
+ html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<header class="bar">
+  <b>KINKY BOOTS</b>
+  <nav aria-label="Secciones"><a href="#historia">La historia</a><a href="#canciones">Canciones</a><a href="#reparto">Reparto</a><a href="#funcion">La función</a></nav>
+  <a class="go" href="#pases">Ver mis pases</a>
+</header>
+
+<main>
+<div class="hero">
+  <span class="concept">Concepto de minisitio por TADAA!</span>
+  <div class="spot" aria-hidden="true"></div>
+  <div class="heroL">
+    <h1 class="stomp" aria-label="Kinky Boots"><span>Kinky</span><span class="boots">Boots</span></h1>
+    <p class="lede">Una fábrica de zapatos a punto de cerrar, un heredero que no quería serlo y una drag queen con muy buen ojo para los tacones. Esta noche la función es solo para nuestra gente.</p>
+    <div class="ribbon"><span class="stub" aria-hidden="true">F&amp;F</span><span>Función Family &amp; Friends<small id="whenTxt">Lunes 8 de diciembre · 20:30 · Centro Cultural Teatro 1</small></span></div>
+  </div>
+  <div class="bootWrap" aria-hidden="true">
+    <svg class="boot-in" viewBox="0 0 300 400">
+      <defs><linearGradient id="pat" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF3B52"/><stop offset=".55" stop-color="#E3122B"/><stop offset="1" stop-color="#8E0718"/></linearGradient></defs>
+      <path d="M98 10 H170 L176 236 C178 262 196 280 222 290 C256 302 284 314 288 340 C290 352 282 360 268 360 H176 C160 360 150 352 144 342 L138 336 L132 392 H118 L114 330 C104 300 96 260 96 220 Z" fill="url(#pat)"/>
+      <path d="M118 22 C116 90 116 160 120 230" stroke="#fff" stroke-opacity=".55" stroke-width="7" stroke-linecap="round" fill="none"/>
+      <path d="M104 14 V228" stroke="#FFE9F1" stroke-width="2" stroke-dasharray="7 6" fill="none" opacity=".8"/>
+      <ellipse cx="200" cy="394" rx="96" ry="6" fill="#000" opacity=".35"/>
+    </svg>
+  </div>
+</div>
+
+<section id="historia">
+  <div class="wrap story">
+    <p class="pull">Ocho pulgadas de tacón y cero miedo.</p>
+    <div>
+      <h2>La historia</h2>
+      <p>Charlie hereda la fábrica de su papá en Northampton justo cuando nadie compra zapatos de vestir. Por accidente conoce a Lola, artista de cabaret que necesita botas que aguanten una noche entera de tacón.</p>
+      <p>Lo que empieza como un salvavidas para la fábrica se vuelve algo más grande: un equipo que aprende a aceptarse, un taller lleno de brillo y una pasarela en Milán. Un musical sobre ser quien eres, con música de pop que te deja cantando de regreso a casa.</p>
+    </div>
+  </div>
+</section>
+
+<section id="canciones" class="songs">
+  <div class="wrap">
+    <h2>Lo que vas a escuchar</h2>
+    <div class="row">
+      <span class="tag"><i></i>The Most Beautiful Thing in the World</span>
+      <span class="tag"><i></i>Land of Lola</span>
+      <span class="tag"><i></i>Sex Is in the Heel</span>
+      <span class="tag"><i></i>The History of Wrong Guys</span>
+      <span class="tag"><i></i>Not My Father's Son</span>
+      <span class="tag"><i></i>Everybody Say Yeah</span>
+      <span class="tag"><i></i>Raise You Up / Just Be</span>
+    </div>
+    <p class="note">Música y letras originales de Cyndi Lauper; libreto de Harvey Fierstein.</p>
+  </div>
+</section>
+
+<section id="reparto" class="cast">
+  <div class="wrap">
+    <h2>El turno de esta noche</h2>
+    <div class="labels" id="labels"></div>
+    <p class="demo">Reparto de demostración para el concepto del minisitio.</p>
+  </div>
+</section>
+
+<section id="funcion">
+  <div class="wrap">
+    <h2>La función</h2>
+    <dl class="info">
+      <div><dt>Cuándo</dt><dd id="infoWhen">Lun 8 dic · 20:30</dd></div>
+      <div><dt>Dónde</dt><dd>Centro Cultural Teatro 1</dd></div>
+      <div><dt>Duración</dt><dd>2 h 30 min con intermedio</dd></div>
+      <div><dt>Acceso</dt><dd>Puertas 19:45</dd></div>
+    </dl>
+    <p class="dress">Código de vestimenta: tus botas más altas. Si no tienes, ven como quieras; la noche es de quien llega con ganas.</p>
+  </div>
+</section>
+
+<section id="pases" class="passes">
+  <div class="wrap">
+    <h2>Estos son tus pases</h2>
+    <p class="sub" id="passSub">Tus pases para la función Family &amp; Friends vienen en su caja. Ábrela para ver el QR que presentarás en la entrada.</p>
+    <div class="box" id="box">
+      <div class="box-lid" aria-hidden="true"><b>PRICE &amp; SON</b><span>Talla única · Family &amp; Friends</span></div>
+      <div class="box-body">
+        <button class="open-btn" id="openBtn" type="button">Abrir mi caja</button>
+        <div class="tickets" id="tickets" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="after" id="after"></div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>Minisitio concepto hecho con TADAA! · Kinky Boots es propiedad de sus titulares.</span><a href="../index.html#inicio">Ir a TADAA!</a></div></footer>
+
+<script>
+(function(){
+'use strict';
+const SLUG='kinkyboots-ff';
+const $=id=>document.getElementById(id);
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* Reparto como etiquetas de caja de zapatos */
+const CAST=[['Charlie Price','Emiliano Duarte','27'],['Lola','Rafael “Ráfaga” Montes','29'],['Lauren','Camila Vidal','24'],['Don','Sergio Treviño','28'],['Nicola','Daniela Ochoa','23'],['Las Ángeles','Ensamble de Lola','Única']];
+$('labels').innerHTML=CAST.map(([role,who,size],i)=>`<article class="label" style="--r:${[-1.5,1,-.5,1.5,-1,.6][i]}deg"><span class="size">Talla ${esc(size)}</span><div class="role">${esc(role)}</div><span class="who">${esc(who)}</span><div class="bar-code" aria-hidden="true">${Array.from({length:28},(_,k)=>`<span style="width:${(k*7+i*3)%3+1}px"></span>`).join('')}</div></article>`).join('');
+
+/* Pases: reales desde la Wallet de TADAA! si hay sesión; si no, invitación a entrar */
+let state={user:null,tickets:[]};
+const demoQR=()=>{let s='';for(let k=0;k<121;k++){const r=Math.floor(k/11),c=k%11;const corner=(r<3&&c<3)||(r<3&&c>7)||(r>7&&c<3);s+=`<span style="background:${corner||((k*37)%7<3)?'#1A0B0F':'transparent'}"></span>`}return `<div class="demo-qr" aria-hidden="true">${s}</div>`};
+const qr=id=>'/api/v2/tickets/'+encodeURIComponent(id)+'/qr?m='+Math.floor(Date.now()/60000);
+function fmtWhen(iso){try{return new Intl.DateTimeFormat('es-MX',{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit',hourCycle:'h23',timeZone:'America/Mexico_City'}).format(new Date(iso))}catch{return ''}}
+function render(){const T=$('tickets'),A=$('after');
+ if(state.user&&state.tickets.length){const name=state.user.full_name||state.user.email;
+  T.innerHTML=state.tickets.map((t,i)=>`<article class="ticket" style="--i:${i}"><div><div class="kind">${esc(t.ticket_type||'Family & Friends')}</div><div class="meta">${esc(fmtWhen(t.starts_at))} · ${esc(t.venue||'Centro Cultural Teatro 1')}</div><div class="holder">${esc(name)} · pase ${i+1} de ${state.tickets.length}</div></div><div class="qr">${t.qrPayload?`<img src="${qr(t.id)}" alt="Código QR del pase ${i+1}" data-qr="${esc(t.id)}">`:demoQR()}</div></article>`).join('');
+  $('passSub').textContent='Tienes '+state.tickets.length+(state.tickets.length>1?' pases':' pase')+' para la función Family & Friends. El QR se renueva cada minuto; preséntalo desde tu celular.';
+  A.innerHTML='<a href="../index.html#wallet">Abrir en mi Wallet</a><a class="ghost" href="#funcion">Ver detalles de la función</a>';
+  
+ }else if(state.user){T.innerHTML='<div class="empty"><b>Tu caja está vacía</b>Esta cuenta no tiene pases para la función Family &amp; Friends. Si te invitaron, revisa que entraste con el correo de tu invitación.</div>';A.innerHTML='<a href="../index.html#wallet">Ir a mi Wallet</a>'}
+ else{T.innerHTML=`<article class="ticket" style="--i:0"><div><div class="kind">Pase de ejemplo</div><div class="meta">Así se verán tus pases cuando entres con tu cuenta TADAA!</div><div class="holder">Family &amp; Friends · Talla única</div></div><div class="qr">${demoQR()}</div></article><div class="empty" style="opacity:0;animation:pop .5s var(--out) 1s forwards"><b>¿Te invitaron?</b>Entra con el correo de tu invitación para ver tus pases reales.</div>`;
+  A.innerHTML='<a href="../login.html?next='+encodeURIComponent('minisitios/kinky-boots.html#pases')+'">Entrar para ver mis pases</a>'}}
+async function load(){try{const ev=await fetch('/api/v2/events/'+SLUG,{credentials:'same-origin'}).then(r=>r.ok?r.json():null);const e=ev&&(ev.event||ev);if(e&&e.starts_at){const w=fmtWhen(e.starts_at);$('whenTxt').textContent=w.charAt(0).toUpperCase()+w.slice(1)+' · '+(e.venue_name||e.venue||'Centro Cultural Teatro 1');try{const d=new Date(e.starts_at);$('infoWhen').textContent=new Intl.DateTimeFormat('es-MX',{weekday:'short',day:'numeric',month:'short',timeZone:'America/Mexico_City'}).format(d).replace(/\./g,'')+' · '+new Intl.DateTimeFormat('es-MX',{hour:'2-digit',minute:'2-digit',hourCycle:'h23',timeZone:'America/Mexico_City'}).format(d)}catch{}}}catch{}
+ try{const me=await fetch('/api/v2/auth/me',{credentials:'same-origin'}).then(r=>r.json());state.user=me.authenticated?me.user:null;
+  if(state.user){const r=await fetch('/api/v2/tickets',{credentials:'same-origin'}).then(r=>r.json());state.tickets=(r.tickets||[]).filter(t=>t.event_slug===SLUG&&t.status!=='cancelled')}}catch{}
+ render()}
+$('openBtn').addEventListener('click',()=>{navigator.vibrate?.(12);$('box').classList.add('open');setTimeout(()=>$('tickets').querySelector('img,.kind')?.closest('.ticket')?.focus?.(),900)});
+if(location.hash==='#pases')setTimeout(()=>$('box').classList.add('open'),900);
+setInterval(()=>document.querySelectorAll('img[data-qr]').forEach(i=>{i.src=qr(i.dataset.qr)}),30000);
+load();
+})();
+</script>
+</body>
+</html>

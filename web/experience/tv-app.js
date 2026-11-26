@@ -11,6 +11,9 @@ const ROUTES={
  staff:{M:'MCheckin'},productor:{D:'DPartner'},empresa:{D:'DEmpresa'},admin:{D:'DAdmin'},pitch:{D:'DPitch'},membresia:{D:'RMembresia',M:'RMembresia'}
 };
 const EXTERNAL={};
+const QS=new URLSearchParams(location.search),PREVIEW=QS.has('preview'),FORCE=QS.get('mode');
+/* Vista previa (pitch deck): portales y pantallas personales con datos de muestra del diseño, sin sesión ni llamadas privadas. */
+const SAMPLE=new Set(['DAdmin','DPartner','DEmpresa','MCheckin','DWallet','MWallet','MPase','DCuenta','MCuenta','DGolden','MGolden','MBaja','MLogro']);
 const AUTH=new Set(['wallet','pase','cuenta','logro','golden','baja','productor','empresa','staff']);
 const MOBILE_BP=900;
 const $host=()=>document.getElementById('tv');
@@ -54,6 +57,7 @@ let cur=null,comp=null,tplNode=null,pending=false,mode=null,screenName=null;
 function schedule(){if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;paint(false)})}
 function compile(name){const sc=SCREENS[name];if(!sc)return null;const tpl=sc.tpl.replace(/<sc-(for|if)\b/g,'<template data-sc="$1"').replace(/<\/sc-(for|if)>/g,'</template>');const doc=new DOMParser().parseFromString('<body>'+tpl+'</body>','text/html');return {css:sc.css,node:doc.body.firstElementChild,code:sc.code}}
 function makeComponent(name,code,params){let C=class extends DCLogic{renderVals(){return {}}};if(code.includes('class Component')){try{C=new Function('DCLogic',code+'\nreturn Component;')(DCLogic)}catch(e){console.error('[tv] plantilla',name,e)}}
+ if(PREVIEW&&SAMPLE.has(name)&&!window.TVAdapters?.preview?.[name]){const B=C;C=class extends B{renderVals(){return {TVini:'TD',...super.renderVals()}}};return new C({route:cur,params})}
  const adapt=(window.TVAdapters||{})[name];if(adapt){try{C=adapt(C,TV)}catch(e){console.error('[tv] adaptador',name,e)}}
  const c=new C({route:cur,params});return c}
 function paint(first){const host=$host();if(!tplNode)return;let vals={};try{vals=comp?comp.renderVals():{}}catch(e){console.error('[tv] renderVals',screenName,e)}
@@ -70,7 +74,7 @@ function layout(){const host=$host(),root=host.firstElementChild;if(!root)return
  host.style.zoom='';root.style.removeProperty('height');
  if(isM){const w=mode==='M'?vw:Math.min(430,vw);const z=w/390;host.style.zoom=String(z);root.style.width='390px';root.style.height='auto';root.style.minHeight=Math.ceil((mode==='M'?innerHeight:Math.max(844,innerHeight-40))/z)+'px';root.style.overflow='hidden';root.style.position='relative';
   [...root.children].forEach(c=>{const s=c.style;if(s.position==='absolute'&&s.bottom!==''&&s.top===''&&mode==='M'){const L=parseFloat(s.left)||0,R=parseFloat(s.right);s.position='fixed';s.zIndex=s.zIndex||'30';s.left=L+'px';if(!isNaN(R)){s.width=(390-L-R)+'px';s.right='auto'}else if(!s.width)s.width=(390-L)+'px';s.bottom='calc('+(s.bottom||'0px')+' + env(safe-area-inset-bottom))'}});
- }else{root.style.width='100%';root.style.minHeight='100vh';if(mode==='M'&&screenName[0]!=='R'){const z=vw/1280;if(z<1)host.style.zoom=String(z)}}
+ }else{root.style.width='100%';root.style.minHeight='100vh';if((mode==='M'||FORCE==='d')&&screenName[0]!=='R'){const z=vw/1280;if(z<1){host.style.zoom=String(z);root.style.minHeight=Math.ceil(innerHeight/z)+'px'}}}
  root.querySelectorAll('*').forEach(e=>{const cs=e.style;if((cs.overflowX==='auto'||cs.overflow==='auto'||cs.overflowX==='scroll')&&!e.hasAttribute('data-tv-scroll'))e.setAttribute('data-tv-scroll','')})}
 
 /* ───── coreografía de páginas (principios Apple / Disney): resortes críticamente amortiguados,
@@ -120,11 +124,11 @@ async function go(route,params=[],{replace=false}={}){
 let navTok=0;
 async function show(route,params){
  const tok=++navTok;
- mode=document.documentElement.clientWidth<MOBILE_BP?'M':'D';
- if(AUTH.has(route)){await TV.session();if(!TV.user){location.href='login.html?next='+encodeURIComponent('index.html#'+[route,...params].join('/'));return}}
+ mode=FORCE==='d'?'D':FORCE==='m'?'M':document.documentElement.clientWidth<MOBILE_BP?'M':'D';
+ if(AUTH.has(route)&&!PREVIEW){await TV.session();if(!TV.user){location.href='login.html?next='+encodeURIComponent('index.html#'+[route,...params].join('/'));return}}
  const def=ROUTES[route];const name=def[mode]||def.D||def.M;
  snapshot($host());
- try{await (window.TVAdapters?.load?.[name]||(()=>null))(TV,params)}catch(e){console.warn('[tv] datos',name,e)}
+ if(PREVIEW&&window.TVAdapters?.preview?.[name]){try{window.TVAdapters.preview[name]()}catch(e){console.warn(e)}}else if(!(PREVIEW&&SAMPLE.has(name)))try{await (window.TVAdapters?.load?.[name]||(()=>null))(TV,params)}catch(e){console.warn('[tv] datos',name,e)}
  if(tok!==navTok)return;
  comp?.componentWillUnmount?.();comp=null;cur=route;screenName=name;
  const c=compile(name);if(!c){dropGhost();$host().style.visibility='';$host().textContent='Pantalla no disponible';return}

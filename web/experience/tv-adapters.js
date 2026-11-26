@@ -40,7 +40,7 @@ function mapEvent(e){if(!e)return null;const m=e.metadata||{};const img=e.hero_u
   when:e.starts_at?H.when(e.starts_at):'Fecha por confirmar',whenTxt:e.starts_at?H.short(e.starts_at)+' · '+(e.venue||''):'Fecha por confirmar',d:e.starts_at?H.day(e.starts_at):'—',m:e.starts_at?H.mon(e.starts_at):'',
   price:s==='soon'?'PRÓXIMAMENTE':s==='pre'?'PREVENTA':e.from_price_minor!=null?'Desde '+H.money(e.from_price_minor):(e.ticketing_mode==='tadaa'?'Ver precios':'Solicitar'),pct:m.discount_label||'',
   tags:Array.isArray(m.tags)?m.tags:[],ratingTxt:m.rating||'',kind:planKind(m,cat),dated:planKind(m,cat)==='show',hours:m.hours||'',validity:m.validity||'',highlight:m.highlight||'',openToday:openToday(m),img,pos:m.image_position||'center',video:m.video_url||false,photo:!m.video_url,rush:!!m.now_enabled,golden:!!m.golden_enabled,original:!!m.tadaa_original,s,cta:s==='soon'?'Avisarme cuando salga':s==='pre'?'Entrar a la preventa':'',raw:e}}
-function list(){const real=(TV.events||[]).map(mapEvent).filter(Boolean);return real.length?real:SAMPLES}
+function list(){const real=(TV.events||[]).filter(e=>!(e.metadata&&e.metadata.private)).map(mapEvent).filter(Boolean);return real.length?real:SAMPLES}
 function bySlug(slug){return list().find(e=>e.slug===slug||e.id===slug)}
 const cart={};// por evento: {typeId, qty, addons:{id:q}, seats:[]}
 function cartFor(id){return cart[id]=cart[id]||{typeId:null,qty:1,addons:{},seats:[]}}

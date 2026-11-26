@@ -68,6 +68,10 @@ const EVENTS=[
   meta:{tagline:'Un partido, un campeón',rating:'Todo público',duration:'2 h 30 min',tags:['deportes','basquetbol','familia'],tadaa_rating:'4.5',tadaa_reviews:428,discount_label:'−35%'},
   types:[['Cancha',150000,220000],['Platea',65000,95000],['General',28000,42000]],
   addons:[['combo','Combo de partido','Hot dog + refresco',12900,400],['merch','Jersey oficial','Réplica de la temporada',89900,120]]},
+ {k:'kinkyboots-ff',org:'org-escena',venue:'ven-teatro1',title:'Kinky Boots · Función Family & Friends',days:12,h:20,mode:'tadaa',img:'kinky.webp',cat:'Musical',
+  desc:'Función privada Family & Friends. Tus pases y el minisitio de la obra están en minisitios/kinky-boots.html.',
+  meta:{kind:'show',private:true,minisite:'minisitios/kinky-boots.html',tagline:'Función Family & Friends',rating:'Adolescentes y adultos',duration:'2 h 30 min',tags:['musical','familyandfriends']},
+  types:[['Family & Friends',0,0]],addons:[]},
  {k:'queen',org:'org-escena',venue:'ven-arena',title:'God Save The Queen',hoursFromNow:5,mode:'tadaa',img:'queen.webp',cat:'Concierto',
   desc:'“El mejor show sobre Queen del mundo”. Tributo con orquesta y las canciones de Freddie Mercury.',
   meta:{tagline:'El tributo definitivo',rating:'Todo público',duration:'2 h',tags:['concierto','tributo'],tadaa_rating:'4.7',now_enabled:true},
@@ -151,6 +155,8 @@ try{
  const st=S.matilda,seat=(r,n)=>st.find(s=>s.row===r&&s.n===n).id;
 await buy('luis','cinepolis','Sala 3D',2,{addons:[['Combo palomitas',1]],daysAgo:1});
 await buy('mariana','cinepolis','Sala VIP',2,{daysAgo:2});
+await buy('ana','kinkyboots-ff','Family & Friends',2,{daysAgo:1});
+await buy('luis','kinkyboots-ff','Family & Friends',2,{daysAgo:1});
 await buy('diego','finalliga','Platea',2,{addons:[['Combo de partido',2]],daysAgo:1});
 await buy('sofia','museovivo','Entrada familiar (4 personas)',1,{addons:[['Visita guiada',1]],daysAgo:3});
 await buy('ana','cinepolis','Sala tradicional',3,{addons:[['Nachos con queso',1]],daysAgo:5,used:3});

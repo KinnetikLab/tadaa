@@ -165,6 +165,35 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
       </sc-if>
 
       <sc-if value="{{s7}}" hint-placeholder-val="{{ false }}">
+        <div class="enter" style="position: absolute; inset: 0; padding: 4.5% 5% 5%; background: #08091A; display: flex; flex-direction: column; gap: 16px">
+          <div class="rise" style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px">
+            <div style="display: flex; flex-direction: column; gap: 6px">
+              <span style="font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #D6FF35">PRUÉBALO EN VIVO · ES LA PLATAFORMA REAL</span>
+              <b style="font-family: Outfit, sans-serif; font-weight: 900; font-size: clamp(28px, 3.4vw, 48px); letter-spacing: -1.5px; line-height: .95; color: #FFFFFF">Toca, navega, compra.</b>
+            </div>
+            <div role="tablist" aria-label="Vista previa" style="display: flex; flex-wrap: wrap; gap: 6px; background: #161833; border: 1px solid #2A2D52; border-radius: 99px; padding: 5px">
+              <sc-for list="{{liveTabs}}" as="lt"><button role="tab" aria-selected="{{lt.on}}" onClick="{{lt.pick}}" style="{{lt.style}}">{{lt.label}}</button></sc-for>
+            </div>
+          </div>
+          <div class="rise2" style="flex: 1; min-height: 0; display: flex; gap: 18px; align-items: stretch">
+            <div style="{{live.frame}}">
+              <div style="height: 38px; flex: 0 0 38px; display: flex; align-items: center; gap: 8px; padding: 0 14px; background: #1E2042; border-bottom: 1px solid #2A2D52">
+                <span style="width: 11px; height: 11px; border-radius: 50%; background: #FF5F57"></span><span style="width: 11px; height: 11px; border-radius: 50%; background: #FEBC2E"></span><span style="width: 11px; height: 11px; border-radius: 50%; background: #28C840"></span>
+                <span style="flex: 1; margin: 0 10px; height: 24px; border-radius: 99px; background: #08091A; color: #8C93B5; font-size: 11px; display: flex; align-items: center; padding: 0 12px; overflow: hidden; white-space: nowrap">{{live.url}}</span>
+                <a href="{{live.src}}" target="_blank" rel="noopener" aria-label="Abrir en otra pestaña" style="color: #D6FF35; display: grid; place-items: center"><svg width="16" height="16" viewBox="0 0 256 256" aria-hidden="true"><path d="M228,104a12,12,0,0,1-24,0V69l-59.51,59.51a12,12,0,0,1-17-17L187,52H152a12,12,0,0,1,0-24h64a12,12,0,0,1,12,12Zm-44,24a12,12,0,0,0-12,12v64H52V84h64a12,12,0,0,0,0-24H48A20,20,0,0,0,28,80V208a20,20,0,0,0,20,20H176a20,20,0,0,0,20-20V140A12,12,0,0,0,184,128Z" fill="currentColor"/></svg></a>
+              </div>
+              <iframe src="{{live.src}}" title="{{live.title}}" loading="lazy" style="flex: 1; width: 100%; border: 0; background: #EEF1F7"></iframe>
+            </div>
+            <div style="flex: 0 1 260px; display: flex; flex-direction: column; gap: 12px; color: #FFFFFF">
+              <b style="font-family: Outfit, sans-serif; font-size: 24px; line-height: 1.1">{{live.title}}</b>
+              <span style="font-size: 14px; line-height: 1.55; color: #C7CDE6">{{live.text}}</span>
+              <span style="margin-top: auto; font-size: 12px; color: #8C93B5; line-height: 1.5">{{live.note}}</span>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{s8}}" hint-placeholder-val="{{ false }}">
         <div class="enter" style="position: absolute; inset: 0; padding: 6%; background: radial-gradient(60% 70% at 85% 10%, rgba(91,60,255,.4), transparent 70%), #08091A; display: flex; gap: 40px; align-items: center">
           <div style="flex: 1">
             <span class="rise" style="font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #D6FF35">SOLO PARA LOS PRIMEROS 20 · PROVISIONAL</span>
@@ -178,7 +207,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
         </div>
       </sc-if>
 
-      <sc-if value="{{s8}}" hint-placeholder-val="{{ false }}">
+      <sc-if value="{{s9}}" hint-placeholder-val="{{ false }}">
         <div class="enter txw" style="position: absolute; inset: 0; padding: 6%; display: flex; gap: 40px; align-items: center; flex-wrap: wrap">
           <h2 class="rise" style="flex: 1 1 360px; margin: 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: clamp(44px, 5.5vw, 84px); line-height: .9; letter-spacing: -3px">¿Hablamos de tu próximo evento?</h2>
           <form class="rise2" style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 10px">
@@ -217,12 +246,12 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
 class Component extends DCLogic {
-  constructor(p){ super(p); this.state = { i: 0, open: '', t: 'prod', idx: false }; }
+  constructor(p){ super(p); this.state = { i: 0, open: '', t: 'prod', idx: false, live: 'home' }; }
   renderVals() {
-    const st = this.state, N = 8, i = st.i;
+    const st = this.state, N = 9, i = st.i;
     const go = k => () => this.setState({ i: k, open: '', idx: false });
     const tog = id => () => this.setState({ open: st.open === id ? '' : id });
-    const labels = ['Portada', 'El problema', 'La solución', 'En números', 'Para quién', 'Herramientas', 'Early Partner', 'Hablemos'];
+    const labels = ['Portada', 'El problema', 'La solución', 'En números', 'Para quién', 'Herramientas', 'En vivo', 'Early Partner', 'Hablemos'];
     const dots = labels.map((l, k) => ({ aria: 'Ir a ' + l, on: k === i, go: go(k),
       style: 'flex: 1; height: 6px; border: 0; padding: 0; border-radius: 99px; ' + (k <= i ? 'background: #D6FF35;' : 'background: rgba(255,255,255,.25);') }));
     const thumbs = labels.map((label, k) => ({ label, n: String(k + 1).padStart(2, '0'), go: go(k),
@@ -266,10 +295,26 @@ class Component extends DCLogic {
     const PK = [['01', 'Comisión preferente por 12 meses', 'Dato provisional: tarifa fija menor a la estándar durante el primer año.'], ['02', 'Lugar destacado al lanzar', 'Banner principal de la cartelera y campaña en redes de TADAA!.'], ['03', 'Now! y Golden sin costo', 'Ambas herramientas activadas desde el día uno.'], ['04', 'Línea directa con el equipo', 'Un canal privado para proponer funciones y dar forma al producto.']];
     const perks = PK.map(([n, t, d]) => { const id = 'k' + n, o = st.open === id; return { n, t, d, open: o, sign: o ? '−' : '+', pick: tog(id),
       style: 'width: 100%; display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-radius: 20px; font-family: inherit; color: #FFFFFF; ' + (o ? 'background: #1238FF; border: 0;' : 'background: #161833; border: 1px solid #2A2D52;') }; });
+    const LV = {
+      home: ['Plataforma', 'inicio', 'd', 'La cartelera de TADAA!', 'Home, populares, Now! y planes para cualquier día con datos reales del sistema.'],
+      evento: ['Evento', 'evento/matilda', 'd', 'Ficha de evento y compra', 'Zonas, mapa de asientos, add-ons, Golden Ticket y Aplausómetro. El pago está en modo de prueba.'],
+      admin: ['Studio', 'admin', 'd', 'Panel de administración', 'KPIs, eventos, Now!, solicitudes de boletera externa y check-in. Vista con datos de muestra.'],
+      prod: ['Productores', 'productor', 'd', 'Portal de productores', 'Ventas del día, compras con add-ons, Now! y Golden Ticket configurables. Vista con datos de muestra.'],
+      emp: ['Empresas', 'empresa', 'd', 'Portal de empresas', 'Altas y bajas por RFC, padrón por CSV y uso agregado sin ver compras. Vista con datos de muestra.'],
+      staff: ['Staff', 'staff', 'm', 'App de acceso', 'Escaneo de QR dinámico, verificación de compra y entrega de add-ons en puerta.'],
+      wallet: ['Wallet', 'wallet', 'm', 'Wallet del asistente', 'Boleto final con QR que cambia cada minuto, pases provisionales y add-ons.'],
+      mini: ['Minisitio', 'minisitios/kinky-boots.html', 'x', 'Minisitios de obra', 'Hacemos el sitio de tu obra o función especial, conectado a TADAA!: historia, reparto, canciones y, al final, los pases de cada invitado con su QR. Ejemplo: Kinky Boots · Family & Friends.']
+    };
+    const lv = LV[st.live] || LV.home;
+    const liveTabs = Object.keys(LV).map(id => ({ label: LV[id][0], on: st.live === id, pick: () => this.setState({ live: id }),
+      style: 'height: 36px; padding: 0 14px; border: 0; border-radius: 99px; font-family: inherit; font-weight: 800; font-size: 12px; cursor: pointer; transition: background .2s ease-out, color .2s ease-out; ' + (st.live === id ? 'background: #D6FF35; color: #08091A;' : 'background: transparent; color: #FFFFFF;') }));
+    const src = lv[2] === 'x' ? lv[1] : 'index.html?preview=1&mode=' + lv[2] + '#' + lv[1];
+    const live = { title: lv[3], text: lv[4], src, url: 'tadaa.1wp.site/' + lv[1], note: 'Vista previa incrustada: los portales muestran datos de ejemplo y no requieren sesión.',
+      frame: 'flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; border-radius: 22px; overflow: hidden; background: #161833; border: 1px solid #2A2D52; box-shadow: 0 30px 80px rgba(0,0,0,.5); ' + (lv[2] === 'm' ? 'flex: 0 0 360px; max-width: 360px; margin: 0 auto;' : '') };
     const v = {}; for (let k = 0; k < N; k++) v['s' + (k + 1)] = i === k;
     return { ...v, dots, thumbs, probs, nodes, stats, tabs, tools, perks,
       p: { ...sel, points: sel.points.map(([n, t, d]) => ({ n, t, d })) },
-      counter: String(i + 1).padStart(2, '0') + ' / 0' + N + ' · ' + labels[i],
+      counter: String(i + 1).padStart(2, '0') + ' / 0' + N + ' · ' + labels[i], liveTabs, live,
       prev: go((i + N - 1) % N), next: go((i + 1) % N),
       indexOpen: st.idx, toggleIndex: () => this.setState({ idx: !st.idx }) };
   }

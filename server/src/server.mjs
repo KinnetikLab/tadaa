@@ -19,7 +19,7 @@ function corsGuard(req){const origin=req.headers.origin;return !origin||origin==
 function reqSecure(req){return req.socket.encrypted||req.headers['x-forwarded-proto']==='https';}
 async function body(req){let count=0;const chunks=[];for await(const chunk of req){count+=chunk.length;if(count>20_000)throw new Error('JSON supera el tamaño permitido');chunks.push(chunk)}const str=Buffer.concat(chunks).toString('utf8');return str?JSON.parse(str):{}}
 async function request(req,res){
- res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('X-Frame-Options','DENY');res.setHeader('Referrer-Policy','no-referrer');res.setHeader('Permissions-Policy','camera=(self), microphone=(), geolocation=()');
+ res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('X-Frame-Options','SAMEORIGIN');res.setHeader('Referrer-Policy','no-referrer');res.setHeader('Permissions-Policy','camera=(self), microphone=(), geolocation=()');
  const u=new URL(req.url,'http://local');const pathname=u.pathname;
  // La portada vive en /experience/. Sin esta redirección, /curtain.js,
  // /site-live.js y /login.html se resuelven incorrectamente desde /.
