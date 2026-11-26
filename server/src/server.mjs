@@ -36,6 +36,8 @@ async function request(req,res){
   res.writeHead(302,{'Location':aliasPaths[pathname]+(u.search||'')+(u.hash||''),'Cache-Control':'no-store'});
   res.end();return;
  }
+ // Enlaces cortos para compartir: /obra/<slug> abre la landing de la obra; /p/<slug> abre la presentación personalizada.
+ {const m=pathname.match(/^\/(obra|p)\/([a-z0-9-]{2,80})\/?$/);if(m){res.writeHead(302,{'Location':m[1]==='obra'?'/experience/landings/?s='+m[2]:'/experience/#pitch/'+m[2],'Cache-Control':'no-store'});res.end();return}}
 
  if(pathname.startsWith('/api/')){
   if(process.env.NODE_ENV==='production'&&!reqSecure(req))return send(res,403,{error:'HTTPS obligatorio'});
@@ -78,9 +80,10 @@ async function request(req,res){
  if(pathname==='/experience/'||pathname==='/experience')file='/experience/index.html';
  // Never expose files outside the web directory.
  if(file.includes('\0')){res.writeHead(400);return res.end()}
- const target=path.resolve(root,'.'+file);
+ let target=path.resolve(root,'.'+file);
  if(!target.startsWith(root+path.sep)&&target!==path.join(root,'index.html')){res.writeHead(403);return res.end()}
  let st;try{st=fs.statSync(target)}catch{res.writeHead(404);return res.end()}
+ if(st.isDirectory()){if(!pathname.endsWith('/')){res.writeHead(301,{Location:pathname+'/'+(u.search||'')});return res.end()}target=path.join(target,'index.html');try{st=fs.statSync(target)}catch{res.writeHead(404);return res.end()}}
  if(!st.isFile()){res.writeHead(404);return res.end()}
  const type=types[path.extname(target)]||'application/octet-stream';
  res.setHeader('Content-Type',type);res.setHeader('Cache-Control',['.html','.js','.css'].includes(path.extname(target))?'no-store':'public, max-age=3600');

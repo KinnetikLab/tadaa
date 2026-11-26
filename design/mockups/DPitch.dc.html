@@ -53,13 +53,15 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
         <div class="enter txw" style="position: absolute; inset: 0; display: flex; align-items: center; padding: 6%">
           <div style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(6,14,90,.85), transparent 70%)"></div>
           <div style="position: relative; flex: 1; display: flex; flex-direction: column; gap: 22px">
-            <span class="rise" style="align-self: flex-start; background: #08091A; border-radius: 99px; padding: 8px 14px; font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #D6FF35">PROGRAMA EARLY PARTNERS</span>
+            <span class="rise" style="align-self: flex-start; display: flex; align-items: center; gap: 10px; background: #08091A; border-radius: 99px; padding: 8px 14px; font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #D6FF35"><sc-if value="{{cover.logo}}"><img src="{{cover.logo}}" alt="" style="height: 22px; width: auto; border-radius: 6px; background: #FFFFFF"></sc-if>{{cover.kicker}}</span>
             <h1 class="rise2" style="margin: 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: clamp(56px, 7vw, 112px); line-height: .86; letter-spacing: -4px">Más gente<br>en tus <span style="color: #D6FF35">butacas.</span></h1>
+            <sc-if value="{{cover.message}}"><p class="rise3" style="margin: 0; max-width: 520px; font-size: 17px; line-height: 1.55; color: #E1E6F5">{{cover.message}}</p></sc-if>
             <button class="rise3" onClick="{{next}}" style="align-self: flex-start; height: 60px; padding: 0 8px 0 26px; border-radius: 99px; border: 0; background: #D6FF35; color: #08091A; display: flex; align-items: center; gap: 16px; font-family: inherit; font-weight: 800; font-size: 15px">Empezar<span style="width: 46px; height: 46px; border-radius: 50%; background: #08091A; display: grid; place-items: center; color: #D6FF35; font-size: 20px">→</span></button>
           </div>
           <div class="float" style="position: relative; width: 300px; background: #FFFFFF; color: #08091A; border-radius: 30px; padding: 10px 10px 18px; box-shadow: 0 40px 80px rgba(8,9,26,.45)">
-            <img src="/_blob/bf23baed004bb85668937804b7d495cc" alt="" style="width: 100%; height: 170px; object-fit: cover; border-radius: 22px; display: block">
-            <div style="font-family: Outfit, sans-serif; font-weight: 800; font-size: 22px; text-align: center; margin-top: 12px">Tu evento aquí</div>
+            <img src="{{card.img}}" alt="" style="width: 100%; height: 170px; object-fit: {{card.fit}}; border-radius: 22px; display: block; background: {{card.bg}}">
+            <div style="font-family: Outfit, sans-serif; font-weight: 800; font-size: 22px; line-height: 1.1; text-align: center; margin-top: 12px">{{card.title}}</div>
+            <sc-if value="{{card.when}}"><div style="font-size: 12px; color: #4A5068; text-align: center; margin-top: 4px">{{card.when}}</div></sc-if>
             <div style="margin: 12px -10px 0; border-top: 2px dashed #9DAEF5"></div>
             <div style="display: flex; justify-content: space-between; padding: 12px 12px 0; font-size: 12px"><span>Vendidos</span><b>+38% · provisional</b></div>
           </div>
@@ -165,6 +167,27 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
       </sc-if>
 
       <sc-if value="{{s7}}" hint-placeholder-val="{{ false }}">
+        <div class="enter" style="position: absolute; inset: 0; padding: 4.5% 5% 5%; background: radial-gradient(70% 80% at 0% 0%, rgba(18,56,255,.55), transparent 70%), #08091A; display: flex; gap: 26px; align-items: stretch">
+          <div class="rise" style="flex: 0 1 300px; display: flex; flex-direction: column; gap: 14px; color: #FFFFFF">
+            <span style="font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #D6FF35">{{obra.kicker}}</span>
+            <b style="font-family: Outfit, sans-serif; font-weight: 900; font-size: clamp(30px, 3.4vw, 50px); letter-spacing: -1.5px; line-height: .95">{{obra.title}}</b>
+            <span style="font-size: 14px; line-height: 1.55; color: #C7CDE6">{{obra.text}}</span>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px">
+              <sc-for list="{{obra.points}}" as="op"><span style="display: flex; gap: 10px; align-items: flex-start; font-size: 13px; line-height: 1.45; color: #E1E6F5"><span style="flex: 0 0 22px; height: 22px; border-radius: 50%; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-size: 12px; font-weight: 900">✓</span>{{op.t}}</span></sc-for>
+            </div>
+            <a href="{{obra.open}}" target="_blank" rel="noopener" style="margin-top: auto; align-self: flex-start; height: 48px; padding: 0 20px; border-radius: 99px; background: #D6FF35; color: #08091A; display: flex; align-items: center; font-weight: 800; font-size: 14px">Abrir la landing completa</a>
+          </div>
+          <div class="rise2" style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; border-radius: 22px; overflow: hidden; background: #161833; border: 1px solid #2A2D52; box-shadow: 0 30px 80px rgba(0,0,0,.5)">
+            <div style="height: 38px; flex: 0 0 38px; display: flex; align-items: center; gap: 8px; padding: 0 14px; background: #1E2042; border-bottom: 1px solid #2A2D52">
+              <span style="width: 11px; height: 11px; border-radius: 50%; background: #FF5F57"></span><span style="width: 11px; height: 11px; border-radius: 50%; background: #FEBC2E"></span><span style="width: 11px; height: 11px; border-radius: 50%; background: #28C840"></span>
+              <span style="flex: 1; margin: 0 10px; height: 24px; border-radius: 99px; background: #08091A; color: #8C93B5; font-size: 11px; display: flex; align-items: center; padding: 0 12px; overflow: hidden; white-space: nowrap">{{obra.url}}</span>
+            </div>
+            <iframe src="{{obra.src}}" title="{{obra.title}}" loading="lazy" style="flex: 1; width: 100%; border: 0; background: #08091A"></iframe>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{s8}}" hint-placeholder-val="{{ false }}">
         <div class="enter" style="position: absolute; inset: 0; padding: 4.5% 5% 5%; background: #08091A; display: flex; flex-direction: column; gap: 16px">
           <div class="rise" style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px">
             <div style="display: flex; flex-direction: column; gap: 6px">
@@ -193,7 +216,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
         </div>
       </sc-if>
 
-      <sc-if value="{{s8}}" hint-placeholder-val="{{ false }}">
+      <sc-if value="{{s9}}" hint-placeholder-val="{{ false }}">
         <div class="enter" style="position: absolute; inset: 0; padding: 6%; background: radial-gradient(60% 70% at 85% 10%, rgba(91,60,255,.4), transparent 70%), #08091A; display: flex; gap: 40px; align-items: center">
           <div style="flex: 1">
             <span class="rise" style="font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #D6FF35">SOLO PARA LOS PRIMEROS 20 · PROVISIONAL</span>
@@ -207,15 +230,17 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
         </div>
       </sc-if>
 
-      <sc-if value="{{s9}}" hint-placeholder-val="{{ false }}">
+      <sc-if value="{{s10}}" hint-placeholder-val="{{ false }}">
         <div class="enter txw" style="position: absolute; inset: 0; padding: 6%; display: flex; gap: 40px; align-items: center; flex-wrap: wrap">
-          <h2 class="rise" style="flex: 1 1 360px; margin: 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: clamp(44px, 5.5vw, 84px); line-height: .9; letter-spacing: -3px">¿Hablamos de tu próximo evento?</h2>
-          <form class="rise2" style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 10px">
-            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700">Nombre<input placeholder="Tu nombre" style="height: 52px; border: 0; border-radius: 16px; padding: 0 16px; font: inherit; font-size: 14px"></label>
-            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700">Organización<input placeholder="Productora, empresa o escuela" style="height: 52px; border: 0; border-radius: 16px; padding: 0 16px; font: inherit; font-size: 14px"></label>
-            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700">Correo<input type="email" placeholder="tu@organizacion.mx" style="height: 52px; border: 0; border-radius: 16px; padding: 0 16px; font: inherit; font-size: 14px"></label>
-            <button type="button" style="height: 58px; border-radius: 99px; border: 0; background: #D6FF35; color: #08091A; font-family: inherit; font-weight: 800; font-size: 15px">Quiero ser Early Partner</button>
-          </form>
+          <h2 class="rise" style="flex: 1 1 360px; margin: 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: clamp(44px, 5.5vw, 84px); line-height: .9; letter-spacing: -3px">{{lead.title}}</h2>
+          <sc-if value="{{lead.sent}}"><div class="pop" role="status" style="flex: 1 1 380px; background: #08091A; border-radius: 28px; padding: 30px; display: flex; flex-direction: column; gap: 10px"><span style="width: 56px; height: 56px; border-radius: 50%; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-size: 28px; font-weight: 900">✓</span><b style="font-family: Outfit, sans-serif; font-size: 30px; line-height: 1">¡Listo, {{lead.first}}!</b><span style="font-size: 15px; line-height: 1.55; color: #C7CDE6">Te escribimos en menos de 24 horas para agendar una llamada. Mientras, puedes volver a cualquier diapositiva.</span></div></sc-if>
+          <sc-if value="{{lead.form}}"><form class="rise2" onSubmit="{{lead.submit}}" style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 10px">
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700">Nombre<input name="name" required autocomplete="name" value="{{lead.name}}" onInput="{{lead.setName}}" placeholder="Tu nombre" style="height: 52px; border: 0; border-radius: 16px; padding: 0 16px; font: inherit; font-size: 14px"></label>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700">Organización<input name="organization" autocomplete="organization" value="{{lead.org}}" onInput="{{lead.setOrg}}" placeholder="Productora, empresa o escuela" style="height: 52px; border: 0; border-radius: 16px; padding: 0 16px; font: inherit; font-size: 14px"></label>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700">Correo<input name="email" type="email" required autocomplete="email" value="{{lead.email}}" onInput="{{lead.setEmail}}" placeholder="tu@organizacion.mx" style="height: 52px; border: 0; border-radius: 16px; padding: 0 16px; font: inherit; font-size: 14px"></label>
+            <sc-if value="{{lead.error}}"><span role="alert" style="font-size: 13px; font-weight: 700; color: #FFE1E1; background: rgba(255,60,60,.25); border-radius: 12px; padding: 10px 12px">{{lead.error}}</span></sc-if>
+            <button type="submit" disabled="{{lead.busy}}" style="height: 58px; border-radius: 99px; border: 0; background: #D6FF35; color: #08091A; font-family: inherit; font-weight: 800; font-size: 15px; cursor: pointer">{{lead.cta}}</button>
+          </form></sc-if>
         </div>
       </sc-if>
 
@@ -246,12 +271,13 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
 class Component extends DCLogic {
-  constructor(p){ super(p); this.state = { i: 0, open: '', t: 'prod', idx: false, live: 'home' }; }
+  constructor(p){ super(p); this.state = { i: 0, open: '', t: 'prod', idx: false, live: 'home', deck: null, ln: '', lo: null, le: '', lbusy: false, lsent: false, lerr: '' }; }
   renderVals() {
-    const st = this.state, N = 9, i = st.i;
+    const st = this.state, N = 10, i = st.i, deck = st.deck, land = deck && deck.landing;
+    const lslug = (land && land.slug) || 'kinky-boots', ltitle = String((land && land.title) || 'Kinky Boots').split(' — ')[0];
     const go = k => () => this.setState({ i: k, open: '', idx: false });
     const tog = id => () => this.setState({ open: st.open === id ? '' : id });
-    const labels = ['Portada', 'El problema', 'La solución', 'En números', 'Para quién', 'Herramientas', 'En vivo', 'Early Partner', 'Hablemos'];
+    const labels = ['Portada', 'El problema', 'La solución', 'En números', 'Para quién', 'Herramientas', deck && land ? ltitle : 'Tu obra', 'En vivo', 'Early Partner', 'Hablemos'];
     const dots = labels.map((l, k) => ({ aria: 'Ir a ' + l, on: k === i, go: go(k),
       style: 'flex: 1; height: 6px; border: 0; padding: 0; border-radius: 99px; ' + (k <= i ? 'background: #D6FF35;' : 'background: rgba(255,255,255,.25);') }));
     const thumbs = labels.map((label, k) => ({ label, n: String(k + 1).padStart(2, '0'), go: go(k),
@@ -303,18 +329,38 @@ class Component extends DCLogic {
       emp: ['Empresas', 'empresa', 'd', 'Portal de empresas', 'Altas y bajas por RFC, padrón por CSV y uso agregado sin ver compras. Vista con datos de muestra.'],
       staff: ['Staff', 'staff', 'm', 'App de acceso', 'Escaneo de QR dinámico, verificación de compra y entrega de add-ons en puerta.'],
       wallet: ['Wallet', 'wallet', 'm', 'Wallet del asistente', 'Boleto final con QR que cambia cada minuto, pases provisionales y add-ons.'],
-      mini: ['Minisitio', 'minisitios/kinky-boots.html', 'x', 'Minisitios de obra', 'Hacemos el sitio de tu obra o función especial, conectado a TADAA!: historia, reparto, canciones y, al final, los pases de cada invitado con su QR. Ejemplo: Kinky Boots · Family & Friends.']
+      mini: ['Minisitio', 'minisitios/kinky-boots.html', 'x', 'Minisitios de obra', 'Hacemos el sitio de tu obra o función especial, conectado a TADAA!: historia, reparto, canciones y, al final, los pases de cada invitado con su QR. Ejemplo: Kinky Boots · Family & Friends.'],
+      land: ['Landing', 'landings/?s=' + lslug + '&embed=1', 'x', 'Landing de ' + ltitle, 'La página de venta de la obra, con su propia identidad: historia, interacción firma, canciones y boletos conectados a TADAA!.']
     };
     const lv = LV[st.live] || LV.home;
     const liveTabs = Object.keys(LV).map(id => ({ label: LV[id][0], on: st.live === id, pick: () => this.setState({ live: id }),
       style: 'height: 36px; padding: 0 14px; border: 0; border-radius: 99px; font-family: inherit; font-weight: 800; font-size: 12px; cursor: pointer; transition: background .2s ease-out, color .2s ease-out; ' + (st.live === id ? 'background: #D6FF35; color: #08091A;' : 'background: transparent; color: #FFFFFF;') }));
     const src = lv[2] === 'x' ? lv[1] : 'index.html?preview=1&mode=' + lv[2] + '#' + lv[1];
-    const live = { title: lv[3], text: lv[4], src, url: 'tadaa.1wp.site/' + lv[1], note: 'Vista previa incrustada: los portales muestran datos de ejemplo y no requieren sesión.',
+    const live = { title: lv[3], text: lv[4], src, url: 'tadaa.1wp.site/' + lv[1].replace('&embed=1', ''), note: 'Vista previa incrustada: los portales muestran datos de ejemplo y no requieren sesión.',
       frame: 'flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; border-radius: 22px; overflow: hidden; background: #161833; border: 1px solid #2A2D52; box-shadow: 0 30px 80px rgba(0,0,0,.5); ' + (lv[2] === 'm' ? 'flex: 0 0 360px; max-width: 360px; margin: 0 auto;' : '') };
     const v = {}; for (let k = 0; k < N; k++) v['s' + (k + 1)] = i === k;
-    return { ...v, dots, thumbs, probs, nodes, stats, tabs, tools, perks,
+    const lc = (land && land.card) || {}, lh = (land && land.hero) || {};
+    const prospect = deck ? deck.prospect : '';
+    const cover = { kicker: deck ? 'PREPARADO PARA ' + String(prospect).toUpperCase() : 'PROGRAMA EARLY PARTNERS', message: deck ? deck.message || '' : '', logo: deck ? deck.logo_url || '' : '' };
+    const card = land ? { img: lc.img || lh.art || lh.logo, title: ltitle, when: [lc.when, lc.venue].filter(Boolean).join(' · '), fit: lc.img && /legs|logo/.test(lc.img) ? 'contain' : 'cover', bg: '#F6EFEA' }
+      : { img: '/_blob/bf23baed004bb85668937804b7d495cc', title: 'Tu evento aquí', when: '', fit: 'cover', bg: '#EEF1F7' };
+    const obra = { kicker: land ? 'TU PRÓXIMA OBRA EN TADAA!' : 'EJEMPLO · LANDINGS DE OBRA', title: land ? ltitle : 'Una landing para cada obra', src: 'landings/?s=' + lslug + '&embed=1', open: 'landings/?s=' + lslug, url: 'tadaa.1wp.site/obra/' + lslug,
+      text: land ? 'Así se vería ' + ltitle + ' vendiéndose en TADAA!: con la identidad de la obra, una interacción propia y los boletos conectados a la plataforma.' : 'Cada obra tiene su página con identidad propia, una interacción memorable y los boletos conectados a TADAA!. Este es un ejemplo.',
+      points: [{ t: 'Diseño con el arte oficial de la obra' }, { t: 'Interacción firma: algo que el público quiere tocar y compartir' }, { t: 'Boletos, preventa para miembros y QR en la Wallet' }, { t: 'La editamos contigo desde Studio' }] };
+    const nm = st.ln, org = st.lo == null ? prospect : st.lo, em = st.le;
+    const lead = { title: deck ? (land ? '¿Llevamos ' + ltitle + ' a TADAA!?' : '¿Hablamos, ' + prospect + '?') : '¿Hablamos de tu próximo evento?', name: nm, org, email: em, busy: st.lbusy, error: st.lerr, sent: st.lsent, form: !st.lsent, first: (nm || '').split(' ')[0],
+      cta: st.lbusy ? 'Enviando…' : deck ? 'Quiero empezar' : 'Quiero ser Early Partner',
+      setName: e => this.setState({ ln: e.target.value, lerr: '' }), setOrg: e => this.setState({ lo: e.target.value }), setEmail: e => this.setState({ le: e.target.value, lerr: '' }),
+      submit: async e => { e && e.preventDefault && e.preventDefault(); if (st.lbusy) return;
+        if (!nm.trim()) return this.setState({ lerr: 'Escribe tu nombre para saber con quién hablamos.' });
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em.trim())) return this.setState({ lerr: 'Revisa tu correo: le falta algo (ej. tu@organizacion.mx).' });
+        this.setState({ lbusy: true, lerr: '' });
+        try { const r = await fetch('/api/v2/pitch/' + encodeURIComponent((deck && deck.slug) || 'general') + '/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: nm.trim(), organization: org, email: em.trim() }) });
+          const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || 'No pudimos enviar tus datos. Intenta de nuevo.'); this.setState({ lbusy: false, lsent: true }) }
+        catch (x) { this.setState({ lbusy: false, lerr: x.message }) } } };
+    return { ...v, dots, thumbs, probs, nodes, stats, tabs, tools, perks, cover, card, obra, lead,
       p: { ...sel, points: sel.points.map(([n, t, d]) => ({ n, t, d })) },
-      counter: String(i + 1).padStart(2, '0') + ' / 0' + N + ' · ' + labels[i], liveTabs, live,
+      counter: String(i + 1).padStart(2, '0') + ' / ' + String(N).padStart(2, '0') + ' · ' + labels[i], liveTabs, live,
       prev: go((i + N - 1) % N), next: go((i + 1) % N),
       indexOpen: st.idx, toggleIndex: () => this.setState({ idx: !st.idx }) };
   }

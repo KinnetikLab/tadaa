@@ -1,0 +1,71 @@
+{
+  "title": "La Jaula de las Locas — El Musical",
+  "theme": {
+    "mode": "light", "particles": "feathers", "signature": "transform",
+    "colors": {"bg":"#FDF4F6","surface":"#FFFFFF","ink":"#3D0A24","muted":"#7A4A63","accent":"#C2185B","accent2":"#A1124C","gold":"#A87F2C","dark":"#2A0718","onDark":"#F9E9F0","line":"#E8C9D4"},
+    "fonts": {"display":"Playfair Display","body":"Manrope","script":"Great Vibes","url":"https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Manrope:wght@400;600;700;800&family=Great+Vibes&display=swap"},
+    "displayCase": "none"
+  },
+  "card": {"img":"landings/la-jaula-de-las-locas/cartel.webp","when":"Temporada 2027","venue":"Por confirmar"},
+  "nav": ["historia","camerino","personajes","canciones","boletos"],
+  "hero": {
+    "layout": "frame", "kicker": "El musical · La Cage aux Folles",
+    "art": "landings/la-jaula-de-las-locas/cartel.webp",
+    "title": "La Jaula de las Locas", "script": "La Cage aux Folles",
+    "sub": "Plumas, lentejuelas y un corazón enorme. En Saint-Tropez, Georges y Albin llevan veinte años de amor y de cabaret… hasta que el hijo anuncia su boda con la hija del político más conservador de Francia.",
+    "chips": [{"icon":"star","t":"6 premios Tony"},{"icon":"music","t":"Música de Jerry Herman"},{"icon":"star","t":"Libreto de Harvey Fierstein"}],
+    "countdown": "", "ctas": [{"t":"Quiero mis boletos","href":"#boletos","primary":true},{"t":"Conocer la historia","href":"#historia"}]
+  },
+  "marquee": ["We are what we are","Saint-Tropez","Les Cagelles","Plumas y lentejuelas","I am what I am","Una cena muy normal"],
+  "stats": [{"n":1983,"s":"","l":"Estreno en Broadway"},{"n":6,"s":" Tony","l":"Incluido Mejor Musical"},{"n":3,"s":" de 3","l":"Producciones de Broadway premiadas"},{"n":20,"s":" años","l":"De amor entre Georges y Albin"}],
+  "story": {
+    "kicker": "La historia", "title": "Una cena, dos familias y cero normalidad", "img": "landings/la-jaula-de-las-locas/cabaret.webp", "img2": "landings/la-jaula-de-las-locas/saint-tropez.webp",
+    "chapters": [
+      {"tab":"El cabaret","title":"La Cage aux Folles","text":"En Saint-Tropez, Georges dirige el cabaret más glamoroso de la costa. Su estrella indiscutible es Zaza: en realidad Albin, su pareja de toda la vida, diva dentro y fuera del escenario."},
+      {"tab":"La boda","title":"Una noticia inesperada","text":"Jean-Michel, el hijo de Georges, anuncia que se casa con Anne Dindon, hija de un diputado que quiere cerrar todos los cabarets. Los futuros consuegros vienen a cenar y la familia decide fingir ser una familia normal."},
+      {"tab":"La cena","title":"El papel de su vida","text":"Albin se ofrece a interpretar el papel más difícil de su carrera: la madre perfecta. Lo que sigue es una cadena de enredos, plumas escondidas y verdades a gritos."}
+    ],
+    "quote": "Soy lo que soy, y no pienso pedir perdón por ello.", "quoteBy": "El himno de Albin"
+  },
+  "signature": {
+    "id": "camerino", "kicker": "El camerino", "title": "De Albin a Zaza",
+    "text": "Un poco más de rímel, la peluca perfecta y… ¡a escena! Arrastra el control y mira la transformación estrella del cabaret.",
+    "before": "landings/la-jaula-de-las-locas/albin.webp", "after": "landings/la-jaula-de-las-locas/zaza.webp", "beforeLabel": "Albin", "afterLabel": "Zaza",
+    "steps": ["Albin, recién llegado al camerino.","Base y un poco de sombra.","Pestañas, rímel y mucha paciencia.","La peluca perfecta.","Lentejuelas, boa y abanicos.","Señoras y señores… ¡Zaza!"]
+  },
+  "characters": {
+    "kicker": "Personajes", "title": "Las estrellas de la jaula",
+    "cards": [
+      {"name":"Albin, «Zaza»","role":"La estrella","img":"landings/la-jaula-de-las-locas/zaza.webp","text":"La gran diva del cabaret y el corazón de la familia. Cuando canta su himno, no queda un ojo seco en el teatro."},
+      {"name":"Georges","role":"El anfitrión","img":"landings/la-jaula-de-las-locas/albin.webp","text":"Dueño del cabaret y maestro de ceremonias. Su trabajo es que el show, y la familia, nunca se detengan."},
+      {"name":"Jean-Michel","role":"El hijo","text":"Criado entre plumas y lentejuelas. Su boda detona todo el enredo y le enseña qué significa de verdad una familia."},
+      {"name":"Anne Dindon","role":"La novia","text":"Dulce y enamorada, ignora que la cena con sus padres será la noche más loca de la Costa Azul."},
+      {"name":"Édouard Dindon","role":"El consuegro","text":"Diputado ultraconservador. Llega a la cena decidido a juzgar… y termina bailando entre plumas."},
+      {"name":"Jacob","role":"El mayordomo","text":"Insiste en ser «la doncella», sueña con su propio número y roba escena en cada aparición."}
+    ]
+  },
+  "songs": {
+    "kicker": "La música de Jerry Herman", "title": "Canciones que ya son himnos", "dark": true, "disc": "landings/la-jaula-de-las-locas/cartel.webp",
+    "tracks": [
+      {"t":"We Are What We Are","who":"Les Cagelles","dur":214,"d":"El número de apertura del cabaret: plumas, abanicos y actitud."},
+      {"t":"A Little More Mascara","who":"Albin","dur":236,"d":"La transformación de Albin en Zaza frente al espejo del camerino."},
+      {"t":"With Anne on My Arm","who":"Jean-Michel","dur":190,"d":"Jean-Michel canta lo que siente cuando está con Anne."},
+      {"t":"I Am What I Am","who":"Albin","dur":204,"d":"El himno de orgullo más famoso del teatro musical."},
+      {"t":"Song on the Sand","who":"Georges","dur":198,"d":"Georges recuerda cómo empezó su historia con Albin."},
+      {"t":"The Best of Times","who":"Jacqueline y compañía","dur":226,"d":"La cena se convierte en fiesta: el mejor momento es ahora."}
+    ]
+  },
+  "gallery": {"kicker":"Galería","title":"Postales de la Costa Azul","images":[{"src":"landings/la-jaula-de-las-locas/cabaret.webp","cap":"Zaza y Les Cagelles"},{"src":"landings/la-jaula-de-las-locas/zaza.webp","cap":"Zaza, la estrella"},{"src":"landings/la-jaula-de-las-locas/saint-tropez.webp","cap":"Saint-Tropez al atardecer"},{"src":"landings/la-jaula-de-las-locas/cartel.webp","cap":"El cartel"}]},
+  "tickets": {
+    "kicker": "Boletos", "title": "Arma tu noche de cabaret", "venue": "Teatro por confirmar", "eventSlug": "",
+    "days": [{"dow":"Jueves","day":"10","mon":"jun","times":["20:30"]},{"dow":"Viernes","day":"11","mon":"jun","times":["20:30"]},{"dow":"Sábado","day":"12","mon":"jun","times":["17:00","21:00"]},{"dow":"Domingo","day":"13","mon":"jun","times":["13:00","18:00"]}],
+    "zones": [{"name":"Mesa de cabaret","price":1950},{"name":"Platea","price":1450},{"name":"Preferente","price":990},{"name":"Balcón","price":590}],
+    "note": "Fechas, horarios y precios de ejemplo para la presentación."
+  },
+  "faq": [
+    {"q":"¿Es para toda la familia?","a":"Es una comedia musical para adolescentes y adultos, llena de humor y de un mensaje de aceptación."},
+    {"q":"¿Cuánto dura?","a":"Aproximadamente 2 horas 30 minutos con intermedio."}
+  ],
+  "cta": {"title":"La vida es un cabaret","text":"Ven a la cena más disparatada de Saint-Tropez. Las plumas las ponemos nosotros."},
+  "footer": "La Jaula de las Locas — El Musical. Música y letras de Jerry Herman, libreto de Harvey Fierstein. Landing de presentación hecha con TADAA!"
+}

@@ -71,7 +71,7 @@ async function eventModal(ev){const m=ev?.metadata||{};const isNew=!ev;
    return id}});
  if(res){TV.toast(isNew?'Evento creado':'Cambios guardados','ok');TV.eventsLoaded=false;await adminRefresh()}}
 A.DAdmin=C=>class extends C{constructor(p){super(p);this.state={f:'all',q:'',invite:{email:'',role:'staff'}}}renderVals(){const D=S.data||{kpis:{},events:[],requests:[],organizations:[]};const st=this.state,k=D.kpis||{};
- const NAV=[['Resumen','#admin'],['Eventos y funciones','#admin'],['Boletera','admin.html',String((D.events||[]).filter(e=>e.ticketing_mode==='tadaa'&&e.status==='published').length)],['Now!','#admin',D.now?'EN VIVO':''],['Solicitudes','#admin',String(D.requests.length||'')],['Convenios y membresías','admin.html'],['Niveles, badges y cashback','admin.html'],['Golden Ticket y Awards','admin.html'],['Partners y productores','#productor'],['Pagos, devoluciones','admin.html'],['Integraciones y API','admin.html']];
+ const NAV=[['Resumen','#admin'],['Eventos y funciones','#admin'],['Boletera','admin.html',String((D.events||[]).filter(e=>e.ticketing_mode==='tadaa'&&e.status==='published').length)],['Now!','#admin',D.now?'EN VIVO':''],['Solicitudes','#admin',String(D.requests.length||'')],['Convenios y membresías','admin.html'],['Niveles, badges y cashback','admin.html'],['Golden Ticket y Awards','admin.html'],['Partners y productores','#productor'],['Presentaciones','presentaciones.html'],['Pagos, devoluciones','admin.html'],['Integraciones y API','admin.html']];
  const nav=NAV.map(([label,href,badge],i)=>({label,href,badge:badge||'',pick:()=>{},style:'height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; font-weight: '+(i===0?800:700)+'; font-size: 13px; transition: background .2s; '+(i===0?'background: #FFFFFF; color: #08091A;':''),badgeStyle:'background: '+(label==='Now!'?'linear-gradient(100deg,#FF3D8B,#FF8A3D)':'rgba(255,255,255,.18)')+'; color: '+(label==='Now!'?'#08091A':'inherit')+'; border-radius: 99px; padding: 2px 8px; font-size: 10px; font-weight: 800;'}));
  const delta=k.prev_week_minor>0?Math.round((k.week_minor-k.prev_week_minor)/k.prev_week_minor*100):null;
  const F=[['all','Todos'],['tadaa','TADAA! Tickets'],['now','Con Now!']];
@@ -245,8 +245,12 @@ A.preview={};
 
 /* ───── Pitch: enlaces del deck ───── */
 A.DPitch=C=>class extends C{renderVals(){return {...g(),...super.renderVals()}}
- componentDidMount(){this._k=e=>{if(e.target.closest('input,textarea,select'))return;if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();this.setState({i:(this.state.i+1)%9,open:'',idx:false})}if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();this.setState({i:(this.state.i+8)%9,open:'',idx:false})}if(e.key==='Escape')this.setState({idx:false})};document.addEventListener('keydown',this._k);
-  let x0=null;this._ts=e=>{x0=e.touches[0].clientX};this._te=e=>{if(x0==null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)this.setState({i:(this.state.i+(dx<0?1:8))%9,open:''});x0=null};document.addEventListener('touchstart',this._ts,{passive:true});document.addEventListener('touchend',this._te,{passive:true})}
+ componentDidMount(){const N=()=>10;
+  // Presentación personalizada: #pitch/<slug> carga el prospecto y la landing de su obra.
+  const slug=String((this.props.params||[])[0]||'').toLowerCase();
+  if(/^[a-z0-9-]{2,80}$/.test(slug))fetch('/api/v2/pitch/'+slug).then(r=>r.ok?r.json():Promise.reject(r.status)).then(j=>{if(j&&j.deck){this.setState({deck:j.deck});document.title='TADAA! × '+j.deck.prospect}}).catch(()=>TV.toast('No encontramos esa presentación; te mostramos la general.'));
+  this._k=e=>{if(e.target.closest('input,textarea,select'))return;const n=N();if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();this.setState({i:(this.state.i+1)%n,open:'',idx:false})}if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();this.setState({i:(this.state.i+n-1)%n,open:'',idx:false})}if(e.key==='Escape')this.setState({idx:false})};document.addEventListener('keydown',this._k);
+  let x0=null;this._ts=e=>{x0=e.target.closest('iframe,input')?null:e.touches[0].clientX};this._te=e=>{if(x0==null)return;const dx=e.changedTouches[0].clientX-x0,n=N();if(Math.abs(dx)>50)this.setState({i:(this.state.i+(dx<0?1:n-1))%n,open:''});x0=null};document.addEventListener('touchstart',this._ts,{passive:true});document.addEventListener('touchend',this._te,{passive:true})}
  componentWillUnmount(){document.removeEventListener('keydown',this._k);document.removeEventListener('touchstart',this._ts);document.removeEventListener('touchend',this._te)}};
 
 /* En vista previa nada se escribe: cualquier acción muestra un aviso. */
