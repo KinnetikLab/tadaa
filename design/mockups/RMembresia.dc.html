@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Tadaa! · Membresía</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+.txw{background:#1238FF url(/_blob/e0912ca8104f4784a21d635acba18e3a) center/cover}
+.grain{background-image:url(/_blob/3deff8146b80bb3fb1485ea91d6f55e6);background-size:256px}
+@media (max-width: 760px){header{display:grid!important;grid-template-columns:1fr auto;padding:16px 20px!important}header nav{grid-column:1/-1;order:3;flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none}header nav a{white-space:nowrap}section>div{padding-left:20px!important;padding-right:20px!important}}
+</style>
+</helmet>
+<div style="width: 100%; background: #EEF1F7; font-family: 'Plus Jakarta Sans', sans-serif; color: #08091A">
+  <section class="txw" style="position: relative; color: #FFFFFF; border-radius: 0 0 48px 48px; overflow: hidden">
+    <div class="grain" style="position: absolute; inset: 0; opacity: .25"></div>
+    <header style="position: relative; max-width: 1280px; margin: 0 auto; padding: 22px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="Tadaa!" style="height: 38px; width: auto">
+      <nav aria-label="Principal" style="display: flex; flex-wrap: wrap; gap: 4px; background: rgba(8,9,26,.28); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.14); border-radius: 99px; padding: 5px">
+        <a href="DHome.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Inicio</a>
+        <a href="DExplorar.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Cartelera</a>
+        <a href="DRush.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Now!</a>
+        <a href="DWallet.dc.html" style="padding: 11px 18px; border-radius: 99px; font-weight: 700; font-size: 13px">Mi Wallet</a>
+        <a href="RMembresia.dc.html" style="padding: 11px 18px; border-radius: 99px; background: #FFFFFF; color: #08091A; font-weight: 800; font-size: 13px" aria-current="page">Membresía</a>
+      </nav>
+      <a href="DCuenta.dc.html" aria-label="Mi cuenta" style="width: 44px; height: 44px; border-radius: 50%; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 800">{{TVini}}</a>
+    </header>
+    <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: 40px 32px 72px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+      <div style="flex: 1 1 460px; display: flex; flex-direction: column; gap: 18px">
+        <span style="align-self: flex-start; background: #D6FF35; color: #08091A; border-radius: 99px; padding: 8px 14px; font-size: 12px; font-weight: 800; letter-spacing: .08em">MEMBRESÍA TADAA!</span>
+        <h1 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: clamp(44px, 7vw, 92px); line-height: .92; letter-spacing: -.03em">Sal más.<br><span style="color: #D6FF35">Paga menos.</span></h1>
+        <p style="margin: 0; max-width: 520px; font-size: 17px; line-height: 1.6; color: #DCE3FF">Tarifas de convenio en teatro, conciertos, cine y paseos, acceso a Now! y oportunidad de Golden Ticket en cada boleto. Todo por menos de lo que cuesta un refresco.</p>
+      </div>
+      <div style="flex: 0 1 400px; width: 100%; background: #FFFFFF; color: #08091A; border-radius: 32px; padding: 26px; box-shadow: 0 30px 80px rgba(6,14,90,.35); display: flex; flex-direction: column; gap: 14px">
+        <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #1238FF">{{plan.kicker}}</span>
+        <div style="display: flex; align-items: flex-end; gap: 8px"><b style="font-family: Outfit, sans-serif; font-size: 72px; line-height: .85; letter-spacing: -.03em">{{plan.price}}</b><span style="font-size: 15px; color: #4A5068; padding-bottom: 6px">MXN / mes</span></div>
+        <sc-if value="{{plan.hasDiscount}}"><span style="align-self: flex-start; background: #FFF6DA; color: #8A5B00; border-radius: 99px; padding: 6px 12px; font-size: 12px; font-weight: 800">{{plan.discount}}</span></sc-if>
+        <span style="font-size: 13px; color: #4A5068; line-height: 1.5">{{plan.note}}</span>
+        <button onClick="{{join}}" aria-disabled="{{plan.disabled}}" style="{{plan.btnStyle}}">{{plan.cta}}</button>
+        <span style="font-size: 12px; color: #5A6178; text-align: center">Sin plazos forzosos · cancela cuando quieras</span>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width: 1280px; margin: 0 auto; padding: 56px 32px 24px">
+    <h2 style="margin: 0 0 22px; font-family: Outfit, sans-serif; font-weight: 800; font-size: 40px; letter-spacing: -1.5px">Lo que incluye</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px">
+      <sc-for list="{{benefits}}" as="b"><div style="background: #FFFFFF; border-radius: 28px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
+        <span style="width: 52px; height: 52px; border-radius: 16px; background: {{b.bg}}; display: grid; place-items: center"><svg width="26" height="26" viewBox="0 0 256 256" aria-hidden="true"><path d="{{b.icon}}" fill="#08091A"/></svg></span>
+        <b style="font-family: Outfit, sans-serif; font-size: 22px; line-height: 1.1">{{b.title}}</b>
+        <span style="font-size: 14px; color: #4A5068; line-height: 1.55">{{b.text}}</span>
+      </div></sc-for>
+    </div>
+  </section>
+
+  <section style="max-width: 1280px; margin: 0 auto; padding: 32px 32px 24px; display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
+    <div style="flex: 1 1 420px; background: #08091A; color: #FFFFFF; border-radius: 32px; padding: 28px; display: flex; flex-direction: column; gap: 16px">
+      <h2 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 32px; letter-spacing: -1px">Así de fácil</h2>
+      <sc-for list="{{steps}}" as="s"><div style="display: flex; gap: 14px; align-items: flex-start">
+        <span style="width: 40px; height: 40px; flex: 0 0 40px; border-radius: 50%; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 900; font-size: 18px">{{s.n}}</span>
+        <span style="display: flex; flex-direction: column; gap: 4px"><b style="font-size: 16px">{{s.title}}</b><span style="font-size: 14px; color: #C7CDE6; line-height: 1.5">{{s.text}}</span></span>
+      </div></sc-for>
+    </div>
+    <div style="flex: 1 1 420px; background: #FFFFFF; border-radius: 32px; padding: 24px; display: flex; flex-direction: column; gap: 4px">
+      <h2 style="margin: 0 0 10px; font-family: Outfit, sans-serif; font-weight: 800; font-size: 32px; letter-spacing: -1px">¿Vale la pena?</h2>
+      <div style="display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 8px; padding: 0 6px 8px; font-size: 12px; font-weight: 800; color: #5A6178"><span></span><span style="text-align: center">Sin membresía</span><span style="text-align: center; color: #1238FF">Miembro</span></div>
+      <sc-for list="{{compare}}" as="c"><div style="display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 8px; align-items: center; padding: 12px 6px; border-top: 1px solid #EEF1F7; font-size: 14px">
+        <span style="font-weight: 700">{{c.label}}</span>
+        <span style="text-align: center; color: #4A5068">{{c.free}}</span>
+        <span style="text-align: center; font-weight: 800; color: #1238FF">{{c.member}}</span>
+      </div></sc-for>
+    </div>
+  </section>
+
+  <section style="max-width: 900px; margin: 0 auto; padding: 32px 32px 40px">
+    <h2 style="margin: 0 0 16px; font-family: Outfit, sans-serif; font-weight: 800; font-size: 32px; letter-spacing: -1px; text-align: center">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <sc-for list="{{faq}}" as="f"><div style="background: #FFFFFF; border-radius: 22px; overflow: hidden">
+        <button onClick="{{f.toggle}}" aria-expanded="{{f.open}}" style="width: 100%; border: 0; background: transparent; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px; font-family: inherit; font-size: 15px; font-weight: 800; color: #08091A; text-align: left; cursor: pointer">{{f.q}}<svg width="18" height="18" viewBox="0 0 256 256" aria-hidden="true" style="{{f.caret}}"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,48,88H208a8,8,0,0,1,5.66,13.66Z" fill="#1238FF"/></svg></button>
+        <sc-if value="{{f.open}}"><p style="margin: 0; padding: 0 20px 18px; font-size: 14px; line-height: 1.6; color: #4A5068">{{f.a}}</p></sc-if>
+      </div></sc-for>
+    </div>
+  </section>
+
+  <section style="max-width: 1280px; margin: 0 auto; padding: 0 32px 80px">
+    <div class="txw" style="position: relative; overflow: hidden; border-radius: 36px; padding: 36px; color: #FFFFFF; display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center">
+      <div style="display: flex; flex-direction: column; gap: 6px"><b style="font-family: Outfit, sans-serif; font-size: 34px; letter-spacing: -1px">Tu próximo plan, más barato.</b><span style="color: #DCE3FF">{{plan.price}} al mes. Úsala desde hoy.</span></div>
+      <button onClick="{{join}}" aria-disabled="{{plan.disabled}}" style="height: 60px; padding: 0 30px; border-radius: 99px; border: 0; background: #D6FF35; color: #08091A; font-family: inherit; font-weight: 800; font-size: 16px; cursor: pointer">{{plan.cta}}</button>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

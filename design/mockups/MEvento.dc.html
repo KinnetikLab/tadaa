@@ -51,7 +51,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 
   <div style="position: relative; margin: 380px 16px 0; background: #FFFFFF; color: #08091A; border-radius: 28px; padding: 18px 16px 16px">
     <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 0 4px">
-      <h2 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 20px">Elige tu zona</h2>
+      <h2 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 20px">{{zonesTitle}}</h2>
       <sc-if value="{{hasSeats}}"><a href="MAsientos.dc.html" style="font-size: 12px; font-weight: 700; color: #1238FF">Ver mapa</a></sc-if>
     </div>
     <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px">
@@ -85,7 +85,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 
   <sc-if value="{{ev.golden}}"><div style="margin: 14px 16px 0; display: flex; gap: 12px; align-items: center; padding: 14px; border-radius: 22px; background: linear-gradient(120deg, #FFE9A8, #E9B949); color: #2A1A00"><b style="font-family: Outfit, sans-serif; font-size: 22px">1/{{ev.odds}}</b><span style="font-size: 12px; line-height: 1.4">Tu boleto puede volverse <b>Golden Ticket</b>: {{ev.goldenBenefit}}</span></div></sc-if>
   <sc-if value="{{hasAddons}}"><a href="MAddons.dc.html" style="margin: 12px 16px 0; display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border-radius: 22px; background: rgba(255,255,255,.14); color: #FFFFFF; font-size: 13px"><span><b style="display: block; font-family: Outfit, sans-serif; font-size: 17px">Agrega a tu plan</b>{{addonsLabel}}</span><span style="height: 40px; padding: 0 14px; border-radius: 99px; background: #FFFFFF; color: #08091A; display: flex; align-items: center; font-weight: 800; font-size: 12px">{{addonsCta}}</span></a></sc-if>
-  <sc-if value="{{ev.desc}}"><div style="margin: 12px 16px 0; padding: 18px; border-radius: 22px; background: rgba(8,9,26,.28); color: #EEF1FF; font-size: 14px; line-height: 1.55"><b style="display: block; font-family: Outfit, sans-serif; font-size: 18px; color: #FFFFFF; margin-bottom: 6px">Sinopsis</b>{{ev.desc}}</div></sc-if>
+  <sc-if value="{{ev.desc}}"><div style="margin: 12px 16px 0; padding: 18px; border-radius: 22px; background: rgba(8,9,26,.28); color: #EEF1FF; font-size: 14px; line-height: 1.55"><b style="display: block; font-family: Outfit, sans-serif; font-size: 18px; color: #FFFFFF; margin-bottom: 6px">{{aboutLabel}}</b>{{ev.desc}}</div></sc-if>
   <div style="height: 130px"></div>
   <div style="position: absolute; left: 16px; right: 16px; bottom: 26px; height: 72px; border-radius: 99px; background: #08091A; display: flex; align-items: center; justify-content: space-between; padding: 0 8px 0 24px">
     <span style="display: flex; flex-direction: column">
