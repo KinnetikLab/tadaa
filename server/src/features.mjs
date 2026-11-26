@@ -252,6 +252,13 @@ export async function featureRequest(req,res,pathname,url,parts,ctx){
  if(pathname==='/api/v2/cine/estrenos'&&M==='GET')return response(res,200,await estrenos()),true;
  // ── Landings de obras y presentaciones por prospecto ──
  const SLUG=/^[a-z0-9-]{2,80}$/;
+ // Pase de invitación con QR dinámico (cambia cada minuto). Es una credencial de cortesía para la landing:
+ // la firma permite que el staff verifique que el código salió de TADAA! y en qué minuto se generó.
+ if(parts[2]==='landings'&&parts[4]==='invite-qr'&&parts.length===5&&M==='GET'){const sl=String(parts[3]||'');if(!SLUG.test(sl))throw invalid('Landing no encontrada',404);
+  const g=clean(url.searchParams.get('g')||'Invitado',80),n=Math.max(1,Math.min(10,parseInt(url.searchParams.get('n'),10)||1)),m=Math.floor(Date.now()/60000);
+  const body=['TADAA','PRENSA',sl,n,g,m].join('|'),sig=crypto.createHmac('sha256',process.env.QR_SECRET||process.env.SESSION_SECRET||'tadaa-invite').update(body).digest('base64url').slice(0,12);
+  const {default:QR}=await import('qrcode');const svg=await QR.toString(body+'|'+sig,{type:'svg',margin:1,errorCorrectionLevel:'M',color:{dark:'#14050A',light:'#FFFFFF'}});
+  res.writeHead(200,{'Content-Type':'image/svg+xml; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(svg);return true}
  if(parts[2]==='landings'&&parts.length===4&&M==='GET'){const sl=String(parts[3]||'');if(!SLUG.test(sl))throw invalid('Landing no encontrada',404);
   const r=await p.query(`SELECT slug,title,config,status,updated_at FROM show_landings WHERE slug=$1 AND status<>'archived'`,[sl]);if(!r.rowCount)throw invalid('Landing no encontrada',404);return response(res,200,{landing:r.rows[0]}),true}
  if(parts[2]==='pitch'&&parts.length===4&&M==='GET'){const sl=String(parts[3]||'');if(!SLUG.test(sl))throw invalid('Presentación no encontrada',404);

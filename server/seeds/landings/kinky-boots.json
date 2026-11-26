@@ -1,72 +1,258 @@
 {
   "title": "Kinky Boots — El Musical",
   "theme": {
-    "mode": "light", "particles": "glitter", "signature": "heel",
-    "colors": {"bg":"#FAF6F1","surface":"#FFFFFF","ink":"#171013","muted":"#6F6065","accent":"#E30613","accent2":"#B00510","gold":"#C9A24B","dark":"#0D0A0B","onDark":"#F7EDEF","line":"#E5D9D2"},
-    "fonts": {"display":"Bebas Neue","body":"Manrope","url":"https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700;800&display=swap"},
-    "displayCase": "upper"
+    "mode": "light",
+    "particles": "glitter",
+    "signature": "heel",
+    "colors": {
+      "bg": "#FAF6F1",
+      "surface": "#FFFFFF",
+      "ink": "#171013",
+      "muted": "#6F6065",
+      "accent": "#E30613",
+      "accent2": "#B00510",
+      "gold": "#C9A24B",
+      "dark": "#0D0A0B",
+      "onDark": "#F7EDEF",
+      "line": "#E5D9D2"
+    },
+    "fonts": {
+      "display": "Bebas Neue",
+      "body": "Manrope",
+      "url": "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700;800&display=swap"
+    },
+    "displayCase": "upper",
+    "confetti": {
+      "colors": [
+        "#E30613",
+        "#B00510",
+        "#FF2D3D",
+        "#8E0012",
+        "#FF5A6A",
+        "#C40812"
+      ],
+      "accents": [
+        "#E8C66A"
+      ],
+      "intro": true,
+      "rain": true
+    }
   },
-  "card": {"img":"landings/kinky-boots/legs.webp","when":"12–16 mayo 2027","venue":"CCT1"},
-  "nav": ["historia","tacon","personajes","canciones","boletos"],
+  "card": {
+    "img": "landings/kinky-boots/legs.webp",
+    "when": "12–16 mayo 2027",
+    "venue": "CCT1"
+  },
+  "nav": [
+    "historia",
+    "tacon",
+    "personajes",
+    "canciones",
+    "pases"
+  ],
   "hero": {
-    "layout": "boots", "presenter": "Banamex presenta", "kicker": "Directamente desde Broadway",
-    "logo": "landings/kinky-boots/logo.webp", "art": "landings/kinky-boots/legs.webp",
-    "title": "Cambia tu mundo. Cambia tus botas.",
-    "sub": "Una fábrica al borde de la quiebra, una drag queen fabulosa llamada Lola y unas botas rojas imposibles de ignorar. Libro de Harvey Fierstein, música y letras de Cyndi Lauper.",
-    "chips": [{"icon":"calendar","t":"12 al 16 de mayo de 2027"},{"icon":"pin","t":"CCT1 · Centro Cultural Teatro 1"},{"icon":"star","t":"Solo 5 días en la CDMX","hot":true}],
-    "countdown": "2027-05-12T20:00:00-06:00", "countdownLabel": "Para el estreno · mié 12 de mayo",
-    "badge": {"big":"5 días","small":"12–16 mayo"},
-    "ctas": [{"t":"Ver funciones","href":"#boletos","primary":true},{"t":"Escuchar los hits","href":"#canciones"}]
+    "layout": "invite",
+    "presenter": "Banamex presenta",
+    "kicker": "Función de prensa",
+    "logo": "landings/kinky-boots/logo.webp",
+    "art": "landings/kinky-boots/legs.webp",
+    "title": "Estás en la lista.",
+    "sub": "La función de prensa de Kinky Boots, antes que nadie.",
+    "countdown": "2027-05-11T20:00:00-06:00",
+    "countdownLabel": "Para que se abra el telón",
+    "badge": {
+      "big": "Prensa",
+      "small": "11 · 05 · 2027"
+    },
+    "ctas": [
+      {
+        "t": "Ver mis pases",
+        "href": "#pases",
+        "primary": true
+      },
+      {
+        "t": "Agregar al calendario",
+        "href": "#calendario"
+      }
+    ]
   },
-  "marquee": ["Everybody say yeah","12–16 mayo 2027","CCT1 · Centro Cultural Teatro 1","Directamente desde Broadway","Raise you up","Just be"],
-  "stats": [{"n":6,"s":"","l":"Premios Tony®"},{"n":1,"s":"","l":"Grammy® al mejor álbum"},{"n":3,"s":"","l":"Premios Olivier"},{"n":5,"s":" días","l":"En el CCT1"}],
+  "marquee": [
+    "Función de prensa",
+    "11 de mayo 2027",
+    "Everybody say yeah",
+    "CCT1",
+    "Directamente desde Broadway",
+    "Raise you up"
+  ],
   "story": {
-    "kicker": "La historia", "title": "De una fábrica en crisis a la pasarela de Milán", "img": "landings/kinky-boots/elenco.webp",
+    "kicker": "La historia",
+    "title": "De una fábrica en crisis a la pasarela de Milán",
+    "img": "landings/kinky-boots/elenco.webp",
     "chapters": [
-      {"tab":"Northampton","title":"Una fábrica en aprietos","text":"Charlie Price hereda la fábrica de zapatos de su padre justo cuando nadie compra zapatos de vestir. Tiene un taller lleno de gente buena y ninguna idea de cómo salvarlo."},
-      {"tab":"Londres","title":"Entra Lola","text":"Una noche conoce a Lola, artista drag que necesita botas que aguanten un show entero. Ahí está el negocio: botas hechas para brillar, fabricadas en Northampton."},
-      {"tab":"Milán","title":"A la pasarela","text":"La fábrica apuesta todo en una pasarela internacional. Al final, la lección es para todos: puedes cambiar el mundo cuando cambias de opinión."}
+      {
+        "tab": "Northampton",
+        "title": "Una fábrica en aprietos",
+        "text": "Charlie Price hereda la fábrica de zapatos de su padre justo cuando nadie compra zapatos de vestir. Tiene un taller lleno de gente buena y ninguna idea de cómo salvarlo."
+      },
+      {
+        "tab": "Londres",
+        "title": "Entra Lola",
+        "text": "Una noche conoce a Lola, artista drag que necesita botas que aguanten un show entero. Ahí está el negocio: botas hechas para brillar, fabricadas en Northampton."
+      },
+      {
+        "tab": "Milán",
+        "title": "A la pasarela",
+        "text": "La fábrica apuesta todo en una pasarela internacional. Al final, la lección es para todos: puedes cambiar el mundo cuando cambias de opinión."
+      }
     ],
-    "quote": "Sé quien quieras ser. No importa quién te dijeron que tenías que ser.", "quoteBy": "El corazón de Kinky Boots"
+    "quote": "Sé quien quieras ser. No importa quién te dijeron que tenías que ser.",
+    "quoteBy": "El corazón de Kinky Boots"
   },
   "signature": {
-    "kicker": "Interactivo", "title": "Todo está en el tacón",
+    "kicker": "Interactivo",
+    "title": "Todo está en el tacón",
     "text": "Lola tiene una regla: una bota de verdad aguanta una noche entera de show. Sube el tacón y descubre qué tan Lola eres.",
     "img": "landings/kinky-boots/legs.webp",
-    "verdicts": ["Zapato de oficina. Cómodo, sí. Memorable, no.","Un poquito de altura. Charlie aprueba.","Ya se nota la intención.","Tres pulgadas: caminas distinto.","Cuatro: el taller voltea a verte.","Cinco: esto ya es una entrada.","Seis: Nicola no lo puede creer.","Siete: casi casi Lola.","Ocho pulgadas. Eso es una bota de Lola."]
+    "verdicts": [
+      "Zapato de oficina. Cómodo, sí. Memorable, no.",
+      "Un poquito de altura. Charlie aprueba.",
+      "Ya se nota la intención.",
+      "Tres pulgadas: caminas distinto.",
+      "Cuatro: el taller voltea a verte.",
+      "Cinco: esto ya es una entrada.",
+      "Seis: Nicola no lo puede creer.",
+      "Siete: casi casi Lola.",
+      "Ocho pulgadas. Eso es una bota de Lola."
+    ]
   },
   "characters": {
-    "kicker": "Personajes", "title": "Personajes que se quedan contigo", "dark": true,
+    "kicker": "Personajes",
+    "title": "Personajes que se quedan contigo",
+    "dark": true,
     "cards": [
-      {"name":"Lola","role":"La estrella","img":"landings/kinky-boots/lola.webp","text":"Drag queen, diseñadora y fuerza de la naturaleza. Entra cantando “Land of Lola” y nadie vuelve a mirar unas botas igual.","more":"Su filosofía cabe en una frase: el secreto no es el zapato, es el tacón y la confianza para llevarlo."},
-      {"name":"Charlie Price","role":"El heredero","img":"landings/kinky-boots/elenco.webp","pos":"center","text":"No quería la fábrica, ni las botas, ni el riesgo. Termina desfilando en Milán con tacones rojos.","more":"Su dueto con Lola, “Not My Father's Son”, es el momento más íntimo del segundo acto."},
-      {"name":"The Angels","role":"El séquito","img":"landings/kinky-boots/angels.webp","text":"Seis performers que convierten cada número en pasarela: brillo, humor y coreografía impecable.","more":"Cada Angel tiene su momento en el final de Milán, el desfile más fotografiado del show."},
-      {"name":"Lauren","role":"La fábrica","img":"landings/kinky-boots/elenco.webp","pos":"right","text":"Lauren aporta la idea que salva Price & Son y la canción más divertida sobre enamorarse de tu jefe.","more":"“The History of Wrong Guys” detiene el show casi cada noche."}
+      {
+        "name": "Lola",
+        "role": "La estrella",
+        "img": "landings/kinky-boots/lola.webp",
+        "text": "Drag queen, diseñadora y fuerza de la naturaleza. Entra cantando “Land of Lola” y nadie vuelve a mirar unas botas igual.",
+        "more": "Su filosofía cabe en una frase: el secreto no es el zapato, es el tacón y la confianza para llevarlo."
+      },
+      {
+        "name": "Charlie Price",
+        "role": "El heredero",
+        "img": "landings/kinky-boots/elenco.webp",
+        "pos": "center",
+        "text": "No quería la fábrica, ni las botas, ni el riesgo. Termina desfilando en Milán con tacones rojos.",
+        "more": "Su dueto con Lola, “Not My Father's Son”, es el momento más íntimo del segundo acto."
+      },
+      {
+        "name": "The Angels",
+        "role": "El séquito",
+        "img": "landings/kinky-boots/angels.webp",
+        "text": "Seis performers que convierten cada número en pasarela: brillo, humor y coreografía impecable.",
+        "more": "Cada Angel tiene su momento en el final de Milán, el desfile más fotografiado del show."
+      },
+      {
+        "name": "Lauren",
+        "role": "La fábrica",
+        "img": "landings/kinky-boots/elenco.webp",
+        "pos": "right",
+        "text": "Lauren aporta la idea que salva Price & Son y la canción más divertida sobre enamorarse de tu jefe.",
+        "more": "“The History of Wrong Guys” detiene el show casi cada noche."
+      }
     ]
   },
   "songs": {
-    "kicker": "Banda sonora · Cyndi Lauper", "title": "Toca una canción, siente el show", "dark": true, "disc": "landings/kinky-boots/legs.webp",
+    "kicker": "Banda sonora · Cyndi Lauper",
+    "title": "Toca una canción, siente el show",
+    "dark": true,
+    "disc": "landings/kinky-boots/legs.webp",
     "tracks": [
-      {"t":"Land of Lola","who":"Lola & The Angels","dur":252,"d":"La entrada triunfal. Lola presenta a sus Angels y deja claro que este no es un musical cualquiera."},
-      {"t":"Sex Is in the Heel","who":"Lola, Charlie y compañía","dur":228,"d":"El manifiesto de las botas: el secreto no es el zapato, es el tacón."},
-      {"t":"The History of Wrong Guys","who":"Lauren","dur":215,"d":"El número cómico favorito: Lauren se da cuenta, en tiempo real, de que se está enamorando de su jefe."},
-      {"t":"Not My Father's Son","who":"Charlie & Lola","dur":260,"d":"Dos personas que crecieron tratando de complacer a sus padres descubren que se parecen más de lo que creían."},
-      {"t":"Everybody Say Yeah","who":"Toda la compañía","dur":245,"d":"La fábrica vuelve a la vida y el primer acto cierra en fiesta total."},
-      {"t":"Raise You Up / Just Be","who":"Toda la compañía","dur":310,"d":"El final en Milán: todos desfilan, todos brillan."}
+      {
+        "t": "Land of Lola",
+        "who": "Lola & The Angels",
+        "dur": 252,
+        "d": "La entrada triunfal. Lola presenta a sus Angels y deja claro que este no es un musical cualquiera."
+      },
+      {
+        "t": "Sex Is in the Heel",
+        "who": "Lola, Charlie y compañía",
+        "dur": 228,
+        "d": "El manifiesto de las botas: el secreto no es el zapato, es el tacón."
+      },
+      {
+        "t": "The History of Wrong Guys",
+        "who": "Lauren",
+        "dur": 215,
+        "d": "El número cómico favorito: Lauren se da cuenta, en tiempo real, de que se está enamorando de su jefe."
+      },
+      {
+        "t": "Not My Father's Son",
+        "who": "Charlie & Lola",
+        "dur": 260,
+        "d": "Dos personas que crecieron tratando de complacer a sus padres descubren que se parecen más de lo que creían."
+      },
+      {
+        "t": "Everybody Say Yeah",
+        "who": "Toda la compañía",
+        "dur": 245,
+        "d": "La fábrica vuelve a la vida y el primer acto cierra en fiesta total."
+      }
     ]
   },
-  "gallery": {"kicker":"Galería","title":"Rojo, brillo y escenario","images":[{"src":"landings/kinky-boots/elenco.webp","cap":"El gran final"},{"src":"landings/kinky-boots/lola.webp","cap":"Lola en solitario"},{"src":"landings/kinky-boots/angels.webp","cap":"Lola & The Angels"}]},
-  "tickets": {
-    "kicker": "Temporada · CCT1", "title": "Del 12 al 16 de mayo de 2027", "venue": "CCT1 · Centro Cultural Teatro 1", "eventSlug": "",
-    "days": [{"dow":"Miércoles","day":"12","mon":"may","times":["20:00"]},{"dow":"Jueves","day":"13","mon":"may","times":["20:00"]},{"dow":"Viernes","day":"14","mon":"may","times":["20:30"]},{"dow":"Sábado","day":"15","mon":"may","times":["17:00","20:30"]},{"dow":"Domingo","day":"16","mon":"may","times":["13:00","18:00"]}],
-    "zones": [{"name":"Palco VIP","price":1850},{"name":"Platea","price":1250},{"name":"Preferente","price":950},{"name":"Balcón","price":650}],
-    "note": "Horarios y precios de ejemplo para la presentación."
-  },
   "faq": [
-    {"q":"¿Cuánto dura y hay intermedio?","a":"Aproximadamente 2 horas 20 minutos con un intermedio."},
-    {"q":"¿Es para toda la familia?","a":"Es un musical alegre, recomendado a partir de los 10 años. Su mensaje central es de aceptación."},
-    {"q":"¿Por qué solo cinco días?","a":"Es una temporada corta y especial: el montaje llega directamente desde Broadway por una sola semana."}
+    {
+      "q": "¿Puedo llevar acompañante?",
+      "a": "Tu invitación incluye los pases que ves en tu wallet. Cada uno tiene su propio QR."
+    },
+    {
+      "q": "¿A qué hora conviene llegar?",
+      "a": "La alfombra roja y el acceso abren a las 19:00 h. La función empieza puntual a las 20:00 h."
+    },
+    {
+      "q": "¿Necesito imprimir algo?",
+      "a": "No. Presenta el QR desde tu celular; se renueva cada minuto para que nadie pueda copiarlo."
+    }
   ],
-  "cta": {"title":"Everybody say yeah!","text":"Del 12 al 16 de mayo de 2027 · CCT1. Ponte las botas y ven a celebrar la historia más brillante de Broadway."},
-  "footer": "Kinky Boots — El Musical · Banamex presenta · Una producción de Gou Producciones y Bway. Libro de Harvey Fierstein, música y letras de Cyndi Lauper. Landing de presentación hecha con TADAA!"
+  "cta": {
+    "title": "Nos vemos en la función",
+    "text": "Martes 11 de mayo · 20:00 h · CCT1. Trae tus pases y tus ganas de cantar «Everybody Say Yeah»."
+  },
+  "footer": "Kinky Boots — El Musical · Banamex presenta · Una producción de Gou Producciones y Bway. Libro de Harvey Fierstein, música y letras de Cyndi Lauper. Landing de presentación hecha con TADAA!",
+  "mode": "invite",
+  "invite": {
+    "kicker": "Tu wallet",
+    "title": "Tus pases para la función de prensa",
+    "text": "Personales e intransferibles. Preséntalos desde tu celular: el código QR se renueva cada minuto.",
+    "event": "Kinky Boots · Función de prensa",
+    "start": "2027-05-11T20:00:00-06:00",
+    "end": "2027-05-11T22:30:00-06:00",
+    "dateShort": "Mar 11 may",
+    "time": "20:00",
+    "doors": "19:00",
+    "dateLabel": "Martes 11 de mayo de 2027",
+    "venue": "CCT1 · Centro Cultural Teatro 1",
+    "zone": "Platea",
+    "dress": "Algo rojo, algo que brille. El tacón es opcional, pero Lola lo agradece.",
+    "passes": 2,
+    "guest": "Prensa invitada",
+    "details": [
+      {
+        "icon": "calendar",
+        "t": "Martes 11 de mayo de 2027"
+      },
+      {
+        "icon": "clock",
+        "t": "Alfombra roja y puertas a las 19:00 h · función a las 20:00 h"
+      },
+      {
+        "icon": "pin",
+        "t": "CCT1 · Centro Cultural Teatro 1"
+      },
+      {
+        "icon": "sparkle",
+        "t": "Código de vestimenta: algo rojo, algo que brille"
+      }
+    ]
+  }
 }

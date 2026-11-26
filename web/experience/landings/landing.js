@@ -7,6 +7,8 @@ const ICONS={"calendar":"M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H
 const Q=new URLSearchParams(location.search);
 const SLUG=(Q.get('s')||'').replace(/[^a-z0-9-]/g,'');
 const EMBED=Q.get('embed')==='1';
+const GUEST=(Q.get('para')||'').replace(/[<>]/g,'').trim().slice(0,60);
+const PASES=Math.max(1,Math.min(6,parseInt(Q.get('pases'),10)||0));
 const ROOT=new URL('../',location.href).href; // /experience/
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
@@ -15,7 +17,7 @@ const src=p=>!p?'':/^(https?:|data:|\/)/.test(p)?p:ROOT+p;
 const ic=(n,extra='')=>ICONS[n]?`<svg class="ic" viewBox="0 0 256 256" aria-hidden="true" ${extra}><path d="${ICONS[n]}"/></svg>`:'';
 const money=n=>'$'+Math.round(n).toLocaleString('es-MX');
 const mmss=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
-const LABELS={historia:'Historia',tacon:'El tacón',maquina:'Máquina del tiempo',camerino:'Camerino',personajes:'Personajes',canciones:'Canciones',galeria:'Galería',boletos:'Boletos',faq:'Preguntas'};
+const LABELS={historia:'Historia',tacon:'El tacón',maquina:'Máquina del tiempo',camerino:'Camerino',personajes:'Personajes',canciones:'Canciones',galeria:'Galería',boletos:'Boletos',pases:'Mis pases',faq:'Preguntas'};
 let C,toastT;
 
 function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),2600)}
@@ -41,7 +43,7 @@ const head=(s,center)=>`<div class="head rv"${center?' style="margin-inline:auto
 function navHTML(){
  const h=C.hero||{};
  const brand=h.logo?`<img src="${src(h.logo)}" alt="${esc(C.title)}">`:esc(C.brand||h.title||C.title);
- return `<header class="nav" id="nav"><div class="wrap in"><a class="brand" href="#top">${brand}</a><nav class="links" aria-label="Secciones">${(C.nav||[]).map(id=>`<a href="#${id}" data-id="${id}">${esc(LABELS[id]||id)}</a>`).join('')}</nav><a class="btn pri sm" href="#boletos">${ic('ticket')}Boletos</a></div></header>`;
+ return `<header class="nav" id="nav"><div class="wrap in"><a class="brand" href="#top">${brand}</a><nav class="links" aria-label="Secciones">${(C.nav||[]).map(id=>`<a href="#${id}" data-id="${id}">${esc(LABELS[id]||id)}</a>`).join('')}</nav>${C.mode==='invite'?`<a class="btn pri sm" href="#pases">${ic('ticket')}Mis pases</a>`:`<a class="btn pri sm" href="#boletos">${ic('ticket')}Boletos</a>`}</div></header>`;
 }
 
 function countdownHTML(h){
@@ -53,6 +55,7 @@ const ctas=h=>(h.ctas||[]).length?`<div class="ctas a5">${h.ctas.map(c=>`<a clas
 
 function heroHTML(){
  const h=C.hero||{},L=h.layout||'boots';
+ if(L==='invite')return inviteHeroHTML(h);
  if(L==='poster')return `<section class="hero h-poster" id="top" style="padding-top:20px"><div class="glow"></div><div class="wrap">
   <div class="frame art-in" id="poster">${boltSVG('b1')}${boltSVG('b2')}<img src="${src(h.art)}" alt="${esc(h.title)}" fetchpriority="high"></div>
   <div class="copy"><span class="kick a1"><i></i>${esc(h.kicker)}</span>
@@ -73,6 +76,53 @@ function heroHTML(){
 }
 function presenterHTML(p){const m=String(p).match(/^(.*?)\s+(presenta.*)$/i);return m?`<b>${esc(m[1])}</b> ${esc(m[2])}`:esc(p)}
 function boltSVG(cls){return `<svg class="bolt ${cls}" viewBox="0 0 64 120" aria-hidden="true"><path d="M38 0 6 66h22L18 120l40-74H34L46 0Z" fill="#fff"/><path d="M38 0 6 66h22L18 120l40-74H34L46 0Z" fill="none" stroke="var(--glow)" stroke-width="3"/></svg>`}
+
+
+/* ---------- invitación (función de prensa, F&F, estreno) ---------- */
+const guestName=()=>GUEST||((C.invite||{}).guest)||'Invitado';
+const firstName=()=>GUEST?GUEST.split(/\s+/)[0]:'';
+function inviteHeroHTML(h){const iv=C.invite||{};const fn=firstName();
+ return `<section class="hero h-invite" id="top"><div class="beams" aria-hidden="true"><i></i><i></i></div><div class="floorglow" aria-hidden="true"></div>
+ <div class="wrap inv-grid">
+  <div class="inv-copy">${h.presenter?`<p class="presenter a1">${presenterHTML(h.presenter)}</p>`:''}
+   <span class="pass-pill a1">${ic('ticket')}${esc(h.kicker||iv.event||'Invitación')}</span>
+   ${h.logo?`<img class="logo a2" id="hlogo" src="${src(h.logo)}" alt="${esc(C.title)}" fetchpriority="high">`:''}
+   <h1 class="a3">${fn?`<span class="who">${esc(fn)},</span> `:''}${esc(h.title||'Estás en la lista.')}</h1>
+   <p class="sub a3">${esc(h.sub||'')}</p>
+   <ul class="meta a4">${[iv.dateLabel&&['calendar',iv.dateLabel],iv.time&&['clock',iv.time+' h'],iv.venue&&['pin',iv.venue]].filter(Boolean).map(([i,t])=>`<li>${ic(i)}${esc(t)}</li>`).join('')}</ul>
+   ${countdownHTML(h)}${ctas(h)}</div>
+  <div class="art3d art-in" id="art3d" role="button" tabindex="0" aria-label="Lanzar confeti"><img src="${src(h.art)}" alt="" draggable="false">${h.badge?`<span class="badge" id="badge"><span><b>${esc(h.badge.big)}</b>${esc(h.badge.small)}</span></span>`:''}</div>
+ </div></section>`}
+function walletHTML(){const iv=C.invite;if(!iv)return '';const n=PASES||iv.passes||1,g=guestName(),f=firstName()||g.split(/\s+/)[0];
+ const passes=Array.from({length:n},(_,k)=>({n:k+1,name:k===0?g:'Acompañante de '+f}));
+ return `<section id="pases" class="dark wallet-sec"><div class="wrap wal-grid">
+  <div>${head({kicker:iv.kicker||'Tu wallet',title:iv.title||'Tus pases',text:iv.text})}
+   <ul class="idet rv">${(iv.details||[]).map(d=>`<li>${ic(d.icon||'star')}<span>${esc(d.t)}</span></li>`).join('')}</ul>
+   <div class="ctas rv"><button class="btn pri" id="ics">${ic('calendar')}Agregar al calendario</button><a class="btn gho" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((iv.venue||'')+' Ciudad de México')}">${ic('pin')}Cómo llegar</a></div>
+  </div>
+  <div class="wallet rv" id="wallet" role="list" aria-label="Pases">${passes.map((p,k)=>`<article class="pass" role="listitem" tabindex="0" data-k="${k}" aria-label="Pase ${p.n} de ${n}: ${esc(p.name)}">
+   <header class="ph"><img src="${src((C.hero||{}).logo)}" alt="${esc(C.title)}"><span><small>${esc(iv.event||'Invitación')}</small><b>Pase ${p.n} de ${n}</b></span></header>
+   <div class="pb"><div class="pr"><span><small>Invitado</small><b>${esc(p.name)}</b></span><span class="r"><small>Zona</small><b>${esc(iv.zone||'General')}</b></span></div>
+    <div class="pr"><span><small>Fecha</small><b>${esc(iv.dateShort||'')}</b></span><span><small>Función</small><b>${esc(iv.time||'')}</b></span><span class="r"><small>Acceso</small><b>${esc(iv.doors||'')}</b></span></div>
+    <div class="qrbox"><div class="qr"><img alt="Código QR del pase ${p.n}" data-g="${esc(p.name)}" data-n="${p.n}"></div>
+     <div class="qrmeta"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" class="rt"/><circle cx="24" cy="24" r="20" class="rp" data-ring/></svg><span>QR dinámico<br><b data-left>60</b> s para renovarse</span></div></div>
+    <p class="pfoot">${ic('sparkle')}${esc(iv.dress||'Personal e intransferible')}</p></div></article>`).join('')}</div>
+ </div></section>`}
+function wireWallet(){const w=$('#wallet');if(!w)return;const ps=$$('.pass',w);let act=0;
+ const lay=()=>{const full=ps[act].offsetHeight;let j=0;ps.forEach((p,k)=>{if(k===act){p.style.transform='translateY(0) scale(1)';p.style.zIndex=20;p.classList.add('on');p.setAttribute('aria-expanded','true')}else{p.style.transform=`translateY(${full+18+j*16}px) scale(${.95-j*.03})`;p.style.zIndex=10-j;p.classList.remove('on');p.setAttribute('aria-expanded','false');j++}});w.style.height=(full+18+Math.max(0,ps.length-1)*16+70)+'px'};
+ ps.forEach((p,k)=>{const sel=()=>{if(k===act)return;act=k;lay()};p.addEventListener('click',sel);p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();sel()}})});
+ const imgs=$$('img[data-n]',w),rings=$$('[data-ring]',w),lefts=$$('[data-left]',w);let lastM=-1;
+ const qsrc=(im,m)=>'/api/v2/landings/'+SLUG+'/invite-qr?n='+im.dataset.n+'&g='+encodeURIComponent(im.dataset.g)+'&m='+m;
+ const tick=()=>{const now=Date.now(),m=Math.floor(now/60000),left=60-Math.floor(now/1000)%60;
+  lefts.forEach(e=>e.textContent=left);rings.forEach(r=>r.style.strokeDashoffset=String(126*(1-left/60)));
+  if(m!==lastM){lastM=m;imgs.forEach(im=>{const pre=new Image();pre.onload=()=>{im.src=pre.src;if(!RM&&lastM>=0)im.animate([{transform:'rotateY(90deg)',opacity:.3},{transform:'none',opacity:1}],{duration:380,easing:'cubic-bezier(.2,1.2,.4,1)'})};pre.src=qsrc(im,m)})}};
+ tick();setInterval(tick,1000);requestAnimationFrame(lay);addEventListener('resize',lay);
+ const ics=$('#ics');if(ics)ics.addEventListener('click',downloadICS);
+}
+function downloadICS(){const iv=C.invite||{};const f=d=>new Date(d).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');if(!iv.start)return;
+ const end=iv.end||new Date(Date.parse(iv.start)+2.5*3600e3).toISOString();
+ const t=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//TADAA!//Invitacion//ES','BEGIN:VEVENT','UID:'+SLUG+'-'+Date.parse(iv.start)+'@tadaa','DTSTAMP:'+f(Date.now()),'DTSTART:'+f(iv.start),'DTEND:'+f(end),'SUMMARY:'+(iv.event||C.title),'LOCATION:'+(iv.venue||''),'DESCRIPTION:Tus pases están en '+location.href.split('#')[0].replace(/\n/g,''),'END:VEVENT','END:VCALENDAR'].join('\r\n');
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/calendar'}));a.download=SLUG+'.ics';document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);toast('Listo: abre el archivo para guardarlo en tu calendario')}
 
 const marqueeHTML=()=>{const m=C.marquee||[];if(!m.length)return '';const one=m.map(t=>`<span>${esc(t)}<i>✦</i></span>`).join('');return `<div class="marquee" aria-hidden="true"><div class="tr">${one}${one}</div></div>`};
 const statsHTML=()=>(C.stats||[]).length?`<div class="stats"><div class="wrap g">${C.stats.map(s=>`<div class="rv"><b><span data-count="${Number(s.n)||0}">0</span>${s.s?`<em>${esc(s.s)}</em>`:''}</b><span>${esc(s.l)}</span></div>`).join('')}</div></div>`:'';
@@ -134,7 +184,7 @@ function songsHTML(){
   <aside class="panel rv" id="panel" aria-live="polite"><div class="disc">${s.disc?`<img src="${src(s.disc)}" alt="">`:''}</div>
    <span class="kick"><i></i><span id="pWho">${esc(t[0]?.who||'')}</span></span><h3 id="pT">${esc(t[0]?.t||'')}</h3><p id="pD">${esc(t[0]?.d||'')}</p>
    <div class="pbar" id="pbar" role="slider" aria-label="Progreso" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><i id="pfill"></i></div>
-   <div class="prow"><span id="pCur">0:00</span><span id="pDur">${mmss(t[0]?.dur||200)}</span></div>
+   <div class="pr"><span id="pCur">0:00</span><span id="pDur">${mmss(t[0]?.dur||200)}</span></div>
    <div class="pctl"><button class="btn gho sm" id="pPrev" aria-label="Anterior">${ic('next','style="transform:scaleX(-1)"')}</button><button class="btn pri play" id="pPlay" aria-label="Reproducir">${ic('play')}</button><button class="btn gho sm" id="pNext" aria-label="Siguiente">${ic('next')}</button></div>
    ${s.credit?`<p class="credit">${esc(s.credit)}</p>`:''}</aside></div></div></section>`;
 }
@@ -171,11 +221,11 @@ const ctaHTML=()=>C.cta?`<section class="cta"><div class="wrap rv"><h2 class="sk
 const footHTML=()=>`<footer><div class="wrap">${esc(C.footer||C.title)}</div></footer>`;
 
 function render(){
- const map={historia:storyHTML,personajes:charactersHTML,canciones:songsHTML,boletos:()=>tadaaHTML()+ticketsHTML()};
+ const map=C.mode==='invite'?{historia:storyHTML,personajes:charactersHTML,canciones:songsHTML,pases:walletHTML}:{historia:storyHTML,personajes:charactersHTML,canciones:songsHTML,boletos:()=>tadaaHTML()+ticketsHTML()};
  const sigId=(C.signature||{}).id||((C.theme||{}).signature==='heel'?'tacon':'firma');map[sigId]=signatureHTML;
  const done=new Set();let body='';
- for(const id of(C.nav||[])){if(id==='boletos'&&!done.has('galeria')){body+=galleryHTML();done.add('galeria')}if(map[id]&&!done.has(id)){body+=map[id]();done.add(id)}}
- for(const[id,fn]of Object.entries(map))if(!done.has(id)){if(id==='boletos'&&!done.has('galeria')){body+=galleryHTML();done.add('galeria')}body+=fn();done.add(id)}
+ for(const id of(C.nav||[])){if((id==='boletos'||id==='pases')&&!done.has('galeria')){body+=galleryHTML();done.add('galeria')}if(map[id]&&!done.has(id)){body+=map[id]();done.add(id)}}
+ for(const[id,fn]of Object.entries(map))if(!done.has(id)){if((id==='boletos'||id==='pases')&&!done.has('galeria')){body+=galleryHTML();done.add('galeria')}body+=fn();done.add(id)}
  if(!done.has('galeria'))body+=galleryHTML();
  $('#app').innerHTML=navHTML()+`<main>${heroHTML()}${marqueeHTML()}${statsHTML()}${body}${faqHTML()}${ctaHTML()}</main>`+footHTML();
  document.title=`${C.title} · TADAA!`;
@@ -205,20 +255,35 @@ function ambient(kind){
  document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAnimationFrame(raf);else raf=requestAnimationFrame(tick)});
 }
 
-/* ---------- confeti (botas, plumas, estrellas según obra) ---------- */
-const FX={cv:null,x:null,P:[],raf:0};
-function burst(cx,cy,n=70){
- if(RM)return;if(!FX.cv){FX.cv=$('#fx');FX.x=FX.cv.getContext('2d')}
- const dpr=Math.min(2,devicePixelRatio||1);FX.cv.width=innerWidth*dpr;FX.cv.height=innerHeight*dpr;FX.cv.style.width=innerWidth+'px';FX.cv.style.height=innerHeight+'px';
- const cs=getComputedStyle(document.documentElement),cols=[cs.getPropertyValue('--accent'),cs.getPropertyValue('--gold'),cs.getPropertyValue('--accent2'),'#fff'].map(s=>s.trim());
- for(let i=0;i<n;i++){const a=Math.random()*6.28,v=6+Math.random()*10;FX.P.push({x:cx*dpr,y:cy*dpr,vx:Math.cos(a)*v*dpr,vy:(Math.sin(a)*v-8)*dpr,r:(4+Math.random()*6)*dpr,c:cols[i%cols.length],rot:Math.random()*6,vr:(Math.random()-.5)*.4,l:1,shape:i%3})}
- if(!FX.raf)FX.raf=requestAnimationFrame(fxTick);
-}
-function fxTick(){const x=FX.x,dpr=Math.min(2,devicePixelRatio||1);x.clearRect(0,0,FX.cv.width,FX.cv.height);
- FX.P=FX.P.filter(p=>p.l>0);for(const p of FX.P){p.vy+=.35*dpr;p.vx*=.985;p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;p.l-=.011;x.save();x.globalAlpha=Math.max(0,p.l);x.translate(p.x,p.y);x.rotate(p.rot);x.fillStyle=p.c;
-  if(p.shape===0)x.fillRect(-p.r/2,-p.r/4,p.r,p.r/2);else if(p.shape===1){x.beginPath();x.arc(0,0,p.r/2.4,0,6.28);x.fill()}else{x.beginPath();x.moveTo(0,-p.r/1.5);x.lineTo(p.r/5,0);x.lineTo(0,p.r/1.5);x.lineTo(-p.r/5,0);x.fill()}x.restore()}
- FX.raf=FX.P.length?requestAnimationFrame(fxTick):0;if(!FX.raf)x.clearRect(0,0,FX.cv.width,FX.cv.height)}
+/* ---------- confeti de papel y listones ----------
+   Papelitos que giran en 3D (se ven por el frente y por el revés) y listones que ondean al caer.
+   Cañonazo al entrar, lluvia mientras la portada está en pantalla y ráfagas al tocar. */
+const CF={cv:null,x:null,P:[],R:[],raf:0,rain:0,dpr:1,t0:0,cols:null,acc:null};
+function cfColors(){if(CF.cols)return;const t=(C&&C.theme&&C.theme.confetti)||{},cs=getComputedStyle(document.documentElement);
+ CF.cols=(t.colors&&t.colors.length?t.colors:[cs.getPropertyValue('--accent'),cs.getPropertyValue('--accent2'),cs.getPropertyValue('--gold')]).map(s=>String(s).trim());CF.acc=(t.accents||[]).map(s=>String(s).trim())}
+function cfSize(){if(!CF.cv){CF.cv=$('#fx');CF.x=CF.cv.getContext('2d')}CF.dpr=Math.min(2,devicePixelRatio||1);CF.cv.width=innerWidth*CF.dpr;CF.cv.height=innerHeight*CF.dpr;CF.cv.style.width=innerWidth+'px';CF.cv.style.height=innerHeight+'px'}
+const shade=(hex,k)=>{const m=String(hex).match(/^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i);if(!m)return hex;return '#'+[1,2,3].map(i=>Math.max(0,Math.min(255,Math.round(parseInt(m[i],16)*k))).toString(16).padStart(2,'0')).join('')};
+function cfPick(){return CF.acc.length&&Math.random()<.1?CF.acc[Math.random()*CF.acc.length|0]:CF.cols[Math.random()*CF.cols.length|0]}
+function cfPaper(x,y,vx,vy){const c=cfPick(),d=CF.dpr;CF.P.push({x,y,vx,vy,w:(7+Math.random()*7)*d,h:(4+Math.random()*4)*d,a:Math.random()*6.28,va:(Math.random()-.5)*.2,f:Math.random()*6.28,vf:.08+Math.random()*.12,sw:Math.random()*6.28,c,b:shade(c,.62)})}
+function cfRibbon(x,y,vx,vy){const c=cfPick(),d=CF.dpr,n=9,pts=[];for(let i=0;i<n;i++)pts.push({x,y:y-i*6*d});CF.R.push({pts,vx,vy,ph:Math.random()*6.28,c,b:shade(c,.6),w:(5+Math.random()*3)*d,life:1})}
+function cfSpawnBurst(px,py,n,spread,power,dir=-Math.PI/2){const d=CF.dpr;for(let i=0;i<n;i++){const a=dir+(Math.random()-.5)*spread,v=(power*.55+Math.random()*power*.45)*d;
+  (i%11===0?cfRibbon:cfPaper)(px*d,py*d,Math.cos(a)*v,Math.sin(a)*v)}if(!CF.raf){CF.t0=CF.t0||performance.now();CF.raf=requestAnimationFrame(cfTick)}}
+function cfTick(now){const x=CF.x,d=CF.dpr,W=CF.cv.width,H=CF.cv.height;x.clearRect(0,0,W,H);
+ if(CF.rain){const age=(now-CF.t0)/1000,every=age<6?3:age<14?7:14;if((now/16|0)%every===0&&CF.P.length<260)cfPaper(Math.random()*W,-20*d,(Math.random()-.5)*1.2*d,(1+Math.random())*d);if(Math.random()<.012&&CF.R.length<10)cfRibbon(Math.random()*W,-30*d,0,1.5*d)}
+ CF.P=CF.P.filter(p=>p.y<H+40*d);
+ for(const p of CF.P){p.vy=Math.min(p.vy+.16*d,(2.2+Math.sin(p.f)*.6)*d);p.vx*=.985;p.sw+=.04;p.x+=p.vx+Math.sin(p.sw)*.7*d;p.y+=p.vy;p.a+=p.va;p.f+=p.vf;
+  const s=Math.cos(p.f);x.save();x.translate(p.x,p.y);x.rotate(p.a);x.scale(1,s);x.fillStyle=s>0?p.c:p.b;x.fillRect(-p.w/2,-p.h/2,p.w,p.h);x.restore()}
+ CF.R=CF.R.filter(r=>r.pts[r.pts.length-1].y<H+60*d);
+ for(const r of CF.R){r.vy=Math.min(r.vy+.14*d,2.6*d);r.vx*=.98;r.ph+=.12;const h=r.pts[0];h.x+=r.vx+Math.sin(r.ph)*1.6*d;h.y+=r.vy;
+  for(let i=1;i<r.pts.length;i++){const a=r.pts[i-1],b=r.pts[i],dx=b.x-a.x,dy=b.y-a.y,L=Math.hypot(dx,dy)||1,seg=6*d;b.x=a.x+dx/L*seg;b.y=a.y+dy/L*seg}
+  for(let i=1;i<r.pts.length;i++){const a=r.pts[i-1],b=r.pts[i],tw=Math.sin(r.ph+i*.8);x.strokeStyle=tw>0?r.c:r.b;x.lineWidth=Math.max(1,r.w*Math.abs(tw));x.lineCap='round';x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}
+ CF.raf=(CF.P.length||CF.R.length||CF.rain)?requestAnimationFrame(cfTick):0;if(!CF.raf)x.clearRect(0,0,W,H)}
+function burst(cx,cy,n=80){if(RM)return;cfColors();cfSize();cfSpawnBurst(cx,cy,n,Math.PI*1.1,15)}
 const burstAt=el=>{const r=el.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2)};
+function confettiIntro(){const t=((C.theme||{}).confetti);if(!t||RM)return;cfColors();cfSize();addEventListener('resize',cfSize);
+ if(t.intro!==false){const H=innerHeight,W=innerWidth;setTimeout(()=>{cfSpawnBurst(0,H,120,.6,24,-Math.PI/3.2);cfSpawnBurst(W,H,120,.6,24,-Math.PI+Math.PI/3.2)},350);setTimeout(()=>cfSpawnBurst(W/2,H*.15,60,Math.PI*2,9),900)}
+ if(t.rain!==false){CF.rain=1;CF.t0=performance.now();const hero=$('.hero');if(hero)new IntersectionObserver(es=>{CF.rain=es[0].isIntersecting?1:0;if(CF.rain&&!CF.raf)CF.raf=requestAnimationFrame(cfTick)},{threshold:.15}).observe(hero);if(!CF.raf)CF.raf=requestAnimationFrame(cfTick)}
+ document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(CF.raf);CF.raf=0}else if(CF.P.length||CF.rain)CF.raf=requestAnimationFrame(cfTick)})}
 
 /* ---------- interacción ---------- */
 function wireNav(){
@@ -348,9 +413,10 @@ async function boot(){
  let r;try{r=await fetch('/api/v2/landings/'+SLUG,{credentials:'same-origin'})}catch{return fail('No pudimos conectar con TADAA!. Revisa tu conexión y recarga la página.')}
  if(!r.ok)return fail(r.status===404?'Esta landing no existe o ya no está publicada.':'No pudimos cargar la landing. Recarga la página en un momento.');
  const j=await r.json();C=Object.assign({title:j.landing.title},j.landing.config||{});
- theme(C.theme||{});render();
+ theme(C.theme||{});document.body.classList.toggle('inv',C.mode==='invite');render();
  document.body.classList.remove('boot-hide');document.body.classList.add('in-a');
- ambient((C.theme||{}).particles);wireNav();wireReveal();wireCountdown();wireHero();wireStory();wireSignature();wireCards();wireSongs();wireGallery();wireTickets();wireFaq();wireCta();
+ ambient((C.theme||{}).particles);confettiIntro();wireWallet();
+ $$('a[href="#calendario"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();downloadICS()}));wireNav();wireReveal();wireCountdown();wireHero();wireStory();wireSignature();wireCards();wireSongs();wireGallery();wireTickets();wireFaq();wireCta();
  if(location.hash){const t=document.getElementById(location.hash.slice(1));if(t)setTimeout(()=>t.scrollIntoView(),60)}
 }
 function fail(msg){document.body.classList.remove('boot-hide');$('#app').innerHTML=`<div style="min-height:100svh;display:grid;place-items:center;padding:24px;text-align:center"><div><h1 style="font:800 34px/1.1 system-ui;margin:0 0 10px">No encontramos esta obra</h1><p style="color:#666;max-width:46ch;margin:0 auto 18px">${esc(msg)}</p><a class="btn pri" href="${ROOT}">Ir a TADAA!</a></div></div>`}

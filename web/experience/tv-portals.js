@@ -245,7 +245,7 @@ A.preview={};
 
 /* ───── Pitch: enlaces del deck ───── */
 A.DPitch=C=>class extends C{renderVals(){return {...g(),...super.renderVals()}}
- componentDidMount(){const N=()=>10;
+ componentDidMount(){const N=()=>15;
   // Presentación personalizada: #pitch/<slug> carga el prospecto y la landing de su obra.
   const slug=String((this.props.params||[])[0]||'').toLowerCase();
   if(/^[a-z0-9-]{2,80}$/.test(slug))fetch('/api/v2/pitch/'+slug).then(r=>r.ok?r.json():Promise.reject(r.status)).then(j=>{if(j&&j.deck){this.setState({deck:j.deck});document.title='TADAA! × '+j.deck.prospect}}).catch(()=>TV.toast('No encontramos esa presentación; te mostramos la general.'));
