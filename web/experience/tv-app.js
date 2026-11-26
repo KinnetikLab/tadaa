@@ -87,27 +87,28 @@ let navDir=1;
 const LEAF=/^(H1|H2|H3|H4|P|IMG|VIDEO|BUTTON|A|INPUT|SELECT|TEXTAREA|LABEL|NAV|HEADER|ASIDE|ARTICLE|LI|TABLE|FORM|IFRAME|SVG)$/;
 function pickRole(el,r,vw){const t=el.tagName;if(t==='HEADER'||t==='NAV'&&r.top<140)return 'chrome';if(t==='H1'||(t==='H2'&&r.height>40))return 'title';if(t==='IMG'||t==='VIDEO'||t==='IFRAME')return r.width>220?'media':'pop';if(t==='ASIDE')return 'side';
  if((t==='BUTTON'||t==='A'||t==='INPUT'||t==='SELECT')&&r.height<72&&r.width<420)return 'pop';return 'card'}
-function choreograph(host){if(REDUCE){host.style.opacity='';host.animate([{opacity:0},{opacity:1}],{duration:200,easing:'ease-out'});return}
- const root=host.firstElementChild;host.style.opacity='';if(!root)return;const vh=innerHeight,vw=innerWidth,picks=[];
- root.animate([{opacity:0},{opacity:1}],{duration:220,easing:'cubic-bezier(0,0,.2,1)'});
- const walk=(el,depth)=>{for(const c of el.children){if(picks.length>=72)return;if(/^(STYLE|SCRIPT|LINK|TEMPLATE|BR)$/.test(c.tagName))continue;const r=c.getBoundingClientRect();if(r.width<8||r.height<8)continue;if(r.bottom<0||r.top>vh)continue;
-   const st=c.getAttribute('style')||'';const area=r.width*r.height;const surface=/background|border|box-shadow/.test(st);
-   if(LEAF.test(c.tagName)||(!c.children.length&&c.textContent.trim())){picks.push([c,r]);continue}
-   if(surface&&area<vw*vh*.42&&depth>0){picks.push([c,r]);continue}
-   if(depth<12)walk(c,depth+1)}};
- walk(root,0);picks.sort((a,b)=>(Math.round(a[1].top/24)-Math.round(b[1].top/24))||(a[1].left-b[1].left));
- const S=spring(1,.42),POP=spring(.78,.36),MEDIA=spring(1,.6);let k=0;
- const go=(el,frames,sp,delay)=>{try{el.animate(frames.op,{duration:Math.min(sp.duration,360),delay,easing:'cubic-bezier(0,0,.2,1)',fill:'backwards'});el.animate(frames.tf,{duration:sp.duration,delay,easing:sp.easing,fill:'backwards',composite:'add'})}catch{}};
- picks.forEach(([el,r])=>{const role=pickRole(el,r,vw);const delay=role==='chrome'?0:Math.min(30+k++*22,380);const dx=18*navDir;
-  if(role==='chrome')go(el,{op:[{opacity:0,offset:0}],tf:[{transform:'translateY(-14px)'},{transform:'none'}]},S,0);
-  else if(role==='title'){go(el,{op:[{opacity:0,offset:0}],tf:[{transform:'translate('+dx+'px, 34px)'},{transform:'none'}]},S,delay);try{el.animate([{clipPath:'inset(0 0 100% 0)'},{clipPath:'inset(0 0 -20% 0)'}],{duration:S.duration,delay,easing:S.easing,fill:'backwards'})}catch{}}
-  else if(role==='media')go(el,{op:[{opacity:0,offset:0}],tf:[{transform:'scale(1.07)'},{transform:'none'}]},MEDIA,delay);
-  else if(role==='side')go(el,{op:[{opacity:0,offset:0}],tf:[{transform:'translateX('+(56*navDir)+'px)'},{transform:'none'}]},S,delay+60);
-  else if(role==='pop')go(el,{op:[{opacity:0,offset:0}],tf:[{transform:'scale(.82)'},{transform:'none'}]},POP,delay);
-  else go(el,{op:[{opacity:0,offset:0}],tf:[{transform:'translate('+dx+'px, 30px) scale(.97)'},{transform:'none'}]},S,delay)});
- const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io.unobserve(e.target);go(e.target,{op:[{opacity:0,offset:0}],tf:[{transform:'translateY(36px) scale(.98)'},{transform:'none'}]},S,0)}),{rootMargin:'0px 0px -10% 0px'});
- root.querySelectorAll('section, aside, article, h2, [data-tv-scroll]').forEach(el=>{const r=el.getBoundingClientRect();if(r.top>vh)io.observe(el)})}
-function leave(host){const root=host.firstElementChild;if(!root||REDUCE)return null;return root.animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateX('+(-24*navDir)+'px) scale(.985)'}],{duration:170,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'}).finished.catch(()=>{})}
+/* Transición tipo app (push): la página anterior queda como capa fantasma y se desliza/desvanece,
+   la nueva entra desde el lado de la navegación con un resorte; dentro, pocos bloques clave suben con
+   escalonado corto (≤30 ms). Nunca hay pantalla vacía entre páginas. */
+let ghost=null;
+function snapshot(host){if(REDUCE||!host.firstElementChild)return;dropGhost();const g=document.createElement('div');g.setAttribute('aria-hidden','true');g.style.cssText='position:fixed;inset:0;z-index:60;pointer-events:none;overflow:hidden;contain:strict';
+ const st=document.createElement('style');st.textContent=document.getElementById('tv-css').textContent;g.appendChild(st);
+ const c=host.cloneNode(true);c.removeAttribute('id');c.style.position='absolute';c.style.left='0';c.style.right='0';c.style.top=(-window.scrollY)+'px';c.style.margin='0 auto';
+ c.querySelectorAll('video').forEach(v=>{v.removeAttribute('autoplay');v.pause?.()});c.querySelectorAll('iframe').forEach(f=>f.remove());g.appendChild(c);document.body.appendChild(g);
+ const r=host.getBoundingClientRect();c.style.width=r.width+'px';c.style.left=r.left+'px';c.style.right='auto';
+ ghost={g,c};host.style.visibility='hidden'}
+function dropGhost(){if(ghost){ghost.g.remove();ghost=null}}
+function choreograph(host,first){host.style.visibility='';host.style.opacity='';const root=host.firstElementChild;if(!root){dropGhost();return}
+ if(REDUCE){dropGhost();root.animate([{opacity:0,offset:0},{opacity:1}],{duration:180,easing:'ease-out'});return}
+ const S=spring(1,.36),dir=navDir;
+ if(ghost){const {g,c}=ghost;ghost=null;c.animate([{transform:'none',opacity:1},{transform:'translateX('+(-72*dir)+'px) scale(.97)',opacity:0}],{duration:240,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'}).finished.then(()=>g.remove(),()=>g.remove());
+  root.animate([{opacity:0,offset:0},{opacity:1}],{duration:200,easing:'cubic-bezier(0,0,.2,1)'});root.animate([{transform:'translateX('+(64*dir)+'px)'},{transform:'none'}],{duration:S.duration,easing:S.easing})}
+ else root.animate([{opacity:0,transform:'translateY(16px)',offset:0},{opacity:1,transform:'none'}],{duration:S.duration,easing:S.easing});
+ const vh=innerHeight,picks=[];
+ root.querySelectorAll('h1, h2, [data-tv-link], aside, article, section > div > a').forEach(el=>{if(picks.length>=14)return;const r=el.getBoundingClientRect();if(r.width<120||r.height<40||r.top>vh||r.bottom<0)return;if(picks.some(p=>p.contains(el)||el.contains(p)))return;picks.push(el)});
+ picks.sort((a,b)=>a.getBoundingClientRect().top-b.getBoundingClientRect().top).forEach((el,k)=>{const o={duration:S.duration,delay:(first?120:70)+k*30,easing:S.easing,fill:'backwards'};try{el.animate([{opacity:0,offset:0}],{...o,duration:220,easing:'cubic-bezier(0,0,.2,1)'});el.animate([{transform:'translateY(18px)'},{transform:'none'}],{...o,composite:'add'})}catch{}});
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io.unobserve(e.target);const o={duration:S.duration,easing:S.easing,fill:'backwards'};try{e.target.animate([{opacity:0,offset:0}],{...o,duration:260,easing:'cubic-bezier(0,0,.2,1)'});e.target.animate([{transform:'translateY(28px)'},{transform:'none'}],{...o,composite:'add'})}catch{}}),{rootMargin:'0px 0px -8% 0px'});
+ root.querySelectorAll('section, aside, article, h2, [data-tv-link]').forEach(el=>{const r=el.getBoundingClientRect();if(r.top>vh&&r.height>40)io.observe(el)})}
 
 /* ───── enrutador ───── */
 function parseHash(){const h=decodeURIComponent(location.hash.replace(/^#\/?/,''));const [r,...rest]=h.split('/');return {route:ROUTES[r]?r:(r?r:'inicio'),params:rest}}
@@ -122,16 +123,15 @@ async function show(route,params){
  mode=document.documentElement.clientWidth<MOBILE_BP?'M':'D';
  if(AUTH.has(route)){await TV.session();if(!TV.user){location.href='login.html?next='+encodeURIComponent('index.html#'+[route,...params].join('/'));return}}
  const def=ROUTES[route];const name=def[mode]||def.D||def.M;
- const hostEl=$host();const leaving=leave(hostEl);
+ snapshot($host());
  try{await (window.TVAdapters?.load?.[name]||(()=>null))(TV,params)}catch(e){console.warn('[tv] datos',name,e)}
- if(leaving)await leaving;
  if(tok!==navTok)return;
  comp?.componentWillUnmount?.();comp=null;cur=route;screenName=name;
- const c=compile(name);if(!c){$host().textContent='Pantalla no disponible';return}
+ const c=compile(name);if(!c){dropGhost();$host().style.visibility='';$host().textContent='Pantalla no disponible';return}
  document.getElementById('tv-css').textContent=c.css;tplNode=c.node;comp=makeComponent(name,c.code,params);
- const host=$host();host.style.opacity='0';
+ const host=$host();
  window.scrollTo({top:0,behavior:'instant'});paint(true);comp?.componentDidMount?.();const firstLoad=!document.body.classList.contains('tv-ready');document.body.classList.add('tv-ready');
- requestAnimationFrame(()=>setTimeout(()=>{if(tok===navTok)choreograph(host);else host.style.opacity=''},firstLoad?240:0));navDir=1;
+ if(firstLoad){host.style.opacity='0';setTimeout(()=>{if(tok===navTok)choreograph(host,true)},260)}else choreograph(host,false);navDir=1;
  document.title=(TV.titles[route]||'TADAA!')+' · TADAA!'}
 
 /* enlaces internos */
