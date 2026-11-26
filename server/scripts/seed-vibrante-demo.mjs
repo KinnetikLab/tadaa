@@ -22,7 +22,7 @@ const ORGS=[
  {k:'org-empresa',name:'Empresa Demo Norte',slug:'empresa-demo-norte',kind:'company'},
  {k:'org-uni',name:'Universidad Demo',slug:'universidad-demo',kind:'institution'}
 ];
-const VENUES=[['ven-teatro1','Centro Cultural Teatro 1',1200],['ven-teatro2','Centro Cultural Teatro 2',600],['ven-palacio','Palacio de los Deportes',18000],['ven-gnp','Estadio GNP Seguros',65000],['ven-bio','BioParque Estrella · Chapa de Mota',5000],['ven-arena','Arena CDMX',22000],['ven-autodromo','Sede por revelar',40000],['ven-cine','Cinépolis Plaza Universidad',2400]];
+const VENUES=[['ven-teatro1','Centro Cultural Teatro 1',1200],['ven-teatro2','Centro Cultural Teatro 2',600],['ven-palacio','Palacio de los Deportes',18000],['ven-gnp','Estadio GNP Seguros',65000],['ven-bio','BioParque Estrella · Chapa de Mota',5000],['ven-arena','Arena CDMX',22000],['ven-autodromo','Sede por revelar',40000],['ven-cine','Cinépolis Plaza Universidad',2400],['ven-museo','Museo Vivo de Ciencia y Arte',1500]];
 const EVENTS=[
  {k:'matilda',org:'org-escena',venue:'ven-teatro1',title:'Matilda · El Musical',days:6,h:19,mode:'tadaa',img:'matilda.webp',cat:'Musical',
   desc:'Basado en la novela de Roald Dahl. Matilda es una niña extraordinaria que descubre en los libros —y en un poder secreto— la forma de enfrentar a los adultos injustos. Un musical para toda la familia con canciones de Tim Minchin.',
@@ -49,15 +49,20 @@ const EVENTS=[
   meta:{tagline:'Gira mundial',rating:'Todo público',duration:'2 h aprox.',tags:['concierto','pop'],discount_label:'−14%'},types:[['GNP Verde',155000,180000],['GNP Naranja',230000,265000]]},
  {k:'bioparque',org:'org-escena',venue:'ven-bio',title:'BioParque Estrella',days:10,h:10,mode:'tadaa',img:'bioparque.webp',cat:'Paseo',
   desc:'Safari en camión, aviario, tirolesa y más de 500 animales. Pasaporte Aventura con tarifa de convenio y combos para toda la familia.',
-  meta:{kind:'attraction',hours:'Todos los días · 9:00 a 17:00',validity:'Válido cualquier día por 30 días',address:'Carretera Chapa de Mota km 3, Estado de México',tagline:'Un día de safari',rating:'Familiar',duration:'Todo el día',tags:['paseo','familia','naturaleza'],tadaa_rating:'4.5',discount_label:'−19%'},
+  meta:{kind:'attraction',open_days:[0,1,2,3,4,5,6],highlight:'Safari, aviario y tirolesa',hours:'Todos los días · 9:00 a 17:00',validity:'Válido cualquier día por 30 días',address:'Carretera Chapa de Mota km 3, Estado de México',tagline:'Un día de safari',rating:'Familiar',duration:'Todo el día',tags:['paseo','familia','naturaleza'],tadaa_rating:'4.5',discount_label:'−19%'},
   types:[['Pasaporte Aventura',38000,47000],['Pasaporte Niño',29000,36000]],
   addons:[['combo','Combo familiar','2 hamburguesas, 2 papas y 2 bebidas',32000,200],['food','Comida en el restaurante','Buffet para 1 persona',22000,200],['merch','Peluche león','Tamaño mediano',29900,80],['merch','Gorra safari','Talla única',24900,80],['parking','Estacionamiento','Por auto, todo el día',12000,300]]},
  {k:'cinepolis',org:'org-escena',venue:'ven-cine',title:'Cinépolis · Plaza Universidad',days:1,h:12,mode:'tadaa',img:'cine.webp',cat:'Cine',
   desc:'Boletos de cine con tarifa de convenio para cualquier película en cartelera. Elige el tipo de sala y canjea tu pase en taquilla o en la app del cine.',
-  meta:{kind:'cinema',hours:'Todos los días · funciones de 11:00 a 23:30',validity:'Válido para cualquier función por 60 días',address:'Cinépolis Plaza Universidad, Av. Universidad 1000, Santa Cruz Atoyac, CDMX',tagline:'Tu cine con tarifa TADAA!',rating:'Según película',duration:'Según película',tags:['cine','estrenos','pareja'],tadaa_rating:'4.6',tadaa_reviews:2140,discount_label:'−32%',
+  meta:{kind:'cinema',open_days:[0,1,2,3,4,5,6],highlight:'4 estrenos en cartelera',hours:'Todos los días · funciones de 11:00 a 23:30',validity:'Válido para cualquier función por 60 días',address:'Cinépolis Plaza Universidad, Av. Universidad 1000, Santa Cruz Atoyac, CDMX',tagline:'Tu cine con tarifa TADAA!',rating:'Según película',duration:'Según película',tags:['cine','estrenos','pareja'],tadaa_rating:'4.6',tadaa_reviews:2140,discount_label:'−32%',
    movies:[{title:'Órbita Cero',genre:'Ciencia ficción',rating:'B',runtime:'2 h 08 min',poster:'img/tv/cine/orbita.webp'},{title:'La Reina del Barrio',genre:'Comedia',rating:'B',runtime:'1 h 46 min',poster:'img/tv/cine/reina.webp'},{title:'Niebla',genre:'Terror',rating:'B15',runtime:'1 h 52 min',poster:'img/tv/cine/niebla.webp'},{title:'Patitas al Rescate',genre:'Animación',rating:'AA',runtime:'1 h 34 min',poster:'img/tv/cine/patitas.webp'}]},
   types:[['Sala tradicional',6500,9500],['Sala 3D',8500,12500],['Sala VIP',15500,21000]],
   addons:[['combo','Combo palomitas','Palomitas grandes + 2 refrescos',14900,500],['food','Nachos con queso','Porción individual',8900,300],['combo','Combo dulcería','Palomitas medianas + refresco + dulce',11900,300]]},
+ {k:'museovivo',org:'org-escena',venue:'ven-museo',title:'Museo Vivo de Ciencia y Arte',days:1,h:10,mode:'tadaa',img:'museo.webp',cat:'Museo',
+  desc:'Salas interactivas de ciencia, arte contemporáneo y una exposición temporal. Recorrido libre a tu ritmo; tu pase incluye la exposición temporal.',
+  meta:{kind:'museum',open_days:[0,2,3,4,5,6],highlight:'Exposición temporal incluida',hours:'Martes a domingo · 10:00 a 18:00',validity:'Válido cualquier día por 30 días',address:'Av. Chapultepec 500, Juárez, CDMX',tagline:'Ciencia y arte para tocar',rating:'Todo público',duration:'2 a 3 horas',tags:['museo','familia','cultura'],tadaa_rating:'4.7',tadaa_reviews:612,discount_label:'−40%'},
+  types:[['Entrada general',4500,7500],['Entrada familiar (4 personas)',15000,26000]],
+  addons:[['experience','Visita guiada','Recorrido de 60 min con guía',8000,200],['merch','Catálogo de la exposición','Edición impresa',22000,80]]},
  {k:'queen',org:'org-escena',venue:'ven-arena',title:'God Save The Queen',hoursFromNow:5,mode:'tadaa',img:'queen.webp',cat:'Concierto',
   desc:'“El mejor show sobre Queen del mundo”. Tributo con orquesta y las canciones de Freddie Mercury.',
   meta:{tagline:'El tributo definitivo',rating:'Todo público',duration:'2 h',tags:['concierto','tributo'],tadaa_rating:'4.7',now_enabled:true},
@@ -141,6 +146,7 @@ try{
  const st=S.matilda,seat=(r,n)=>st.find(s=>s.row===r&&s.n===n).id;
 await buy('luis','cinepolis','Sala 3D',2,{addons:[['Combo palomitas',1]],daysAgo:1});
 await buy('mariana','cinepolis','Sala VIP',2,{daysAgo:2});
+await buy('sofia','museovivo','Entrada familiar (4 personas)',1,{addons:[['Visita guiada',1]],daysAgo:3});
 await buy('ana','cinepolis','Sala tradicional',3,{addons:[['Nachos con queso',1]],daysAgo:5,used:3});
  await buy('ana','matilda','Mezzanine 1',2,{seats:[seat('G',8),seat('G',9)],addons:[['Programa de mano',1]],daysAgo:3});
  await buy('luis','matilda','Orquesta 1',4,{seats:[seat('C',4),seat('C',5),seat('C',6),seat('C',7)],addons:[['Combo dulcería',2]],daysAgo:4,used:0});

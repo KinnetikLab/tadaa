@@ -17,7 +17,7 @@ export function accountBadges(stats){const b=[];if(stats.tickets>=1)b.push({key:
 
 const BENEFIT_KINDS=['upgrade','meet_greet','ticket','custom'];
 const ADDON_KINDS=['merch','combo','food','experience','parking'];
-const META_KEYS=['video_url','image_position','discount_label','logo_url','tadaa_original','cast','crew','duration','rating','tags','reviews','tadaa_rating','synopsis','category','preventa','proximamente'];
+const META_KEYS=['kind','hours','validity','address','open_days','highlight','movies','tadaa_reviews','tadaa_score_pct','video_url','image_position','discount_label','logo_url','tadaa_original','cast','crew','duration','rating','tags','reviews','tadaa_rating','synopsis','category','preventa','proximamente'];
 
 // ───────────────────────── hooks usados por platform.mjs ─────────────────────────
 /** Now!: si el tipo de boleto pertenece a una campaña, solo registrados compran, primero en pagar. */

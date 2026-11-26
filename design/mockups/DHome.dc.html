@@ -173,6 +173,25 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
     </div>
   </section>
 
+  <sc-if value="{{hasAnyday}}"><section style="max-width: 1280px; margin: 0 auto; padding: 40px 32px 8px">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 18px">
+      <div><span style="font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #1238FF">SIN FECHA FIJA</span>
+      <h2 style="margin: 6px 0 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: 44px; letter-spacing: -2px; line-height: .95">Planes para cualquier día</h2></div>
+      <a href="DExplorar.dc.html" onClick="{{seeAnyday}}" style="font-weight: 800; font-size: 14px; color: #1238FF">Ver todos</a>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px">
+      <sc-for list="{{anyday}}" as="a"><a href="DEvento.dc.html" style="position: relative; height: 260px; border-radius: 28px; overflow: hidden; display: block; color: #FFFFFF; background: #08091A">
+        <img src="{{a.img}}" alt="{{a.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: {{a.pos}}; opacity: .9">
+        <span style="position: absolute; left: 14px; top: 14px; background: #D6FF35; color: #08091A; border-radius: 99px; padding: 6px 11px; font-size: 11px; font-weight: 800">{{a.kindLabel}}</span>
+        <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 56px 16px 16px; background: linear-gradient(transparent, rgba(8,9,26,.92)); display: flex; flex-direction: column; gap: 6px">
+          <b style="font-family: Outfit, sans-serif; font-size: 22px; line-height: 1.05">{{a.title}}</b>
+          <span style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #D9E0FF"><svg width="14" height="14" viewBox="0 0 256 256" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm56,112H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48a8,8,0,0,1,0,16Z" fill="#D6FF35"/></svg>{{a.whenLine}}</span>
+          <span style="font-size: 13px; font-weight: 800">{{a.price}}</span>
+        </div>
+      </a></sc-for>
+    </div>
+  </section></sc-if>
+
   <section id="originals" style="max-width: 1280px; margin: 0 auto; padding: 48px 32px 8px">
     <div class="inferno" style="position: relative; border-radius: 44px; overflow: hidden; min-height: 460px; color: #FFFFFF; display: flex; align-items: flex-end">
       <div style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(10,4,6,.95) 0%, rgba(10,4,6,.4) 50%, transparent 80%)"></div>
