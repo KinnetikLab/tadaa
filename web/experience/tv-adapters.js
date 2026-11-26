@@ -21,16 +21,16 @@ const IMG={matilda:'img/tv/ev/matilda.webp',morat:'img/tv/ev/morat.webp',nocturn
 const VIDEO='img/tv/video-demo.mp4';
 /* Muestras del diseño: se ven solo si aún no hay eventos publicados. */
 const SAMPLES=[
- {slug:'muestra-matilda',title:'Matilda · El Musical',cat:'Musical',k:'Teatro',venue:'Teatro 1',whenTxt:'Vie a dom · Teatro 1',d:'29',m:'NOV',price:'Desde $700',pct:'−61%',img:IMG.matilda,pos:'center 30%',golden:true,s:'now'},
+ {slug:'muestra-matilda',title:'Matilda · El Musical',cat:'Musical',k:'Musicales',venue:'Teatro 1',whenTxt:'Vie a dom · Teatro 1',d:'29',m:'NOV',price:'Desde $700',pct:'−61%',img:IMG.matilda,pos:'center 30%',golden:true,s:'now'},
  {slug:'muestra-morat',title:'Morat',cat:'Concierto',k:'Conciertos',venue:'Palacio de los Deportes',whenTxt:'17 nov · 20:00',d:'17',m:'NOV',price:'Desde $2,100',pct:'−13%',img:IMG.morat,pos:'center 40%',video:VIDEO,s:'now'},
  {slug:'muestra-nocturno',title:'Nocturno',cat:'Teatro',k:'Teatro',venue:'Teatro 2',whenTxt:'Hoy · 20:00',d:'21',m:'NOV',price:'Desde $850',pct:'−31%',img:IMG.nocturno,pos:'center 25%',rush:true,golden:true,s:'now'},
  {slug:'muestra-inferno',title:'INFERNO',cat:'Festival · Preventa',k:'Festivales',venue:'Sede por revelar',whenTxt:'2027 · fecha por revelar',d:'—',m:'2027',price:'Regístrate',pct:'',img:IMG.inferno,pos:'center 30%',original:true,golden:true,s:'pre',cta:'Registrarme a la preventa'},
  {slug:'muestra-bruno',title:'Bruno Mars',cat:'Concierto',k:'Conciertos',venue:'Estadio GNP Seguros',whenTxt:'11 dic · 20:30',d:'11',m:'DIC',price:'Desde $1,550',pct:'−14%',img:IMG.bruno,pos:'center',s:'now'},
  {slug:'muestra-bioparque',title:'BioParque Estrella',cat:'Paseo',k:'Paseos',venue:'Chapa de Mota',whenTxt:'Fecha abierta',d:'—',m:'ABIERTA',price:'Desde $380',pct:'−19%',img:IMG.bio,pos:'center',s:'now'},
  {slug:'muestra-queen',title:'God Save The Queen',cat:'Concierto',k:'Conciertos',venue:'Arena CDMX',whenTxt:'19 nov · 21:00',d:'19',m:'NOV',price:'Desde $410',pct:'',img:IMG.queen,pos:'center',rush:true,s:'now'},
- {slug:'muestra-hoy',title:'Hoy No Me Puedo Levantar',cat:'Musical',k:'Teatro',venue:'Teatro 1',whenTxt:'Nueva temporada',d:'—',m:'2027',price:'PRÓXIMAMENTE',pct:'',img:IMG.hoy,pos:'center',video:VIDEO,golden:true,s:'soon',cta:'Avisarme cuando salga'}
+ {slug:'muestra-hoy',title:'Hoy No Me Puedo Levantar',cat:'Musical',k:'Musicales',venue:'Teatro 1',whenTxt:'Nueva temporada',d:'—',m:'2027',price:'PRÓXIMAMENTE',pct:'',img:IMG.hoy,pos:'center',video:VIDEO,golden:true,s:'soon',cta:'Avisarme cuando salga'}
 ].map(x=>({sample:true,id:x.slug,rush:false,golden:false,original:false,video:false,cta:'',...x,photo:!x.video,when:x.whenTxt}));
-const CAT_MAP={concierto:'Conciertos',conciertos:'Conciertos',teatro:'Teatro',musical:'Teatro',festival:'Festivales',festivales:'Festivales',paseo:'Paseos',paseos:'Paseos',parque:'Paseos',familia:'Familia',familiar:'Familia',experiencias:'Paseos'};
+const CAT_MAP={concierto:'Conciertos',conciertos:'Conciertos',teatro:'Teatro',musical:'Musicales',musicales:'Musicales',deporte:'Deportivos',deportes:'Deportivos',deportivo:'Deportivos',deportivos:'Deportivos',festival:'Festivales',festivales:'Festivales',paseo:'Paseos',paseos:'Paseos',parque:'Paseos',familia:'Familiares',familiar:'Familiares',experiencias:'Paseos'};
 const KIND_LABEL={cinema:'Cine',attraction:'Atracción',museum:'Museo',show:''};
 function planKind(m,cat){const k=String(m.kind||'').toLowerCase();if(k)return k;const c=String(cat||'').toLowerCase();if(/cine|pel[ií]cula/.test(c))return 'cinema';if(/museo/.test(c))return 'museum';if(/paseo|parque|atracci|zool|safari|acuario/.test(c))return 'attraction';return 'show'}
 function openToday(m){const d=new Date().getDay();const od=Array.isArray(m.open_days)?m.open_days:null;return od?od.includes(d):true}
@@ -39,7 +39,7 @@ function mapEvent(e){if(!e)return null;const m=e.metadata||{};const img=e.hero_u
  return {id:e.id,slug:e.slug||e.id,title:e.title,cat,k:CAT_MAP[String(cat).toLowerCase()]||cat,venue:e.venue||m.venue||'Sede por confirmar',starts:e.starts_at,
   when:e.starts_at?H.when(e.starts_at):'Fecha por confirmar',whenTxt:e.starts_at?H.short(e.starts_at)+' · '+(e.venue||''):'Fecha por confirmar',d:e.starts_at?H.day(e.starts_at):'—',m:e.starts_at?H.mon(e.starts_at):'',
   price:s==='soon'?'PRÓXIMAMENTE':s==='pre'?'PREVENTA':e.from_price_minor!=null?'Desde '+H.money(e.from_price_minor):(e.ticketing_mode==='tadaa'?'Ver precios':'Solicitar'),pct:m.discount_label||'',
-  kind:planKind(m,cat),dated:planKind(m,cat)==='show',hours:m.hours||'',validity:m.validity||'',highlight:m.highlight||'',openToday:openToday(m),img,pos:m.image_position||'center',video:m.video_url||false,photo:!m.video_url,rush:!!m.now_enabled,golden:!!m.golden_enabled,original:!!m.tadaa_original,s,cta:s==='soon'?'Avisarme cuando salga':s==='pre'?'Entrar a la preventa':'',raw:e}}
+  tags:Array.isArray(m.tags)?m.tags:[],ratingTxt:m.rating||'',kind:planKind(m,cat),dated:planKind(m,cat)==='show',hours:m.hours||'',validity:m.validity||'',highlight:m.highlight||'',openToday:openToday(m),img,pos:m.image_position||'center',video:m.video_url||false,photo:!m.video_url,rush:!!m.now_enabled,golden:!!m.golden_enabled,original:!!m.tadaa_original,s,cta:s==='soon'?'Avisarme cuando salga':s==='pre'?'Entrar a la preventa':'',raw:e}}
 function list(){const real=(TV.events||[]).map(mapEvent).filter(Boolean);return real.length?real:SAMPLES}
 function bySlug(slug){return list().find(e=>e.slug===slug||e.id===slug)}
 const cart={};// por evento: {typeId, qty, addons:{id:q}, seats:[]}
@@ -106,12 +106,12 @@ A.DHome=C=>class extends C{renderVals(){const evs=datedFirst();const data=evs.sl
   const tk=root.querySelector('[data-tv-link="evento"]')?.parentElement;if(tk&&!tk.__hv){tk.__hv=1;tk.addEventListener('mouseenter',()=>{this._hover=true});tk.addEventListener('mouseleave',()=>{this._hover=false})}}};
 
 /* ───── Cartelera ───── */
-const CATS=['Todo','Conciertos','Teatro','Festivales','Paseos','Familia','Now!'];
+const CATS=['Todo','Teatro','Musicales','Conciertos','Festivales','Deportivos','Familiares'];
 function filterCat(evs,c){return c==='Now!'?evs.filter(e=>e.rush):c==='Todo'?evs:evs.filter(e=>e.k===c||e.cat===c)}
 function dayKey(d){return fmt(d,{year:'numeric',month:'2-digit',day:'2-digit'})}
-const DATED_CATS=['Todo','Conciertos','Teatro','Festivales','Familia','Now!'],OPEN_CATS=['Todo','Cine','Atracciones','Museos'];
+const DATED_CATS=['Todo','Teatro','Musicales','Conciertos','Festivales','Deportivos','Familiares'],OPEN_CATS=['Todo','Cine','Atracciones','Museos'];
 const MODE_ICON={"cal": "M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32Zm0,48H48V48H72v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24Z", "clock": "M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm56,112H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48a8,8,0,0,1,0,16Z"};
-function filterPlan(evs,c){if(c==='Todo')return evs;if(c==='Now!')return evs.filter(e=>e.rush);if(c==='Cine')return evs.filter(e=>e.kind==='cinema');if(c==='Atracciones')return evs.filter(e=>e.kind==='attraction');if(c==='Museos')return evs.filter(e=>e.kind==='museum');return evs.filter(e=>e.k===c||e.cat===c)}
+function filterPlan(evs,c){if(c==='Todo')return evs;if(c==='Now!')return evs.filter(e=>e.rush);if(c==='Cine')return evs.filter(e=>e.kind==='cinema');if(c==='Atracciones')return evs.filter(e=>e.kind==='attraction');if(c==='Museos')return evs.filter(e=>e.kind==='museum');if(c==='Familiares')return evs.filter(e=>e.k===c||(e.tags||[]).some(t=>/famil|niñ/i.test(t))||/todo p[uú]blico|familiar/i.test(e.ratingTxt||''));return evs.filter(e=>e.k===c||e.cat===c)}
 function planCard(e){const chipBase='position: absolute; left: 14px; top: 14px; border-radius: 99px; padding: 7px 12px; font-size: 11px; font-weight: 800; ';
  if(e.dated)return {...e,soon:e.s!=='now',kindLabel:'',whenLine:e.when,chip:e.price,chipStyle:chipBase+(e.s==='now'?'background: #D6FF35; color: #08091A;':e.s==='soon'?'background: #FFFFFF; color: #08091A;':'background: #1238FF; color: #FFFFFF;')};
  return {...e,soon:false,kindLabel:(KIND_LABEL[e.kind]||'Plan').toUpperCase()+(e.validity?' · '+e.validity.replace(/^Válido /,'').replace(/^para /,''):''),whenLine:e.hours?(e.openToday?e.hours.replace(/^Todos los días · /,'Hoy · '):e.hours):(e.openToday?'Abierto hoy':'Cerrado hoy'),venue:e.highlight||e.venue,chip:e.price,chipStyle:chipBase+'background: #D6FF35; color: #08091A;'}}
