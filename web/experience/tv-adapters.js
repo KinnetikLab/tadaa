@@ -115,6 +115,8 @@ function filterPlan(evs,c){if(c==='Todo')return evs;if(c==='Now!')return evs.fil
 function planCard(e){const chipBase='position: absolute; left: 14px; top: 14px; border-radius: 99px; padding: 7px 12px; font-size: 11px; font-weight: 800; ';
  if(e.dated)return {...e,soon:e.s!=='now',kindLabel:'',whenLine:e.when,chip:e.price,chipStyle:chipBase+(e.s==='now'?'background: #D6FF35; color: #08091A;':e.s==='soon'?'background: #FFFFFF; color: #08091A;':'background: #1238FF; color: #FFFFFF;')};
  return {...e,soon:false,kindLabel:(KIND_LABEL[e.kind]||'Plan').toUpperCase()+(e.validity?' · '+e.validity.replace(/^Válido /,'').replace(/^para /,''):''),whenLine:e.hours?(e.openToday?e.hours.replace(/^Todos los días · /,'Hoy · '):e.hours):(e.openToday?'Abierto hoy':'Cerrado hoy'),venue:e.highlight||e.venue,chip:e.price,chipStyle:chipBase+'background: #D6FF35; color: #08091A;'}}
+function dateBadge(iso){if(!iso)return 'POR CONFIRMAR';const d=new Date(iso),t=new Date();const k=dayKey(d);if(k===dayKey(t))return 'HOY · '+H.hour(iso);if(k===dayKey(new Date(t.getTime()+864e5)))return 'MAÑANA · '+H.hour(iso);return fmt(d,{weekday:'short',day:'numeric',month:'short'}).replace(/\./g,'').toUpperCase()}
+function datedCard(e){return {...planCard(e),kindLabel:e.s==='now'?dateBadge(e.starts):''}}
 function explorarState(self){const st=self.state;const all=list();const q=(st.q||'').trim().toLowerCase();
  const match=e=>(e.title+' '+e.venue+' '+e.cat+' '+(KIND_LABEL[e.kind]||'')).toLowerCase().includes(q);
  const dated=all.filter(e=>e.dated),open=all.filter(e=>!e.dated);return {st,all,q,match,dated,open}}
@@ -135,10 +137,7 @@ A.DExplorar=C=>class extends C{constructor(p){super(p);this.state={mode:TV.explo
  let groups=[];
  if(q){const d=dated.filter(match).map(planCard),o=open.filter(match).map(planCard);if(d.length)groups.push({label:'Con fecha',sub:d.length+' resultado'+(d.length>1?'s':''),items:d});if(o.length)groups.push({label:'Para cualquier día',sub:o.length+' resultado'+(o.length>1?'s':''),items:o})}
  else if(fecha){let ev=filterPlan(dated.filter(e=>e.s===st.tab),st.cat);if(st.day)ev=ev.filter(e=>e.starts&&dayKey(e.starts)===st.day);
-  if(st.tab==='now'){const by={};ev.filter(e=>e.starts).sort((a,b)=>new Date(a.starts)-new Date(b.starts)).forEach(e=>{const k=dayKey(e.starts);(by[k]=by[k]||[]).push(e)});const tk=dayKey(today),mk=dayKey(new Date(today.getTime()+864e5));
-   groups=Object.entries(by).map(([k,items])=>{const d=new Date(items[0].starts);return {label:k===tk?'Hoy':k===mk?'Mañana':H.short(items[0].starts),sub:k===tk||k===mk?fmt(d,{weekday:'long',day:'numeric',month:'long'}):'',items:items.map(planCard)}});
-   const nod=ev.filter(e=>!e.starts);if(nod.length)groups.push({label:'Fecha por confirmar',sub:'',items:nod.map(planCard)})}
-  else groups=ev.length?[{label:'',sub:'',items:ev.map(planCard)}]:[]}
+  ev=ev.sort((a,b)=>(a.starts?new Date(a.starts):9e15)-(b.starts?new Date(b.starts):9e15));groups=ev.length?[{label:'',sub:'',items:ev.map(datedCard)}]:[]}
  else{const ev=filterPlan(open,st.cat);const o=ev.filter(e=>e.openToday),c=ev.filter(e=>!e.openToday);if(o.length)groups.push({label:'Abierto hoy',sub:o.length+' lugar'+(o.length>1?'es':''),items:o.map(planCard)});if(c.length)groups.push({label:'Otros días',sub:'Cerrado hoy',items:c.map(planCard)})}
  const empty=!groups.length;
  return {...globals(),modes,cats,days,feat,hasFeat:feat.length>0,fdots,tabs,groups,empty,emptyMsg:q?'No encontramos “'+st.q+'”. Prueba con otro nombre.':fecha&&st.day?'No hay funciones ese día. Prueba otro día.':'No hay planes en esta categoría por ahora.',
@@ -152,7 +151,7 @@ A.MExplorar=C=>class extends C{constructor(p){super(p);this.state={mode:TV.explo
  let groups=[];
  if(q){const d=dated.filter(match).map(planCard),o=open.filter(match).map(planCard);if(d.length)groups.push({label:'Con fecha',sub:String(d.length),items:d});if(o.length)groups.push({label:'Cualquier día',sub:String(o.length),items:o})}
  else if(fecha){let ev=filterPlan(dated,st.cat);if(st.day)ev=ev.filter(e=>e.starts&&dayKey(e.starts)===st.day);ev=ev.sort((a,b)=>(a.starts?new Date(a.starts):9e15)-(b.starts?new Date(b.starts):9e15));const tk=dayKey(today),mk=dayKey(new Date(today.getTime()+864e5));const by=[];
-  ev.forEach(e=>{const k=e.starts?dayKey(e.starts):'tbd';let g=by.find(x=>x.k===k);if(!g){g={k,label:k==='tbd'?'Por confirmar':k===tk?'Hoy':k===mk?'Mañana':H.short(e.starts),sub:'',items:[]};by.push(g)}g.items.push(planCard(e))});groups=by}
+  groups=ev.length?[{label:'',sub:'',items:ev.map(datedCard)}]:[]}
  else{const ev=filterPlan(open,st.cat);const o=ev.filter(e=>e.openToday),c=ev.filter(e=>!e.openToday);if(o.length)groups.push({label:'Abierto hoy',sub:'',items:o.map(planCard)});if(c.length)groups.push({label:'Otros días',sub:'Cerrado hoy',items:c.map(planCard)})}
  const empty=!groups.length;
  return {...globals(),modes,cats,days,withDates:fecha&&!q,month:fmt(today,{month:'short'}).replace('.','').toUpperCase(),q:st.q,search:e=>{this.state.q=e.target.value;clearTimeout(this._t);this._t=setTimeout(()=>{const pos=e.target.selectionStart;this.setState({});requestAnimationFrame(()=>{const i=document.querySelector('#tv input[aria-label="Buscar"]');if(i){i.focus();try{i.setSelectionRange(pos,pos)}catch{}}})},250)},
