@@ -63,6 +63,11 @@ const EVENTS=[
   meta:{kind:'museum',open_days:[0,2,3,4,5,6],highlight:'Exposición temporal incluida',hours:'Martes a domingo · 10:00 a 18:00',validity:'Válido cualquier día por 30 días',address:'Av. Chapultepec 500, Juárez, CDMX',tagline:'Ciencia y arte para tocar',rating:'Todo público',duration:'2 a 3 horas',tags:['museo','familia','cultura'],tadaa_rating:'4.7',tadaa_reviews:612,discount_label:'−40%'},
   types:[['Entrada general',4500,7500],['Entrada familiar (4 personas)',15000,26000]],
   addons:[['experience','Visita guiada','Recorrido de 60 min con guía',8000,200],['merch','Catálogo de la exposición','Edición impresa',22000,80]]},
+ {k:'finalliga',org:'org-escena',venue:'ven-arena',title:'Final de Liga · Halcones vs. Toros',days:3,h:20,mode:'tadaa',img:'deporte.webp',cat:'Deporte',
+  desc:'La gran final de la liga de básquetbol de la capital. Partido único, show de medio tiempo y activaciones para toda la familia.',
+  meta:{tagline:'Un partido, un campeón',rating:'Todo público',duration:'2 h 30 min',tags:['deportes','basquetbol','familia'],tadaa_rating:'4.5',tadaa_reviews:428,discount_label:'−35%'},
+  types:[['Cancha',150000,220000],['Platea',65000,95000],['General',28000,42000]],
+  addons:[['combo','Combo de partido','Hot dog + refresco',12900,400],['merch','Jersey oficial','Réplica de la temporada',89900,120]]},
  {k:'queen',org:'org-escena',venue:'ven-arena',title:'God Save The Queen',hoursFromNow:5,mode:'tadaa',img:'queen.webp',cat:'Concierto',
   desc:'“El mejor show sobre Queen del mundo”. Tributo con orquesta y las canciones de Freddie Mercury.',
   meta:{tagline:'El tributo definitivo',rating:'Todo público',duration:'2 h',tags:['concierto','tributo'],tadaa_rating:'4.7',now_enabled:true},
@@ -146,6 +151,7 @@ try{
  const st=S.matilda,seat=(r,n)=>st.find(s=>s.row===r&&s.n===n).id;
 await buy('luis','cinepolis','Sala 3D',2,{addons:[['Combo palomitas',1]],daysAgo:1});
 await buy('mariana','cinepolis','Sala VIP',2,{daysAgo:2});
+await buy('diego','finalliga','Platea',2,{addons:[['Combo de partido',2]],daysAgo:1});
 await buy('sofia','museovivo','Entrada familiar (4 personas)',1,{addons:[['Visita guiada',1]],daysAgo:3});
 await buy('ana','cinepolis','Sala tradicional',3,{addons:[['Nachos con queso',1]],daysAgo:5,used:3});
  await buy('ana','matilda','Mezzanine 1',2,{seats:[seat('G',8),seat('G',9)],addons:[['Programa de mano',1]],daysAgo:3});
