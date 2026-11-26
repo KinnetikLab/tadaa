@@ -26,8 +26,8 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
       <span style="font-size: 10px; font-weight: 800; letter-spacing: .18em; color: #D6FF35">PRODUCTORES</span>
     </div>
     <div style="margin: 0 4px 14px; background: rgba(8,9,26,.35); border-radius: 18px; padding: 12px; display: flex; align-items: center; gap: 10px">
-      <span style="width: 38px; height: 38px; border-radius: 12px; background: #FFFFFF; color: #1238FF; display: grid; place-items: center; font-weight: 900">PD</span>
-      <span style="display: flex; flex-direction: column"><b style="font-size: 13px">Productora Demo</b><span style="font-size: 11px; color: #D9E0FF">3 eventos activos</span></span>
+      <span style="width: 38px; height: 38px; border-radius: 12px; background: #FFFFFF; color: #1238FF; display: grid; place-items: center; font-weight: 900">{{orgIni}}</span>
+      <span style="display: flex; flex-direction: column"><b style="font-size: 13px">{{orgName}}</b><span style="font-size: 11px; color: #D9E0FF">{{orgSub}}</span></span>
     </div>
     <sc-for list="{{nav}}" as="n" hint-placeholder-count="5">
       <button onClick="{{n.pick}}" aria-current="{{n.on}}" style="{{n.style}}">{{n.label}}<span style="{{n.badgeStyle}}">{{n.badge}}</span></button>
@@ -38,21 +38,20 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
   <main style="flex: 999 1 640px; min-width: 0; padding: 30px 32px 56px; display: flex; flex-direction: column; gap: 22px">
     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
       <div>
-        <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #1238FF">MATILDA · EL MUSICAL ▾</span>
+        <select onChange="{{pickEvent}}" aria-label="Evento" style="border: 0; background: transparent; font: inherit; font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #1238FF; text-transform: uppercase; cursor: pointer; padding: 0"><option value="">Todos los eventos</option><sc-for list="{{events}}" as="ev"><option value="{{ev.id}}" selected="{{ev.on}}">{{ev.title}}</option></sc-for></select>
         <h1 style="margin: 6px 0 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: 46px; letter-spacing: -2px; line-height: 1">{{title}}</h1>
       </div>
       <div style="display: flex; gap: 6px; background: #FFFFFF; border-radius: 99px; padding: 4px">
-        <span style="height: 38px; padding: 0 14px; border-radius: 99px; background: #08091A; color: #FFFFFF; display: flex; align-items: center; font-size: 12px; font-weight: 800">Todas las funciones</span>
-        <span style="height: 38px; padding: 0 14px; border-radius: 99px; display: flex; align-items: center; font-size: 12px; font-weight: 700">Sáb 29 · 19:00</span>
+        <span style="height: 38px; padding: 0 14px; border-radius: 99px; background: #08091A; color: #FFFFFF; display: flex; align-items: center; font-size: 12px; font-weight: 800">{{evWhen}}</span>
       </div>
     </div>
 
     <sc-if value="{{vRes}}" hint-placeholder-val="{{ true }}">
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px">
-        <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Vendido</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">$171,200</b><span style="font-size: 12px; font-weight: 700; color: #0B7A3B">+22% vs semana pasada</span></div>
-        <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Boletos emitidos</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">162</b><span style="font-size: 12px; color: #4A5068">de 336 en 4 funciones</span></div>
-        <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Add-ons vendidos</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">58</b><span style="font-size: 12px; color: #4A5068">programas y combos</span></div>
-        <div class="gold" style="border-radius: 24px; padding: 18px; color: #2A1A00"><span style="font-size: 12px">Golden entregados</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">2</b><span style="font-size: 12px; font-weight: 700">Upgrade a Orquesta</span></div>
+        <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Vendido</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">{{k.gross}}</b><span style="font-size: 12px; font-weight: 700; color: #0B7A3B">{{k.grossSub}}</span></div>
+        <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Boletos emitidos</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">{{k.tickets}}</b><span style="font-size: 12px; color: #4A5068">{{k.ticketsSub}}</span></div>
+        <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Add-ons vendidos</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">{{k.addons}}</b><span style="font-size: 12px; color: #4A5068">{{k.addonsSub}}</span></div>
+        <div class="gold" style="border-radius: 24px; padding: 18px; color: #2A1A00"><span style="font-size: 12px">Golden entregados</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">{{k.golden}}</b><span style="font-size: 12px; font-weight: 700">{{k.goldenSub}}</span></div>
       </div>
       <section style="background: #FFFFFF; border-radius: 28px; padding: 24px">
         <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 style="margin: 0; font-family: Outfit, sans-serif; font-size: 22px">Boletos por día</h2><span style="font-size: 12px; color: #5A6178">Últimos 14 días</span></div>
@@ -71,12 +70,11 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
         <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 12px">
           <label style="display: flex; align-items: center; gap: 8px; height: 46px; padding: 0 16px; border-radius: 99px; border: 1px solid #D5DBEA; flex: 0 1 360px">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5A6178" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            <input placeholder="Buscar comprador o folio" aria-label="Buscar comprador o folio" style="flex: 1; min-width: 0; border: 0; outline: 0; font: inherit; font-size: 13px">
+            <input placeholder="Buscar comprador o folio" aria-label="Buscar comprador o folio" onInput="{{search}}" value="{{q}}" style="flex: 1; min-width: 0; border: 0; outline: 0; font: inherit; font-size: 13px">
           </label>
           <div style="display: flex; gap: 8px">
-            <span style="height: 40px; padding: 0 14px; border-radius: 99px; background: #08091A; color: #FFFFFF; display: flex; align-items: center; font-size: 12px; font-weight: 700">Todos · 86</span>
-            <span style="height: 40px; padding: 0 14px; border-radius: 99px; border: 1px solid #D5DBEA; display: flex; align-items: center; font-size: 12px; font-weight: 700">Con add-ons</span>
-            <a href="#" style="height: 40px; padding: 0 14px; border-radius: 99px; border: 1px solid #D5DBEA; display: flex; align-items: center; font-size: 12px; font-weight: 700">Exportar CSV</a>
+            <button onClick="{{fAll}}" style="{{fAllStyle}}">Todos · {{count}}</button><button onClick="{{fAdd}}" style="{{fAddStyle}}">Con add-ons</button>
+            <button onClick="{{exportCsv}}" style="height: 40px; padding: 0 14px; border-radius: 99px; border: 1px solid #D5DBEA; display: flex; align-items: center; font-size: 12px; font-weight: 700">Exportar CSV</button>
           </div>
         </div>
         <div style="overflow-x: auto">
@@ -111,10 +109,10 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
           </div>
           <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #C7CDE6">Libera un cupo de último minuto. Tu tarifa de convenio no cambia.</p>
           <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; font-size: 12px">
-            <span style="background: #15142E; border-radius: 16px; padding: 12px"><span style="display: block; color: #AEB6D6">Función</span><b style="font-size: 14px">Dom 30 · 17:00</b></span>
-            <span style="background: #15142E; border-radius: 16px; padding: 12px"><span style="display: block; color: #AEB6D6">Abre</span><b style="font-size: 14px">3 h antes</b></span>
-            <span style="background: #15142E; border-radius: 16px; padding: 12px"><span style="display: block; color: #AEB6D6">Cupo</span><b style="font-size: 14px">30 boletos</b></span>
-            <span style="background: #15142E; border-radius: 16px; padding: 12px"><span style="display: block; color: #AEB6D6">Precio Now!</span><b style="font-size: 14px">$[precio]</b></span>
+            <span style="background: #15142E; border-radius: 16px; padding: 12px"><span style="display: block; color: #AEB6D6">Función</span><b style="font-size: 14px">{{rush.fn}}</b></span>
+            <span style="background: #15142E; border-radius: 16px; padding: 12px"><span style="display: block; color: #AEB6D6">Abre</span><b style="font-size: 14px">{{rush.opens}}</b></span>
+            <span style="background: #15142E; border-radius: 16px; padding: 12px"><span style="display: block; color: #AEB6D6">Cupo</span><b style="font-size: 14px">{{rush.quota}}</b></span>
+            <span style="background: #15142E; border-radius: 16px; padding: 12px"><span style="display: block; color: #AEB6D6">Precio Now!</span><b style="font-size: 14px">{{rush.price}}</b></span>
           </div>
           <span style="font-size: 12px; color: #8C93B5">{{rushNote}}</span>
         </section>
@@ -124,7 +122,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
             <span style="display: flex; align-items: center; gap: 10px"><span class="gold" style="width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 900; color: #2A1A00">G</span><b style="font-family: Outfit, sans-serif; font-size: 24px">Golden Ticket</b></span>
             <button role="switch" aria-checked="{{goldOn}}" aria-label="Activar Golden Ticket" onClick="{{tGold}}" style="{{goldTrack}}"><span style="{{goldKnob}}"></span></button>
           </div>
-          <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #4A5068">1 de cada 100 boletos finales se convierte en Golden al emitirse. Tú defines el beneficio.</p>
+          <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #4A5068">1 de cada {{goldOdds}} boletos finales se convierte en Golden al emitirse. Tú defines el beneficio.</p>
           <div role="radiogroup" aria-label="Beneficio Golden" style="display: flex; flex-direction: column; gap: 8px">
             <sc-for list="{{benefits}}" as="b" hint-placeholder-count="3">
               <button role="radio" aria-checked="{{b.on}}" onClick="{{b.pick}}" style="{{b.style}}">
@@ -133,8 +131,8 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
               </button>
             </sc-for>
           </div>
-          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A5068">Mensaje para el ganador<input value="{{msg}}" readonly style="height: 46px; border: 1px solid #D5DBEA; border-radius: 14px; padding: 0 14px; font: inherit; font-size: 14px; color: #08091A"></label>
-          <span style="font-size: 12px; color: #4A5068">Probabilidad fija 1/100 · máx. 4 Golden por función · TADAA! revisa antes de publicar.</span>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A5068">Mensaje para el ganador<input value="{{msg}}" onInput="{{msgInput}}" style="height: 46px; border: 1px solid #D5DBEA; border-radius: 14px; padding: 0 14px; font: inherit; font-size: 14px; color: #08091A"></label>
+          <span style="font-size: 12px; color: #4A5068">Probabilidad 1/{{goldOdds}} · máx. {{goldMax}} Golden por evento · los cambios se guardan al momento.</span>
         </section>
       </div>
     </sc-if>

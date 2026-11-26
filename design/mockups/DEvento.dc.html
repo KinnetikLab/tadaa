@@ -19,7 +19,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 </helmet>
 <div style="width: 100%; background: #EEF1F7; font-family: 'Plus Jakarta Sans', sans-serif; color: #08091A">
 
-  <section style="position: relative; color: #FFFFFF; border-radius: 0 0 48px 48px; overflow: hidden; min-height: 640px; background: #08091A">
+  <section style="position: relative; color: #FFFFFF; border-radius: 0 0 48px 48px; overflow: hidden; min-height: 560px; background: #08091A; display: flex; flex-direction: column">
     <img src="{{ev.img}}" alt="{{ev.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%">
     <div style="position: absolute; inset: 0; background: linear-gradient(0deg, #0E2BD9 0%, rgba(18,56,255,.88) 22%, rgba(18,56,255,.35) 52%, rgba(8,9,26,.2) 78%, rgba(8,9,26,.45) 100%)"></div>
     <div class="grain" style="position: absolute; inset: 0; opacity: .25"></div>
@@ -33,7 +33,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
       </nav>
       <a href="DCuenta.dc.html" aria-label="Mi cuenta" style="width: 44px; height: 44px; border-radius: 50%; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 800">{{TVini}}</a>
     </header>
-    <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: 200px 32px 120px; display: flex; flex-direction: column; gap: 18px">
+    <div style="position: relative; flex: 1; width: 100%; box-sizing: border-box; max-width: 1280px; margin: 0 auto; padding: 150px 32px 64px; display: flex; flex-direction: column; justify-content: flex-end; gap: 18px">
       <div style="display: flex; gap: 8px">
         <sc-if value="{{ev.original}}"><span title="TADAA! Original" role="img" aria-label="TADAA! Original" style="width: 44px; height: 44px; border-radius: 50%; background: #D6FF35; color: #08091A; display: grid; place-items: center; font: 800 15px Outfit, sans-serif">t!</span></sc-if><sc-if value="{{ev.golden}}"><span title="Golden Ticket activo: 1 de cada {{ev.odds}} boletos" role="img" aria-label="Golden Ticket activo" style="width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, #FFE9A3, #E2B23C 55%, #B8860B); display: grid; place-items: center; box-shadow: 0 6px 18px rgba(226,178,60,.5)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A1A00" stroke-width="2.2" aria-hidden="true"><path d="M3 7h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4z"/><path d="M13 7v12" stroke-dasharray="2 2"/></svg></span></sc-if><sc-if value="{{ev.now}}"><span title="Now! disponible " role="img" aria-label="Now! disponible" style="width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, #FF3D8B, #FF8A3D); display: grid; place-items: center; box-shadow: 0 6px 18px rgba(255,61,139,.45)"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0B0A1C" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span></sc-if>
       </div>
@@ -46,7 +46,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
       <div style="display: flex; flex-wrap: wrap; gap: 10px">
         <span style="height: 44px; padding: 0 16px; border-radius: 99px; background: rgba(255,255,255,.16); backdrop-filter: blur(10px); display: flex; align-items: center; font-size: 14px; font-weight: 700">{{ev.when}}</span>
         <span style="height: 44px; padding: 0 16px; border-radius: 99px; background: rgba(255,255,255,.16); backdrop-filter: blur(10px); display: flex; align-items: center; font-size: 14px; font-weight: 700">{{ev.venue}}</span>
-        <sc-if value="{{ev.score}}"><span style="height: 44px; padding: 0 16px; border-radius: 99px; background: rgba(255,255,255,.16); backdrop-filter: blur(10px); display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700"><span style="color: #D6FF35">★</span> {{ev.score}} TADAA!</span></sc-if>
+        <sc-if value="{{ev.score}}"><span title="{{ap.tip}}" style="height: 44px; padding: 0 16px 0 5px; border-radius: 99px; background: rgba(255,255,255,.16); backdrop-filter: blur(10px); display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 700"><span style="{{ap.seal}}"><svg viewBox="0 0 256 256" width="34" height="34" aria-hidden="true" style="position: absolute; inset: 0"><path d="M240,128c0,10.44-7.51,18.27-14.14,25.18-3.77,3.94-7.67,8-9.14,11.57-1.36,3.27-1.44,8.69-1.52,13.94-.15,9.76-.31,20.82-8,28.51s-18.75,7.85-28.51,8c-5.25.08-10.67.16-13.94,1.52-3.57,1.47-7.63,5.37-11.57,9.14C146.27,232.49,138.44,240,128,240s-18.27-7.51-25.18-14.14c-3.94-3.77-8-7.67-11.57-9.14-3.27-1.36-8.69-1.44-13.94-1.52-9.76-.15-20.82-.31-28.51-8s-7.85-18.75-8-28.51c-.08-5.25-.16-10.67-1.52-13.94-1.47-3.57-5.37-7.63-9.14-11.57C23.51,146.27,16,138.44,16,128s7.51-18.27,14.14-25.18c3.77-3.94,7.67-8,9.14-11.57,1.36-3.27,1.44-8.69,1.52-13.94.15-9.76.31-20.82,8-28.51s18.75-7.85,28.51-8c5.25-.08,10.67-.16,13.94-1.52,3.57-1.47,7.63-5.37,11.57-9.14C109.73,23.51,117.56,16,128,16s18.27,7.51,25.18,14.14c3.94,3.77,8,7.67,11.57,9.14,3.27,1.36,8.69,1.44,13.94,1.52,9.76.15,20.82.31,28.51,8s7.85,18.75,8,28.51c.08,5.25.16,10.67,1.52,13.94,1.47,3.57,5.37,7.63,9.14,11.57C232.49,109.73,240,117.56,240,128Z" fill="{{ap.sealColor}}"/></svg><svg viewBox="0 0 256 256" width="17" height="17" aria-hidden="true" style="position: relative"><path d="M188.87,65A18,18,0,0,0,157.62,83L133.36,41a18,18,0,0,0-31.22,18L96.4,49A18,18,0,0,0,65.18,67l3.34,5.77A26,26,0,0,0,39.74,111l3,5.2A26,26,0,0,0,23.5,155l35.27,61a80.14,80.14,0,0,0,149.52-39.57A71.92,71.92,0,0,0,210,101.58Zm1.2,127.56A64.12,64.12,0,0,1,72.65,208L37.38,147a10,10,0,0,1,17.34-10L75,172a8,8,0,0,0,13.87-8L53.62,103A10,10,0,0,1,71,93l31.81,55a8,8,0,0,0,13.87-8l-26-45a10,10,0,0,1,17.35-10l36.5,63a8,8,0,0,0,13.87-8l-12.6-21.75A10,10,0,0,1,163.44,109l20.22,35A63.52,63.52,0,0,1,190.07,192.57ZM160.22,24V8a8,8,0,0,1,16,0V24a8,8,0,0,1-16,0Zm33.22,6,8-13.1a8,8,0,0,1,13.68,8.33l-8,13.11a8,8,0,0,1-6.84,3.83A8,8,0,0,1,193.44,30Zm45,33.66-15.05,4.85a8.15,8.15,0,0,1-2.46.39,8,8,0,0,1-2.46-15.62l15.06-4.85a8,8,0,1,1,4.91,15.23Z" fill="#08091A"/></svg></span><b style="font-family: Outfit, sans-serif; font-size: 18px">{{ap.pct}}</b><span style="opacity: .85">{{ap.tier}}</span></span></sc-if>
         <button style="height: 44px; padding: 0 18px; border-radius: 99px; border: 0; background: #FFFFFF; color: #08091A; display: flex; align-items: center; gap: 8px; font: inherit; font-size: 14px; font-weight: 800"><svg width="14" height="14" viewBox="0 0 24 24" fill="#08091A" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>Ver promo</button>
       </div>
     </div>
@@ -62,6 +62,10 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
           </div>
         </div>
         <div style="background: #FFFFFF; border-radius: 28px; padding: 8px">
+          <sc-if value="{{hasZoneMap}}"><div aria-label="Mapa de zonas: toca una zona para elegirla" style="margin: 6px 6px 10px; border-radius: 22px; background: #EEF1F7; padding: 16px 16px 12px; display: flex; flex-direction: column; align-items: center; gap: 5px">
+            <span style="width: 46%; height: 26px; border-radius: 10px 10px 36px 36px; background: #08091A; color: #D6FF35; display: grid; place-items: center; font-size: 10px; font-weight: 800; letter-spacing: .2em; margin-bottom: 6px">ESCENARIO</span>
+            <sc-for list="{{zoneMap}}" as="zm"><button onClick="{{zm.pick}}" aria-pressed="{{zm.on}}" aria-label="{{zm.aria}}" style="{{zm.style}}"><b>{{zm.name}}</b><span style="opacity: .85">{{zm.price}}</span></button></sc-for>
+          </div></sc-if>
           <sc-for list="{{rows}}" as="r" hint-placeholder-count="4">
             <button onClick="{{r.pick}}" aria-pressed="{{r.on}}" style="{{r.style}}">
               <span style="font-weight: 800; font-size: 16px">{{r.name}}</span>
@@ -98,9 +102,9 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px">
               <sc-for list="{{cast}}" as="c" hint-placeholder-count="5">
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center">
-                  <span style="{{c.av}}">{{c.ini}}</span>
+                  <span style="{{c.av}}"><sc-if value="{{c.photo}}"><img src="{{c.photo}}" alt="{{c.name}}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover"></sc-if><sc-if value="{{c.noPhoto}}">{{c.ini}}</sc-if></span>
                   <b style="font-size: 14px">{{c.name}}</b>
-                  <span style="font-size: 12px; color: #4A5068">{{c.role}}</span>
+                  <span style="font-size: 12px; color: #4A5068">como <b style="color: #1238FF">{{c.role}}</b></span>
                 </div>
               </sc-for>
             </div>
@@ -121,10 +125,19 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
                 <sc-for list="{{ev.tags}}" as="tg"><span style="border: 1px solid #D5DBEA; border-radius: 99px; padding: 6px 12px; font-size: 12px; font-weight: 700">#{{tg}}</span></sc-for>
               </div>
             </div>
-            <div style="flex: 1 1 300px; position: relative; min-height: 240px; border-radius: 22px; overflow: hidden; background: #DCE3F5">
-              <div aria-hidden="true" style="position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent 0 38px, #FFFFFF 38px 46px), repeating-linear-gradient(90deg, transparent 0 58px, #FFFFFF 58px 66px)"></div>
-              <span style="position: absolute; left: 50%; top: 42%; margin-left: -22px; width: 44px; height: 44px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: #1238FF; box-shadow: 0 10px 20px rgba(18,56,255,.4)"></span>
-              <span style="position: absolute; left: 12px; bottom: 12px; right: 12px; background: #FFFFFF; border-radius: 16px; padding: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 13px"><b>{{ev.venue}}</b><a href="{{ev.maps}}" target="_blank" rel="noopener" <span style="color: #1238FF; font-weight: 800">Cómo llegar →</a></span>
+            <div style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 10px">
+              <div role="tablist" aria-label="Mapa" style="display: flex; gap: 4px; background: #EEF1F7; border-radius: 99px; padding: 4px; align-self: flex-start">
+                <sc-for list="{{mapTabs}}" as="mt"><button role="tab" aria-selected="{{mt.on}}" onClick="{{mt.pick}}" style="{{mt.style}}"><svg viewBox="0 0 256 256" width="15" height="15" aria-hidden="true"><path d="{{mt.icon}}" fill="currentColor"/></svg>{{mt.label}}</button></sc-for>
+              </div>
+              <sc-if value="{{mapVenue}}"><div style="position: relative; height: 280px; border-radius: 22px; overflow: hidden; background: #DCE3F5">
+                <iframe src="{{ev.mapEmbed}}" title="Mapa de {{ev.venue}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0"></iframe>
+                <span style="position: absolute; left: 12px; bottom: 12px; right: 12px; background: #FFFFFF; border-radius: 16px; padding: 12px; display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 13px; box-shadow: 0 8px 24px rgba(8,9,26,.14)"><span style="display: flex; align-items: center; gap: 8px; min-width: 0"><svg viewBox="0 0 256 256" width="18" height="18" aria-hidden="true" style="flex: 0 0 18px"><path d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z" fill="#1238FF"/></svg><b style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{ev.venue}}</b></span><a href="{{ev.maps}}" target="_blank" rel="noopener" style="color: #1238FF; font-weight: 800; white-space: nowrap">Cómo llegar</a></span>
+              </div></sc-if>
+              <sc-if value="{{mapSeats}}"><div style="border-radius: 22px; background: #EEF1F7; padding: 18px 16px 14px; display: flex; flex-direction: column; align-items: center; gap: 6px">
+                <span style="width: 56%; height: 30px; border-radius: 10px 10px 40px 40px; background: #08091A; color: #D6FF35; display: grid; place-items: center; font-size: 11px; font-weight: 800; letter-spacing: .2em; margin-bottom: 8px">ESCENARIO</span>
+                <sc-for list="{{seatMap}}" as="sm"><span style="{{sm.style}}"><b>{{sm.name}}</b><span style="opacity: .8">{{sm.price}}</span></span></sc-for>
+                <span style="margin-top: 8px; font-size: 12px; color: #4A5068; text-align: center">Mapa ilustrativo por zona. Eliges tu zona arriba, en <b>Precios por zona</b>.</span>
+              </div></sc-if>
             </div>
           </div>
         </sc-if>
@@ -132,9 +145,10 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
         <sc-if value="{{tRes}}" hint-placeholder-val="{{ false }}">
           <div style="padding: 22px 18px 0; display: flex; flex-wrap: wrap; gap: 24px">
             <div style="flex: 0 1 240px; display: flex; flex-direction: column; gap: 10px">
-              <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #1238FF">CALIFICACIÓN TADAA!</span>
-              <b style="font-family: Outfit, sans-serif; font-size: 64px; line-height: .9">{{ev.scoreBig}}</b>
-              <span style="font-size: 13px; color: #4A5068">De asistentes verificados</span>
+              <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #1238FF">APLAUSÓMETRO TADAA!</span>
+              <span style="display: flex; align-items: center; gap: 12px"><span style="{{ap.sealBig}}"><svg viewBox="0 0 256 256" width="72" height="72" aria-hidden="true" style="position: absolute; inset: 0"><path d="M240,128c0,10.44-7.51,18.27-14.14,25.18-3.77,3.94-7.67,8-9.14,11.57-1.36,3.27-1.44,8.69-1.52,13.94-.15,9.76-.31,20.82-8,28.51s-18.75,7.85-28.51,8c-5.25.08-10.67.16-13.94,1.52-3.57,1.47-7.63,5.37-11.57,9.14C146.27,232.49,138.44,240,128,240s-18.27-7.51-25.18-14.14c-3.94-3.77-8-7.67-11.57-9.14-3.27-1.36-8.69-1.44-13.94-1.52-9.76-.15-20.82-.31-28.51-8s-7.85-18.75-8-28.51c-.08-5.25-.16-10.67-1.52-13.94-1.47-3.57-5.37-7.63-9.14-11.57C23.51,146.27,16,138.44,16,128s7.51-18.27,14.14-25.18c3.77-3.94,7.67-8,9.14-11.57,1.36-3.27,1.44-8.69,1.52-13.94.15-9.76.31-20.82,8-28.51s18.75-7.85,28.51-8c5.25-.08,10.67-.16,13.94-1.52,3.57-1.47,7.63-5.37,11.57-9.14C109.73,23.51,117.56,16,128,16s18.27,7.51,25.18,14.14c3.94,3.77,8,7.67,11.57,9.14,3.27,1.36,8.69,1.44,13.94,1.52,9.76.15,20.82.31,28.51,8s7.85,18.75,8,28.51c.08,5.25.16,10.67,1.52,13.94,1.47,3.57,5.37,7.63,9.14,11.57C232.49,109.73,240,117.56,240,128Z" fill="{{ap.sealColor}}"/></svg><svg viewBox="0 0 256 256" width="32" height="32" aria-hidden="true" style="position: relative"><path d="M188.87,65A18,18,0,0,0,157.62,83L133.36,41a18,18,0,0,0-31.22,18L96.4,49A18,18,0,0,0,65.18,67l3.34,5.77A26,26,0,0,0,39.74,111l3,5.2A26,26,0,0,0,23.5,155l35.27,61a80.14,80.14,0,0,0,149.52-39.57A71.92,71.92,0,0,0,210,101.58Zm1.2,127.56A64.12,64.12,0,0,1,72.65,208L37.38,147a10,10,0,0,1,17.34-10L75,172a8,8,0,0,0,13.87-8L53.62,103A10,10,0,0,1,71,93l31.81,55a8,8,0,0,0,13.87-8l-26-45a10,10,0,0,1,17.35-10l36.5,63a8,8,0,0,0,13.87-8l-12.6-21.75A10,10,0,0,1,163.44,109l20.22,35A63.52,63.52,0,0,1,190.07,192.57ZM160.22,24V8a8,8,0,0,1,16,0V24a8,8,0,0,1-16,0Zm33.22,6,8-13.1a8,8,0,0,1,13.68,8.33l-8,13.11a8,8,0,0,1-6.84,3.83A8,8,0,0,1,193.44,30Zm45,33.66-15.05,4.85a8.15,8.15,0,0,1-2.46.39,8,8,0,0,1-2.46-15.62l15.06-4.85a8,8,0,1,1,4.91,15.23Z" fill="#08091A"/></svg></span><b style="font-family: Outfit, sans-serif; font-size: 56px; line-height: .9">{{ap.pct}}</b></span>
+              <span style="align-self: flex-start; border-radius: 99px; padding: 5px 11px; font-size: 12px; font-weight: 800; {{ap.tierStyle}}">{{ap.tierLong}}</span>
+              <span style="font-size: 13px; color: #4A5068; line-height: 1.5">{{ap.sub}}</span>
               <sc-for list="{{stars}}" as="s" hint-placeholder-count="5">
                 <span style="display: flex; align-items: center; gap: 8px; font-size: 12px"><b style="width: 12px">{{s.n}}</b><span style="flex: 1; height: 6px; border-radius: 9px; background: #EEF1F7; overflow: hidden"><span style="{{s.bar}}"></span></span></span>
               </sc-for>
@@ -150,8 +164,8 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
       </section>
     </div>
 
-    <aside aria-label="Tus boletos" style="flex: 1 1 360px; max-width: 420px; margin-top: -90px; position: relative; display: flex; flex-direction: column; gap: 14px">
-      <div style="background: #FFFFFF; border-radius: 32px; padding: 26px 22px 22px; box-shadow: 0 30px 70px rgba(18,56,255,.18)">
+    <aside aria-label="Tus boletos" style="flex: 1 1 360px; max-width: 420px; margin-top: -56px; position: relative; display: flex; flex-direction: column; gap: 14px">
+      <div style="filter: drop-shadow(0 24px 34px rgba(18,56,255,.16)) drop-shadow(0 4px 10px rgba(8,9,26,.05))"><div style="background: #FFFFFF; border-radius: 32px 32px 0 0; padding: 26px 22px 20px; -webkit-mask: radial-gradient(circle 13px at 0 100%, #0000 97%, #000) left / 51% 100% no-repeat, radial-gradient(circle 13px at 100% 100%, #0000 97%, #000) right / 51% 100% no-repeat; mask: radial-gradient(circle 13px at 0 100%, #0000 97%, #000) left / 51% 100% no-repeat, radial-gradient(circle 13px at 100% 100%, #0000 97%, #000) right / 51% 100% no-repeat">
         <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #1238FF">HAZ TU PLAN</span>
         <h2 style="margin: 6px 0 16px; font-family: Outfit, sans-serif; font-weight: 800; font-size: 28px">Tus boletos</h2>
         <div style="display: flex; flex-direction: column; gap: 10px">
@@ -177,10 +191,9 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
             </button>
           </sc-for>
         </div>
-        <div style="position: relative; margin: 20px -22px 0; border-top: 2px dashed #C9D1EA">
-          <span style="position: absolute; left: -12px; top: -13px; width: 24px; height: 24px; border-radius: 50%; background: #EEF1F7"></span>
-          <span style="position: absolute; right: -12px; top: -13px; width: 24px; height: 24px; border-radius: 50%; background: #EEF1F7"></span>
-        </div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 0 0 32px 32px; padding: 0 22px 22px; position: relative; -webkit-mask: radial-gradient(circle 13px at 0 0, #0000 97%, #000) left / 51% 100% no-repeat, radial-gradient(circle 13px at 100% 0, #0000 97%, #000) right / 51% 100% no-repeat; mask: radial-gradient(circle 13px at 0 0, #0000 97%, #000) left / 51% 100% no-repeat, radial-gradient(circle 13px at 100% 0, #0000 97%, #000) right / 51% 100% no-repeat">
+        <span aria-hidden="true" style="position: absolute; left: 20px; right: 20px; top: -1px; border-top: 2px dashed #C9D1EA"></span>
         <div style="display: flex; justify-content: space-between; align-items: flex-end; padding: 18px 0 4px">
           <span style="font-size: 13px; color: #4A5068">Total</span>
           <b style="font-family: Outfit, sans-serif; font-size: 36px; letter-spacing: -1px">{{total}}</b>
@@ -193,6 +206,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
           <b style="font-family: Outfit, sans-serif; font-size: 22px">1/{{ev.odds}}</b>
           <span style="font-size: 12px; line-height: 1.4; font-weight: 600">Tu boleto puede convertirse en <b>Golden Ticket</b>: {{ev.goldenBenefit}}.</span>
         </div></sc-if>
+      </div>
       </div>
 
       <div style="background: #08091A; color: #FFFFFF; border-radius: 28px; padding: 22px; display: flex; flex-direction: column; gap: 10px">

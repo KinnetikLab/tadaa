@@ -23,53 +23,43 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
       <img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="Tadaa!" style="height: 30px; width: auto">
       <span style="font-size: 10px; font-weight: 800; letter-spacing: .18em; color: #D6FF35">STUDIO</span>
     </div>
-    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; background: #FFFFFF; color: #08091A; display: flex; align-items: center; font-weight: 800; font-size: 13px">Resumen</a>
-    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Eventos y funciones</a>
-    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-size: 13px">Boletera <span style="background: #D6FF35; color: #08091A; border-radius: 99px; padding: 2px 8px; font-size: 11px">3</span></a>
-    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-size: 13px">Now! <span style="background: linear-gradient(100deg, #FF3D8B, #FF8A3D); color: #08091A; border-radius: 99px; padding: 2px 8px; font-size: 11px">EN VIVO</span></a>
-    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-size: 13px">Solicitudes <span style="background: rgba(255,255,255,.2); border-radius: 99px; padding: 2px 8px; font-size: 11px">12</span></a>
-    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Convenios y membresías</a>
-    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Niveles, badges y cashback</a>
-    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Golden Ticket y Awards</a>
-    <a href="DPartner.dc.html" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Partners y productores</a>
-    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Pagos, devoluciones</a>
-    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Integraciones y API</a>
+    <sc-for list="{{nav}}" as="n"><a href="{{n.href}}" onClick="{{n.pick}}" style="{{n.style}}">{{n.label}}<sc-if value="{{n.badge}}"><span style="{{n.badgeStyle}}">{{n.badge}}</span></sc-if></a></sc-for>
     <div style="margin-top: auto; background: rgba(8,9,26,.35); border-radius: 18px; padding: 14px; font-size: 12px; line-height: 1.5">
-      <b style="display: block; color: #D6FF35">Pagos: pruebas internas</b>Clip real bloqueado hasta completar checklist.
+      <b style="display: block; color: #D6FF35">{{payTitle}}</b>{{payText}}
     </div>
   </aside>
 
   <main style="flex: 999 1 640px; min-width: 0; padding: 30px 32px 56px; display: flex; flex-direction: column; gap: 22px">
     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
       <div>
-        <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #1238FF">VIERNES 21 NOV · CDMX</span>
+        <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #1238FF">{{today}}</span>
         <h1 style="margin: 6px 0 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 48px; letter-spacing: -2px; line-height: 1">Haz que suceda.</h1>
       </div>
       <div style="display: flex; gap: 10px; flex-wrap: wrap">
         <label style="display: flex; align-items: center; gap: 8px; height: 48px; padding: 0 16px; border-radius: 99px; background: #FFFFFF; border: 1px solid #D5DBEA">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5A6178" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-          <input placeholder="Buscar folio, evento o usuario" aria-label="Buscar" style="border: 0; outline: 0; font: inherit; font-size: 13px; width: 220px">
+          <input placeholder="Buscar folio, evento o usuario" aria-label="Buscar" onInput="{{search}}" value="{{q}}" style="border: 0; outline: 0; font: inherit; font-size: 13px; width: 220px">
         </label>
-        <a href="#" style="height: 48px; padding: 0 20px; border-radius: 99px; background: #08091A; color: #FFFFFF; display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 13px"><span style="color: #D6FF35; font-size: 18px">+</span> Nuevo evento</a>
+        <a href="#" onClick="{{newEvent}}" style="height: 48px; padding: 0 20px; border-radius: 99px; background: #08091A; color: #FFFFFF; display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 13px"><span style="color: #D6FF35; font-size: 18px">+</span> Nuevo evento</a>
       </div>
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px">
       <div style="background: #FFFFFF; border-radius: 24px; padding: 18px; display: flex; flex-direction: column; gap: 6px">
-        <span style="font-size: 12px; color: #4A5068">Por confirmar con productor</span><b style="font-family: Outfit, sans-serif; font-size: 36px">12</b>
+        <span style="font-size: 12px; color: #4A5068">Por confirmar con productor</span><b style="font-family: Outfit, sans-serif; font-size: 36px">{{k.provisional}}</b>
         <span style="align-self: flex-start; font-size: 10px; font-weight: 800; color: #4A5068; border: 1.5px dashed #8C93B5; border-radius: 99px; padding: 3px 8px">PROVISIONALES</span>
       </div>
       <div style="background: #FFFFFF; border-radius: 24px; padding: 18px; display: flex; flex-direction: column; gap: 6px">
-        <span style="font-size: 12px; color: #4A5068">Pagados en entrega</span><b style="font-family: Outfit, sans-serif; font-size: 36px">27</b>
+        <span style="font-size: 12px; color: #4A5068">Pagados en entrega</span><b style="font-family: Outfit, sans-serif; font-size: 36px">{{k.delivering}}</b>
         <span style="align-self: flex-start; font-size: 10px; font-weight: 800; color: #5A3D00; background: #FFE9A8; border-radius: 99px; padding: 4px 8px">EN ENTREGA</span>
       </div>
       <div style="background: #FFFFFF; border-radius: 24px; padding: 18px; display: flex; flex-direction: column; gap: 6px">
-        <span style="font-size: 12px; color: #4A5068">Boletos finales emitidos hoy</span><b style="font-family: Outfit, sans-serif; font-size: 36px">184</b>
+        <span style="font-size: 12px; color: #4A5068">Boletos finales emitidos hoy</span><b style="font-family: Outfit, sans-serif; font-size: 36px">{{k.finals}}</b>
         <span style="align-self: flex-start; font-size: 10px; font-weight: 800; background: #D6FF35; border-radius: 99px; padding: 4px 8px">TADAA! TICKETS</span>
       </div>
       <div style="background: #08091A; color: #FFFFFF; border-radius: 24px; padding: 18px; display: flex; flex-direction: column; gap: 6px">
-        <span style="font-size: 12px; color: #AEB6D6">Ventas de la semana (prueba)</span><b style="font-family: Outfit, sans-serif; font-size: 36px">$412k</b>
-        <span style="font-size: 12px; color: #D6FF35; font-weight: 700">+18% vs semana pasada</span>
+        <span style="font-size: 12px; color: #AEB6D6">Ventas de la semana</span><b style="font-family: Outfit, sans-serif; font-size: 36px">{{k.week}}</b>
+        <span style="font-size: 12px; color: #D6FF35; font-weight: 700">{{k.delta}}</span>
       </div>
     </div>
 
@@ -78,9 +68,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px">
           <h2 style="margin: 0; font-family: Outfit, sans-serif; font-size: 24px">Eventos y funciones</h2>
           <div style="display: flex; gap: 6px">
-            <span style="height: 34px; padding: 0 12px; border-radius: 99px; background: #08091A; color: #FFFFFF; display: flex; align-items: center; font-size: 12px; font-weight: 700">Todos</span>
-            <span style="height: 34px; padding: 0 12px; border-radius: 99px; border: 1px solid #D5DBEA; display: flex; align-items: center; font-size: 12px; font-weight: 700">TADAA! Tickets</span>
-            <span style="height: 34px; padding: 0 12px; border-radius: 99px; border: 1px solid #D5DBEA; display: flex; align-items: center; font-size: 12px; font-weight: 700">Con Now!</span>
+<sc-for list="{{filters}}" as="fl"><button onClick="{{fl.pick}}" style="{{fl.style}}">{{fl.label}}</button></sc-for>
           </div>
         </div>
         <div style="overflow-x: auto">
@@ -91,38 +79,16 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
               </tr>
             </thead>
             <tbody>
+              <sc-for list="{{events}}" as="e">
               <tr style="border-top: 1px solid #EEF1F7">
-                <td style="padding: 12px 8px"><span style="display: flex; align-items: center; gap: 10px"><img src="/_blob/bf23baed004bb85668937804b7d495cc" alt="" style="width: 44px; height: 44px; border-radius: 12px; object-fit: cover"><span><b>Matilda · El Musical</b><br><span style="color: #5A6178; font-size: 12px">Teatro 1 · 9 funciones</span></span></span></td>
-                <td style="padding: 12px 8px"><span style="background: #D6FF35; border-radius: 99px; padding: 4px 9px; font-size: 11px; font-weight: 800">TADAA!</span></td>
-                <td style="padding: 12px 8px">Imagen</td>
-                <td style="padding: 12px 8px"><span style="display: flex; align-items: center; gap: 8px"><span style="width: 80px; height: 6px; border-radius: 9px; background: #EEF1F7; overflow: hidden"><span style="display: block; width: 72%; height: 100%; background: #1238FF"></span></span>72%</span></td>
-                <td style="padding: 12px 8px"><span role="switch" aria-checked="false" aria-label="Now! Matilda" style="display: inline-block; width: 40px; height: 24px; border-radius: 99px; background: #D5DBEA; position: relative"><span style="position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: #FFFFFF"></span></span></td>
-                <td style="padding: 12px 8px"><b style="color: #0B7A3B">Publicado</b></td>
+                <td style="padding: 12px 8px"><a href="#evento/{{e.slug}}" style="display: flex; align-items: center; gap: 10px"><img src="{{e.img}}" alt="" style="width: 44px; height: 44px; border-radius: 12px; object-fit: cover"><span><b>{{e.title}}</b><br><span style="color: #5A6178; font-size: 12px">{{e.sub}}</span></span></a></td>
+                <td style="padding: 12px 8px"><span style="{{e.modeStyle}}">{{e.mode}}</span></td>
+                <td style="padding: 12px 8px">{{e.media}}</td>
+                <td style="padding: 12px 8px"><sc-if value="{{e.tadaa}}"><span style="display: flex; align-items: center; gap: 8px"><span style="width: 80px; height: 6px; border-radius: 9px; background: #EEF1F7; overflow: hidden"><span style="{{e.bar}}"></span></span>{{e.pct}}</span></sc-if><sc-if value="{{e.external}}">Por solicitud</sc-if></td>
+                <td style="padding: 12px 8px"><sc-if value="{{e.hasNow}}"><button role="switch" aria-checked="{{e.nowOn}}" aria-label="Now! {{e.title}}" onClick="{{e.toggleNow}}" style="{{e.track}}"><span style="{{e.knob}}"></span></button></sc-if><sc-if value="{{e.noNow}}"><span style="color: #8C93B5; font-size: 12px">{{e.nowNA}}</span></sc-if></td>
+                <td style="padding: 12px 8px"><button onClick="{{e.toggleStatus}}" title="Cambiar estado" style="border: 0; background: transparent; font: inherit; font-weight: 800; cursor: pointer; color: {{e.statusColor}}">{{e.status}}</button></td>
               </tr>
-              <tr style="border-top: 1px solid #EEF1F7">
-                <td style="padding: 12px 8px"><span style="display: flex; align-items: center; gap: 10px"><img src="/_blob/638dbc29de26c4783746a0bef23bebdd" alt="" style="width: 44px; height: 44px; border-radius: 12px; object-fit: cover"><span><b>Nocturno</b><br><span style="color: #5A6178; font-size: 12px">Teatro 2 · hoy 20:00</span></span></span></td>
-                <td style="padding: 12px 8px"><span style="background: #D6FF35; border-radius: 99px; padding: 4px 9px; font-size: 11px; font-weight: 800">TADAA!</span></td>
-                <td style="padding: 12px 8px">Imagen</td>
-                <td style="padding: 12px 8px"><span style="display: flex; align-items: center; gap: 8px"><span style="width: 80px; height: 6px; border-radius: 9px; background: #EEF1F7; overflow: hidden"><span style="display: block; width: 88%; height: 100%; background: #1238FF"></span></span>88%</span></td>
-                <td style="padding: 12px 8px"><span role="switch" aria-checked="true" aria-label="Now! Nocturno" style="display: inline-block; width: 40px; height: 24px; border-radius: 99px; background: linear-gradient(100deg, #FF3D8B, #FF8A3D); position: relative"><span style="position: absolute; right: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: #08091A"></span></span></td>
-                <td style="padding: 12px 8px"><b style="color: #0B7A3B">Publicado</b></td>
-              </tr>
-              <tr style="border-top: 1px solid #EEF1F7">
-                <td style="padding: 12px 8px"><span style="display: flex; align-items: center; gap: 10px"><img src="/_blob/8e0bcf402dffa7cdf67f5b3be9f05c08" alt="" style="width: 44px; height: 44px; border-radius: 12px; object-fit: cover"><span><b>Morat</b><br><span style="color: #5A6178; font-size: 12px">Palacio de los Deportes</span></span></span></td>
-                <td style="padding: 12px 8px"><span style="border: 1.5px solid #D5DBEA; border-radius: 99px; padding: 3px 9px; font-size: 11px; font-weight: 800">EXTERNA</span></td>
-                <td style="padding: 12px 8px">Video</td>
-                <td style="padding: 12px 8px; color: #5A6178">Por solicitud</td>
-                <td style="padding: 12px 8px; color: #8C93B5; font-size: 12px">N/D externa</td>
-                <td style="padding: 12px 8px"><b style="color: #0B7A3B">Publicado</b></td>
-              </tr>
-              <tr style="border-top: 1px solid #EEF1F7">
-                <td style="padding: 12px 8px"><span style="display: flex; align-items: center; gap: 10px"><img src="/_blob/fd6d958733bf058344285c28d805e194" alt="" style="width: 44px; height: 44px; border-radius: 12px; object-fit: cover"><span><b>Hoy No Me Puedo Levantar</b><br><span style="color: #5A6178; font-size: 12px">Teatro 1 · temporada</span></span></span></td>
-                <td style="padding: 12px 8px"><span style="background: #D6FF35; border-radius: 99px; padding: 4px 9px; font-size: 11px; font-weight: 800">TADAA!</span></td>
-                <td style="padding: 12px 8px">Video</td>
-                <td style="padding: 12px 8px"><span style="display: flex; align-items: center; gap: 8px"><span style="width: 80px; height: 6px; border-radius: 9px; background: #EEF1F7; overflow: hidden"><span style="display: block; width: 12%; height: 100%; background: #1238FF"></span></span>12%</span></td>
-                <td style="padding: 12px 8px"><span role="switch" aria-checked="false" aria-label="Now! Hoy No Me Puedo Levantar" style="display: inline-block; width: 40px; height: 24px; border-radius: 99px; background: #D5DBEA; position: relative"><span style="position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: #FFFFFF"></span></span></td>
-                <td style="padding: 12px 8px"><b style="color: #8A5A00">Borrador</b></td>
-              </tr>
+              </sc-for>
             </tbody>
           </table>
         </div>
@@ -131,31 +97,45 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
       <div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
         <section style="position: relative; background: #08091A; color: #FFFFFF; border-radius: 28px; padding: 20px; overflow: hidden">
           <span style="position: absolute; right: -40px; top: -40px; width: 160px; height: 160px; border-radius: 50%; background: radial-gradient(circle, rgba(255,79,147,.5), transparent 70%)"></span>
-          <span style="position: relative; display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 800; letter-spacing: .1em; color: #FF4F93"><span style="width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(100deg, #FF3D8B, #FF8A3D)"></span>NOW! · NOCTURNO HOY</span>
-          <b style="position: relative; display: block; font-family: Outfit, sans-serif; font-size: 40px; margin-top: 6px">Abre 17:00</b>
+          <span style="position: relative; display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 800; letter-spacing: .1em; color: #FF4F93"><span style="width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(100deg, #FF3D8B, #FF8A3D)"></span>{{nw.kicker}}</span>
+          <b style="position: relative; display: block; font-family: Outfit, sans-serif; font-size: 40px; margin-top: 6px">{{nw.when}}</b>
           <div style="position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px">
-            <span style="background: #161833; border-radius: 14px; padding: 10px"><span style="display: block; font-size: 11px; color: #AEB6D6">Inscritos</span><b style="font-size: 18px">214</b></span>
-            <span style="background: #161833; border-radius: 14px; padding: 10px"><span style="display: block; font-size: 11px; color: #AEB6D6">Cupo</span><b style="font-size: 18px">40</b></span>
-            <span style="background: #161833; border-radius: 14px; padding: 10px"><span style="display: block; font-size: 11px; color: #AEB6D6">Precio</span><b style="font-size: 18px">$350</b></span>
+            <span style="background: #161833; border-radius: 14px; padding: 10px"><span style="display: block; font-size: 11px; color: #AEB6D6">Inscritos</span><b style="font-size: 18px">{{nw.signups}}</b></span>
+            <span style="background: #161833; border-radius: 14px; padding: 10px"><span style="display: block; font-size: 11px; color: #AEB6D6">Cupo</span><b style="font-size: 18px">{{nw.quota}}</b></span>
+            <span style="background: #161833; border-radius: 14px; padding: 10px"><span style="display: block; font-size: 11px; color: #AEB6D6">Precio</span><b style="font-size: 18px">{{nw.price}}</b></span>
           </div>
           <div style="position: relative; display: flex; gap: 8px; margin-top: 14px">
-            <a href="#" style="flex: 1; height: 44px; border-radius: 99px; background: linear-gradient(100deg, #FF3D8B, #FF8A3D); color: #08091A; display: grid; place-items: center; font-weight: 800; font-size: 13px">Configurar Now!</a>
-            <a href="#" style="flex: 1; height: 44px; border-radius: 99px; border: 1px solid #3A3E66; display: grid; place-items: center; font-weight: 700; font-size: 13px">Pausar</a>
+            <a href="{{nw.cfg}}" style="flex: 1; height: 44px; border-radius: 99px; background: linear-gradient(100deg, #FF3D8B, #FF8A3D); color: #08091A; display: grid; place-items: center; font-weight: 800; font-size: 13px">Configurar Now!</a>
+            <button onClick="{{nw.pause}}" style="flex: 1; height: 44px; border-radius: 99px; border: 1px solid #3A3E66; background: transparent; color: #FFFFFF; font: inherit; display: grid; place-items: center; font-weight: 700; font-size: 13px; cursor: pointer">{{nw.pauseLabel}}</button>
           </div>
         </section>
 
         <section style="background: #FFFFFF; border-radius: 28px; padding: 20px">
           <h2 style="margin: 0 0 10px; font-family: Outfit, sans-serif; font-size: 20px">Solicitudes por confirmar</h2>
           <div style="display: flex; flex-direction: column">
-            <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #EEF1F7"><span style="flex: 1"><b style="font-size: 13px">Morat · Zona C × 2</b><br><span style="font-size: 12px; color: #5A6178">TD-2611-0051 · vence en 5 h</span></span><span style="height: 34px; padding: 0 12px; border-radius: 99px; background: #D6FF35; display: flex; align-items: center; font-weight: 800; font-size: 12px">Confirmar</span></div>
-            <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #EEF1F7"><span style="flex: 1"><b style="font-size: 13px">Bruno Mars · GNP × 4</b><br><span style="font-size: 12px; color: #5A6178">TD-2611-0058 · vence en 7 h</span></span><span style="height: 34px; padding: 0 12px; border-radius: 99px; background: #D6FF35; display: flex; align-items: center; font-weight: 800; font-size: 12px">Confirmar</span></div>
-            <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0"><span style="flex: 1"><b style="font-size: 13px">Queen · Verde × 2</b><br><span style="font-size: 12px; color: #5A6178">TD-2611-0060 · sin disponibilidad</span></span><span style="height: 34px; padding: 0 12px; border-radius: 99px; border: 1px solid #D5DBEA; display: flex; align-items: center; font-weight: 700; font-size: 12px">Rechazar</span></div>
+            <sc-for list="{{requests}}" as="r"><div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #EEF1F7"><span style="flex: 1"><b style="font-size: 13px">{{r.title}}</b><br><span style="font-size: 12px; color: #5A6178">{{r.sub}}</span></span><button onClick="{{r.primary}}" style="height: 34px; padding: 0 12px; border-radius: 99px; border: 0; background: #D6FF35; font: inherit; display: flex; align-items: center; font-weight: 800; font-size: 12px; cursor: pointer">{{r.primaryLabel}}</button><button onClick="{{r.reject}}" title="Rechazar" style="height: 34px; padding: 0 12px; border-radius: 99px; border: 1px solid #D5DBEA; background: #FFFFFF; font: inherit; display: flex; align-items: center; font-weight: 700; font-size: 12px; cursor: pointer">Rechazar</button></div></sc-for>
+            <sc-if value="{{noRequests}}"><p style="margin: 0; color: #5A6178; font-size: 13px">Sin solicitudes pendientes.</p></sc-if>
           </div>
         </section>
 
         <section style="background: #FFFFFF; border-radius: 28px; padding: 20px; display: flex; align-items: center; gap: 14px">
-          <span style="width: 64px; height: 64px; border-radius: 50%; background: conic-gradient(#1238FF 234deg, #EEF1F7 0); display: grid; place-items: center"><span style="width: 46px; height: 46px; border-radius: 50%; background: #FFFFFF; display: grid; place-items: center; font-weight: 800; font-size: 13px">65%</span></span>
-          <span><b style="font-family: Outfit, sans-serif; font-size: 18px">Check-in Matilda</b><br><span style="font-size: 12px; color: #5A6178">312 de 480 · 3 puertas activas</span></span>
+          <span style="width: 64px; height: 64px; border-radius: 50%; background: {{ck.ring}}; display: grid; place-items: center"><span style="width: 46px; height: 46px; border-radius: 50%; background: #FFFFFF; display: grid; place-items: center; font-weight: 800; font-size: 13px">{{ck.pct}}</span></span>
+          <span><b style="font-family: Outfit, sans-serif; font-size: 18px">{{ck.title}}</b><br><span style="font-size: 12px; color: #5A6178">{{ck.sub}}</span></span>
+        </section>
+
+        <section style="background: #FFFFFF; border-radius: 28px; padding: 20px">
+          <h2 style="margin: 0 0 10px; font-family: Outfit, sans-serif; font-size: 20px">Equipos y staff</h2>
+          <select onChange="{{pickOrg}}" aria-label="Organización" style="width: 100%; height: 44px; border-radius: 14px; border: 1px solid #D5DBEA; padding: 0 12px; font: inherit; font-size: 13px; background: #FFFFFF">
+            <sc-for list="{{orgs}}" as="o"><option value="{{o.id}}" selected="{{o.on}}">{{o.label}}</option></sc-for>
+          </select>
+          <div style="display: flex; flex-direction: column; margin-top: 8px">
+            <sc-for list="{{members}}" as="m"><div style="display: flex; justify-content: space-between; gap: 8px; padding: 8px 0; border-bottom: 1px solid #EEF1F7; font-size: 13px"><span><b>{{m.full_name}}</b><br><span style="color: #5A6178; font-size: 12px">{{m.email}}</span></span><span style="align-self: center; background: #EEF1F7; border-radius: 99px; padding: 4px 9px; font-size: 11px; font-weight: 800">{{m.role}}</span></div></sc-for>
+          </div>
+          <div style="display: flex; gap: 6px; margin-top: 10px">
+            <input placeholder="correo@persona.com" aria-label="Correo" onInput="{{inviteEmail}}" value="{{invite.email}}" style="flex: 1; min-width: 0; height: 40px; border-radius: 12px; border: 1px solid #D5DBEA; padding: 0 10px; font: inherit; font-size: 13px">
+            <select onChange="{{inviteRole}}" aria-label="Rol" style="height: 40px; border-radius: 12px; border: 1px solid #D5DBEA; font: inherit; font-size: 12px"><option value="staff">Staff</option><option value="admin">Admin</option><option value="owner">Dueño</option></select>
+            <button onClick="{{invite.send}}" style="height: 40px; padding: 0 12px; border-radius: 99px; border: 0; background: #08091A; color: #FFFFFF; font: inherit; font-weight: 800; font-size: 12px; cursor: pointer">Agregar</button>
+          </div>
         </section>
       </div>
     </div>
