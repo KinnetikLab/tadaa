@@ -133,7 +133,7 @@ export async function featureRequest(req,res,pathname,url,parts,ctx){
  if(parts[2]==='orgs'&&uuid(parts[3])&&parts[4]==='producer'){const org=parts[3];
   if(parts[5]==='summary'&&M==='GET'){await producerUser(req,ctx,org);const ev=url.searchParams.get('eventId');const args=[org];let f='e.organization_id=$1';if(uuid(ev)){args.push(ev);f+=' AND e.id=$2'}
    const [days,k,evs]=await Promise.all([
-    p.query(`SELECT to_char(d,'YYYY-MM-DD') day,COALESCE((SELECT sum(oi.quantity) FROM orders o JOIN order_items oi ON oi.order_id=o.id JOIN reservations r ON r.id=o.reservation_id JOIN events e ON e.id=r.event_id WHERE ${f} AND o.status='paid' AND date_trunc('day',o.created_at AT TIME ZONE 'America/Mexico_City')=d),0)::int tickets,
+    p.query(`SELECT to_char(d,'YYYY-MM-DD') AS day,COALESCE((SELECT sum(oi.quantity) FROM orders o JOIN order_items oi ON oi.order_id=o.id JOIN reservations r ON r.id=o.reservation_id JOIN events e ON e.id=r.event_id WHERE ${f} AND o.status='paid' AND date_trunc('day',o.created_at AT TIME ZONE 'America/Mexico_City')=d),0)::int tickets,
       EXISTS(SELECT 1 FROM orders o JOIN reservations r ON r.id=o.reservation_id JOIN events e ON e.id=r.event_id WHERE ${f} AND o.status='paid' AND o.metadata ? 'nowCampaignId' AND date_trunc('day',o.created_at AT TIME ZONE 'America/Mexico_City')=d) now_day
       FROM generate_series(date_trunc('day',now() AT TIME ZONE 'America/Mexico_City')-interval '13 days',date_trunc('day',now() AT TIME ZONE 'America/Mexico_City'),interval '1 day') d ORDER BY d`,args),
     p.query(`SELECT count(DISTINCT o.id)::int orders,COALESCE(sum(oi.quantity),0)::int tickets,COALESCE(sum(oi.total_minor),0)::bigint gross_minor,

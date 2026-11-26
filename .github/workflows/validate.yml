@@ -40,6 +40,8 @@ jobs:
           node --check web/experience/tv-motion.js
           node --check web/experience/tv-app.js
           node --check web/experience/tv-adapters.js
+          node --check web/experience/tv-portals.js
+          node --check server/scripts/seed-vibrante-demo.mjs
           node tools/build-vibrante.mjs && git diff --exit-code web/experience/tv-screens.js
           node --check server/src/features.mjs
           test -s server/migrations/004_now_golden_addons_rfc.sql

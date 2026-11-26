@@ -22,9 +22,9 @@ function lookup(expr,scope){expr=expr.trim();if(expr==='true')return true;if(exp
 function proc(node,scope,out,item){
  if(node.nodeType===3){out.appendChild(document.createTextNode(node.nodeValue.replace(HOLE,(_,e)=>{const v=lookup(e,scope);return v==null?'':String(v)})));return}
  if(node.nodeType!==1)return;
- const tag=node.tagName.toLowerCase();
- if(tag==='sc-if'){const m=(node.getAttribute('value')||'').match(WHOLE);if(m&&lookup(m[1],scope))for(const c of node.childNodes)proc(c,scope,out,item);return}
- if(tag==='sc-for'){const m=(node.getAttribute('list')||'').match(WHOLE),as=node.getAttribute('as')||'item',list=m?lookup(m[1],scope):[];(list||[]).forEach((it,i)=>{const s=Object.create(scope);s[as]=it;s.index=i;for(const c of node.childNodes)proc(c,s,out,it)});return}
+ let tag=node.tagName.toLowerCase();let kids=node.childNodes;if(tag==='template'&&node.dataset&&node.dataset.sc){tag='sc-'+node.dataset.sc;kids=node.content?node.content.childNodes:node.childNodes}
+ if(tag==='sc-if'){const m=(node.getAttribute('value')||'').match(WHOLE);if(m&&lookup(m[1],scope))for(const c of kids)proc(c,scope,out,item);return}
+ if(tag==='sc-for'){const m=(node.getAttribute('list')||'').match(WHOLE),as=node.getAttribute('as')||'item',list=m?lookup(m[1],scope):[];(list||[]).forEach((it,i)=>{const s=Object.create(scope);s[as]=it;s.index=i;for(const c of kids)proc(c,s,out,it)});return}
  const el=node.namespaceURI==='http://www.w3.org/2000/svg'?document.createElementNS(node.namespaceURI,node.tagName):document.createElement(node.tagName);
  for(const a of node.attributes){if(a.name.startsWith('hint-'))continue;const w=a.value.match(WHOLE);
   if(/^on[a-z]/i.test(a.name)){const fn=w?lookup(w[1],scope):null;if(typeof fn==='function'){let ev=a.name.slice(2).toLowerCase();if(ev==='change'&&/input|textarea/i.test(tag))ev='input';(el.__tvH=el.__tvH||{})[ev]=fn;bindH(el,ev)}continue}
@@ -52,7 +52,7 @@ function morph(oldP,newP){const oc=[...oldP.childNodes],nc=[...newP.childNodes];
 /* ───── estado de la vista ───── */
 let cur=null,comp=null,tplNode=null,pending=false,mode=null,screenName=null;
 function schedule(){if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;paint(false)})}
-function compile(name){const sc=SCREENS[name];if(!sc)return null;const doc=new DOMParser().parseFromString('<body>'+sc.tpl+'</body>','text/html');return {css:sc.css,node:doc.body.firstElementChild,code:sc.code}}
+function compile(name){const sc=SCREENS[name];if(!sc)return null;const tpl=sc.tpl.replace(/<sc-(for|if)\b/g,'<template data-sc="$1"').replace(/<\/sc-(for|if)>/g,'</template>');const doc=new DOMParser().parseFromString('<body>'+tpl+'</body>','text/html');return {css:sc.css,node:doc.body.firstElementChild,code:sc.code}}
 function makeComponent(name,code,params){let C=class extends DCLogic{renderVals(){return {}}};if(code.includes('class Component')){try{C=new Function('DCLogic',code+'\nreturn Component;')(DCLogic)}catch(e){console.error('[tv] plantilla',name,e)}}
  const adapt=(window.TVAdapters||{})[name];if(adapt){try{C=adapt(C,TV)}catch(e){console.error('[tv] adaptador',name,e)}}
  const c=new C({route:cur,params});return c}
@@ -70,7 +70,7 @@ function layout(){const host=$host(),root=host.firstElementChild;if(!root)return
  host.style.zoom='';root.style.removeProperty('height');
  if(isM){const w=mode==='M'?vw:Math.min(430,vw);const z=w/390;host.style.zoom=String(z);root.style.width='390px';root.style.height='auto';root.style.minHeight=Math.ceil((mode==='M'?innerHeight:Math.max(844,innerHeight-40))/z)+'px';root.style.overflow='hidden';root.style.position='relative';
   [...root.children].forEach(c=>{const s=c.style;if(s.position==='absolute'&&s.bottom!==''&&s.top===''&&mode==='M'){const L=parseFloat(s.left)||0,R=parseFloat(s.right);s.position='fixed';s.zIndex=s.zIndex||'30';s.left=L+'px';if(!isNaN(R)){s.width=(390-L-R)+'px';s.right='auto'}else if(!s.width)s.width=(390-L)+'px';s.bottom='calc('+(s.bottom||'0px')+' + env(safe-area-inset-bottom))'}});
- }else{root.style.width='100%';if(mode==='M'){const z=vw/1280;if(z<1)host.style.zoom=String(z)}}
+ }else{root.style.width='100%';root.style.minHeight='100vh';if(mode==='M'){const z=vw/1280;if(z<1)host.style.zoom=String(z)}}
  root.querySelectorAll('*').forEach(e=>{const cs=e.style;if((cs.overflowX==='auto'||cs.overflow==='auto'||cs.overflowX==='scroll')&&!e.hasAttribute('data-tv-scroll'))e.setAttribute('data-tv-scroll','')})}
 
 /* ───── enrutador ───── */

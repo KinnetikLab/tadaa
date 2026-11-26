@@ -50,7 +50,7 @@ img.ticket-qr.tvm-refresh{opacity:.35;filter:blur(2px)}
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.tvm-r{opacity:1;transform:none}}
 
 /* ───── diálogos de portales (Studio, productores, empresas, staff) ───── */
-.tv-modal{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:20px;background:rgba(8,9,26,0);backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0);transition:background .28s ease,backdrop-filter .28s ease}
+.tv-modal{position:fixed;inset:0;z-index:5000;display:grid;place-items:center;padding:20px;background:rgba(8,9,26,0);backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0);transition:background .28s ease,backdrop-filter .28s ease}
 .tv-modal.on{background:rgba(8,9,26,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .tv-modal-card{width:min(460px,100%);max-height:calc(100vh - 40px);overflow:auto;background:#fff;color:#08091A;border-radius:28px;padding:26px;font-family:Outfit,system-ui,sans-serif;box-shadow:0 30px 80px rgba(8,9,26,.35);opacity:0;transform:translateY(18px) scale(.96);transition:opacity .22s ease,transform .38s cubic-bezier(.34,1.4,.64,1)}
 .tv-modal.on .tv-modal-card{opacity:1;transform:none}
