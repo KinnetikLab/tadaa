@@ -74,7 +74,7 @@ function layout(){const host=$host(),root=host.firstElementChild;if(!root)return
  host.style.zoom='';root.style.removeProperty('height');
  if(isM){const w=mode==='M'?vw:Math.min(430,vw);const z=w/390;host.style.zoom=String(z);root.style.width='390px';root.style.height='auto';root.style.minHeight=Math.ceil((mode==='M'?innerHeight:Math.max(844,innerHeight-40))/z)+'px';root.style.overflow='hidden';root.style.position='relative';
   [...root.children].forEach(c=>{const s=c.style;if(s.position==='absolute'&&s.bottom!==''&&s.top===''&&mode==='M'){const L=parseFloat(s.left)||0,R=parseFloat(s.right);s.position='fixed';s.zIndex=s.zIndex||'30';s.left=L+'px';if(!isNaN(R)){s.width=(390-L-R)+'px';s.right='auto'}else if(!s.width)s.width=(390-L)+'px';s.bottom='calc('+(s.bottom||'0px')+' + env(safe-area-inset-bottom))'}});
- }else{root.style.width='100%';root.style.minHeight='100vh';if((mode==='M'||FORCE==='d')&&screenName[0]!=='R'){const z=vw/1280;if(z<1){host.style.zoom=String(z);root.style.minHeight=Math.ceil(innerHeight/z)+'px'}}}
+ }else{root.style.width='100%';root.style.minHeight='100vh';if((mode==='M'||FORCE==='d')&&screenName[0]!=='R'&&screenName!=='DPitch'){const z=vw/1280;if(z<1){host.style.zoom=String(z);root.style.minHeight=Math.ceil(innerHeight/z)+'px'}}}
  root.querySelectorAll('*').forEach(e=>{const cs=e.style;if((cs.overflowX==='auto'||cs.overflow==='auto'||cs.overflowX==='scroll')&&!e.hasAttribute('data-tv-scroll'))e.setAttribute('data-tv-scroll','')})}
 
 /* ───── coreografía de páginas (principios Apple / Disney): resortes críticamente amortiguados,
