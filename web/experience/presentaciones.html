@@ -138,7 +138,9 @@ const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelecto
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const ORIGIN=location.origin;
 const DST={draft:'Borrador',sent:'Enviada',won:'Ganada',lost:'Perdida',archived:'Archivada'},LST={draft:'Borrador',published:'Publicada',archived:'Archivada'};
-let csrf=null,decks=[],lands=[],tab='decks',q='',fresh='';let tT;
+let csrf=null,decks=[],lands=[],tab='decks',grp='produccion',q='',fresh='';
+const GRP={produccion:['Eventos','Teatro, conciertos y espectáculos: muestra la obra del prospecto.'],atraccion:['Atracciones','Parques, museos y experiencias sin función: sin NOW! ni Golden Ticket.'],empresa:['Empresas','Empresas que suman a sus colaboradores como beneficio.']};
+const varOf=d=>((d.config||{}).variant)||'produccion';let tT;
 const toast=t=>{const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>e.classList.remove('show'),2400)};
 const slugify=s=>String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,80);
 const ago=d=>{if(!d)return 'Nunca';const m=(Date.now()-new Date(d))/6e4;if(m<1)return 'Hace un momento';if(m<60)return 'Hace '+Math.round(m)+' min';if(m<1440)return 'Hace '+Math.round(m/60)+' h';return new Date(d).toLocaleDateString('es-MX',{day:'numeric',month:'short'})};
@@ -156,11 +158,11 @@ function paint(){
  $('#nDecks').textContent=decks.length;$('#nLands').textContent=lands.length;
  const views=decks.reduce((s,d)=>s+(d.views||0),0),leads=decks.reduce((s,d)=>s+(d.leads||0),0),won=decks.filter(d=>d.status==='won').length;
  $('#kpis').innerHTML=`<div class="kpi"><span>Presentaciones activas</span><b>${decks.filter(d=>d.status!=='archived').length}</b></div><div class="kpi"><span>Veces que las abrieron</span><b>${views}</b></div><div class="kpi"><span>Prospectos que dejaron datos</span><b>${leads}</b></div><div class="kpi dk"><span>Ganadas</span><b>${won}</b></div>`;
- $('#newLabel').textContent=tab==='decks'?'Nueva presentación':'Nueva landing';
+ $('#newLabel').textContent=tab==='decks'?'Nueva presentación de '+GRP[grp][0].toLowerCase():'Nueva landing';
  $('#decks').hidden=tab!=='decks';$('#lands').hidden=tab!=='lands';
  const m=x=>!q||JSON.stringify([x.prospect,x.landing_title,x.title,x.slug]).toLowerCase().includes(q);
- const D=decks.filter(m),L=lands.filter(m);
- $('#decks').innerHTML=`<div class="row"><h2>Por prospecto</h2><span style="color:var(--mut);font-size:12px">El enlace corto abre la presentación con su obra y su mensaje.</span></div>`+(D.length?`<div style="overflow-x:auto"><table><thead><tr><th>PROSPECTO</th><th>OBRA</th><th>ESTADO</th><th>VISTAS</th><th>DATOS</th><th>ÚLTIMA VISTA</th><th></th></tr></thead><tbody>${D.map(d=>{const l=lands.find(x=>x.slug===d.landing_slug),ci=l&&l.config&&l.config.card&&l.config.card.img;
+ const D=decks.filter(m).filter(d=>varOf(d)===grp),L=lands.filter(m);
+ $('#decks').innerHTML=`<div class="row"><div class="seg" role="tablist" aria-label="Tipo de presentación" style="background:var(--bg)">${Object.entries(GRP).map(([k,[t]])=>`<button role="tab" data-grp="${k}" aria-selected="${k===grp}">${t} <b>${decks.filter(d=>varOf(d)===k).length}</b></button>`).join('')}</div><span style="color:var(--mut);font-size:12px">${GRP[grp][1]}</span></div>`+(D.length?`<div style="overflow-x:auto"><table><thead><tr><th>PROSPECTO</th><th>OBRA</th><th>ESTADO</th><th>VISTAS</th><th>DATOS</th><th>ÚLTIMA VISTA</th><th></th></tr></thead><tbody>${D.map(d=>{const l=lands.find(x=>x.slug===d.landing_slug),ci=l&&l.config&&l.config.card&&l.config.card.img;
   return `<tr class="${d.slug===fresh?'new':''}"><td><div class="who">${d.logo_url?`<img src="${esc(img(d.logo_url))}" alt="">`:`<span class="mono">${esc((d.prospect||'?').split(/\s+/).map(w=>w[0]).slice(0,2).join(''))}</span>`}<span><b>${esc(d.prospect)}</b><small>${esc(d.contact_name||d.contact_email||'/p/'+d.slug)}</small></span></div></td>
   <td>${l?`<div class="who">${ci?`<img src="${esc(img(ci))}" alt="" style="object-fit:contain;background:#F6EFEA">`:''}<span>${esc(String(l.title).split(' — ')[0])}</span></div>`:'<span style="color:var(--mut)">Sin obra</span>'}</td>
   <td><select class="pill st-${d.status}" data-st="${d.id}" aria-label="Estado de ${esc(d.prospect)}">${Object.entries(DST).map(([k,v])=>`<option value="${k}"${k===d.status?' selected':''}>${v}</option>`).join('')}</select></td>
@@ -191,7 +193,7 @@ function deckForm(d){const isNew=!d;d=d||{status:'draft'};
  openDrawer(`<form novalidate><div class="dh"><h2 id="dTitle" style="font-size:28px">${isNew?'Nueva presentación':esc(d.prospect)}</h2><button type="button" class="btn wh ico" data-close aria-label="Cerrar">${ic('x')}</button></div>
  <label class="f">Prospecto<input name="prospect" required value="${esc(d.prospect||'')}" placeholder="Ej. Gou Producciones"></label>
  <label class="f">Enlace corto<input name="slug" ${isNew?'':'readonly'} value="${esc(d.slug||'')}" placeholder="gou-producciones"><small>${isNew?'Se llena solo con el nombre. Quedará como':'No se puede cambiar:'} ${ORIGIN}/p/<b class="sl">${esc(d.slug||'…')}</b></small></label>
- <label class="f">Tipo de presentación<select name="variant"><option value="produccion"${(d.config||{}).variant!=='atraccion'?' selected':''}>Producciones (teatro, conciertos, eventos)</option><option value="atraccion"${(d.config||{}).variant==='atraccion'?' selected':''}>Atracciones (parques, museos, experiencias)</option></select><small>Atracciones quita NOW! y Golden Ticket y habla de pases, lanzamientos y eventos corporativos.</small></label>
+ <label class="f">Tipo de presentación<select name="variant">${Object.entries(GRP).map(([k,[t,dsc]])=>`<option value="${k}"${(isNew?grp:varOf(d))===k?' selected':''}>${t}</option>`).join('')}</select><small>Eventos muestra la obra; Atracciones quita NOW! y Golden Ticket; Empresas explica el beneficio y los datos para el alta.</small></label>
  <label class="f">Obra que verá<select name="landing_slug"><option value="">Sin obra (presentación general)</option>${opts}</select><small>Aparece en la portada, en su propia diapositiva y en la pestaña Landing del demo en vivo.</small></label>
  <label class="f">Mensaje de portada<textarea name="message" maxlength="600" placeholder="Preparamos esta propuesta pensando en…">${esc(d.message||'')}</textarea></label>
  <div class="grid2"><label class="f">Contacto<input name="contact_name" value="${esc(d.contact_name||'')}" placeholder="Nombre"></label><label class="f">Correo<input name="contact_email" type="email" value="${esc(d.contact_email||'')}" placeholder="nombre@empresa.mx"></label></div>
@@ -236,6 +238,7 @@ function dupForm(from){const l=lands.find(x=>x.slug===from);
 
 /* ---- eventos ---- */
 document.addEventListener('click',async e=>{const b=e.target.closest('button,a');if(!b)return;
+ if(b.dataset.grp){grp=b.dataset.grp;paint();return}
  if(b.dataset.tab){tab=b.dataset.tab;$$('[data-tab]').forEach(x=>x.setAttribute('aria-selected',x===b));paint();return}
  if(b.dataset.copy){try{await navigator.clipboard.writeText(ORIGIN+b.dataset.copy);toast('Enlace copiado: '+ORIGIN+b.dataset.copy)}catch{prompt('Copia el enlace',ORIGIN+b.dataset.copy)}return}
  if(b.dataset.edit){deckForm(decks.find(d=>d.id===b.dataset.edit));return}

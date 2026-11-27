@@ -12,6 +12,7 @@ const DECKS=[
   {slug:'gou-producciones',prospect:'Gou Producciones',contact_name:'Equipo Gou',landing_slug:'kinky-boots',status:'sent',message:'Preparamos esta propuesta pensando en Kinky Boots y en la temporada 2027 en el CCT1.'},
   {slug:'mejor-teatro',prospect:'Mejor Teatro',contact_name:'Equipo Mejor Teatro',landing_slug:'back-to-the-future',status:'sent',message:'Así se vería Back to the Future — The Musical en TADAA!: un minisitio que se siente como la obra y vende como boletera.'},
   {slug:'six-flags',prospect:'Six Flags México',contact_name:'Equipo Six Flags',landing_slug:null,status:'draft',message:'Una propuesta para llevar Six Flags a nuevas audiencias: pases con tarifa preferencial, lanzamientos y eventos corporativos.',config:{variant:'atraccion',card:{title:'Six Flags México',when:'Parque de diversiones · CDMX'}}},
+  {slug:'grupo-coppel',prospect:'Grupo Coppel',contact_name:'Equipo de Capital Humano',landing_slug:null,status:'draft',message:'Un beneficio de entretenimiento para los colaboradores de Grupo Coppel: tarifas de convenio en teatro, conciertos y atracciones, con alta sencilla y sin ver compras individuales.',config:{variant:'empresa',card:{title:'Grupo Coppel',when:'Beneficio para colaboradores'}}},
   {slug:'demo',prospect:'Tu productora',landing_slug:'la-jaula-de-las-locas',status:'draft',message:'Presentación de ejemplo con La Jaula de las Locas.'}
 ];
 const pool=getPool();if(!pool)throw new Error('DATABASE_URL no configurada');
