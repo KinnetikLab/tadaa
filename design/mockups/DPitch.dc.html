@@ -81,9 +81,20 @@ body{margin:0}
 .stack{display:flex;flex-direction:column;gap:22px;min-width:0}
 /* boleto (motivo de marca) */
 .tkt{position:relative;background:#fff;color:var(--ink);border-radius:26px;padding:14px 14px 20px;box-shadow:0 40px 80px rgba(4,8,40,.45);
- -webkit-mask:radial-gradient(circle 15px at 0 66%,#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle 15px at 100% 66%,#0000 97%,#000) right/51% 100% no-repeat;
- mask:radial-gradient(circle 15px at 0 66%,#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle 15px at 100% 66%,#0000 97%,#000) right/51% 100% no-repeat}
-.tkt .perf{position:absolute;left:24px;right:24px;top:66%;border-top:2px dashed #C9D2F2}
+ -webkit-mask:radial-gradient(circle 15px at 0 calc(100% - 64px),#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle 15px at 100% calc(100% - 64px),#0000 97%,#000) right/51% 100% no-repeat;
+ mask:radial-gradient(circle 15px at 0 calc(100% - 64px),#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle 15px at 100% calc(100% - 64px),#0000 97%,#000) right/51% 100% no-repeat}
+.tkt .perf{position:absolute;left:22px;right:22px;bottom:64px;border-top:2px dashed #C9D2F2}
+.brand{display:flex;align-items:center;gap:14px}
+.brand .plus{font:900 30px/1 Outfit,sans-serif;opacity:.9}
+.brand .co{height:44px;padding:0 16px;border-radius:14px;background:#fff;color:#08091A;display:inline-flex;align-items:center;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.brand .co img{height:28px;width:auto;max-width:160px;object-fit:contain;filter:none!important}
+.brand .co b{font:900 18px/1 Outfit,sans-serif;letter-spacing:-.02em;white-space:nowrap}
+.dk.th-paper .brand .co,.dk.th-lime .brand .co{background:#08091A;color:#fff}
+.coin{position:relative;flex:0 0 auto}
+.coin i{position:absolute;left:0;width:64px;height:18px;border-radius:50%;background:linear-gradient(180deg,#F6E27A,#C9A24B);box-shadow:inset 0 -3px 0 #A07E2C,0 2px 0 #7A5E1E}
+.coin .face{position:absolute;left:4px;top:-34px;width:56px;height:56px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFF3B0,#E8C66A 45%,#B8892D);box-shadow:inset 0 0 0 4px rgba(122,94,30,.35),0 6px 14px rgba(0,0,0,.25);display:grid;place-items:center;font:900 26px/1 Outfit,sans-serif;color:#7A5E1E;animation:coin 3.2s ease-in-out infinite}
+@keyframes coin{0%,100%{transform:translateY(0) rotateY(0)}50%{transform:translateY(-6px) rotateY(180deg)}}
+
 .flt{animation:flt 6s ease-in-out infinite}
 @keyframes flt{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-14px) rotate(-3deg)}}
 /* tarjetas interactivas */
@@ -209,10 +220,10 @@ body{margin:0}
   </aside>
 
   <header class="top">
-    <img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="Tadaa!">
+    <span class="brand"><img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="Tadaa!"><sc-if value="{{co.on}}"><span class="plus" aria-hidden="true">+</span><span class="co"><sc-if value="{{co.logo}}"><img src="{{co.logo}}" alt="{{co.name}}"></sc-if><sc-if value="{{co.noLogo}}"><b>{{co.name}}</b></sc-if></span></sc-if></span>
     <span class="tb">
       <button class="btn b-ghost" onClick="{{toggleIndex}}" aria-expanded="{{indexOpen}}">Índice</button>
-      <button class="btn b-lime" onClick="{{goLast}}">Quiero ser aliado</button>
+      <button class="btn b-lime" onClick="{{goLast}}">{{ctaTop}}</button>
     </span>
   </header>
 
@@ -221,17 +232,16 @@ body{margin:0}
     <section class="sl t-blue" aria-label="Portada">
       <div class="g2" style="grid-template-columns: minmax(0, 1.35fr) minmax(0, .65fr)">
         <div class="stack">
-          <span class="up" style="--i: 0; align-self: flex-start; display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 15px"><sc-if value="{{cover.logo}}"><img src="{{cover.logo}}" alt="" style="height: 26px; width: auto; border-radius: 6px; background: #FFFFFF"></sc-if>{{cover.kicker}}</span>
           <h1 class="mega h-xl"><span class="ln" style="--i: 0"><span>Más que</span></span><span class="ln" style="--i: 1"><span>tickets,</span></span><span class="ln acc" style="--i: 2"><span>experiencias.</span></span></h1>
           <p class="lead up" style="--i: 2">{{cover.sub}}</p>
-          <div class="row up" style="--i: 3"><button class="btn b-lime b-lg" onClick="{{next}}">Conoce nuestro modelo</button><button class="btn b-ghost b-lg" onClick="{{goLast}}">Convirtámonos en aliados</button></div>
+          <div class="row up" style="--i: 3"><button class="btn b-lime b-lg" onClick="{{next}}">{{V.cta1}}</button><button class="btn b-ghost b-lg" onClick="{{goLast}}">{{V.cta2}}</button></div>
         </div>
-        <div class="tkt flt" style="width: 300px; justify-self: center">
+        <div class="tkt flt" style="width: 300px; justify-self: center; padding: 12px 12px 0">
           <sc-if value="{{card.img}}"><img src="{{card.img}}" alt="" style="width: 100%; height: 190px; object-fit: {{card.fit}}; border-radius: 18px; display: block; background: {{card.bg}}"></sc-if>
           <sc-if value="{{card.noImg}}"><div style="height: 190px; border-radius: 18px; display: grid; place-items: center; background: linear-gradient(135deg, #1238FF, #5B3CFF 60%, #D6FF35 140%); color: #D6FF35"><svg width="96" height="96" viewBox="0 0 256 256" aria-hidden="true"><path d="{{card.icon}}" fill="currentColor"/></svg></div></sc-if>
-          <div style="padding: 14px 8px 0"><b style="display: block; font: 900 26px/1 Outfit, sans-serif; letter-spacing: -.03em">{{card.title}}</b><span style="font-size: 13px; color: #4A5068">{{card.when}}</span></div>
+          <div style="padding: 16px 6px 22px; display: flex; flex-direction: column; gap: 6px"><b style="font: 900 26px/1 Outfit, sans-serif; letter-spacing: -.03em">{{card.title}}</b><span style="font-size: 13px; color: #4A5068">{{card.when}}</span></div>
           <span class="perf"></span>
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 34px 8px 0; font-size: 12px; font-weight: 800"><span>ADMIT ONE</span><span style="background: #D6FF35; border-radius: 99px; padding: 5px 10px">Nuevo canal</span></div>
+          <div style="height: 64px; display: flex; justify-content: space-between; align-items: center; padding: 0 6px; font-size: 12px; font-weight: 800; letter-spacing: .04em"><span>ADMIT ONE</span><span style="background: #D6FF35; border-radius: 99px; padding: 5px 10px">Nuevo canal</span></div>
         </div>
       </div>
     </section>
@@ -257,7 +267,10 @@ body{margin:0}
         <div class="stack">
           <h2 class="mega h-l"><span class="ln" style="--i: 0"><span>Tu próximo</span></span><span class="ln" style="--i: 1"><span>público está</span></span><span class="ln acc" style="--i: 2"><span>más cerca.</span></span></h2>
           <p class="lead up" style="--i: 1">No sustituimos tus canales: abrimos uno nuevo hacia gente que hoy no ve tu cartelera.</p>
-          <div class="up" style="--i: 2; align-self: flex-start; display: flex; align-items: baseline; gap: 14px; background: #FFFFFF; color: #08091A; border-radius: 24px; padding: 18px 22px"><b style="font: 900 clamp(40px, 4vw, 64px)/.9 Outfit, sans-serif; letter-spacing: -.05em">$2,505</b><span style="font-size: 13px; line-height: 1.4; max-width: 190px">MXN de gasto mensual promedio por hogar en educación y esparcimiento</span></div>
+          <div class="up" style="--i: 2; align-self: flex-start; display: flex; align-items: center; gap: 26px; background: #FFFFFF; color: #08091A; border-radius: 26px; padding: 22px 28px 22px 24px">
+            <span class="coin" aria-hidden="true" style="width: 64px; height: 76px"><i style="top: 58px"></i><i style="top: 48px"></i><i style="top: 38px"></i><span class="face" style="top: 0">$</span></span>
+            <span style="display: flex; flex-direction: column; gap: 6px"><b style="font: 900 clamp(40px, 4vw, 60px)/.9 Outfit, sans-serif; letter-spacing: -.05em">$2,505 <small style="font-size: .36em; letter-spacing: 0">MXN</small></b><span style="font-size: 13px; line-height: 1.4; color: #4A5068; max-width: 250px">Gasto mensual promedio por hogar en educación y esparcimiento</span></span>
+          </div>
         </div>
         <div class="up" style="--i: 1; position: relative; display: grid; place-items: center">
           <svg viewBox="0 0 520 520" style="width: min(100%, 520px); height: auto; overflow: visible" role="img" aria-label="9.17 millones de habitantes en Ciudad de México, de ellos 4.90 millones ocupados y cerca de 2.66 millones con empleo formal">
@@ -440,13 +453,96 @@ body{margin:0}
     </section>
   </sc-if>
 
+  <!-- valor (empresas) -->
+  <sc-if value="{{S.valor}}" hint-placeholder-val="{{ false }}">
+    <section class="sl t-paper" aria-label="Un beneficio que sí se usa">
+      <div class="g2" style="grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr)">
+        <div class="stack" style="gap: 28px">
+          <h2 class="mega h-l"><span class="ln" style="--i: 0"><span>Un beneficio</span></span><span class="ln acc" style="--i: 1"><span>que sí se usa.</span></span></h2>
+          <div class="up" style="--i: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px"><sc-for list="{{empVal}}" as="e" hint-placeholder-count="4"><div style="background: #FFFFFF; border-radius: 24px; padding: 20px; display: flex; flex-direction: column; gap: 8px"><span style="width: 44px; height: 44px; border-radius: 14px; background: {{e.bg}}; color: {{e.fg}}; display: grid; place-items: center"><svg width="24" height="24" viewBox="0 0 256 256" aria-hidden="true"><path d="{{e.p}}" fill="currentColor"/></svg></span><b style="font: 900 22px/1.05 Outfit, sans-serif; letter-spacing: -.02em">{{e.t}}</b><span style="font-size: 14px; line-height: 1.5; color: #4A5068">{{e.d}}</span></div></sc-for></div>
+        </div>
+        <div class="up" style="--i: 2; background: #08091A; color: #FFFFFF; border-radius: 30px; padding: 28px; display: flex; flex-direction: column; gap: 16px">
+          <b style="font: 900 28px/1.05 Outfit, sans-serif; letter-spacing: -.02em">Lo que gana {{coName}}</b>
+          <ul class="chk"><sc-for list="{{empGain}}" as="g"><li>{{g.t}}</li></sc-for></ul>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- pasos (empresas) -->
+  <sc-if value="{{S.pasos}}" hint-placeholder-val="{{ false }}">
+    <section class="sl t-ink" aria-label="Cómo sumamos a tus colaboradores">
+      <div class="stack" style="gap: 36px">
+        <h2 class="mega h-l"><span class="ln" style="--i: 0"><span>Cuatro pasos</span></span><span class="ln acc" style="--i: 1"><span>y listo.</span></span></h2>
+        <div class="steps up" style="--i: 1"><sc-for list="{{empSteps}}" as="w" hint-placeholder-count="4"><button class="{{w.cls}}" onClick="{{w.pick}}" aria-pressed="{{w.on}}"><span class="n">{{w.k}}</span><b>{{w.t}}</b><sc-if value="{{w.on}}"><p class="reveal">{{w.d}}</p></sc-if></button></sc-for></div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- datos (empresas) -->
+  <sc-if value="{{S.datos}}" hint-placeholder-val="{{ false }}">
+    <section class="sl t-paper" aria-label="Datos para el alta">
+      <div class="stack" style="gap: 26px">
+        <h2 class="mega h-m"><span class="ln" style="--i: 0"><span>Lo que necesitamos</span></span><span class="ln acc" style="--i: 1"><span>para sumarlos.</span></span></h2>
+        <div class="up" style="--i: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px">
+          <div style="background: #08091A; color: #FFFFFF; border-radius: 26px; padding: 22px; display: flex; flex-direction: column; gap: 12px">
+            <span style="align-self: flex-start; background: #D6FF35; color: #08091A; border-radius: 99px; padding: 6px 12px; font-size: 12px; font-weight: 800">Mínimo indispensable</span>
+            <div class="row" style="gap: 8px"><sc-for list="{{fieldsMin}}" as="f"><span style="display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 14px; border-radius: 12px; background: #161833; font-weight: 700; font-size: 14px"><svg width="18" height="18" viewBox="0 0 256 256" aria-hidden="true"><path d="{{ic.shield}}" fill="#D6FF35"/></svg>{{f.t}}</span></sc-for></div>
+            <span style="font-size: 13px; line-height: 1.5; color: #C7CDE6">Con esto damos de alta a cada colaborador y validamos que pertenece a {{coName}}.</span>
+          </div>
+          <div style="background: #FFFFFF; border-radius: 26px; padding: 22px; display: flex; flex-direction: column; gap: 12px; box-shadow: inset 0 0 0 2px #1238FF">
+            <span style="align-self: flex-start; background: #1238FF; color: #FFFFFF; border-radius: 99px; padding: 6px 12px; font-size: 12px; font-weight: 800">Ideal, si tu aviso de privacidad lo permite</span>
+            <div class="row" style="gap: 8px"><sc-for list="{{fieldsIdeal}}" as="f"><span style="{{f.st}}">{{f.t}}</span></sc-for></div>
+            <span style="font-size: 13px; line-height: 1.5; color: #4A5068">El RFC y el correo institucional agilizan el registro y nos permiten avisarles de cada estreno, NOW! y preventa.</span>
+          </div>
+        </div>
+        <div class="up" style="--i: 2; background: #FFFFFF; border-radius: 22px; overflow: hidden; font-size: 13px">
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1.2fr 1.6fr; background: #EEF1F7; font-weight: 800; font-size: 12px"><sc-for list="{{csvHead}}" as="h"><span style="{{h.st}}">{{h.t}}</span></sc-for></div>
+          <sc-for list="{{csvRows}}" as="r"><div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1.2fr 1.6fr; border-top: 1px solid #EEF1F7"><sc-for list="{{r.c}}" as="c"><span style="padding: 10px 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: {{c.col}}">{{c.t}}</span></sc-for></div></sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- comunica (empresas) -->
+  <sc-if value="{{S.comunica}}" hint-placeholder-val="{{ false }}">
+    <section class="sl t-blue" aria-label="Comunicación interna">
+      <div class="g2">
+        <div class="stack">
+          <h2 class="mega h-l"><span class="ln" style="--i: 0"><span>Llegamos por</span></span><span class="ln acc" style="--i: 1"><span>tus canales.</span></span></h2>
+          <p class="lead up" style="--i: 1">Activamos campañas en la comunicación interna de {{coName}}: lanzamiento del beneficio, cartelera de cada mes, NOW! y preventas. Tú apruebas; nosotros preparamos el contenido.</p>
+          <div class="row up" style="--i: 2"><sc-for list="{{chans}}" as="c"><span class="chip" style="gap: 8px"><svg width="16" height="16" viewBox="0 0 256 256" aria-hidden="true"><path d="{{c.p}}" fill="currentColor"/></svg>{{c.t}}</span></sc-for></div>
+        </div>
+        <div class="up" style="--i: 2; justify-self: center; width: min(100%, 420px); background: #FFFFFF; color: #08091A; border-radius: 26px; overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,.4); rotate: 2deg">
+          <div style="padding: 14px 18px; border-bottom: 1px solid #EEF1F7; font-size: 12px; color: #4A5068; display: flex; flex-direction: column; gap: 3px"><span><b style="color: #08091A">De:</b> Beneficios {{coName}}</span><span><b style="color: #08091A">Asunto:</b> Este mes en Tadaa!: tarifas de convenio para ti</span></div>
+          <div style="background: linear-gradient(135deg, #1238FF, #5B3CFF); padding: 22px; color: #FFFFFF; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px"><span><img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="Tadaa!" style="height: 24px"><b style="display: block; margin-top: 12px; font: 900 26px/1 Outfit, sans-serif; letter-spacing: -.02em">Tu plan de este mes</b></span><img src="landings/kinky-boots/legs.webp" alt="" style="height: 96px; width: auto"></div>
+          <div style="padding: 18px; display: flex; flex-direction: column; gap: 10px; font-size: 14px"><span>Hola, Carla: con tu número de colaborador ya tienes tarifa de convenio en teatro, conciertos y parques.</span><span style="align-self: flex-start; height: 44px; padding: 0 18px; border-radius: 99px; background: #D6FF35; display: flex; align-items: center; font-weight: 800">Ver la cartelera</span></div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- portal de empresas -->
+  <sc-if value="{{S.portalEmp}}" hint-placeholder-val="{{ false }}">
+    <section class="sl t-ink" aria-label="Portal de empresas" style="padding: 0">
+      <div class="split">
+        <div class="stack" style="align-self: center">
+          <h2 class="mega h-m"><span class="ln" style="--i: 0"><span>Tu padrón,</span></span><span class="ln acc" style="--i: 1"><span>bajo control.</span></span></h2>
+          <ul class="chk up" style="--i: 1"><sc-for list="{{empPortal}}" as="d"><li>{{d.t}}</li></sc-for></ul>
+          <span class="small up" style="--i: 2">Es el portal real con datos de ejemplo. Navégalo.</span>
+        </div>
+        <div class="brw up" style="--i: 1"><div class="bar"><i></i><i></i><i></i><span>tadaa.1wp.site/empresa</span></div><iframe src="index.html?preview=1&amp;mode=d#empresa" title="Portal de empresas" loading="lazy"></iframe></div>
+      </div>
+    </section>
+  </sc-if>
+
   <!-- loyalty -->
   <sc-if value="{{S.loyalty}}" hint-placeholder-val="{{ false }}">
     <section class="sl t-blue" aria-label="Gamification y loyalty">
       <div class="g2" style="grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr)">
         <div class="stack">
           <h2 class="mega h-l" style="font-size: clamp(44px, 5.4vw, 92px)"><span class="ln" style="--i: 0"><span>Comprar</span></span><span class="ln" style="--i: 1"><span>experiencias</span></span><span class="ln acc" style="--i: 2"><span>tiene premio.</span></span></h2>
-          <p class="lead up" style="--i: 1">Niveles, badges y cashback hacen que tu público vuelva. Para ti: más recompra y tu {{V.obra}} presente en una comunidad que sigue descubriendo.</p>
+          <p class="lead up" style="--i: 1">{{V.loyal}}</p>
           <div class="row up" style="--i: 2"><sc-for list="{{rewards}}" as="r"><span class="chip">{{r.t}}</span></sc-for></div>
         </div>
         <div class="up" style="--i: 2; background: #08091A; border-radius: 32px; padding: 24px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 40px 80px rgba(0,0,0,.4)">
@@ -476,7 +572,7 @@ body{margin:0}
     <section class="sl t-ink" aria-label="Demo en vivo" style="padding: 0">
       <div class="split" style="grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); gap: 18px">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap">
-          <h2 class="mega h-m"><span class="ln" style="--i: 0"><span>Toca, navega, <span class="acc">compra.</span></span></span></h2>
+          <h2 class="mega h-m"><span class="ln" style="--i: 0"><span>Así se ve <span class="acc">el portal.</span></span></span></h2>
           <div class="tabs up" role="tablist" aria-label="Vista" style="--i: 1"><sc-for list="{{liveTabs}}" as="t" hint-placeholder-count="8"><button role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}">{{t.label}}</button></sc-for></div>
         </div>
         <div class="up" style="--i: 1; display: flex; gap: 24px; min-height: 0">
@@ -494,15 +590,15 @@ body{margin:0}
         <div class="stack" style="gap: 20px">
           <h2 class="mega h-m"><span class="ln" style="--i: 0"><span>{{lead.title}}</span></span></h2>
           <ul class="chk up" style="--i: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 16px"><sc-for list="{{define}}" as="d"><li style="font-size: 14px">{{d.t}}</li></sc-for></ul>
-          <p class="up" style="--i: 2; margin: 0; font: 800 21px/1.25 Outfit, sans-serif">Tú produces experiencias extraordinarias. <span class="acc">Nosotros te ayudamos a llevarlas a nuevas audiencias.</span></p>
+          <p class="up" style="--i: 2; margin: 0; font: 800 21px/1.25 Outfit, sans-serif">{{V.close1}} <span class="acc">{{V.close2}}</span></p>
         </div>
         <div class="up" style="--i: 2">
           <sc-if value="{{lead.sent}}"><div class="form" role="status"><span style="width: 56px; height: 56px; border-radius: 50%; background: #D6FF35; display: grid; place-items: center"><svg width="28" height="28" viewBox="0 0 256 256" aria-hidden="true"><path d="M104 192a8 8 0 0 1-5.7-2.3l-56-56a8 8 0 0 1 11.4-11.4L104 172.7 202.3 74.3a8 8 0 0 1 11.4 11.4l-104 104A8 8 0 0 1 104 192Z" fill="#08091A"/></svg></span><b style="font: 900 32px/1 Outfit, sans-serif; letter-spacing: -.03em">Let’s make it happen, {{lead.first}}.</b><span style="font-size: 15px; line-height: 1.55; opacity: .85">Te escribimos en menos de 24 horas para agendar una llamada.</span></div></sc-if>
           <sc-if value="{{lead.form}}"><form class="form" onSubmit="{{lead.submit}}">
             <b style="font: 900 28px/1 Outfit, sans-serif; letter-spacing: -.03em">Let’s make it happen.</b>
             <label>Nombre<input name="name" required autocomplete="name" value="{{lead.name}}" onInput="{{lead.setName}}" placeholder="Tu nombre"></label>
-            <label>Producción u organización<input name="organization" autocomplete="organization" value="{{lead.org}}" onInput="{{lead.setOrg}}" placeholder="Productora, recinto o promotora"></label>
-            <label>Correo<input name="email" type="email" required autocomplete="email" value="{{lead.email}}" onInput="{{lead.setEmail}}" placeholder="tu@produccion.mx"></label>
+            <label>{{V.orgLabel}}<input name="organization" autocomplete="organization" value="{{lead.org}}" onInput="{{lead.setOrg}}" placeholder="{{V.orgPh}}"></label>
+            <label>Correo<input name="email" type="email" required autocomplete="email" value="{{lead.email}}" onInput="{{lead.setEmail}}" placeholder="{{V.mailPh}}"></label>
             <sc-if value="{{lead.error}}"><span role="alert" style="font-size: 13px; font-weight: 700; color: #FFE1E1; background: rgba(255,60,60,.25); border-radius: 12px; padding: 10px 12px">{{lead.error}}</span></sc-if>
             <button type="submit" class="btn b-lime b-lg" disabled="{{lead.busy}}">{{lead.cta}}</button>
           </form></sc-if>
@@ -530,23 +626,28 @@ body{margin:0}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
 class Component extends DCLogic {
-  constructor(p){ super(p); this.state = { i: 0, dx: 1, open: 'p1', net: 0, wk: 0, tx: 0, gold: false, idx: false, live: 'home', deck: null, ln: '', lo: null, le: '', lbusy: false, lsent: false, lerr: '' }; }
+  constructor(p){ super(p); this.state = { i: 0, dx: 1, wk2: 0, open: 'p1', net: 0, wk: 0, tx: 0, gold: false, idx: false, live: 'home', deck: null, ln: '', lo: null, le: '', lbusy: false, lsent: false, lerr: '' }; }
   renderVals() {
     const PH = {"crown": "M239.75,90.81c0,.11,0,.21-.07.32L217,195a16,16,0,0,1-15.72,13H54.71A16,16,0,0,1,39,195L16.32,91.13c0-.11-.05-.21-.07-.32A16,16,0,0,1,44,77.39l33.67,36.29,35.8-80.29a1,1,0,0,0,0-.1,16,16,0,0,1,29.06,0,1,1,0,0,0,0,.1l35.8,80.29L212,77.39a16,16,0,0,1,27.71,13.42Z", "gift": "M216,72H180.92c.39-.33.79-.65,1.17-1A29.53,29.53,0,0,0,192,49.57,32.62,32.62,0,0,0,158.44,16,29.53,29.53,0,0,0,137,25.91a54.94,54.94,0,0,0-9,14.48,54.94,54.94,0,0,0-9-14.48A29.53,29.53,0,0,0,97.56,16,32.62,32.62,0,0,0,64,49.57,29.53,29.53,0,0,0,73.91,71c.38.33.78.65,1.17,1H40A16,16,0,0,0,24,88v32a16,16,0,0,0,16,16v64a16,16,0,0,0,16,16h60a4,4,0,0,0,4-4V120H40V88h80v32h16V88h80v32H136v92a4,4,0,0,0,4,4h60a16,16,0,0,0,16-16V136a16,16,0,0,0,16-16V88A16,16,0,0,0,216,72ZM84.51,59a13.69,13.69,0,0,1-4.5-10A16.62,16.62,0,0,1,96.59,32h.49a13.69,13.69,0,0,1,10,4.5c8.39,9.48,11.35,25.2,12.39,34.92C109.71,70.39,94,67.43,84.51,59Zm87,0c-9.49,8.4-25.24,11.36-35,12.4C137.7,60.89,141,45.5,149,36.51a13.69,13.69,0,0,1,10-4.5h.49A16.62,16.62,0,0,1,176,49.08,13.69,13.69,0,0,1,171.49,59Z", "ticket": "M232,104a8,8,0,0,0,8-8V64a16,16,0,0,0-16-16H32A16,16,0,0,0,16,64V96a8,8,0,0,0,8,8,24,24,0,0,1,0,48,8,8,0,0,0-8,8v32a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V160a8,8,0,0,0-8-8,24,24,0,0,1,0-48ZM32,167.2a40,40,0,0,0,0-78.4V64H88V192H32Z", "music": "M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z", "star": "M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z", "plug": "M88.57,35A8,8,0,0,1,103.43,29l8,20A8,8,0,0,1,96.57,55ZM29,103.43l20,8A8,8,0,1,0,55,96.57l-20-8A8,8,0,0,0,29,103.43ZM227,152.57l-20-8A8,8,0,1,0,201,159.43l20,8A8,8,0,0,0,227,152.57ZM159.43,201A8,8,0,0,0,144.57,207l8,20A8,8,0,1,0,167.43,221ZM237.91,18.52a8,8,0,0,0-11.5-.18L174,70.75l-5.38-5.38a32,32,0,0,0-45.28,0L106.14,82.54a4,4,0,0,0,0,5.66l61.7,61.66a4,4,0,0,0,5.66,0l16.74-16.74a32.76,32.76,0,0,0,9.81-22.52,31.82,31.82,0,0,0-9.37-23.17l-5.38-5.37,52.2-52.17A8.22,8.22,0,0,0,237.91,18.52ZM85.64,90.34a8,8,0,0,0-11.49.18,8.22,8.22,0,0,0,.41,11.37L80.67,108,65.34,123.31A31.82,31.82,0,0,0,56,146.47,32.75,32.75,0,0,0,65.77,169l5,4.94L18.49,226.13a8.21,8.21,0,0,0-.61,11.1,8,8,0,0,0,11.72.43L82,185.25l5.37,5.38a32.1,32.1,0,0,0,45.29,0L148,175.31l6.34,6.35a8,8,0,0,0,11.32-11.32Z", "phone": "M176,16H80A24,24,0,0,0,56,40V216a24,24,0,0,0,24,24h96a24,24,0,0,0,24-24V40A24,24,0,0,0,176,16ZM80,32h96a8,8,0,0,1,8,8v8H72V40A8,8,0,0,1,80,32Zm96,192H80a8,8,0,0,1-8-8v-8H184v8A8,8,0,0,1,176,224Z", "confetti": "M111.49,52.63a15.8,15.8,0,0,0-26,5.77L33,202.78A15.83,15.83,0,0,0,47.76,224a16,16,0,0,0,5.46-1l144.37-52.5a15.8,15.8,0,0,0,5.78-26ZM65.14,161.13l19.2-52.79,63.32,63.32-52.8,19.2ZM160,72a37.8,37.8,0,0,1,3.84-15.58C169.14,45.83,179.14,40,192,40c6.7,0,11-2.29,13.65-7.21A22,22,0,0,0,208,23.94,8,8,0,0,1,224,24c0,12.86-8.52,32-32,32-6.7,0-11,2.29-13.65,7.21A22,22,0,0,0,176,72.06,8,8,0,0,1,160,72ZM136,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm101.66,82.34a8,8,0,1,1-11.32,11.31l-16-16a8,8,0,0,1,11.32-11.32Zm4.87-42.75-24,8a8,8,0,0,1-5.06-15.18l24-8a8,8,0,0,1,5.06,15.18Z"};
+    const I3 = {"users": "M64.12,147.8a4,4,0,0,1-4,4.2H16a8,8,0,0,1-7.8-6.17,8.35,8.35,0,0,1,1.62-6.93A67.79,67.79,0,0,1,37,117.51a40,40,0,1,1,66.46-35.8,3.94,3.94,0,0,1-2.27,4.18A64.08,64.08,0,0,0,64,144C64,145.28,64,146.54,64.12,147.8Zm182-8.91A67.76,67.76,0,0,0,219,117.51a40,40,0,1,0-66.46-35.8,3.94,3.94,0,0,0,2.27,4.18A64.08,64.08,0,0,1,192,144c0,1.28,0,2.54-.12,3.8a4,4,0,0,0,4,4.2H240a8,8,0,0,0,7.8-6.17A8.33,8.33,0,0,0,246.17,138.89Zm-89,43.18a48,48,0,1,0-58.37,0A72.13,72.13,0,0,0,65.07,212,8,8,0,0,0,72,224H184a8,8,0,0,0,6.93-12A72.15,72.15,0,0,0,157.19,182.07Z", "buildings": "M239.73,208H224V96a16,16,0,0,0-16-16H164a4,4,0,0,0-4,4V208H144V32.41a16.43,16.43,0,0,0-6.16-13,16,16,0,0,0-18.72-.69L39.12,72A16,16,0,0,0,32,85.34V208H16.27A8.18,8.18,0,0,0,8,215.47,8,8,0,0,0,16,224H240a8,8,0,0,0,8-8.53A8.18,8.18,0,0,0,239.73,208ZM76,184a8,8,0,0,1-8.53,8A8.18,8.18,0,0,1,60,183.72V168.27A8.19,8.19,0,0,1,67.47,160,8,8,0,0,1,76,168Zm0-56a8,8,0,0,1-8.53,8A8.19,8.19,0,0,1,60,127.72V112.27A8.19,8.19,0,0,1,67.47,104,8,8,0,0,1,76,112Zm40,56a8,8,0,0,1-8.53,8,8.18,8.18,0,0,1-7.47-8.26V168.27a8.19,8.19,0,0,1,7.47-8.26,8,8,0,0,1,8.53,8Zm0-56a8,8,0,0,1-8.53,8,8.19,8.19,0,0,1-7.47-8.26V112.27a8.19,8.19,0,0,1,7.47-8.26,8,8,0,0,1,8.53,8Z", "envelope": "M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-8,144H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z", "chat": "M128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24ZM84,140a12,12,0,1,1,12-12A12,12,0,0,1,84,140Zm44,0a12,12,0,1,1,12-12A12,12,0,0,1,128,140Zm44,0a12,12,0,1,1,12-12A12,12,0,0,1,172,140Z", "megaphone": "M200,72H160.2c-2.91-.17-53.62-3.74-101.91-44.24A16,16,0,0,0,32,40V200a16,16,0,0,0,26.29,12.25c37.77-31.68,77-40.76,93.71-43.3v31.72A16,16,0,0,0,159.12,214l11,7.33A16,16,0,0,0,194.5,212l11.77-44.36A48,48,0,0,0,200,72ZM179,207.89l0,.11-11-7.33V168h21.6ZM200,152H168V88h32a32,32,0,1,1,0,64Z", "shield": "M208,40H48A16,16,0,0,0,32,56v56c0,52.72,25.52,84.67,46.93,102.19,23.06,18.86,46,25.26,47,25.53a8,8,0,0,0,4.2,0c1-.27,23.91-6.67,47-25.53C198.48,196.67,224,164.72,224,112V56A16,16,0,0,0,208,40Zm-34.32,69.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z", "lightning": "M213.85,125.46l-112,120a8,8,0,0,1-13.69-7l14.66-73.33L45.19,143.49a8,8,0,0,1-3-13l112-120a8,8,0,0,1,13.69,7L153.18,90.9l57.63,21.61a8,8,0,0,1,3,12.95Z", "sparkle": "M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"};
     const st = this.state, deck = st.deck, land = deck && deck.landing;
     const lslug = (land && land.slug) || 'kinky-boots', ltitle = String((land && land.title) || 'Kinky Boots').split(' — ')[0];
-    const VAR = (deck && deck.config && deck.config.variant) === 'atraccion' ? 'atraccion' : 'produccion', AT = VAR === 'atraccion';
-    const ORDER = AT ? ['portada', 'queEs', 'mercado', 'canales', 'trabajo', 'ticketing', 'preview', 'extras', 'loyalty', 'dash', 'vivo', 'alianza']
+    const VAR = ['atraccion', 'empresa'].includes(deck && deck.config && deck.config.variant) ? deck.config.variant : 'produccion', AT = VAR === 'atraccion', EM = VAR === 'empresa';
+    const ORDER = EM ? ['portada', 'valor', 'pasos', 'datos', 'comunica', 'portalEmp', 'loyalty', 'vivo', 'alianza'] : AT ? ['portada', 'queEs', 'mercado', 'canales', 'trabajo', 'ticketing', 'preview', 'extras', 'loyalty', 'dash', 'vivo', 'alianza']
       : ['portada', 'queEs', 'mercado', 'canales', 'trabajo', 'ticketing', 'now', 'golden', 'preview', 'extras', 'loyalty', 'dash', 'vivo', 'alianza'];
-    const NAMES = { portada: 'Portada', queEs: '¿Qué es Tadaa!?', mercado: 'La oportunidad', canales: 'Cómo llegamos', trabajo: 'Así trabajamos', ticketing: 'Ticketing flexible', now: 'NOW!', golden: 'Golden Ticket', preview: AT ? 'Lanzamientos' : 'Preview Night', extras: 'Más por compra', loyalty: 'Gamification', dash: 'Partner Dashboard', vivo: 'En vivo', alianza: 'Alianza' };
-    const THEME = { portada: 'blue', queEs: 'paper', mercado: 'ink', canales: 'ink', trabajo: 'ink', ticketing: 'paper', now: 'now', golden: 'gold', preview: 'show', extras: 'ink', loyalty: 'blue', dash: 'ink', vivo: 'ink', alianza: 'blue' };
+    const NAMES = { portada: 'Portada', queEs: '¿Qué es Tadaa!?', mercado: 'La oportunidad', canales: 'Cómo llegamos', trabajo: 'Así trabajamos', ticketing: 'Ticketing flexible', now: 'NOW!', golden: 'Golden Ticket', preview: AT ? 'Lanzamientos' : 'Preview Night', extras: 'Más por compra', loyalty: 'Gamification', dash: 'Partner Dashboard', vivo: 'Portal', valor: 'El beneficio', pasos: 'Cómo funciona', datos: 'Datos para el alta', comunica: 'Comunicación interna', portalEmp: 'Portal de empresas', alianza: 'Alianza' };
+    const THEME = { portada: 'blue', queEs: 'paper', mercado: 'ink', canales: 'ink', trabajo: 'ink', ticketing: 'paper', now: 'now', golden: 'gold', preview: 'show', extras: 'ink', loyalty: 'blue', dash: 'ink', vivo: 'ink', valor: 'paper', pasos: 'ink', datos: 'paper', comunica: 'blue', portalEmp: 'ink', alianza: 'blue' };
     const N = ORDER.length, i = Math.min(st.i, N - 1), cur = ORDER[i]; this._n = N;
     const labels = ORDER.map(k => NAMES[k]);
     const go = (k, d) => () => this.setState({ i: k, idx: false, dx: d || (k >= i ? 1 : -1) });
     const dots = labels.map((l, k) => ({ aria: 'Ir a ' + l, on: k === i, go: go(k), cls: k < i ? 'done' : '' }));
     const thumbs = labels.map((label, k) => ({ label, n: String(k + 1).padStart(2, '0'), go: go(k), on: k === i }));
     const v = {}; ORDER.forEach(k => { v[k] = k === cur; });
-    const V = AT ? { obra: 'parque', enEl: 'en la entrada.', pnSub: 'Antes de abrir las puertas, comienza la experiencia.' } : { obra: 'obra', enEl: 'en el boleto.', pnSub: 'Antes de que se abra el telón, comienza la experiencia.' };
+    const VB = { cta1: 'Conoce nuestro modelo', cta2: 'Convirtámonos en aliados', close1: 'Tú produces experiencias extraordinarias.', close2: 'Nosotros te ayudamos a llevarlas a nuevas audiencias.', orgLabel: 'Producción u organización', orgPh: 'Productora, recinto o promotora', mailPh: 'tu@produccion.mx' };
+    const V0 = EM ? { obra: 'empresa', loyal: 'Cada plan suma: tus colaboradores suben de nivel, desbloquean badges y ganan cashback. El beneficio se vuelve parte de la cultura, no un PDF olvidado.' }
+      : AT ? { obra: 'parque', enEl: 'en la entrada.', pnSub: 'Antes de abrir las puertas, comienza la experiencia.', loyal: 'Niveles, badges y cashback hacen que tu público vuelva. Para ti: más recompra y tu parque presente en una comunidad que sigue descubriendo.' }
+      : { obra: 'obra', enEl: 'en el boleto.', pnSub: 'Antes de que se abra el telón, comienza la experiencia.', loyal: 'Niveles, badges y cashback hacen que tu público vuelva. Para ti: más recompra y tu obra presente en una comunidad que sigue descubriendo.' };
+    const V = { ...VB, ...V0, ...(EM ? { cta1: 'Conoce el beneficio', cta2: 'Sumar a mi empresa', close1: 'Tus colaboradores trabajan duro.', close2: 'Démosles algo que celebrar.', orgLabel: 'Empresa', orgPh: 'Nombre de tu empresa', mailPh: 'tu@empresa.com' } : AT ? { orgLabel: 'Parque u organización', orgPh: 'Parque, museo o atracción', mailPh: 'tu@parque.mx' } : {}) };
     // 2 · mercado
     const market = [
       { n: '9.17', u: ' M', t: 'habitantes en Ciudad de México', bg: '#D6FF35', fg: '#08091A' },
@@ -576,7 +677,7 @@ class Component extends DCLogic {
     const tx = Math.min(st.tx, 1);
     const tix = TX.map((x, k) => ({ k: k + 1, t: x.t, tag: x.tag, on: tx === k, pick: () => this.setState({ tx: k }), cls: 'opt' + (tx === k ? ' on' : '') }));
     const tixOn = { ...TX[tx], meta: AT ? [{ l: 'Visita', v: 'Sáb 14 dic' }, { l: 'Horario', v: '10:00–20:00' }, { l: 'Tipo', v: 'Pase general' }] : [{ l: 'Fecha', v: 'Mié 12 may' }, { l: 'Hora', v: '20:30' }, { l: 'Lugar', v: 'Platea F-12' }] };
-    const ic = { plug: PH.plug, phone: PH.phone };
+    const ic = { plug: PH.plug, phone: PH.phone, shield: I3.shield };
     const qr = seed => { let x = seed * 9301 + 49297; const rnd = () => (x = (x * 9301 + 49297) % 233280) / 233280; const n = 25; let d = '';
       const fin = (r, c) => { const inF = (R, C) => r >= R && r < R + 7 && c >= C && c < C + 7; return inF(0, 0) || inF(0, n - 7) || inF(n - 7, 0); };
       const finOn = (r, c) => { const b = (R, C) => { const y = r - R, z = c - C; if (y < 0 || z < 0 || y > 6 || z > 6) return null; return y === 0 || y === 6 || z === 0 || z === 6 || (y >= 2 && y <= 4 && z >= 2 && z <= 4); };
@@ -620,12 +721,9 @@ class Component extends DCLogic {
     const LV = {
       home: ['Plataforma', 'inicio', 'd', 'La cartelera de Tadaa!', 'Home, populares, NOW! y planes para cualquier día con datos reales del sistema.'],
       evento: ['Evento', AT ? 'evento/bioparque' : 'evento/matilda', 'd', 'Ficha de evento y compra', 'Zonas, mapa de asientos, add-ons, Golden Ticket y Aplausómetro. El pago está en modo de prueba.'],
-      prod: ['Partner Dashboard', 'productor', 'd', 'Portal de aliados', 'Ventas del día, compras con add-ons, NOW! y Golden Ticket configurables. Vista con datos de muestra.'],
-      admin: ['Studio', 'admin', 'd', 'Panel de administración', 'KPIs, eventos, NOW!, solicitudes de boletera externa y check-in. Vista con datos de muestra.'],
-      emp: ['Empresas', 'empresa', 'd', 'Portal de empresas', 'Altas y bajas por RFC, padrón por CSV y uso agregado sin ver compras. Vista con datos de muestra.'],
-      staff: ['Staff', 'staff', 'm', 'App de acceso', 'Escaneo de QR dinámico, verificación de compra y entrega de add-ons en puerta.'],
-      wallet: ['Wallet', 'wallet', 'm', 'Wallet del asistente', 'Boleto final con QR que cambia cada minuto, pases provisionales y add-ons.'],
-      ...(AT ? {} : { land: ['Micrositio', 'landings/?s=' + lslug + '&embed=1', 'x', 'Micrositio de ' + ltitle, 'Preview Night: la página de la obra con su identidad, su interacción firma y los pases de cada invitado.'] })
+      ...(EM ? {} : { staff: ['Staff', 'staff', 'm', 'App de acceso', 'Escaneo de QR dinámico, verificación de compra y entrega de add-ons en puerta.'], }),
+      wallet: ['Wallet', 'wallet', 'm', 'Wallet del asistente', 'Boletos finales con QR que cambia cada minuto, pases provisionales y Golden Ticket.'],
+      ...(AT || EM ? {} : { land: ['Micrositio', 'landings/?s=' + lslug + '&embed=1', 'x', 'Micrositio de ' + ltitle, 'Preview Night: la página de la obra con su identidad, su interacción firma y los pases de cada invitado.'] })
     };
     const lv = LV[st.live] || LV.home;
     const liveTabs = Object.keys(LV).map(id => ({ label: LV[id][0], on: st.live === id, pick: () => this.setState({ live: id }),
@@ -633,22 +731,34 @@ class Component extends DCLogic {
     const src = lv[2] === 'x' ? lv[1] : 'index.html?preview=1&mode=' + lv[2] + '#' + lv[1];
     const live = { title: lv[3], text: lv[4], src, url: 'tadaa.1wp.site/' + lv[1].replace('&embed=1', ''), note: 'Vista previa incrustada: los portales muestran datos de ejemplo y no requieren sesión.',
       frame: 'flex: 1 1 auto; min-width: 0; ' + (lv[2] === 'm' ? 'flex: 0 0 360px; max-width: 360px; margin: 0 auto;' : '') };
+    const coName = deck ? deck.prospect : 'tu empresa';
+    const empVal = [[PH.ticket, 'Tarifas de convenio', 'En teatro, conciertos, atracciones y más, todo el año.', '#1238FF', '#D6FF35'], [I3.lightning, 'NOW!', 'Boletos de último minuto con descuento especial.', '#FF3D8B', '#FFFFFF'], [I3.sparkle, 'Golden Ticket', 'Upgrades y experiencias sorpresa en sus compras.', '#F6E27A', '#3A2A05'], [I3.users, 'Para toda la plantilla', 'Cada colaborador entra con su número, en cualquier sede.', '#08091A', '#D6FF35']].map(([p, t, d, bg, fg]) => ({ p, t, d, bg, fg }));
+    const empGain = ['Un beneficio de bienestar que se nota y se usa', 'Algo que celebrar en la comunicación interna', 'Reportes de uso agregado, sin ver compras individuales', 'Altas y bajas desde su propio portal'].map(t => ({ t }));
+    const ES = [['Convenio', 'Definimos alcance, vigencia y qué colaboradores participan.'], ['Padrón', 'Nos compartes el listado de colaboradores con los datos que tu aviso de privacidad permita.'], ['Lanzamiento', 'Activamos la campaña interna: correo, intranet y los canales que uses.'], ['A disfrutar', 'Cada colaborador entra con su número y compra con tarifa de convenio.']];
+    const empSteps = ES.map(([t, d], k) => { const on = (st.wk2 || 0) === k; return { k: String(k + 1).padStart(2, '0'), t, d, on, pick: () => this.setState({ wk2: k }), cls: 'opt' + (on ? ' on' : '') }; });
+    const fieldsMin = ['Nombre', 'Primer apellido', 'Número de colaborador'].map(t => ({ t }));
+    const fieldsIdeal = [['Nombre de pila', 1], ['Primer apellido', 1], ['Número de colaborador', 1], ['RFC', 0], ['Correo institucional', 0]].map(([t, req]) => ({ t, st: 'display: inline-flex; align-items: center; height: 42px; padding: 0 14px; border-radius: 12px; font-weight: 700; font-size: 14px; ' + (req ? 'background: #EEF1F7;' : 'background: #FFFFFF; box-shadow: inset 0 0 0 1.5px #1238FF; color: #1238FF;') }));
+    const csvHead = [['Nombre', 1], ['Primer apellido', 1], ['No. colaborador', 1], ['RFC', 0], ['Correo institucional', 0]].map(([t, req]) => ({ t, st: 'padding: 10px 14px; ' + (req ? 'background: #D6FF35;' : 'color: #1238FF; border-bottom: 2px dashed #1238FF;') }));
+    const csvRows = [['Carla', 'Jiménez', '104 218', 'JICA900101AB1', 'carla.jimenez@empresa.com'], ['Roberto', 'Salinas', '104 219', 'SARR880512CD2', 'roberto.salinas@empresa.com'], ['Fernanda', 'Ortiz', '104 220', '—', '—']].map(r => ({ c: r.map((t, k) => ({ t, col: t === '—' ? '#AEB6D6' : k > 2 ? '#4A5068' : '#08091A' })) }));
+    const chans = [[I3.envelope, 'Correo institucional'], [I3.buildings, 'Intranet'], [I3.chat, 'Chat interno'], [I3.megaphone, 'Pantallas y carteles']].map(([p, t]) => ({ p, t }));
+    const empPortal = ['Altas y bajas por número de colaborador o RFC', 'Carga del padrón por CSV', 'Uso agregado del beneficio, sin ver compras individuales', 'Materiales para la comunicación interna'].map(t => ({ t }));
     // 15 · alianza
-    const define = (AT ? ['Inventario y tipos de pase disponibles', 'Tarifas preferenciales y condiciones', 'Periodos de comercialización', 'Preventas y temporadas', 'Cortesías, lanzamientos y eventos corporativos', 'Add-ons: fast pass, comida y más', 'Modalidad de ticketing y validación', 'Operación, liquidación y atención'].map(t => ({ t })) : null) || ['Inventario y categorías disponibles', 'Tarifas preferenciales y condiciones', 'Periodos de comercialización', 'Campañas NOW! y Golden Ticket', 'Preventas, cortesías y Preview Night', 'Add-ons y experiencias adicionales', 'Modalidad de ticketing y validación', 'Operación, liquidación y atención'].map(t => ({ t }));
+    const define = (EM ? ['Convenio y vigencia', 'Colaboradores que participan', 'Padrón con los datos que permita tu aviso de privacidad', 'Canales de comunicación interna', 'Fecha de lanzamiento', 'Reportes de uso'].map(t => ({ t })) : AT ? ['Inventario y tipos de pase disponibles', 'Tarifas preferenciales y condiciones', 'Periodos de comercialización', 'Preventas y temporadas', 'Cortesías, lanzamientos y eventos corporativos', 'Add-ons: fast pass, comida y más', 'Modalidad de ticketing y validación', 'Operación, liquidación y atención'].map(t => ({ t })) : null) || ['Inventario y categorías disponibles', 'Tarifas preferenciales y condiciones', 'Periodos de comercialización', 'Campañas NOW! y Golden Ticket', 'Preventas, cortesías y Preview Night', 'Add-ons y experiencias adicionales', 'Modalidad de ticketing y validación', 'Operación, liquidación y atención'].map(t => ({ t }));
 
     const lc = (land && land.card) || {}, lh = (land && land.hero) || {};
     const prospect = deck ? deck.prospect : '';
     const cover = { kicker: deck ? 'PREPARADO PARA ' + String(prospect).toUpperCase() : 'UNA NUEVA PLATAFORMA DE EXPERIENCIAS', sub: deck && deck.message ? deck.message : 'Conectamos productores, promotores y recintos con nuevas audiencias: una red de distribución digital, beneficios exclusivos y herramientas flexibles de comercialización.', logo: deck ? deck.logo_url || '' : '' };
     const dc = (deck && deck.config && deck.config.card) || {};
     const card = land ? { img: lc.img || lh.art || lh.logo, title: ltitle, when: [lc.when, lc.venue].filter(Boolean).join(' · '), fit: lc.img && /legs|logo/.test(lc.img) ? 'contain' : 'cover', bg: '#F6EFEA' }
-      : AT ? { img: dc.img || '', title: dc.title || (deck ? deck.prospect : 'Tu parque'), when: dc.when || 'Parque de diversiones', fit: 'cover', bg: '#1238FF' }
+      : (AT || EM) ? { img: dc.img || '', title: dc.title || (deck ? deck.prospect : 'Tu parque'), when: dc.when || (EM ? 'Beneficio para colaboradores' : 'Parque de diversiones'), fit: 'cover', bg: '#1238FF' }
       : { img: 'landings/kinky-boots/legs.webp', title: 'Kinky Boots', when: 'Ejemplo de producción', fit: 'contain', bg: '#F6EFEA' };
-    card.noImg = !card.img; card.icon = PH.confetti;
+    card.noImg = !card.img; card.icon = EM ? I3.users : PH.confetti;
+    const co = { on: !!deck, logo: deck ? deck.logo_url || '' : '', noLogo: !!deck && !deck.logo_url, name: deck ? deck.prospect : '' };
     const obra = { site: !AT, noSite: AT, title: ltitle, src: 'landings/?s=' + lslug + '&embed=1', open: 'landings/?s=' + lslug, url: 'tadaa.1wp.site/obra/' + lslug,
       text: AT ? 'Micrositios e invitaciones digitales para lanzar atracciones, recibir empresas o abrir noches exclusivas, con pases y QR dinámico para cada invitado.' : land ? 'Así sería el micrositio de ' + ltitle + ': presenta la obra y entrega cortesías e invitaciones con QR dinámico.' : 'Micrositios para presentar producciones próximas a estrenarse y entregar cortesías e invitaciones de forma electrónica. Ejemplo: ' + ltitle + '.' };
     const nm = st.ln, org = st.lo == null ? prospect : st.lo, em = st.le;
-    const lead = { title: AT ? (deck ? deck.prospect : 'Tu parque') + ' puede llegar más lejos.' : deck && land ? ltitle + ' tiene una nueva oportunidad de llegar más lejos.' : 'Tu producción tiene una nueva oportunidad de llegar más lejos.', name: nm, org, email: em, busy: st.lbusy, error: st.lerr, sent: st.lsent, form: !st.lsent, first: (nm || '').split(' ')[0],
-      cta: st.lbusy ? 'Enviando…' : 'Quiero ser aliado de Tadaa!',
+    const lead = { title: EM ? 'Sumemos a los colaboradores de ' + coName + '.' : AT ? (deck ? deck.prospect : 'Tu parque') + ' puede llegar más lejos.' : deck && land ? ltitle + ' tiene una nueva oportunidad de llegar más lejos.' : 'Tu producción tiene una nueva oportunidad de llegar más lejos.', name: nm, org, email: em, busy: st.lbusy, error: st.lerr, sent: st.lsent, form: !st.lsent, first: (nm || '').split(' ')[0],
+      cta: st.lbusy ? 'Enviando…' : EM ? 'Quiero sumar a mi empresa' : 'Quiero ser aliado de Tadaa!',
       setName: e => this.setState({ ln: e.target.value, lerr: '' }), setOrg: e => this.setState({ lo: e.target.value }), setEmail: e => this.setState({ le: e.target.value, lerr: '' }),
       submit: async e => { e && e.preventDefault && e.preventDefault(); if (st.lbusy) return;
         if (!nm.trim()) return this.setState({ lerr: 'Escribe tu nombre para saber con quién hablamos.' });
@@ -657,7 +767,8 @@ class Component extends DCLogic {
         try { const r = await fetch('/api/v2/pitch/' + encodeURIComponent((deck && deck.slug) || 'general') + '/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: nm.trim(), organization: org, email: em.trim() }) });
           const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || 'No pudimos enviar tus datos. Intenta de nuevo.'); this.setState({ lbusy: false, lsent: true }) }
         catch (x) { this.setState({ lbusy: false, lerr: x.message }) } } };
-    return { S: v, V, ic, dots, thumbs, market, pillars, net, plan, work, dash, tix, tixOn, qrs, goldEx, hundred, gold, previewFor, pnPasses, extras, cart, rewards, badges, levels, liveTabs, live, define, cover, card, obra, lead,
+    const ctaTop = EM ? 'Sumar a mi empresa' : 'Quiero ser aliado';
+    return { ctaTop, S: v, V, co, coName, empVal, empGain, empSteps, fieldsMin, fieldsIdeal, csvHead, csvRows, chans, empPortal, ic, dots, thumbs, market, pillars, net, plan, work, dash, tix, tixOn, qrs, goldEx, hundred, gold, previewFor, pnPasses, extras, cart, rewards, badges, levels, liveTabs, live, define, cover, card, obra, lead,
       themeCls: 'th-' + THEME[cur], dx: st.dx, num: String(i + 1).padStart(2, '0'), total: N, secLabel: labels[i],
       counter: i < N - 1 ? 'Sigue: ' + labels[i + 1] : 'Fin de la presentación',
       prev: go((i + N - 1) % N, -1), next: go((i + 1) % N, 1), goLast: go(N - 1, 1), nextLabel: i === N - 1 ? 'Volver al inicio' : 'Siguiente',
