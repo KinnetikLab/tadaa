@@ -157,6 +157,32 @@ body{margin:0}
 .tabs{display:flex;gap:4px;flex-wrap:wrap;padding:5px;border-radius:99px;background:rgba(255,255,255,.08);align-self:flex-start}
 .tabs button{height:36px;padding:0 14px;border:0;border-radius:99px;font-weight:800;font-size:12px;background:transparent;color:#fff;transition:background .2s,color .2s}
 .tabs button[aria-selected=true]{background:var(--lime);color:var(--ink)}
+.t-now{background:linear-gradient(180deg,#FF3D8B 0%,#FF5C6C 45%,#FF8A3D 100%);background-size:100% 200%;animation:slin .6s var(--spring) both,nowflow 7s ease-in-out infinite alternate}
+@keyframes nowflow{from{background-position:0 0}to{background-position:0 100%}}
+.dk.th-now .stub{background:#0B0A1C;color:#FF8A3D;--hole:#FF5C6C}.dk.th-now .top img{filter:none}
+.dk.th-now .navb.nx{background:#0B0A1C;color:#FF8A3D}.dk.th-now .bot{color:#0B0A1C}.dk.th-now .navb{background:rgba(11,10,28,.12)}
+.dk.th-now .b-lime{background:#0B0A1C;color:#fff}
+.rushtext{background:linear-gradient(100deg,#FF3D8B,#FF8A3D);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ring1,.ring2,.ring3{transform-box:fill-box;transform-origin:center;animation:grow .9s var(--spring) both}.ring2{animation-delay:.12s}.ring3{animation-delay:.24s}
+@keyframes grow{from{transform:scale(.2);opacity:0}}
+.wph{width:310px;border-radius:44px;padding:14px;background:linear-gradient(160deg,#1A3BF0,#0E25B8);box-shadow:0 40px 80px rgba(8,9,26,.35),inset 0 0 0 8px #08091A}
+.wps{background:#fff;color:#08091A;border-radius:28px;padding:16px;margin:8px}
+.wpc{position:relative;margin:14px -16px 0;border-top:2px dashed #9DAEF5}
+.wpc::before,.wpc::after{content:"";position:absolute;top:-13px;width:24px;height:24px;border-radius:50%;background:#1530D8}.wpc::before{left:-12px}.wpc::after{right:-12px}
+.chp-prov{align-self:flex-start;font-size:10px;font-weight:800;letter-spacing:.06em;padding:4px 8px;border-radius:99px;border:1.5px dashed #8C93B5;color:#4A5068}
+.chp-final{align-self:flex-start;font-size:10px;font-weight:800;letter-spacing:.06em;padding:4px 8px;border-radius:99px;background:#D6FF35;color:#08091A}
+.gt{width:100%;height:140px;border:0;padding:0;background:none;perspective:900px;display:block}
+.gt-in{position:relative;display:block;width:100%;height:100%;transform-style:preserve-3d;transition:transform .9s var(--spring)}
+.gt.on .gt-in{transform:rotateY(180deg) scale(1.04)}
+.gt:active .gt-in{scale:.97}
+.gt-f,.gt-b{position:absolute;inset:0;border-radius:22px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 28px;-webkit-backface-visibility:hidden;backface-visibility:hidden;color:#3A2A05;box-shadow:0 30px 60px rgba(201,162,75,.35)}
+.gt-b{transform:rotateY(180deg);justify-content:flex-start;background:#0B0A07;color:#F6E27A;box-shadow:0 0 0 2px #F6E27A,0 0 60px rgba(246,226,122,.45)}
+.gburst{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none}
+.gburst i{position:absolute;left:0;top:0;width:var(--w,10px);height:var(--h,6px);background:var(--c);border-radius:2px;animation:gfly 1.3s cubic-bezier(.15,.75,.3,1) var(--dl,0s) both}
+@keyframes gfly{0%{transform:translate(-50%,-50%) rotate(0);opacity:1}100%{transform:translate(var(--x),var(--y)) rotate(var(--r));opacity:0}}
+.gflash{position:absolute;inset:0;background:radial-gradient(50% 60% at 72% 55%,rgba(255,243,176,.55),transparent 70%);pointer-events:none;animation:gfl 1.2s ease-out both;z-index:2}
+@keyframes gfl{0%{opacity:0}15%{opacity:1}100%{opacity:0}}
+@media (max-width:860px){.t-now{min-height:100svh}.wph{width:100%;max-width:330px}}
 @media (max-width:860px){
  .dk{height:auto;min-height:100svh;overflow:visible}
  .sl,.split{position:relative;inset:auto;padding:150px 20px 110px;min-height:100svh;display:flex;flex-direction:column;gap:28px}
@@ -164,7 +190,7 @@ body{margin:0}
  .stub::after{display:none}.stub .sec{writing-mode:horizontal-tb;rotate:none}.stub .num{font-size:34px}
  .top{left:20px;right:20px;top:80px;position:absolute}.top .btn{height:40px;padding:0 14px;font-size:13px}
  .bot{left:12px;right:12px;bottom:12px;position:fixed;padding:8px;border-radius:99px;background:rgba(8,9,26,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#fff!important}.dk.th-paper .bot .navb,.dk.th-lime .bot .navb{background:rgba(255,255,255,.12)}.navb{width:44px;height:44px}
- .sl{overflow:visible}.opt{min-height:0!important}.dk.th-paper{background:var(--paper)}.dk.th-lime{background:var(--lime)}.dk.th-blue{background:#0A1E9E}.dk.th-gold{background:#0B0A07}.dk.th-show{background:#0D0A0B}
+ .sl{overflow:visible}.sl>.small{position:static!important}.wps [style*="repeat(3"]{grid-template-columns:repeat(3,minmax(0,1fr))!important}.opt{min-height:0!important}.dk.th-paper{background:var(--paper)}.dk.th-lime{background:var(--lime)}.dk.th-blue{background:#0A1E9E}.dk.th-gold{background:#0B0A07}.dk.th-show{background:#0D0A0B}
  .h-xl{font-size:clamp(50px,14vw,66px)}.h-l{font-size:clamp(40px,11.5vw,58px)}.h-m{font-size:clamp(36px,10vw,48px)}.lead{font-size:16px}
  .sl [style*="grid-template-columns"]{grid-template-columns:minmax(0,1fr)!important}.tkt,.phone,.card-m,.now,.rcpt{justify-self:start!important}.hund{grid-template-columns:repeat(10,1fr);width:100%}.hund i{width:auto;aspect-ratio:1}
  .g2{grid-template-columns:1fr}.steps{flex-direction:column}.mk{grid-template-columns:1fr 1fr}.idx{padding:90px 20px}.idx .gr{grid-template-columns:repeat(2,1fr)}
@@ -190,18 +216,19 @@ body{margin:0}
     </span>
   </header>
 
-  <!-- 1 · Portada -->
-  <sc-if value="{{s1}}" hint-placeholder-val="{{ true }}">
+  <!-- portada -->
+  <sc-if value="{{S.portada}}" hint-placeholder-val="{{ true }}">
     <section class="sl t-blue" aria-label="Portada">
       <div class="g2" style="grid-template-columns: minmax(0, 1.35fr) minmax(0, .65fr)">
         <div class="stack">
           <span class="up" style="--i: 0; align-self: flex-start; display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 15px"><sc-if value="{{cover.logo}}"><img src="{{cover.logo}}" alt="" style="height: 26px; width: auto; border-radius: 6px; background: #FFFFFF"></sc-if>{{cover.kicker}}</span>
-          <h1 class="mega h-xl"><span class="ln" style="--i: 0"><span>More than</span></span><span class="ln" style="--i: 1"><span>tickets.</span></span><span class="ln acc" style="--i: 2"><span>More</span></span><span class="ln acc" style="--i: 3"><span>experiences.</span></span></h1>
+          <h1 class="mega h-xl"><span class="ln" style="--i: 0"><span>Más que</span></span><span class="ln" style="--i: 1"><span>tickets,</span></span><span class="ln acc" style="--i: 2"><span>experiencias.</span></span></h1>
           <p class="lead up" style="--i: 2">{{cover.sub}}</p>
           <div class="row up" style="--i: 3"><button class="btn b-lime b-lg" onClick="{{next}}">Conoce nuestro modelo</button><button class="btn b-ghost b-lg" onClick="{{goLast}}">Convirtámonos en aliados</button></div>
         </div>
         <div class="tkt flt" style="width: 300px; justify-self: center">
-          <img src="{{card.img}}" alt="" style="width: 100%; height: 190px; object-fit: {{card.fit}}; border-radius: 18px; display: block; background: {{card.bg}}">
+          <sc-if value="{{card.img}}"><img src="{{card.img}}" alt="" style="width: 100%; height: 190px; object-fit: {{card.fit}}; border-radius: 18px; display: block; background: {{card.bg}}"></sc-if>
+          <sc-if value="{{card.noImg}}"><div style="height: 190px; border-radius: 18px; display: grid; place-items: center; background: linear-gradient(135deg, #1238FF, #5B3CFF 60%, #D6FF35 140%); color: #D6FF35"><svg width="96" height="96" viewBox="0 0 256 256" aria-hidden="true"><path d="{{card.icon}}" fill="currentColor"/></svg></div></sc-if>
           <div style="padding: 14px 8px 0"><b style="display: block; font: 900 26px/1 Outfit, sans-serif; letter-spacing: -.03em">{{card.title}}</b><span style="font-size: 13px; color: #4A5068">{{card.when}}</span></div>
           <span class="perf"></span>
           <div style="display: flex; justify-content: space-between; align-items: center; padding: 34px 8px 0; font-size: 12px; font-weight: 800"><span>ADMIT ONE</span><span style="background: #D6FF35; border-radius: 99px; padding: 5px 10px">Nuevo canal</span></div>
@@ -210,24 +237,8 @@ body{margin:0}
     </section>
   </sc-if>
 
-  <!-- 2 · Oportunidad -->
-  <sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
-    <section class="sl t-ink" aria-label="La oportunidad">
-      <div class="g2">
-        <div class="stack">
-          <h2 class="mega h-l"><span class="ln" style="--i: 0"><span>Tu próximo</span></span><span class="ln" style="--i: 1"><span>público está</span></span><span class="ln acc" style="--i: 2"><span>más cerca.</span></span></h2>
-          <p class="lead up" style="--i: 1">El público busca mejores formas de acceder a experiencias. Productores y recintos necesitan nuevas formas de llegar a él. Tadaa! conecta las dos cosas como un canal complementario: no sustituye tus canales actuales.</p>
-        </div>
-        <div class="stack up" style="--i: 2; gap: 12px">
-          <div class="mk"><sc-for list="{{market}}" as="m" hint-placeholder-count="4"><div style="background: {{m.bg}}; color: {{m.fg}}"><b>{{m.n}}<small style="font-size: .42em; letter-spacing: 0">{{m.u}}</small></b><span>{{m.t}}</span></div></sc-for></div>
-          <span class="small">Mercado inicial: Ciudad de México. Fuentes: INEGI, ENOE 4T 2025 y ENIGH 2024; AMAI, NSE 2026. Los indicadores corresponden a universos diferentes y no representan un cruce de compradores individuales.</span>
-        </div>
-      </div>
-    </section>
-  </sc-if>
-
   <!-- 3 · Qué es -->
-  <sc-if value="{{s3}}" hint-placeholder-val="{{ false }}">
+  <sc-if value="{{S.queEs}}" hint-placeholder-val="{{ false }}">
     <section class="sl t-paper" aria-label="Qué es Tadaa!">
       <div class="stack" style="gap: 34px">
         <h2 class="mega h-l"><span class="ln" style="--i: 0"><span>Una plataforma.</span></span><span class="ln acc" style="--i: 1"><span>Muchas formas de vender.</span></span></h2>
@@ -239,104 +250,135 @@ body{margin:0}
     </section>
   </sc-if>
 
-  <!-- 4 · Red -->
-  <sc-if value="{{s4}}" hint-placeholder-val="{{ false }}">
-    <section class="sl t-ink" aria-label="Red de distribución">
-      <div class="stack" style="gap: 40px">
-        <h2 class="mega h-l"><span class="ln" style="--i: 0"><span>No esperamos a</span></span><span class="ln" style="--i: 1"><span>que nos encuentren.</span></span><span class="ln acc" style="--i: 2"><span>Llegamos hasta ellos.</span></span></h2>
-        <div class="up" style="--i: 2; display: flex; flex-direction: column; gap: 18px">
-          <div class="flow"></div>
-          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px"><sc-for list="{{net}}" as="n" hint-placeholder-count="4"><button class="{{n.cls}}" onClick="{{n.pick}}" aria-pressed="{{n.on}}"><span class="n">{{n.k}}</span><b style="font-size: 22px">{{n.t}}</b><p>{{n.d}}</p></button></sc-for></div>
+  <!-- mercado -->
+  <sc-if value="{{S.mercado}}" hint-placeholder-val="{{ false }}">
+    <section class="sl t-ink" aria-label="La oportunidad">
+      <div class="g2" style="grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr)">
+        <div class="stack">
+          <h2 class="mega h-l"><span class="ln" style="--i: 0"><span>Tu próximo</span></span><span class="ln" style="--i: 1"><span>público está</span></span><span class="ln acc" style="--i: 2"><span>más cerca.</span></span></h2>
+          <p class="lead up" style="--i: 1">No sustituimos tus canales: abrimos uno nuevo hacia gente que hoy no ve tu cartelera.</p>
+          <div class="up" style="--i: 2; align-self: flex-start; display: flex; align-items: baseline; gap: 14px; background: #FFFFFF; color: #08091A; border-radius: 24px; padding: 18px 22px"><b style="font: 900 clamp(40px, 4vw, 64px)/.9 Outfit, sans-serif; letter-spacing: -.05em">$2,505</b><span style="font-size: 13px; line-height: 1.4; max-width: 190px">MXN de gasto mensual promedio por hogar en educación y esparcimiento</span></div>
         </div>
-        <p class="lead up" style="--i: 3">Convenios con empresas e instituciones públicas y privadas que convierten los beneficios corporativos en oportunidades de venta.</p>
+        <div class="up" style="--i: 1; position: relative; display: grid; place-items: center">
+          <svg viewBox="0 0 520 520" style="width: min(100%, 520px); height: auto; overflow: visible" role="img" aria-label="9.17 millones de habitantes en Ciudad de México, de ellos 4.90 millones ocupados y cerca de 2.66 millones con empleo formal">
+            <circle class="ring1" cx="260" cy="260" r="250" fill="rgba(18,56,255,.28)" stroke="#1238FF" stroke-width="2"/>
+            <circle class="ring2" cx="260" cy="318" r="183" fill="rgba(18,56,255,.55)" stroke="#5B7BFF" stroke-width="2"/>
+            <circle class="ring3" cx="260" cy="375" r="135" fill="#D6FF35"/>
+            <text x="260" y="62" text-anchor="middle" fill="#FFFFFF" style="font: 900 46px Outfit, sans-serif; letter-spacing: -2px">9.17 M</text>
+            <text x="260" y="90" text-anchor="middle" fill="#C7CDE6" style="font: 600 15px 'Plus Jakarta Sans', sans-serif">habitantes en CDMX</text>
+            <text x="260" y="182" text-anchor="middle" fill="#FFFFFF" style="font: 900 42px Outfit, sans-serif; letter-spacing: -2px">4.90 M</text>
+            <text x="260" y="208" text-anchor="middle" fill="#DCE3FF" style="font: 600 15px 'Plus Jakarta Sans', sans-serif">personas ocupadas</text>
+            <text x="260" y="370" text-anchor="middle" fill="#08091A" style="font: 900 58px Outfit, sans-serif; letter-spacing: -3px">54.3%</text>
+            <text x="260" y="400" text-anchor="middle" fill="#08091A" style="font: 700 15px 'Plus Jakarta Sans', sans-serif">con empleo formal estimado</text>
+            <text x="260" y="422" text-anchor="middle" fill="#08091A" style="font: 600 13px 'Plus Jakarta Sans', sans-serif">≈ 2.66 M personas</text>
+          </svg>
+        </div>
       </div>
+      <span class="small up" style="--i: 3; position: absolute; left: 160px; right: 64px; bottom: 96px">Fuentes: INEGI, ENOE 4T 2025 y ENIGH 2024; AMAI, NSE 2026. Los indicadores corresponden a universos diferentes y no representan un cruce de compradores individuales. 2.66 M = 54.3% de 4.90 M.</span>
     </section>
   </sc-if>
 
-  <!-- 5 · Comunidad -->
-  <sc-if value="{{s5}}" hint-placeholder-val="{{ false }}">
-    <section class="sl t-blue" aria-label="Comunidad abierta">
-      <div class="g2">
-        <div class="stack">
-          <h2 class="mega h-l"><span class="ln" style="--i: 0"><span>El entretenimiento,</span></span><span class="ln acc" style="--i: 1"><span>al alcance</span></span><span class="ln acc" style="--i: 2"><span>de todos.</span></span></h2>
-          <p class="lead up" style="--i: 1">Además de la red corporativa, cualquier persona entra a Tadaa! con una membresía individual. Dos vías de adquisición, un solo público para tu obra.</p>
-          <div class="row up" style="--i: 2"><span class="chip">Comunidades corporativas</span><span class="chip">Consumidores individuales</span></div>
+  <!-- canales -->
+  <sc-if value="{{S.canales}}" hint-placeholder-val="{{ false }}">
+    <section class="sl t-ink" aria-label="Cómo llegamos a tu público">
+      <div class="stack" style="gap: 34px">
+        <h2 class="mega h-l"><span class="ln" style="--i: 0"><span>Llegamos</span></span><span class="ln acc" style="--i: 1"><span>hasta tu público.</span></span></h2>
+        <div class="up" style="--i: 1; display: grid; grid-template-columns: minmax(0, 1.5fr) auto minmax(0, 1fr); gap: 22px; align-items: stretch">
+          <div style="display: flex; flex-direction: column; gap: 14px">
+            <b style="font: 900 26px/1 Outfit, sans-serif; letter-spacing: -.02em">Red de convenios <span style="font-weight: 600; font-size: 15px; opacity: .7">con empresas e instituciones</span></b>
+            <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; flex: 1"><sc-for list="{{net}}" as="n" hint-placeholder-count="4"><button class="{{n.cls}}" onClick="{{n.pick}}" aria-pressed="{{n.on}}" style="padding: 18px; justify-content: flex-end"><span class="n" style="font-size: 44px">{{n.k}}</span><b style="font-size: 18px">{{n.t}}</b><sc-if value="{{n.on}}"><p class="reveal" style="font-size: 13px">{{n.d}}</p></sc-if></button></sc-for></div>
+          </div>
+          <span aria-hidden="true" style="align-self: center; width: 56px; height: 56px; border-radius: 50%; background: #D6FF35; color: #08091A; display: grid; place-items: center; font: 900 34px/1 Outfit, sans-serif">+</span>
+          <div style="display: flex; flex-direction: column; gap: 14px">
+            <b style="font: 900 26px/1 Outfit, sans-serif; letter-spacing: -.02em">Membresía <span style="font-weight: 600; font-size: 15px; opacity: .7">para cualquier persona</span></b>
+            <div class="card-m" style="rotate: -3deg; width: 100%; flex: 1; aspect-ratio: auto; min-height: 220px">
+              <div style="display: flex; justify-content: space-between; align-items: center"><img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="" style="height: 24px; filter: brightness(0)"><span style="font-size: 12px; font-weight: 800">Membresía</span></div>
+              <div><b style="font: 900 64px/.85 Outfit, sans-serif; letter-spacing: -.05em">{{plan.price}}</b><span style="font-weight: 800"> MXN al mes</span></div>
+              <span style="font-size: 13px; font-weight: 700; line-height: 1.4">Tarifas preferenciales y beneficios dentro de la plataforma.</span>
+            </div>
+          </div>
         </div>
-        <div class="card-m up" style="--i: 2; justify-self: center">
-          <div style="display: flex; justify-content: space-between; align-items: center"><img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="" style="height: 26px; filter: brightness(0)"><span style="font-size: 12px; font-weight: 800">Membresía</span></div>
-          <div><b style="font: 900 72px/.85 Outfit, sans-serif; letter-spacing: -.05em">{{plan.price}}</b><span style="font-weight: 800"> MXN al mes</span></div>
-          <span style="font-size: 13px; font-weight: 700; line-height: 1.4">Tarifas preferenciales, oportunidades y beneficios dentro de la plataforma.</span>
-        </div>
+        <p class="lead up" style="--i: 2">Dos vías de adquisición —comunidades corporativas y consumidores individuales— para un solo público: el de tu {{V.obra}}.</p>
       </div>
     </section>
   </sc-if>
 
   <!-- 6 · Así trabajamos -->
-  <sc-if value="{{s6}}" hint-placeholder-val="{{ false }}">
+  <sc-if value="{{S.trabajo}}" hint-placeholder-val="{{ false }}">
     <section class="sl t-ink" aria-label="Así trabajamos">
       <div class="stack" style="gap: 36px">
-        <h2 class="mega h-l"><span class="ln" style="--i: 0"><span>Una alianza hecha</span></span><span class="ln acc" style="--i: 1"><span>a la medida de tu obra.</span></span></h2>
+        <h2 class="mega h-l"><span class="ln" style="--i: 0"><span>Una alianza hecha</span></span><span class="ln acc" style="--i: 1"><span>a la medida de tu {{V.obra}}.</span></span></h2>
         <div class="steps up" style="--i: 1"><sc-for list="{{work}}" as="w" hint-placeholder-count="5"><button class="{{w.cls}}" onClick="{{w.pick}}" aria-pressed="{{w.on}}"><span class="n">{{w.k}}</span><b>{{w.t}}</b><sc-if value="{{w.on}}"><p class="reveal">{{w.d}}</p></sc-if></button></sc-for></div>
         <p class="small up" style="--i: 2; font-size: 15px">El productor conserva visibilidad sobre las condiciones de su inventario y el alcance de la colaboración.</p>
       </div>
     </section>
   </sc-if>
 
-  <!-- 7 · Partner Dashboard -->
-  <sc-if value="{{s7}}" hint-placeholder-val="{{ false }}">
-    <section class="sl t-ink" aria-label="Partner Dashboard" style="padding: 0">
-      <div class="split">
-        <div class="stack" style="align-self: center">
-          <h2 class="mega h-m"><span class="ln" style="--i: 0"><span>Tu operación,</span></span><span class="ln acc" style="--i: 1"><span>siempre a la vista.</span></span></h2>
-          <ul class="chk up" style="--i: 1"><sc-for list="{{dash}}" as="d"><li>{{d.t}}</li></sc-for></ul>
-          <span class="small up" style="--i: 2">Es el portal real con datos de ejemplo. Navégalo.</span>
-        </div>
-        <div class="brw up" style="--i: 1"><div class="bar"><i></i><i></i><i></i><span>tadaa.1wp.site/productor</span></div><iframe src="index.html?preview=1&amp;mode=d#productor" title="Partner Dashboard" loading="lazy"></iframe></div>
-      </div>
-    </section>
-  </sc-if>
-
-  <!-- 8 · Ticketing -->
-  <sc-if value="{{s8}}" hint-placeholder-val="{{ false }}">
+  <!-- ticketing -->
+  <sc-if value="{{S.ticketing}}" hint-placeholder-val="{{ false }}">
     <section class="sl t-paper" aria-label="Ticketing flexible">
-      <div class="g2" style="grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr)">
-        <div class="stack">
-          <h2 class="mega h-l"><span class="ln" style="--i: 0"><span>Nos adaptamos</span></span><span class="ln" style="--i: 1"><span>a tu operación.</span></span><span class="ln acc" style="--i: 2"><span>No al revés.</span></span></h2>
-          <div class="up" role="tablist" aria-label="Modalidad de ticketing" style="--i: 2; display: flex; flex-direction: column; gap: 10px"><sc-for list="{{tix}}" as="x" hint-placeholder-count="3"><button role="tab" class="{{x.cls}}" aria-selected="{{x.on}}" onClick="{{x.pick}}" style="flex-direction: row; align-items: flex-start; gap: 16px; padding: 18px 20px"><span class="n" style="font-size: 34px">{{x.k}}</span><span style="display: flex; flex-direction: column; gap: 6px"><b style="font-size: 22px">{{x.t}}</b><sc-if value="{{x.on}}"><p class="reveal">{{x.d}}</p></sc-if></span></button></sc-for></div>
+      <div class="g2" style="grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr)">
+        <div class="stack" style="gap: 20px">
+          <h2 class="mega h-l"><span class="ln" style="--i: 0"><span>Nos adaptamos</span></span><span class="ln acc" style="--i: 1"><span>a tu operación.</span></span></h2>
+          <div class="up" role="tablist" aria-label="Modalidad" style="--i: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px"><sc-for list="{{tix}}" as="x" hint-placeholder-count="2"><button role="tab" class="{{x.cls}}" aria-selected="{{x.on}}" onClick="{{x.pick}}" style="padding: 18px 20px"><span class="n" style="font-size: 34px">{{x.k}}</span><b style="font-size: 22px">{{x.t}}</b><span style="font-size: 13px; font-weight: 700; opacity: .8">{{x.tag}}</span></button></sc-for></div>
+          <p class="up" style="--i: 2; margin: 0; font-size: 17px; line-height: 1.55">{{tixOn.d}}</p>
+          <sc-if value="{{tixOn.integra}}">
+            <div class="reveal" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+              <div style="background: #FFFFFF; border-radius: 22px; padding: 16px 18px; display: flex; gap: 12px; align-items: flex-start"><span style="flex: 0 0 42px; height: 42px; border-radius: 12px; background: #1238FF; color: #D6FF35; display: grid; place-items: center"><svg width="24" height="24" viewBox="0 0 256 256" aria-hidden="true"><path d="{{ic.plug}}" fill="currentColor"/></svg></span><span><b style="display: block; font: 900 18px/1.1 Outfit, sans-serif">Integración por API</b><span style="font-size: 13px; line-height: 1.45; color: #4A5068">Si tu boletera la tiene disponible, nos conectamos para emitir y validar accesos.</span></span></div>
+              <div style="background: #FFFFFF; border-radius: 22px; padding: 16px 18px; display: flex; gap: 12px; align-items: flex-start"><span style="flex: 0 0 42px; height: 42px; border-radius: 12px; background: #08091A; color: #D6FF35; display: grid; place-items: center"><svg width="24" height="24" viewBox="0 0 256 256" aria-hidden="true"><path d="{{ic.phone}}" fill="currentColor"/></svg></span><span><b style="display: block; font: 900 18px/1.1 Outfit, sans-serif">Sin API, con logística</b><span style="font-size: 13px; line-height: 1.45; color: #4A5068">Habilitamos el Partner Dashboard y la app de Staff para entregar los accesos al cliente final.</span></span></div>
+            </div>
+          </sc-if>
         </div>
-        <div class="phone up" style="--i: 2; justify-self: center"><div>
-          <div style="width: 100%; display: flex; justify-content: space-between; align-items: center"><img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="" style="height: 20px; filter: brightness(0)"><span style="font-size: 10px; font-weight: 800; letter-spacing: .08em; background: #D6FF35; border-radius: 99px; padding: 4px 9px">{{tixPhone.tag}}</span></div>
-          <b style="font: 900 22px/1.05 Outfit, sans-serif; text-align: center">{{card.title}}</b>
-          <div class="qr3"><sc-for list="{{qrs}}" as="q"><img src="{{q.src}}" alt="Código QR dinámico de ejemplo"></sc-for></div>
-          <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: #4A5068"><svg width="22" height="22" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="#EEF1F7" stroke-width="6"/><circle class="ring" cx="24" cy="24" r="20" fill="none" stroke="#1238FF" stroke-width="6" stroke-dasharray="126" transform="rotate(-90 24 24)"/></svg>{{tixPhone.note}}</div>
-        </div></div>
-      </div>
-    </section>
-  </sc-if>
-
-  <!-- 9 · NOW! -->
-  <sc-if value="{{s9}}" hint-placeholder-val="{{ false }}">
-    <section class="sl t-lime" aria-label="NOW!">
-      <span class="ghost" aria-hidden="true">NOW!</span>
-      <div class="g2">
-        <div class="stack">
-          <h2 class="mega h-xl"><span class="ln" style="--i: 0"><span>NOW!</span></span></h2>
-          <p class="up" style="--i: 1; margin: 0; font: 900 clamp(26px, 2.6vw, 40px)/1.05 Outfit, sans-serif; letter-spacing: -.03em">El momento de activar inventario es ahora.</p>
-          <p class="lead up" style="--i: 2">Campañas para boletos de último minuto. Tú asignas el inventario y las condiciones; nuestra comunidad se registra para comprar con un descuento especial, durante un periodo definido.</p>
-        </div>
-        <div class="now up" style="--i: 2; justify-self: center">
-          <div style="display: flex; justify-content: space-between; align-items: center"><span style="display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 13px; color: #D6FF35"><span class="blink" style="width: 9px; height: 9px; border-radius: 50%; background: #FF3B3B"></span>En vivo</span><span class="small">Ejemplo</span></div>
-          <b style="font: 900 28px/1.05 Outfit, sans-serif; letter-spacing: -.02em">{{card.title}}, función de hoy</b>
-          <div style="display: flex; gap: 6px"><sc-for list="{{nowClock}}" as="c"><span style="flex: 1; background: #161833; border-radius: 14px; padding: 12px 0; text-align: center"><b style="display: block; font: 900 32px/1 Outfit, sans-serif">{{c.v}}</b><span style="font-size: 11px; color: #AEB6D6">{{c.l}}</span></span></sc-for></div>
-          <div><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px"><span>40 lugares asignados</span><b style="color: #D6FF35">31 apartados</b></div><div style="height: 10px; border-radius: 99px; background: #161833; overflow: hidden"><div class="barin" style="width: 78%; height: 100%; background: #D6FF35; border-radius: 99px"></div></div></div>
-          <div style="display: flex; justify-content: space-between; align-items: center; background: #161833; border-radius: 16px; padding: 12px 16px"><span style="font-size: 14px">Descuento acordado</span><b style="font: 900 32px/1 Outfit, sans-serif; color: #D6FF35">−30%</b></div>
+        <div class="wph up" style="--i: 2; justify-self: center">
+          <div class="wps">
+            <div style="display: flex; gap: 12px; align-items: center">
+              <sc-if value="{{card.img}}"><img src="{{card.img}}" alt="" style="width: 64px; height: 64px; border-radius: 16px; object-fit: {{card.fit}}; background: {{card.bg}}"></sc-if>
+              <sc-if value="{{card.noImg}}"><span style="width: 64px; height: 64px; border-radius: 16px; background: #1238FF; color: #D6FF35; display: grid; place-items: center"><svg width="34" height="34" viewBox="0 0 256 256" aria-hidden="true"><path d="{{card.icon}}" fill="currentColor"/></svg></span></sc-if>
+              <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px"><span class="{{tixOn.chipCls}}">{{tixOn.chip}}</span><b style="font: 900 20px/1.05 Outfit, sans-serif">{{card.title}}</b></span>
+            </div>
+            <div class="wpc"></div>
+            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 12px 2px 0"><sc-for list="{{tixOn.meta}}" as="m"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 11px; color: #5A6178">{{m.l}}</span><b style="font-size: 13px">{{m.v}}</b></span></sc-for></div>
+            <div class="wpc"></div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding-top: 14px">
+              <div class="qr3" style="width: 170px; height: 170px; padding: 8px; border-radius: 18px; box-shadow: 0 0 0 2px #E1E6F2"><sc-for list="{{qrs}}" as="q"><img src="{{q.src}}" alt="Código QR dinámico de ejemplo"></sc-for></div>
+              <span style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #4A5068"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="#EEF1F7" stroke-width="6"/><circle class="ring" cx="24" cy="24" r="20" fill="none" stroke="#1238FF" stroke-width="6" stroke-dasharray="126" transform="rotate(-90 24 24)"/></svg>{{tixOn.note}}</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   </sc-if>
 
-  <!-- 10 · Golden Ticket -->
-  <sc-if value="{{s10}}" hint-placeholder-val="{{ false }}">
+  <!-- now -->
+  <sc-if value="{{S.now}}" hint-placeholder-val="{{ false }}">
+    <section class="sl t-now" aria-label="NOW!">
+      <div class="g2" style="grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr)">
+        <div class="stack" style="gap: 18px">
+          <h2 class="mega" style="font-size: clamp(110px, 14vw, 230px); font-style: italic; letter-spacing: -.07em; line-height: .78; color: #FFFFFF; text-shadow: 0 20px 60px rgba(120,20,80,.35)"><span class="ln" style="--i: 0"><span>NOW!</span></span></h2>
+          <p class="up" style="--i: 1; margin: 0; font: 900 clamp(28px, 2.8vw, 44px)/1.02 Outfit, sans-serif; letter-spacing: -.03em; color: #0B0A1C">Tus boletos también tienen tercera llamada.</p>
+          <p class="lead up" style="--i: 2; color: #0B0A1C; opacity: 1; font-weight: 600">Tú asignas el inventario de último minuto y el descuento. La comunidad se inscribe gratis y, horas antes de la función, compra quien paga primero.</p>
+        </div>
+        <article class="up" style="--i: 2; background: #15142E; border: 1px solid #2A2852; border-radius: 32px; overflow: hidden; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); box-shadow: 0 40px 80px rgba(60,10,40,.45); color: #FFFFFF">
+          <div style="position: relative; min-height: 340px; background: {{card.bg}}">
+            <sc-if value="{{card.img}}"><img src="{{card.img}}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: {{card.fit}}"></sc-if>
+            <div style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(21,20,46,.95), transparent 60%)"></div>
+            <span style="position: absolute; left: 16px; top: 16px; background: linear-gradient(100deg, #FF3D8B, #FF8A3D); color: #0B0A1C; border-radius: 99px; padding: 7px 12px; font-size: 12px; font-weight: 800">Now! · Hoy 20:30</span>
+            <div style="position: absolute; left: 18px; right: 18px; bottom: 16px"><b style="font: 900 34px/.95 Outfit, sans-serif; letter-spacing: -.03em">{{card.title}}</b><div style="font-size: 12px; color: #C7CDE6; margin-top: 4px">Función de hoy</div></div>
+          </div>
+          <div style="padding: 22px; display: flex; flex-direction: column; gap: 14px">
+            <span style="display: flex; flex-direction: column"><span style="font-size: 12px; color: #AEB6D6">Precio Now!</span><b class="rushtext" style="font: 900 50px/1 Outfit, sans-serif; letter-spacing: -.04em">$890</b><span style="font-size: 12px; color: #8C93B5">Convenio desde <s>$1,280</s></span></span>
+            <span style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px"><span style="background: #0B0A1C; border-radius: 16px; padding: 10px 14px"><span style="display: block; font-size: 11px; color: #AEB6D6">Cupo</span><b style="font-size: 20px">40</b></span><span style="background: #0B0A1C; border-radius: 16px; padding: 10px 14px"><span style="display: block; font-size: 11px; color: #AEB6D6">Inscritos</span><b style="font-size: 20px">212</b></span></span>
+            <div style="background: #0B0A1C; border-radius: 20px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center"><span style="font-size: 12px; color: #C7CDE6">La venta abre en</span><b class="rushtext" style="font: 900 32px/1 Outfit, sans-serif">02:14:36</b></div>
+            <span style="height: 54px; border-radius: 99px; background: linear-gradient(100deg, #FF3D8B, #FF8A3D); color: #0B0A1C; display: grid; place-items: center; font-weight: 800; font-size: 15px">Inscribirme gratis</span>
+            <span style="font-size: 11px; color: #8C93B5">Ejemplo con datos ilustrativos.</span>
+          </div>
+        </article>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- golden -->
+  <sc-if value="{{S.golden}}" hint-placeholder-val="{{ false }}">
     <section class="sl t-gold" aria-label="Golden Ticket">
       <div class="g2">
         <div class="stack">
@@ -346,37 +388,46 @@ body{margin:0}
         </div>
         <div class="stack up" style="--i: 2; align-items: center; gap: 26px">
           <div class="hund" role="img" aria-label="Uno de cada 100 boletos"><sc-for list="{{hundred}}" as="h"><i class="{{h.cls}}"></i></sc-for></div>
-          <button onClick="{{gold.pick}}" aria-pressed="{{gold.on}}" class="gold" style="width: min(100%, 380px); height: 128px; border: 0; border-radius: 22px; color: #3A2A05; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; box-shadow: 0 30px 60px rgba(201,162,75,.35)">
-            <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px"><b style="font: 900 32px/1 Outfit, sans-serif; letter-spacing: -.03em">Golden Ticket</b><span style="font-size: 14px; font-weight: 800; text-align: left">{{gold.label}}</span></span>
-            <svg width="52" height="52" viewBox="0 0 256 256" aria-hidden="true"><path d="{{gold.icon}}" fill="currentColor"/></svg>
-          </button>
+          <div style="position: relative; width: min(100%, 400px)">
+            <button onClick="{{gold.pick}}" aria-pressed="{{gold.on}}" class="{{gold.cls}}" aria-label="{{gold.aria}}">
+              <span class="gt-in">
+                <span class="gt-f gold"><span style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px"><b style="font: 900 34px/1 Outfit, sans-serif; letter-spacing: -.03em">Golden Ticket</b><span style="font-size: 14px; font-weight: 800">Toca para descubrir qué esconde</span></span><svg width="54" height="54" viewBox="0 0 256 256" aria-hidden="true"><path d="{{gold.gift}}" fill="currentColor"/></svg></span>
+                <span class="gt-b"><svg width="44" height="44" viewBox="0 0 256 256" aria-hidden="true"><path d="{{gold.crown}}" fill="currentColor"/></svg><span style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px; text-align: left"><span style="font-size: 12px; font-weight: 800; letter-spacing: .08em">¡TE TOCÓ!</span><b style="font: 900 26px/1.05 Outfit, sans-serif; letter-spacing: -.02em">Meet &amp; greet con el elenco</b></span></span>
+              </span>
+            </button>
+            <sc-if value="{{gold.on}}"><span class="gburst" aria-hidden="true"><sc-for list="{{gold.bits}}" as="b"><i style="{{b.s}}"></i></sc-for></span></sc-if>
+          </div>
         </div>
       </div>
+      <sc-if value="{{gold.on}}"><div class="gflash" aria-hidden="true"></div></sc-if>
     </section>
   </sc-if>
 
   <!-- 11 · Preview Night -->
-  <sc-if value="{{s11}}" hint-placeholder-val="{{ false }}">
+  <sc-if value="{{S.preview}}" hint-placeholder-val="{{ false }}">
     <section class="sl t-show" aria-label="Preview Night" style="padding: 0">
       <div class="split">
         <div class="stack" style="align-self: center">
           <h2 class="mega h-m"><span class="ln" style="--i: 0"><span>Preview</span></span><span class="ln acc" style="--i: 1"><span>Night.</span></span></h2>
-          <p class="up" style="--i: 1; margin: 0; font: 800 20px/1.25 Outfit, sans-serif">Antes de que se abra el telón, comienza la experiencia.</p>
+          <p class="up" style="--i: 1; margin: 0; font: 800 20px/1.25 Outfit, sans-serif">{{V.pnSub}}</p>
           <p class="up" style="--i: 2; margin: 0; font-size: 15px; line-height: 1.55; opacity: .8">{{obra.text}}</p>
           <div class="row up" style="--i: 3; gap: 6px"><sc-for list="{{previewFor}}" as="p"><span class="chip" style="height: 32px; font-size: 12px">{{p.t}}</span></sc-for></div>
-          <a class="btn b-lime up" href="{{obra.open}}" target="_blank" rel="noopener" style="--i: 3; align-self: flex-start">Abrir el micrositio</a>
+          <sc-if value="{{obra.site}}"><a class="btn b-lime up" href="{{obra.open}}" target="_blank" rel="noopener" style="--i: 3; align-self: flex-start">Abrir el micrositio</a></sc-if>
         </div>
-        <div class="brw up" style="--i: 1"><div class="bar"><i></i><i></i><i></i><span>{{obra.url}}</span></div><iframe src="{{obra.src}}" title="{{obra.title}}" loading="lazy" style="background: #0D0A0B"></iframe></div>
+        <sc-if value="{{obra.site}}"><div class="brw up" style="--i: 1"><div class="bar"><i></i><i></i><i></i><span>{{obra.url}}</span></div><iframe src="{{obra.src}}" title="{{obra.title}}" loading="lazy" style="background: #0D0A0B"></iframe></div></sc-if>
+        <sc-if value="{{obra.noSite}}"><div class="up" style="--i: 1; display: grid; place-items: center"><div style="position: relative; width: min(100%, 420px); height: 460px">
+          <sc-for list="{{pnPasses}}" as="p"><div style="{{p.st}}"><div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 18px; background: {{p.bg}}; color: #FFFFFF"><b style="font: 900 18px/1 Outfit, sans-serif">{{p.t}}</b><span style="font-size: 11px; font-weight: 800; letter-spacing: .08em">{{p.k}}</span></div><div style="padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; gap: 12px"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 11px; color: #5A6178">Invitado</span><b style="font-size: 15px">{{p.g}}</b><span style="font-size: 12px; color: #5A6178">{{p.w}}</span></span><img src="{{p.qr}}" alt="" style="width: 76px; height: 76px"></div></div></sc-for>
+        </div></div></sc-if>
       </div>
     </section>
   </sc-if>
 
   <!-- 12 · Más por compra -->
-  <sc-if value="{{s12}}" hint-placeholder-val="{{ false }}">
+  <sc-if value="{{S.extras}}" hint-placeholder-val="{{ false }}">
     <section class="sl t-ink" aria-label="Más oportunidades por compra">
       <div class="g2" style="grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr)">
         <div class="stack">
-          <h2 class="mega h-l"><span class="ln" style="--i: 0"><span>La experiencia</span></span><span class="ln acc" style="--i: 1"><span>no termina</span></span><span class="ln acc" style="--i: 2"><span>en el boleto.</span></span></h2>
+          <h2 class="mega h-l"><span class="ln" style="--i: 0"><span>La experiencia</span></span><span class="ln acc" style="--i: 1"><span>no termina</span></span><span class="ln acc" style="--i: 2"><span>{{V.enEl}}</span></span></h2>
           <div class="up" style="--i: 2; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px"><sc-for list="{{extras}}" as="e" hint-placeholder-count="4"><div style="border-radius: 22px; padding: 16px 18px; background: rgba(255,255,255,.06); display: flex; flex-direction: column; gap: 4px"><b style="font: 900 21px/1.1 Outfit, sans-serif; color: {{e.c}}">{{e.t}}</b><span style="font-size: 13px; line-height: 1.45; opacity: .8">{{e.d}}</span></div></sc-for></div>
         </div>
         <div class="rcpt up" style="--i: 2; justify-self: center">
@@ -389,26 +440,39 @@ body{margin:0}
     </section>
   </sc-if>
 
-  <!-- 13 · Loyalty -->
-  <sc-if value="{{s13}}" hint-placeholder-val="{{ false }}">
+  <!-- loyalty -->
+  <sc-if value="{{S.loyalty}}" hint-placeholder-val="{{ false }}">
     <section class="sl t-blue" aria-label="Gamification y loyalty">
-      <div class="g2">
+      <div class="g2" style="grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr)">
         <div class="stack">
-          <h2 class="mega h-l"><span class="ln" style="--i: 0"><span>Comprar</span></span><span class="ln" style="--i: 1"><span>experiencias</span></span><span class="ln acc" style="--i: 2"><span>tiene premio.</span></span></h2>
-          <p class="lead up" style="--i: 1">Los usuarios suben de nivel, desbloquean insignias y ganan beneficios. Para ti: más recompra y tu obra presente en una comunidad que sigue descubriendo.</p>
+          <h2 class="mega h-l" style="font-size: clamp(44px, 5.4vw, 92px)"><span class="ln" style="--i: 0"><span>Comprar</span></span><span class="ln" style="--i: 1"><span>experiencias</span></span><span class="ln acc" style="--i: 2"><span>tiene premio.</span></span></h2>
+          <p class="lead up" style="--i: 1">Niveles, badges y cashback hacen que tu público vuelva. Para ti: más recompra y tu {{V.obra}} presente en una comunidad que sigue descubriendo.</p>
           <div class="row up" style="--i: 2"><sc-for list="{{rewards}}" as="r"><span class="chip">{{r.t}}</span></sc-for></div>
         </div>
-        <div class="lvl up" style="--i: 2">
-          <div style="display: flex; justify-content: space-between; align-items: center"><b style="font: 900 24px Outfit, sans-serif">Nivel Superfan</b><span style="font-size: 12px; font-weight: 800; background: #D6FF35; border-radius: 99px; padding: 6px 11px">5% cashback</span></div>
-          <div><div style="height: 14px; border-radius: 99px; background: #EEF1F7; overflow: hidden"><div class="barin" style="width: 68%; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #1238FF, #5B3CFF)"></div></div><div style="display: flex; justify-content: space-between; font-size: 12px; color: #4A5068; margin-top: 8px"><span>Fan</span><span>3 experiencias más para Leyenda</span><span>Leyenda</span></div></div>
-          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px"><sc-for list="{{badges}}" as="b"><span class="{{b.cls}}"><svg width="30" height="30" viewBox="0 0 256 256" aria-hidden="true"><path d="{{b.p}}" fill="currentColor"/></svg>{{b.t}}</span></sc-for></div>
+        <div class="up" style="--i: 2; background: #08091A; border-radius: 32px; padding: 24px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 40px 80px rgba(0,0,0,.4)">
+          <b style="font: 900 26px/1 Outfit, sans-serif">Badges <span style="font-weight: 600; font-size: 15px; color: #8C93B5">6 de 8</span></b>
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 10px"><sc-for list="{{badges}}" as="b" hint-placeholder-count="8"><div style="display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center"><span style="{{b.shape}}"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="{{b.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{b.icon}}"/></svg></span><b style="font-size: 12px; color: {{b.label}}">{{b.name}}</b><span style="font-size: 11px; color: #8C93B5">{{b.how}}</span></div></sc-for></div>
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px"><sc-for list="{{levels}}" as="l"><span style="{{l.st}}"><b style="font: 900 16px/1 Outfit, sans-serif">{{l.n}}</b><span style="font-size: 11px; line-height: 1.3; opacity: .85">{{l.p}}</span></span></sc-for></div>
         </div>
+      </div>
+    </section>
+  </sc-if>
+  <!-- 7 · Partner Dashboard -->
+  <sc-if value="{{S.dash}}" hint-placeholder-val="{{ false }}">
+    <section class="sl t-ink" aria-label="Partner Dashboard" style="padding: 0">
+      <div class="split">
+        <div class="stack" style="align-self: center">
+          <h2 class="mega h-m"><span class="ln" style="--i: 0"><span>Tu operación,</span></span><span class="ln acc" style="--i: 1"><span>siempre a la vista.</span></span></h2>
+          <ul class="chk up" style="--i: 1"><sc-for list="{{dash}}" as="d"><li>{{d.t}}</li></sc-for></ul>
+          <span class="small up" style="--i: 2">Es el portal real con datos de ejemplo. Navégalo.</span>
+        </div>
+        <div class="brw up" style="--i: 1"><div class="bar"><i></i><i></i><i></i><span>tadaa.1wp.site/productor</span></div><iframe src="index.html?preview=1&amp;mode=d#productor" title="Partner Dashboard" loading="lazy"></iframe></div>
       </div>
     </section>
   </sc-if>
 
   <!-- 14 · En vivo -->
-  <sc-if value="{{s14}}" hint-placeholder-val="{{ false }}">
+  <sc-if value="{{S.vivo}}" hint-placeholder-val="{{ false }}">
     <section class="sl t-ink" aria-label="Demo en vivo" style="padding: 0">
       <div class="split" style="grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); gap: 18px">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap">
@@ -424,7 +488,7 @@ body{margin:0}
   </sc-if>
 
   <!-- 15 · Alianza -->
-  <sc-if value="{{s15}}" hint-placeholder-val="{{ false }}">
+  <sc-if value="{{S.alianza}}" hint-placeholder-val="{{ false }}">
     <section class="sl t-blue" aria-label="Construyamos una alianza">
       <div class="g2">
         <div class="stack" style="gap: 20px">
@@ -466,16 +530,23 @@ body{margin:0}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
 class Component extends DCLogic {
-  constructor(p){ super(p); this.state = { i: 0, dx: 1, open: 'p1', net: 0, wk: 0, tx: 2, gold: false, idx: false, live: 'home', deck: null, ln: '', lo: null, le: '', lbusy: false, lsent: false, lerr: '' }; }
+  constructor(p){ super(p); this.state = { i: 0, dx: 1, open: 'p1', net: 0, wk: 0, tx: 0, gold: false, idx: false, live: 'home', deck: null, ln: '', lo: null, le: '', lbusy: false, lsent: false, lerr: '' }; }
   renderVals() {
-    const PH = {"crown": "M239.75,90.81c0,.11,0,.21-.07.32L217,195a16,16,0,0,1-15.72,13H54.71A16,16,0,0,1,39,195L16.32,91.13c0-.11-.05-.21-.07-.32A16,16,0,0,1,44,77.39l33.67,36.29,35.8-80.29a1,1,0,0,0,0-.1,16,16,0,0,1,29.06,0,1,1,0,0,0,0,.1l35.8,80.29L212,77.39a16,16,0,0,1,27.71,13.42Z", "gift": "M216,72H180.92c.39-.33.79-.65,1.17-1A29.53,29.53,0,0,0,192,49.57,32.62,32.62,0,0,0,158.44,16,29.53,29.53,0,0,0,137,25.91a54.94,54.94,0,0,0-9,14.48,54.94,54.94,0,0,0-9-14.48A29.53,29.53,0,0,0,97.56,16,32.62,32.62,0,0,0,64,49.57,29.53,29.53,0,0,0,73.91,71c.38.33.78.65,1.17,1H40A16,16,0,0,0,24,88v32a16,16,0,0,0,16,16v64a16,16,0,0,0,16,16h60a4,4,0,0,0,4-4V120H40V88h80v32h16V88h80v32H136v92a4,4,0,0,0,4,4h60a16,16,0,0,0,16-16V136a16,16,0,0,0,16-16V88A16,16,0,0,0,216,72ZM84.51,59a13.69,13.69,0,0,1-4.5-10A16.62,16.62,0,0,1,96.59,32h.49a13.69,13.69,0,0,1,10,4.5c8.39,9.48,11.35,25.2,12.39,34.92C109.71,70.39,94,67.43,84.51,59Zm87,0c-9.49,8.4-25.24,11.36-35,12.4C137.7,60.89,141,45.5,149,36.51a13.69,13.69,0,0,1,10-4.5h.49A16.62,16.62,0,0,1,176,49.08,13.69,13.69,0,0,1,171.49,59Z", "ticket": "M232,104a8,8,0,0,0,8-8V64a16,16,0,0,0-16-16H32A16,16,0,0,0,16,64V96a8,8,0,0,0,8,8,24,24,0,0,1,0,48,8,8,0,0,0-8,8v32a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V160a8,8,0,0,0-8-8,24,24,0,0,1,0-48ZM32,167.2a40,40,0,0,0,0-78.4V64H88V192H32Z", "music": "M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z", "star": "M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"};
-    const st = this.state, N = 15, i = st.i, deck = st.deck, land = deck && deck.landing;
+    const PH = {"crown": "M239.75,90.81c0,.11,0,.21-.07.32L217,195a16,16,0,0,1-15.72,13H54.71A16,16,0,0,1,39,195L16.32,91.13c0-.11-.05-.21-.07-.32A16,16,0,0,1,44,77.39l33.67,36.29,35.8-80.29a1,1,0,0,0,0-.1,16,16,0,0,1,29.06,0,1,1,0,0,0,0,.1l35.8,80.29L212,77.39a16,16,0,0,1,27.71,13.42Z", "gift": "M216,72H180.92c.39-.33.79-.65,1.17-1A29.53,29.53,0,0,0,192,49.57,32.62,32.62,0,0,0,158.44,16,29.53,29.53,0,0,0,137,25.91a54.94,54.94,0,0,0-9,14.48,54.94,54.94,0,0,0-9-14.48A29.53,29.53,0,0,0,97.56,16,32.62,32.62,0,0,0,64,49.57,29.53,29.53,0,0,0,73.91,71c.38.33.78.65,1.17,1H40A16,16,0,0,0,24,88v32a16,16,0,0,0,16,16v64a16,16,0,0,0,16,16h60a4,4,0,0,0,4-4V120H40V88h80v32h16V88h80v32H136v92a4,4,0,0,0,4,4h60a16,16,0,0,0,16-16V136a16,16,0,0,0,16-16V88A16,16,0,0,0,216,72ZM84.51,59a13.69,13.69,0,0,1-4.5-10A16.62,16.62,0,0,1,96.59,32h.49a13.69,13.69,0,0,1,10,4.5c8.39,9.48,11.35,25.2,12.39,34.92C109.71,70.39,94,67.43,84.51,59Zm87,0c-9.49,8.4-25.24,11.36-35,12.4C137.7,60.89,141,45.5,149,36.51a13.69,13.69,0,0,1,10-4.5h.49A16.62,16.62,0,0,1,176,49.08,13.69,13.69,0,0,1,171.49,59Z", "ticket": "M232,104a8,8,0,0,0,8-8V64a16,16,0,0,0-16-16H32A16,16,0,0,0,16,64V96a8,8,0,0,0,8,8,24,24,0,0,1,0,48,8,8,0,0,0-8,8v32a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V160a8,8,0,0,0-8-8,24,24,0,0,1,0-48ZM32,167.2a40,40,0,0,0,0-78.4V64H88V192H32Z", "music": "M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z", "star": "M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z", "plug": "M88.57,35A8,8,0,0,1,103.43,29l8,20A8,8,0,0,1,96.57,55ZM29,103.43l20,8A8,8,0,1,0,55,96.57l-20-8A8,8,0,0,0,29,103.43ZM227,152.57l-20-8A8,8,0,1,0,201,159.43l20,8A8,8,0,0,0,227,152.57ZM159.43,201A8,8,0,0,0,144.57,207l8,20A8,8,0,1,0,167.43,221ZM237.91,18.52a8,8,0,0,0-11.5-.18L174,70.75l-5.38-5.38a32,32,0,0,0-45.28,0L106.14,82.54a4,4,0,0,0,0,5.66l61.7,61.66a4,4,0,0,0,5.66,0l16.74-16.74a32.76,32.76,0,0,0,9.81-22.52,31.82,31.82,0,0,0-9.37-23.17l-5.38-5.37,52.2-52.17A8.22,8.22,0,0,0,237.91,18.52ZM85.64,90.34a8,8,0,0,0-11.49.18,8.22,8.22,0,0,0,.41,11.37L80.67,108,65.34,123.31A31.82,31.82,0,0,0,56,146.47,32.75,32.75,0,0,0,65.77,169l5,4.94L18.49,226.13a8.21,8.21,0,0,0-.61,11.1,8,8,0,0,0,11.72.43L82,185.25l5.37,5.38a32.1,32.1,0,0,0,45.29,0L148,175.31l6.34,6.35a8,8,0,0,0,11.32-11.32Z", "phone": "M176,16H80A24,24,0,0,0,56,40V216a24,24,0,0,0,24,24h96a24,24,0,0,0,24-24V40A24,24,0,0,0,176,16ZM80,32h96a8,8,0,0,1,8,8v8H72V40A8,8,0,0,1,80,32Zm96,192H80a8,8,0,0,1-8-8v-8H184v8A8,8,0,0,1,176,224Z", "confetti": "M111.49,52.63a15.8,15.8,0,0,0-26,5.77L33,202.78A15.83,15.83,0,0,0,47.76,224a16,16,0,0,0,5.46-1l144.37-52.5a15.8,15.8,0,0,0,5.78-26ZM65.14,161.13l19.2-52.79,63.32,63.32-52.8,19.2ZM160,72a37.8,37.8,0,0,1,3.84-15.58C169.14,45.83,179.14,40,192,40c6.7,0,11-2.29,13.65-7.21A22,22,0,0,0,208,23.94,8,8,0,0,1,224,24c0,12.86-8.52,32-32,32-6.7,0-11,2.29-13.65,7.21A22,22,0,0,0,176,72.06,8,8,0,0,1,160,72ZM136,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm101.66,82.34a8,8,0,1,1-11.32,11.31l-16-16a8,8,0,0,1,11.32-11.32Zm4.87-42.75-24,8a8,8,0,0,1-5.06-15.18l24-8a8,8,0,0,1,5.06,15.18Z"};
+    const st = this.state, deck = st.deck, land = deck && deck.landing;
     const lslug = (land && land.slug) || 'kinky-boots', ltitle = String((land && land.title) || 'Kinky Boots').split(' — ')[0];
+    const VAR = (deck && deck.config && deck.config.variant) === 'atraccion' ? 'atraccion' : 'produccion', AT = VAR === 'atraccion';
+    const ORDER = AT ? ['portada', 'queEs', 'mercado', 'canales', 'trabajo', 'ticketing', 'preview', 'extras', 'loyalty', 'dash', 'vivo', 'alianza']
+      : ['portada', 'queEs', 'mercado', 'canales', 'trabajo', 'ticketing', 'now', 'golden', 'preview', 'extras', 'loyalty', 'dash', 'vivo', 'alianza'];
+    const NAMES = { portada: 'Portada', queEs: '¿Qué es Tadaa!?', mercado: 'La oportunidad', canales: 'Cómo llegamos', trabajo: 'Así trabajamos', ticketing: 'Ticketing flexible', now: 'NOW!', golden: 'Golden Ticket', preview: AT ? 'Lanzamientos' : 'Preview Night', extras: 'Más por compra', loyalty: 'Gamification', dash: 'Partner Dashboard', vivo: 'En vivo', alianza: 'Alianza' };
+    const THEME = { portada: 'blue', queEs: 'paper', mercado: 'ink', canales: 'ink', trabajo: 'ink', ticketing: 'paper', now: 'now', golden: 'gold', preview: 'show', extras: 'ink', loyalty: 'blue', dash: 'ink', vivo: 'ink', alianza: 'blue' };
+    const N = ORDER.length, i = Math.min(st.i, N - 1), cur = ORDER[i]; this._n = N;
+    const labels = ORDER.map(k => NAMES[k]);
     const go = (k, d) => () => this.setState({ i: k, idx: false, dx: d || (k >= i ? 1 : -1) });
-    const labels = ['Portada', 'La oportunidad', '¿Qué es Tadaa!?', 'Red de distribución', 'Comunidad abierta', 'Así trabajamos', 'Partner Dashboard', 'Ticketing flexible', 'NOW!', 'Golden Ticket', 'Preview Night', 'Más por compra', 'Gamification', 'En vivo', 'Alianza'];
-    const THEMES = ['blue', 'ink', 'paper', 'ink', 'blue', 'ink', 'ink', 'paper', 'lime', 'gold', 'show', 'ink', 'blue', 'ink', 'blue'];
     const dots = labels.map((l, k) => ({ aria: 'Ir a ' + l, on: k === i, go: go(k), cls: k < i ? 'done' : '' }));
     const thumbs = labels.map((label, k) => ({ label, n: String(k + 1).padStart(2, '0'), go: go(k), on: k === i }));
+    const v = {}; ORDER.forEach(k => { v[k] = k === cur; });
+    const V = AT ? { obra: 'parque', enEl: 'en la entrada.', pnSub: 'Antes de abrir las puertas, comienza la experiencia.' } : { obra: 'obra', enEl: 'en el boleto.', pnSub: 'Antes de que se abra el telón, comienza la experiencia.' };
     // 2 · mercado
     const market = [
       { n: '9.17', u: ' M', t: 'habitantes en Ciudad de México', bg: '#D6FF35', fg: '#08091A' },
@@ -499,9 +570,13 @@ class Component extends DCLogic {
     // 7 · dashboard
     const dash = [{ t: 'Consultar ventas por evento' }, { t: 'Verificar compras y transacciones' }, { t: 'Dar seguimiento a los accesos comercializados' }, { t: 'Gestionar la entrega de accesos según la modalidad acordada' }, { t: 'Más visibilidad de la operación de Tadaa!' }];
     // 8 · ticketing
-    const TX = [['Tadaa! como boletera', 'Comercialización y ticketing completos cuando necesitas una solución integral.', 'BOLETO FINAL'], ['Canal complementario', 'Si ya tienes boletera, trabajamos en paralelo con el inventario asignado a Tadaa!.', 'INVENTARIO ASIGNADO'], ['Accesos provisionales', 'Si conservas tu ticketing, emitimos accesos con QR dinámico que se renueva cada minuto para verificar la compra.', 'ACCESO PROVISIONAL']];
-    const tix = TX.map(([t, d], k) => { const on = st.tx === k; return { k: k + 1, t, d, on, pick: () => this.setState({ tx: k }), cls: 'opt' + (on ? ' on' : '') }; });
-    const tixPhone = { tag: TX[st.tx][2], note: st.tx === 2 ? 'Se renueva cada minuto' : 'QR dinámico en la Wallet' };
+    const TX = [
+      { t: 'Canal complementario', tag: AT ? 'Pase provisional' : 'Boleto provisional', d: 'Ya tienes boletera: vendemos el inventario asignado a Tadaa! y emitimos un ' + (AT ? 'pase' : 'boleto') + ' provisional con QR dinámico que se renueva cada minuto para verificar la compra.', chip: AT ? 'PASE PROVISIONAL' : 'BOLETO PROVISIONAL', chipCls: 'chp-prov', note: 'Verificación de compra', integra: true },
+      { t: 'Tadaa! como boletera', tag: AT ? 'Pase de acceso' : 'Boleto final de acceso', d: 'Comercialización y ticketing completos: el ' + (AT ? 'pase' : 'boleto') + ' en la Wallet es el acceso final, con QR dinámico y check-in desde la app de Staff.', chip: AT ? 'PASE DE ACCESO · TADAA!' : 'BOLETO FINAL · TADAA! TICKETS', chipCls: 'chp-final', note: 'Acceso · se renueva cada minuto', integra: false } ];
+    const tx = Math.min(st.tx, 1);
+    const tix = TX.map((x, k) => ({ k: k + 1, t: x.t, tag: x.tag, on: tx === k, pick: () => this.setState({ tx: k }), cls: 'opt' + (tx === k ? ' on' : '') }));
+    const tixOn = { ...TX[tx], meta: AT ? [{ l: 'Visita', v: 'Sáb 14 dic' }, { l: 'Horario', v: '10:00–20:00' }, { l: 'Tipo', v: 'Pase general' }] : [{ l: 'Fecha', v: 'Mié 12 may' }, { l: 'Hora', v: '20:30' }, { l: 'Lugar', v: 'Platea F-12' }] };
+    const ic = { plug: PH.plug, phone: PH.phone };
     const qr = seed => { let x = seed * 9301 + 49297; const rnd = () => (x = (x * 9301 + 49297) % 233280) / 233280; const n = 25; let d = '';
       const fin = (r, c) => { const inF = (R, C) => r >= R && r < R + 7 && c >= C && c < C + 7; return inF(0, 0) || inF(0, n - 7) || inF(n - 7, 0); };
       const finOn = (r, c) => { const b = (R, C) => { const y = r - R, z = c - C; if (y < 0 || z < 0 || y > 6 || z > 6) return null; return y === 0 || y === 6 || z === 0 || z === 6 || (y >= 2 && y <= 4 && z >= 2 && z <= 4); };
@@ -515,26 +590,42 @@ class Component extends DCLogic {
     // 10 · Golden
     const goldEx = [{ t: 'Upgrade de asiento' }, { t: 'Meet & greet' }, { t: 'Merch exclusivo' }, { t: 'Experiencias especiales' }];
     const hundred = Array.from({ length: 100 }, (_, k) => ({ cls: k === 57 ? 'w' : '' }));
-    const gold = { label: st.gold ? '¡Te tocó un meet & greet con el elenco!' : 'Toca para ver qué esconde', icon: st.gold ? PH.crown : PH.gift, on: st.gold, pick: () => this.setState({ gold: !st.gold }) };
+    const GC = ['#F6E27A', '#FFF3B0', '#C9A24B', '#FFFFFF', '#E8C66A'];
+    const bits = Array.from({ length: 36 }, (_, k) => { const ang = (k / 36) * Math.PI * 2 + (k % 3) * .2, dist = 140 + (k * 37 % 120);
+      return { s: '--x: ' + Math.round(Math.cos(ang) * dist * 1.6) + 'px; --y: ' + Math.round(Math.sin(ang) * dist - 40) + 'px; --r: ' + (k * 47 % 360 + 180) + 'deg; --c: ' + GC[k % 5] + '; --w: ' + (6 + k % 4 * 3) + 'px; --h: ' + (4 + k % 3 * 3) + 'px; --dl: ' + (k % 6) * 20 + 'ms' }; });
+    const gold = { on: st.gold, cls: 'gt' + (st.gold ? ' on' : ''), aria: st.gold ? 'Golden Ticket revelado: meet and greet con el elenco. Toca para volver' : 'Revelar el Golden Ticket', gift: PH.gift, crown: PH.crown, bits, pick: () => this.setState({ gold: !st.gold }) };
     // 11 · Preview Night
-    const previewFor = [{ t: 'Premières y prensa' }, { t: 'Amigos y familia' }, { t: 'Funciones especiales' }, { t: 'Lanzamientos y estrenos' }];
+    const previewFor = AT ? [{ t: 'Lanzamientos de atracciones' }, { t: 'Eventos corporativos' }, { t: 'Noches exclusivas' }, { t: 'Prensa e influencers' }] : [{ t: 'Premières y prensa' }, { t: 'Amigos y familia' }, { t: 'Funciones especiales' }, { t: 'Lanzamientos y estrenos' }];
     // 12 · extras
-    const extras = [{ t: 'Add-ons', c: '#D6FF35', d: 'Merch, combos de alimentos y bebidas, paquetes y experiencias.' }, { t: 'Preventas', c: '#FFFFFF', d: 'Acceso anticipado para nuestra comunidad.' }, { t: 'Meses sin intereses', c: '#FFFFFF', d: 'Cuando el margen y las condiciones lo permiten.' }, { t: 'Cortesías digitales', c: '#D6FF35', d: 'Invitaciones y accesos electrónicos, organizados.' }];
-    const cart = [{ t: '1 boleto · Platea', p: '$1,600' }, { t: 'Combo bebida + snack', p: '$280' }, { t: 'Playera oficial', p: '$450' }];
+    const extras = AT ? [{ t: 'Fast pass', c: '#D6FF35', d: 'Menos fila en las atracciones favoritas.' }, { t: 'Preventas', c: '#FFFFFF', d: 'Acceso anticipado a temporadas y eventos.' }, { t: 'Meses sin intereses', c: '#FFFFFF', d: 'En pases de temporada, cuando aplique.' }, { t: 'Cortesías digitales', c: '#D6FF35', d: 'Invitaciones y accesos electrónicos, organizados.' }] : [{ t: 'Add-ons', c: '#D6FF35', d: 'Merch, combos de alimentos y bebidas, paquetes y experiencias.' }, { t: 'Preventas', c: '#FFFFFF', d: 'Acceso anticipado para nuestra comunidad.' }, { t: 'Meses sin intereses', c: '#FFFFFF', d: 'Cuando el margen y las condiciones lo permiten.' }, { t: 'Cortesías digitales', c: '#D6FF35', d: 'Invitaciones y accesos electrónicos, organizados.' }];
+    const cart = AT ? [{ t: '1 pase general', p: '$1,600' }, { t: 'Fast pass', p: '$450' }, { t: 'Combo comida', p: '$280' }] : [{ t: '1 boleto · Platea', p: '$1,600' }, { t: 'Combo bebida + snack', p: '$280' }, { t: 'Playera oficial', p: '$450' }];
+    const pnPasses = [['Noche de lanzamiento', 'PRENSA', 'Ana López', 'Vie 21 mar · 19:00', '#1238FF', 7], ['Evento corporativo', 'EMPRESA', 'Equipo Acme', 'Sáb 5 abr · 10:00', '#08091A', 19], ['Noche exclusiva', 'VIP', 'Luis Pérez', 'Vie 25 abr · 20:00', '#E30613', 31]].map(([t, k, g, w, bg, sd], j) => ({ t, k, g, w, bg, qr: qr(sd),
+      st: 'position: absolute; left: 0; right: 0; top: ' + (j * 130) + 'px; background: #FFFFFF; color: #08091A; border-radius: 22px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,.45); transform: rotate(' + (j - 1) * 3 + 'deg)' }));
     // 13 · loyalty
     const rewards = [{ t: 'Cashback' }, { t: 'Tarifas preferenciales' }, { t: 'Beneficios exclusivos' }, { t: 'Nuevas oportunidades de acceso' }];
-    const BG = [['ticket', 'Primera función', 1], ['music', 'Fan del musical', 1], ['star', 'Superfan', 1], ['crown', 'Leyenda', 0]];
-    const badges = BG.map(([ic, t, on]) => ({ p: PH[ic], t, cls: 'bdg' + (on ? ' on' : '') }));
+    const BD = [
+      ['Primera función', '#D6FF35', true, 'M5 4h14v6a7 7 0 0 1-14 0zM9 21h6M12 17v4', 'Tu primer plan'],
+      ['Noche de rock', '#FF8A3D', true, 'M9 18V5l12-2v13M9 18a3 3 0 1 1-3-3 3 3 0 0 1 3 3zM21 16a3 3 0 1 1-3-3 3 3 0 0 1 3 3z', '1 concierto'],
+      ['Teatrero', '#7FA0FF', true, 'M4 4h16v6a8 8 0 0 1-16 0zM9 9h.01M15 9h.01M9 13a4 4 0 0 0 6 0', '3 obras'],
+      ['Explorador', '#B9C7FF', true, 'M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z', '2 sedes nuevas'],
+      ['Familiar', '#FFE9A8', true, 'M8 21v-6M16 21v-6M6 15h12l-2-7H8z', '1 paseo'],
+      ['Madrugador', '#D6FF35', true, 'M12 2v4M4.9 4.9l2.8 2.8M2 12h4M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8z', 'Compra en preventa'],
+      ['Now! veloz', '#3A3E66', false, 'M13 2 4 14h7l-1 8 9-12h-7z', 'Gana un Now!'],
+      ['Golden', '#3A3E66', false, 'M3 7h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4z', 'Recibe un Golden'] ];
+    const badges = BD.map(([name, bg, on, icon, how]) => ({ name, icon, how, ink: on ? '#08091A' : '#AEB6D6', label: on ? '#FFFFFF' : '#8C93B5',
+      shape: 'width: 64px; height: 72px; display: grid; place-items: center; background: ' + bg + '; border-radius: 20px 20px 34px 34px; ' + (on ? 'box-shadow: 0 0 0 3px #08091A, 0 0 0 5px ' + bg + ';' : 'opacity: .55;') }));
+    const levels = [['Curioso', 'Tarifas de convenio', 'd'], ['Fan', '1% cashback', 'n'], ['Asiduo', '3% cashback', 'x'], ['Leyenda', '5% cashback · preestrenos', 'x']].map(([n, p, s2]) => ({ n, p,
+      st: 'display: flex; flex-direction: column; gap: 4px; border-radius: 16px; padding: 12px; ' + (s2 === 'n' ? 'background: #1238FF; color: #FFFFFF; box-shadow: 0 0 0 2px #D6FF35;' : s2 === 'd' ? 'background: #161833; color: #C7CDE6;' : 'border: 1.5px dashed #3A3E66; color: #8C93B5;') }));
     // 14 · en vivo
     const LV = {
       home: ['Plataforma', 'inicio', 'd', 'La cartelera de Tadaa!', 'Home, populares, NOW! y planes para cualquier día con datos reales del sistema.'],
-      evento: ['Evento', 'evento/matilda', 'd', 'Ficha de evento y compra', 'Zonas, mapa de asientos, add-ons, Golden Ticket y Aplausómetro. El pago está en modo de prueba.'],
+      evento: ['Evento', AT ? 'evento/bioparque' : 'evento/matilda', 'd', 'Ficha de evento y compra', 'Zonas, mapa de asientos, add-ons, Golden Ticket y Aplausómetro. El pago está en modo de prueba.'],
       prod: ['Partner Dashboard', 'productor', 'd', 'Portal de aliados', 'Ventas del día, compras con add-ons, NOW! y Golden Ticket configurables. Vista con datos de muestra.'],
       admin: ['Studio', 'admin', 'd', 'Panel de administración', 'KPIs, eventos, NOW!, solicitudes de boletera externa y check-in. Vista con datos de muestra.'],
       emp: ['Empresas', 'empresa', 'd', 'Portal de empresas', 'Altas y bajas por RFC, padrón por CSV y uso agregado sin ver compras. Vista con datos de muestra.'],
       staff: ['Staff', 'staff', 'm', 'App de acceso', 'Escaneo de QR dinámico, verificación de compra y entrega de add-ons en puerta.'],
       wallet: ['Wallet', 'wallet', 'm', 'Wallet del asistente', 'Boleto final con QR que cambia cada minuto, pases provisionales y add-ons.'],
-      land: ['Micrositio', 'landings/?s=' + lslug + '&embed=1', 'x', 'Micrositio de ' + ltitle, 'Preview Night: la página de la obra con su identidad, su interacción firma y los pases de cada invitado.']
+      ...(AT ? {} : { land: ['Micrositio', 'landings/?s=' + lslug + '&embed=1', 'x', 'Micrositio de ' + ltitle, 'Preview Night: la página de la obra con su identidad, su interacción firma y los pases de cada invitado.'] })
     };
     const lv = LV[st.live] || LV.home;
     const liveTabs = Object.keys(LV).map(id => ({ label: LV[id][0], on: st.live === id, pick: () => this.setState({ live: id }),
@@ -543,18 +634,20 @@ class Component extends DCLogic {
     const live = { title: lv[3], text: lv[4], src, url: 'tadaa.1wp.site/' + lv[1].replace('&embed=1', ''), note: 'Vista previa incrustada: los portales muestran datos de ejemplo y no requieren sesión.',
       frame: 'flex: 1 1 auto; min-width: 0; ' + (lv[2] === 'm' ? 'flex: 0 0 360px; max-width: 360px; margin: 0 auto;' : '') };
     // 15 · alianza
-    const define = ['Inventario y categorías disponibles', 'Tarifas preferenciales y condiciones', 'Periodos de comercialización', 'Campañas NOW! y Golden Ticket', 'Preventas, cortesías y Preview Night', 'Add-ons y experiencias adicionales', 'Modalidad de ticketing y validación', 'Operación, liquidación y atención'].map(t => ({ t }));
+    const define = (AT ? ['Inventario y tipos de pase disponibles', 'Tarifas preferenciales y condiciones', 'Periodos de comercialización', 'Preventas y temporadas', 'Cortesías, lanzamientos y eventos corporativos', 'Add-ons: fast pass, comida y más', 'Modalidad de ticketing y validación', 'Operación, liquidación y atención'].map(t => ({ t })) : null) || ['Inventario y categorías disponibles', 'Tarifas preferenciales y condiciones', 'Periodos de comercialización', 'Campañas NOW! y Golden Ticket', 'Preventas, cortesías y Preview Night', 'Add-ons y experiencias adicionales', 'Modalidad de ticketing y validación', 'Operación, liquidación y atención'].map(t => ({ t }));
 
-    const v = {}; for (let k = 0; k < N; k++) v['s' + (k + 1)] = i === k;
     const lc = (land && land.card) || {}, lh = (land && land.hero) || {};
     const prospect = deck ? deck.prospect : '';
     const cover = { kicker: deck ? 'PREPARADO PARA ' + String(prospect).toUpperCase() : 'UNA NUEVA PLATAFORMA DE EXPERIENCIAS', sub: deck && deck.message ? deck.message : 'Conectamos productores, promotores y recintos con nuevas audiencias: una red de distribución digital, beneficios exclusivos y herramientas flexibles de comercialización.', logo: deck ? deck.logo_url || '' : '' };
+    const dc = (deck && deck.config && deck.config.card) || {};
     const card = land ? { img: lc.img || lh.art || lh.logo, title: ltitle, when: [lc.when, lc.venue].filter(Boolean).join(' · '), fit: lc.img && /legs|logo/.test(lc.img) ? 'contain' : 'cover', bg: '#F6EFEA' }
+      : AT ? { img: dc.img || '', title: dc.title || (deck ? deck.prospect : 'Tu parque'), when: dc.when || 'Parque de diversiones', fit: 'cover', bg: '#1238FF' }
       : { img: 'landings/kinky-boots/legs.webp', title: 'Kinky Boots', when: 'Ejemplo de producción', fit: 'contain', bg: '#F6EFEA' };
-    const obra = { title: ltitle, src: 'landings/?s=' + lslug + '&embed=1', open: 'landings/?s=' + lslug, url: 'tadaa.1wp.site/obra/' + lslug,
-      text: land ? 'Así sería el micrositio de ' + ltitle + ': presenta la obra y entrega cortesías e invitaciones con QR dinámico.' : 'Micrositios para presentar producciones próximas a estrenarse y entregar cortesías e invitaciones de forma electrónica. Ejemplo: ' + ltitle + '.' };
+    card.noImg = !card.img; card.icon = PH.confetti;
+    const obra = { site: !AT, noSite: AT, title: ltitle, src: 'landings/?s=' + lslug + '&embed=1', open: 'landings/?s=' + lslug, url: 'tadaa.1wp.site/obra/' + lslug,
+      text: AT ? 'Micrositios e invitaciones digitales para lanzar atracciones, recibir empresas o abrir noches exclusivas, con pases y QR dinámico para cada invitado.' : land ? 'Así sería el micrositio de ' + ltitle + ': presenta la obra y entrega cortesías e invitaciones con QR dinámico.' : 'Micrositios para presentar producciones próximas a estrenarse y entregar cortesías e invitaciones de forma electrónica. Ejemplo: ' + ltitle + '.' };
     const nm = st.ln, org = st.lo == null ? prospect : st.lo, em = st.le;
-    const lead = { title: deck && land ? ltitle + ' tiene una nueva oportunidad de llegar más lejos.' : 'Tu producción tiene una nueva oportunidad de llegar más lejos.', name: nm, org, email: em, busy: st.lbusy, error: st.lerr, sent: st.lsent, form: !st.lsent, first: (nm || '').split(' ')[0],
+    const lead = { title: AT ? (deck ? deck.prospect : 'Tu parque') + ' puede llegar más lejos.' : deck && land ? ltitle + ' tiene una nueva oportunidad de llegar más lejos.' : 'Tu producción tiene una nueva oportunidad de llegar más lejos.', name: nm, org, email: em, busy: st.lbusy, error: st.lerr, sent: st.lsent, form: !st.lsent, first: (nm || '').split(' ')[0],
       cta: st.lbusy ? 'Enviando…' : 'Quiero ser aliado de Tadaa!',
       setName: e => this.setState({ ln: e.target.value, lerr: '' }), setOrg: e => this.setState({ lo: e.target.value }), setEmail: e => this.setState({ le: e.target.value, lerr: '' }),
       submit: async e => { e && e.preventDefault && e.preventDefault(); if (st.lbusy) return;
@@ -564,10 +657,10 @@ class Component extends DCLogic {
         try { const r = await fetch('/api/v2/pitch/' + encodeURIComponent((deck && deck.slug) || 'general') + '/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: nm.trim(), organization: org, email: em.trim() }) });
           const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || 'No pudimos enviar tus datos. Intenta de nuevo.'); this.setState({ lbusy: false, lsent: true }) }
         catch (x) { this.setState({ lbusy: false, lerr: x.message }) } } };
-    return { ...v, dots, thumbs, market, pillars, net, plan, work, dash, tix, tixPhone, qrs, nowPts, nowClock, goldEx, hundred, gold, previewFor, extras, cart, rewards, badges, liveTabs, live, define, cover, card, obra, lead,
-      themeCls: 'th-' + THEMES[i], dx: st.dx, num: String(i + 1).padStart(2, '0'), total: N, secLabel: labels[i],
+    return { S: v, V, ic, dots, thumbs, market, pillars, net, plan, work, dash, tix, tixOn, qrs, goldEx, hundred, gold, previewFor, pnPasses, extras, cart, rewards, badges, levels, liveTabs, live, define, cover, card, obra, lead,
+      themeCls: 'th-' + THEME[cur], dx: st.dx, num: String(i + 1).padStart(2, '0'), total: N, secLabel: labels[i],
       counter: i < N - 1 ? 'Sigue: ' + labels[i + 1] : 'Fin de la presentación',
-      prev: go((i + N - 1) % N, -1), next: go((i + 1) % N, 1), goLast: go(N - 1, 1), nextLabel: i === N - 1 ? 'Volver al inicio' : 'Siguiente →',
+      prev: go((i + N - 1) % N, -1), next: go((i + 1) % N, 1), goLast: go(N - 1, 1), nextLabel: i === N - 1 ? 'Volver al inicio' : 'Siguiente',
       indexOpen: st.idx, toggleIndex: () => this.setState({ idx: !st.idx }) };
   }
 }
