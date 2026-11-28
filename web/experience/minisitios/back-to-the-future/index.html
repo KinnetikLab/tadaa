@@ -8,21 +8,22 @@
 <meta name="description" content="Back to the Future: El Musical, ganador del Premio Olivier a Mejor Nuevo Musical, estrena temporada en 2027 en el Teatro Telcel. Preventa con TADAA!">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&family=Big+Shoulders+Display:wght@700;800;900&family=Outfit:wght@800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;700;800&family=Big+Shoulders+Display:wght@700;800;900&family=Outfit:wght@800&display=swap" rel="stylesheet">
 <link rel="preload" href="cielo.webp" as="image">
 <link rel="preload" href="logo.webp" as="image">
 <style>
 @font-face{font-family:DSEG14;src:url(DSEG14Classic-Bold.woff2) format('woff2');font-display:block}
 :root{--night:#050722;--deep:#0A1170;--volt:#1E33FF;--arc:#DDF6FF;--cyan:#7FE3FF;--flux:#FF6B1A;--sun:#FFD21F;--red:#FF2D2D;--led-r:#FF3B30;--led-g:#3BFF6E;--led-a:#FFB02E;
- --fd:'Big Shoulders Display',Impact,sans-serif;--fb:'Archivo',system-ui,sans-serif;--fl:DSEG14,ui-monospace,monospace;
+ --fd:'Big Shoulders Display',Impact,sans-serif;--fb:'Chakra Petch',system-ui,sans-serif;
+ --n:12px;--hud:polygon(var(--n) 0,100% 0,100% calc(100% - var(--n)),calc(100% - var(--n)) 100%,0 100%,0 var(--n));--fl:DSEG14,ui-monospace,monospace;
  --spring:cubic-bezier(.2,1.15,.35,1);--out:cubic-bezier(0,0,.2,1);--zoom:cubic-bezier(.33,.05,.25,1)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--night)}
-body{margin:0;color:#fff;font:400 17px/1.6 var(--fb);background:var(--night);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{margin:0;color:#fff;font:500 17px/1.6 var(--fb);background:var(--night);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{color:inherit}
 button{font:inherit;color:inherit;cursor:pointer}
-:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:10px}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
 .ic{width:1.15em;height:1.15em;fill:currentColor;flex:0 0 auto}
 .wrap{width:min(1200px,100% - 40px);margin-inline:auto}
 .kick{font:800 14px/1 var(--fd);letter-spacing:.24em;text-transform:uppercase;color:var(--cyan)}
@@ -30,7 +31,7 @@ h2{font:900 clamp(52px,7.4vw,124px)/.86 var(--fd);text-transform:uppercase;lette
 .grad{background:linear-gradient(180deg,#FFF36B 0%,#FFD21F 32%,#FF8A1A 64%,#FF2D2D 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 0 #1E33FF) drop-shadow(0 10px 24px rgba(30,51,255,.45))}
 .rv{opacity:0;transform:translateY(40px)}
 .rv.on{opacity:1;transform:none;transition:opacity .6s var(--out),transform .9s var(--spring)}
-.btn{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 26px;border-radius:99px;border:0;text-decoration:none;font:800 15px/1 var(--fb);letter-spacing:.02em;transition:scale .12s ease-out,box-shadow .25s var(--out),background .2s}
+.btn{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 26px;border-radius:0;clip-path:var(--hud);text-transform:uppercase;letter-spacing:.06em;border:0;text-decoration:none;font:800 15px/1 var(--fb);letter-spacing:.02em;transition:scale .12s ease-out,box-shadow .25s var(--out),background .2s}
 .btn:active{scale:.96}
 .b-hot{background:linear-gradient(100deg,#FFD21F,#FF6B1A 60%,#FF2D2D);color:#14062A;box-shadow:0 12px 34px rgba(255,107,26,.45)}
 .b-hot:hover{box-shadow:0 16px 44px rgba(255,107,26,.6)}
@@ -49,7 +50,7 @@ h2{font:900 clamp(52px,7.4vw,124px)/.86 var(--fd);text-transform:uppercase;lette
 .hero.off .sky,.hero.off .sky2,.hero.off .cue .ic{animation-play-state:paused}
 .hero .shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,7,34,.25),transparent 30%,transparent 60%,#0A1170 100%)}
 .stage{position:relative;text-align:center;padding:0 20px;display:flex;flex-direction:column;align-items:center;gap:22px;perspective:1200px}
-.logo-wrap{position:relative;width:min(860px,92vw)}
+.logo-wrap{position:relative;width:min(731px,78vw)}
 .logo{width:100%;height:auto;transform-origin:50% 55%;opacity:0}
 .landed .logo.main{filter:drop-shadow(0 18px 40px rgba(10,17,112,.75))}
 .go .logo{will-change:transform,opacity}.landed .logo{will-change:auto}
@@ -58,9 +59,9 @@ h2{font:900 clamp(52px,7.4vw,124px)/.86 var(--fd);text-transform:uppercase;lette
 .go .logo.g1{animation:spinIn 2.3s var(--zoom) .41s both,ghostOut .2s 2.5s forwards}
 .go .logo.g2{animation:spinIn 2.3s var(--zoom) .48s both,ghostOut .2s 2.5s forwards}
 .logo.g1{--gop:.55}.logo.g2{--gop:.3}
-@keyframes spinIn{0%{opacity:0;transform:scale(9) rotate(-720deg)}12%{opacity:var(--gop,1)}55%{transform:scale(1.7) rotate(-60deg)}82%{transform:scale(.93) rotate(5deg)}100%{opacity:var(--gop,1);transform:scale(1) rotate(0deg)}}
+@keyframes spinIn{0%{opacity:0;transform:scale(4)}14%{opacity:var(--gop,1)}70%{transform:scale(.96)}100%{opacity:var(--gop,1);transform:scale(1)}}
 @keyframes ghostOut{to{opacity:0}}
-.ring{position:absolute;left:50%;top:55%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;border:3px solid var(--arc);box-shadow:0 0 40px var(--cyan),inset 0 0 30px var(--cyan);opacity:0;pointer-events:none}
+.ring{position:absolute;left:50%;top:55%;width:60px;height:32px;margin:-16px 0 0 -30px;border-radius:0;border:3px solid var(--arc);box-shadow:0 0 40px var(--cyan),inset 0 0 30px var(--cyan);opacity:0;pointer-events:none}
 .landed .ring{animation:ring 1s var(--out) forwards}
 @keyframes ring{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(28)}}
 .landed .logo.main{animation:spinIn 2.3s var(--zoom) .35s both,thump .5s var(--spring) 0s}
@@ -70,7 +71,7 @@ h2{font:900 clamp(52px,7.4vw,124px)/.86 var(--fd);text-transform:uppercase;lette
 .premiere{display:inline-flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;font:900 clamp(22px,2.6vw,34px)/1 var(--fd);letter-spacing:.06em;text-transform:uppercase;text-shadow:0 2px 20px rgba(10,17,112,.9)}
 .premiere .sep{width:10px;height:10px;transform:rotate(45deg);background:var(--sun);box-shadow:0 0 14px var(--sun)}
 .premiere b{color:var(--sun)}
-.olivier{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:99px;background:rgba(5,7,34,.72);box-shadow:inset 0 0 0 1px rgba(255,210,31,.5);font-weight:700;font-size:14px;color:#FFE9A3}
+.olivier{--n:8px;clip-path:var(--hud);display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:0;background:rgba(5,7,34,.72);box-shadow:inset 0 0 0 1px rgba(255,210,31,.5);font-weight:700;font-size:14px;color:#FFE9A3}
 .olivier .ic{color:var(--sun)}
 .cue{position:absolute;bottom:22px;left:50%;translate:-50% 0;display:flex;flex-direction:column;align-items:center;gap:6px;font:800 12px/1 var(--fd);letter-spacing:.3em;color:var(--arc);opacity:0;text-decoration:none}
 .landed .cue{opacity:.85;transition:opacity 1s 1.2s}
@@ -80,6 +81,7 @@ h2{font:900 clamp(52px,7.4vw,124px)/.86 var(--fd);text-transform:uppercase;lette
 /* ───── EL DELOREAN ───── */
 .car{position:relative;overflow:hidden;background:#0A1170;margin-top:-1px}
 .car-box{position:relative;width:100%;aspect-ratio:16/9;max-height:120vh}
+.car-box{overflow:hidden}
 .car-box::before,.car-box::after{content:"";position:absolute;left:0;right:0;z-index:1;pointer-events:none}
 .car-box::before{top:0;height:13%;background:linear-gradient(180deg,#0A1170,rgba(10,17,112,0))}
 .car-box::after{bottom:0;height:19%;background:linear-gradient(0deg,#0A1170,rgba(10,17,112,0))}
@@ -96,10 +98,10 @@ h2{font:900 clamp(52px,7.4vw,124px)/.86 var(--fd);text-transform:uppercase;lette
 .glow.fire{width:22%;height:20%;background:radial-gradient(closest-side,rgba(255,190,90,.85),rgba(255,90,20,.35) 55%,transparent);animation:fire .35s ease-in-out infinite alternate}
 .glow.fire.l{left:23%;top:76%}.glow.fire.r{left:55%;top:76%;animation-delay:-.17s}
 @keyframes fire{from{opacity:.55;transform:scale(.94) translateY(2%)}to{opacity:1;transform:scale(1.06)}}
-.car-copy{position:absolute;left:0;right:0;bottom:6%;text-align:center;z-index:2;pointer-events:none}
+.car-copy{position:absolute;left:0;right:0;bottom:9%;text-align:center;z-index:3;pointer-events:none}
 .car-copy p{margin:0;font:900 clamp(30px,4.6vw,72px)/.9 var(--fd);text-transform:uppercase;letter-spacing:.02em;text-shadow:0 4px 30px rgba(5,7,34,.9)}
 .car-copy span{display:block;margin-top:10px;font-weight:600;font-size:16px;color:var(--arc);opacity:.9}
-.car-copy p .grad{display:inline;margin:0;font:inherit;color:transparent;opacity:1}
+.car-copy p .grad{display:inline;margin:0;font:inherit;opacity:1;background:none;color:var(--sun);filter:none;text-shadow:0 4px 0 #1E33FF,0 0 34px rgba(5,7,34,.95),0 0 60px rgba(5,7,34,.8)}
 
 /* ───── SINOPSIS ───── */
 .syn{position:relative;padding:120px 0 110px;background:linear-gradient(180deg,#0A1170,#050722 60%)}
@@ -111,46 +113,53 @@ h2{font:900 clamp(52px,7.4vw,124px)/.86 var(--fd);text-transform:uppercase;lette
 .creds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 26px;margin-top:30px;padding-top:26px;border-top:1px solid rgba(221,246,255,.15)}
 .creds small{display:block;font:800 12px/1 var(--fd);letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:6px}
 .creds b{font-weight:700;font-size:16px}
-.songs{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
-.songs span{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:99px;background:rgba(30,51,255,.18);box-shadow:inset 0 0 0 1px rgba(127,227,255,.3);font-weight:600;font-size:14px}
-.songs .ic{color:var(--sun)}
+.crew{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:34px}
+.cr{--n:12px;clip-path:var(--hud);margin:0;background:#0B0F33;box-shadow:inset 0 0 0 1px rgba(127,227,255,.22);display:flex;flex-direction:column}
+.cr-ph{position:relative;aspect-ratio:1;overflow:hidden;background:linear-gradient(160deg,#1E33FF,#0A1170 70%)}
+.cr-ph::before{content:attr(data-ini);position:absolute;inset:0;display:grid;place-items:center;font:900 44px/1 var(--fd);letter-spacing:.04em;color:rgba(221,246,255,.85)}
+.cr-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08);transition:filter .4s var(--out)}
+.cr:hover .cr-ph img{filter:none}
+.cr-ph::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(127,227,255,.06) 0 1px,transparent 1px 4px),linear-gradient(0deg,rgba(5,7,34,.55),transparent 45%);pointer-events:none}
+.cr figcaption{padding:10px 12px 12px;display:flex;flex-direction:column;gap:2px;border-top:2px solid var(--sun)}
+.cr b{font:800 17px/1.05 var(--fd);text-transform:uppercase;letter-spacing:.02em}
+.cr small{font-size:12px;line-height:1.3;color:var(--cyan)}
 
 /* ───── LA MÁQUINA: condensador + circuitos ───── */
 .machine{position:relative;padding:110px 0;background:radial-gradient(60% 50% at 30% 50%,rgba(30,51,255,.25),transparent 70%),#050722;overflow:hidden}
-.mgrid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:60px;align-items:center;margin-top:44px}
-.flux{position:relative;aspect-ratio:3/4;max-width:430px;width:100%;justify-self:center;border-radius:20px;padding:22px;background:linear-gradient(180deg,#2A2E3E,#14161F);box-shadow:inset 0 0 0 3px #3B4054,inset 0 0 0 10px #1B1D27,0 40px 80px rgba(0,0,0,.6)}
-.flux .win{position:relative;width:100%;height:100%;border-radius:10px;background:radial-gradient(70% 60% at 50% 55%,#1A2240,#07091A);box-shadow:inset 0 0 40px rgba(0,0,0,.8),inset 0 0 0 2px #444A60;overflow:hidden}
-.flux svg{position:absolute;inset:0;width:100%;height:100%}
-.flux .tube{fill:none;stroke:#2A3350;stroke-width:22;stroke-linecap:round}
-.flux .core{fill:none;stroke:url(#fluxGrad);stroke-width:8;stroke-linecap:round;stroke-dasharray:14 22;animation:flow var(--fs,1.4s) linear infinite}
-.flux .core.halo{stroke:#9FEBFF;stroke-width:22;opacity:.22}
-.flux.off .core{animation-play-state:paused}
-@keyframes flow{to{stroke-dashoffset:-72}}
-.flux .hub{fill:#DDF6FF}.flux .hub-h{fill:#9FEBFF;opacity:.3}
-.flux .label{position:absolute;left:0;right:0;bottom:-46px;text-align:center;font:900 15px/1 var(--fd);letter-spacing:.3em;color:#9AA3C8}
-.flux .warn{position:absolute;left:50%;top:12px;translate:-50% 0;background:#FFD21F;color:#111;font:800 10px/1 var(--fb);letter-spacing:.08em;padding:4px 8px;border-radius:3px}
+.mgrid{display:grid;grid-template-columns:auto minmax(0,1fr);gap:40px 48px;align-items:start;margin-top:44px}
+.flux{position:relative;width:var(--fw,360px);aspect-ratio:887/900;justify-self:center}
+.flux img{position:absolute;inset:0;width:100%;height:100%}
+.fx-hot{opacity:0;will-change:opacity}
+.fx-core{position:absolute;left:50%;top:44%;width:56%;height:46%;translate:-50% -50%;background:radial-gradient(closest-side,rgba(235,250,255,.95),rgba(120,210,255,.45) 45%,transparent);opacity:0;pointer-events:none;will-change:opacity,transform}
+.fx-flash{position:absolute;inset:-12%;background:radial-gradient(closest-side,#fff,rgba(190,240,255,.8) 35%,transparent 70%);opacity:0;pointer-events:none}
+.flux:not(.off) .fx-hot.idle{animation:fxidle 2.8s ease-in-out infinite}
+@keyframes fxidle{50%{opacity:.28}}
 .circuits{display:flex;flex-direction:column;gap:14px}
-.tc{border-radius:14px;padding:14px 18px 16px;background:linear-gradient(180deg,#2B2F3F,#1A1C26);box-shadow:inset 0 0 0 2px #3B4054,0 20px 40px rgba(0,0,0,.4)}
+.tc{--n:10px;clip-path:var(--hud);border-radius:0;padding:14px 18px 16px;background:linear-gradient(180deg,#2B2F3F,#1A1C26);box-shadow:inset 0 0 0 2px #3B4054,0 20px 40px rgba(0,0,0,.4)}
 .tc .row{display:grid;grid-template-columns:1.3fr .9fr 1.5fr .9fr .9fr;gap:8px}
 .tc .cell{display:flex;flex-direction:column;align-items:center;gap:6px}
-.tc .cap{font:800 10px/1 var(--fb);letter-spacing:.12em;color:#C9CEDD;background:#5A1010;padding:4px 8px;border-radius:3px;width:100%;text-align:center}
+.tc .cap{font:800 10px/1 var(--fb);letter-spacing:.12em;color:#C9CEDD;background:#5A1010;padding:4px 8px;border-radius:0;width:100%;text-align:center}
 .tc.g .cap{background:#0F4A1E}.tc.a .cap{background:#5A3A08}
-.tc .led{width:100%;text-align:center;padding:10px 4px 8px;border-radius:6px;background:#0B0B0E;box-shadow:inset 0 0 0 1px #000,inset 0 2px 8px rgba(0,0,0,.8);font:400 clamp(16px,2.1vw,30px)/1 var(--fl);position:relative}
+.tc .led{width:100%;text-align:center;padding:10px 4px 8px;border-radius:0;background:#0B0B0E;box-shadow:inset 0 0 0 1px #000,inset 0 2px 8px rgba(0,0,0,.8);font:400 clamp(16px,2.1vw,30px)/1 var(--fl);position:relative}
 .tc .led::before{content:attr(data-ghost);position:absolute;inset:10px 4px 8px;opacity:.08}
 .tc.r .led{color:var(--led-r);text-shadow:0 0 10px rgba(255,59,48,.8)}
 .tc.g .led{color:var(--led-g);text-shadow:0 0 10px rgba(59,255,110,.7)}
 .tc.a .led{color:var(--led-a);text-shadow:0 0 10px rgba(255,176,46,.7)}
-.tc .name{margin-top:12px;text-align:center;font:900 14px/1 var(--fd);letter-spacing:.32em;color:#1A1C26;background:#C9CEDD;border-radius:4px;padding:6px}
+.tc .name{margin-top:12px;text-align:center;font:900 14px/1 var(--fd);letter-spacing:.32em;color:#1A1C26;background:#C9CEDD;border-radius:0;padding:6px}
 .tc .led.flip{animation:ledflip .6s steps(4)}
 @keyframes ledflip{25%,75%{opacity:.15}}
-.drive{display:flex;align-items:center;gap:18px;margin-top:6px;flex-wrap:wrap}
-.speedo{display:flex;align-items:baseline;gap:8px;min-width:150px}
-.speedo b{font:400 54px/1 var(--fl);color:var(--sun);text-shadow:0 0 20px rgba(255,210,31,.7);font-variant-numeric:tabular-nums;min-width:2.2ch;text-align:right}
+.drive{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.speedo{display:flex;align-items:baseline;justify-content:center;gap:8px}
+.speedo b{font:400 64px/1 var(--fl);color:var(--sun);text-shadow:0 0 20px rgba(255,210,31,.7);font-variant-numeric:tabular-nums;min-width:2.2ch;text-align:right}
 .speedo span{font:900 18px/1 var(--fd);letter-spacing:.2em;color:#9AA3C8}
-.hold{user-select:none;-webkit-user-select:none;touch-action:none;height:64px;padding:0 30px;font-size:16px}
+.hold{--p:0;position:relative;overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:none;height:68px;padding:0 34px;font-size:16px;color:#fff;background:#0B0F33;box-shadow:inset 0 0 0 2px #FF8A1A}
+.hold .fill{position:absolute;inset:0;background:linear-gradient(100deg,#FFD21F,#FF6B1A 60%,#FF2D2D);transform:scaleX(var(--p));transform-origin:left;transition:transform .08s linear}
+.hold .lbl{position:relative;display:inline-flex;align-items:center;gap:10px}
+.hold.hot{color:#14062A}
+.hold.full{box-shadow:inset 0 0 0 2px #FFD21F,0 0 40px rgba(255,138,26,.7)}
 .hold.charging{animation:shk .12s linear infinite}
 @keyframes shk{25%{transform:translate(1px,-1px)}75%{transform:translate(-1px,1px)}}
-.msg{min-height:1.5em;font-weight:700;color:var(--cyan);margin:4px 0 0}
+.msg{min-height:1.5em;font-weight:700;color:var(--cyan);margin:0}
 #whiteout{position:fixed;inset:0;background:#EAF7FF;opacity:0;pointer-events:none;z-index:90}
 body.quake{animation:quake .55s linear}
 @keyframes quake{20%{transform:translate(-8px,3px)}40%{transform:translate(8px,-3px)}60%{transform:translate(-5px,-2px)}80%{transform:translate(5px,2px)}}
@@ -161,7 +170,7 @@ body.quake{animation:quake .55s linear}
 .cast .head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:40px}
 .cast .head p{max-width:420px;color:#B9C3EE;margin:0}
 .cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-.pc{position:relative;border-radius:20px;overflow:hidden;background:#0B0F33;box-shadow:inset 0 0 0 1px rgba(127,227,255,.18);transition:transform .45s var(--spring),box-shadow .25s var(--out)}
+.pc{--n:18px;clip-path:var(--hud);position:relative;border-radius:0;overflow:hidden;background:#0B0F33;box-shadow:inset 0 0 0 1px rgba(127,227,255,.18);transition:transform .45s var(--spring),box-shadow .25s var(--out)}
 .pc:hover,.pc:focus-within{transform:translateY(-6px);box-shadow:inset 0 0 0 1px var(--cyan),0 24px 50px rgba(30,51,255,.35)}
 .pc .ph{position:relative;aspect-ratio:3/4;overflow:hidden;background:#0A1170}
 .pc .ph .layer{position:absolute;inset:0;background:var(--src) var(--pos,50% 50%)/cover;filter:saturate(1.4) contrast(1.1)}
@@ -179,8 +188,8 @@ body.quake{animation:quake .55s linear}
 .pc:not(.live) .q,.pc:not(.live) .sig i{animation-play-state:paused}
 .pc .q{position:absolute;left:50%;top:38%;translate:-50% -50%;font:900 86px/1 var(--fd);color:rgba(221,246,255,.9);text-shadow:3px 0 0 rgba(255,45,45,.8),-3px 0 0 rgba(30,180,255,.8);animation:qj 2.6s steps(1) infinite}
 @keyframes qj{0%,62%,100%{transform:none}66%{transform:translate(4px,-2px) skewX(-8deg)}70%{transform:translate(-3px,1px)}}
-.pc .sig{position:absolute;left:12px;top:12px;display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border-radius:99px;background:rgba(5,7,34,.7);font:800 10px/1 var(--fb);letter-spacing:.1em;color:var(--cyan)}
-.pc .sig i{width:7px;height:7px;border-radius:50%;background:var(--red);animation:blink 1s steps(2) infinite}
+.pc .sig{position:absolute;left:12px;top:12px;display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border-radius:0;background:rgba(5,7,34,.7);font:800 10px/1 var(--fb);letter-spacing:.1em;color:var(--cyan)}
+.pc .sig i{width:7px;height:7px;border-radius:0;background:var(--red);animation:blink 1s steps(2) infinite}
 @keyframes blink{50%{opacity:.2}}
 .pc .bd{padding:16px 16px 18px}
 .pc h3{margin:0;font:900 28px/1 var(--fd);text-transform:uppercase;letter-spacing:.01em}
@@ -190,13 +199,13 @@ body.quake{animation:quake .55s linear}
 /* ───── PREMIOS Y CRÍTICAS ───── */
 .praise{padding:110px 0;background:linear-gradient(180deg,#050722,#0A1170)}
 .awards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:40px 0 64px}
-.aw{position:relative;border-radius:22px;padding:22px;min-height:190px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;background:linear-gradient(160deg,#121856,#0A0E3A);box-shadow:inset 0 0 0 1px rgba(255,210,31,.25);overflow:hidden}
+.aw{--n:18px;clip-path:var(--hud);position:relative;border-radius:0;padding:22px;min-height:190px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;background:linear-gradient(160deg,#121856,#0A0E3A);box-shadow:inset 0 0 0 1px rgba(255,210,31,.25);overflow:hidden}
 .aw.big{background:linear-gradient(150deg,#FFD21F,#FF8A1A 70%);color:#14062A;box-shadow:0 30px 60px rgba(255,138,26,.3)}
 .aw .ic{width:36px;height:36px;color:var(--sun)}.aw.big .ic{color:#14062A}
 .aw b{display:block;font:900 clamp(26px,2.4vw,40px)/.92 var(--fd);text-transform:uppercase;overflow-wrap:anywhere}
 .aw span{font-size:14px;line-height:1.4;opacity:.85}
 .quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.qt{border-radius:22px;padding:24px;background:rgba(5,7,34,.55);box-shadow:inset 0 0 0 1px rgba(127,227,255,.18);display:flex;flex-direction:column;gap:14px;transition:transform .4s var(--spring)}
+.qt{--n:18px;clip-path:var(--hud);border-radius:0;padding:24px;background:rgba(5,7,34,.55);box-shadow:inset 0 0 0 1px rgba(127,227,255,.18);display:flex;flex-direction:column;gap:14px;transition:transform .4s var(--spring)}
 .qt:hover{transform:translateY(-4px)}
 .qt.wide{grid-column:span 2;background:linear-gradient(135deg,rgba(30,51,255,.45),rgba(5,7,34,.6))}
 .qt .ic.q{width:28px;height:28px;color:var(--flux)}
@@ -250,18 +259,20 @@ footer{padding:40px 0 60px;background:#08091A;color:#8C93B5;font-size:13px;text-
 footer img{height:28px;margin:0 auto 12px}
 
 /* ───── sonido ───── */
-.snd{position:fixed;right:18px;bottom:18px;z-index:80;display:flex;align-items:center;gap:10px;height:52px;padding:0 18px 0 14px;border-radius:99px;border:0;background:rgba(5,7,34,.9);box-shadow:inset 0 0 0 1.5px rgba(127,227,255,.4);color:#fff;font-weight:700;font-size:13px;opacity:0;translate:0 20px;transition:opacity .4s,translate .5s var(--spring),box-shadow .2s}
+.snd{--n:10px;clip-path:var(--hud);position:fixed;right:18px;bottom:18px;z-index:80;display:flex;align-items:center;gap:10px;height:52px;padding:0 18px 0 14px;border-radius:0;border-border:0;background:rgba(5,7,34,.9);box-shadow:inset 0 0 0 1.5px rgba(127,227,255,.4);color:#fff;font-weight:700;font-size:13px;opacity:0;translate:0 20px;transition:opacity .4s,translate .5s var(--spring),box-shadow .2s}
 .snd.show{opacity:1;translate:0 0}
 .snd.ask{box-shadow:inset 0 0 0 2px var(--sun),0 0 0 0 rgba(255,210,31,.6);animation:askp 1.6s ease-out infinite}
 @keyframes askp{70%{box-shadow:inset 0 0 0 2px var(--sun),0 0 0 14px rgba(255,210,31,0)}}
 .snd .eq{display:flex;gap:3px;align-items:flex-end;height:16px}
-.snd .eq i{width:3px;height:4px;border-radius:2px;background:var(--cyan)}
+.snd .eq i{width:3px;height:4px;border-radius:0;background:var(--cyan)}
 .snd.on .eq i{animation:eq .8s ease-in-out infinite alternate}
 .snd.on .eq i:nth-child(2){animation-delay:-.3s}.snd.on .eq i:nth-child(3){animation-delay:-.55s}.snd.on .eq i:nth-child(4){animation-delay:-.15s}
 @keyframes eq{from{height:4px}to{height:16px}}
 
 @media (max-width:960px){
  .syn-grid,.mgrid,.tgrid{grid-template-columns:1fr;gap:40px}
+ .flux{width:min(340px,78vw)!important}
+ .crew{grid-template-columns:repeat(2,minmax(0,1fr))}
  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
  .awards{grid-template-columns:repeat(2,minmax(0,1fr))}
  .quotes{grid-template-columns:1fr}.qt.wide{grid-column:auto}
@@ -294,7 +305,7 @@ footer img{height:28px;margin:0 auto 12px}
    <span class="ring"></span>
   </h1>
   <div class="tag">
-   <p class="premiere" style="margin:0"><span>Estrena temporada <b>2027</b></span><span class="sep"></span><span>Teatro Telcel</span></p>
+   <p class="premiere" style="margin:0"><span>Estrena temporada <b>2027</b> en el <b>Teatro Telcel</b></span></p>
    <span class="olivier"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M232,64H208V48a8,8,0,0,0-8-8H56a8,8,0,0,0-8,8V64H24A16,16,0,0,0,8,80V96a40,40,0,0,0,40,40h3.65A80.13,80.13,0,0,0,120,191.61V216H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16H136V191.58c31.94-3.23,58.44-25.64,68.08-55.58H208a40,40,0,0,0,40-40V80A16,16,0,0,0,232,64ZM48,120A24,24,0,0,1,24,96V80H48v32q0,4,.39,8ZM232,96a24,24,0,0,1-24,24h-.5a81.81,81.81,0,0,0,.5-8.9V80h24Z"/></svg> Ganador del Premio Olivier a Mejor Nuevo Musical</span>
    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:6px"><a class="btn b-hot" href="#boletos"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M232,104a8,8,0,0,0,8-8V64a16,16,0,0,0-16-16H32A16,16,0,0,0,16,64V96a8,8,0,0,0,8,8,24,24,0,0,1,0,48,8,8,0,0,0-8,8v32a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V160a8,8,0,0,0-8-8,24,24,0,0,1,0-48ZM32,167.2a40,40,0,0,0,0-78.4V64H88V192H32Z"/></svg> Ver mi invitación</a><a class="btn b-ghost" href="#maquina"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M213.85,125.46l-112,120a8,8,0,0,1-13.69-7l14.66-73.33L45.19,143.49a8,8,0,0,1-3-13l112-120a8,8,0,0,1,13.69,7L153.18,90.9l57.63,21.61a8,8,0,0,1,3,12.95Z"/></svg> Viajar a 2027</a></div>
   </div>
@@ -310,24 +321,18 @@ footer img{height:28px;margin:0 auto 12px}
   <span class="glow fire l"></span><span class="glow fire r"></span>
   <canvas id="arcs" aria-hidden="true"></canvas>
  </div>
- <div class="car-copy"><p>A 88 millas por hora<br><span class="grad">vas a ver algo serio.</span></p></div>
+ <div class="car-copy"><p>A 88 millas por hora<br><span class="grad">vas a ver algo impactante.</span></p></div>
 </section>
 
 <section class="syn" id="sinopsis">
  <div class="wrap syn-grid">
   <div class="rv"><span class="kick">La historia</span><h2 style="margin-top:14px">Hill Valley,<span class="y">1985 → 1955</span></h2>
-   <div class="songs"><span><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z"/></svg>The Power of Love</span><span><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z"/></svg>Johnny B. Goode</span><span><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z"/></svg>Earth Angel</span><span><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z"/></svg>It's Only a Matter of Time</span><span><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z"/></svg>Good Morning Hill Valley</span><span><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z"/></svg>21st Century</span></div>
+   <div class="crew" aria-label="Equipo creativo"><figure class="cr"><div class="cr-ph" data-ini="AS"><img src="creditos/alan-silvestri.webp" alt="Alan Silvestri" loading="lazy" onerror="this.remove()"></div><figcaption><b>Alan Silvestri</b><small>Música y letras</small></figcaption></figure><figure class="cr"><div class="cr-ph" data-ini="GB"><img src="creditos/glen-ballard.webp" alt="Glen Ballard" loading="lazy" onerror="this.remove()"></div><figcaption><b>Glen Ballard</b><small>Música y letras</small></figcaption></figure><figure class="cr"><div class="cr-ph" data-ini="BG"><img src="creditos/bob-gale.webp" alt="Bob Gale" loading="lazy" onerror="this.remove()"></div><figcaption><b>Bob Gale</b><small>Libreto</small></figcaption></figure><figure class="cr"><div class="cr-ph" data-ini="RZ"><img src="creditos/robert-zemeckis.webp" alt="Robert Zemeckis" loading="lazy" onerror="this.remove()"></div><figcaption><b>Robert Zemeckis</b><small>Cocreador de la película</small></figcaption></figure><figure class="cr"><div class="cr-ph" data-ini="JR"><img src="creditos/john-rando.webp" alt="John Rando" loading="lazy" onerror="this.remove()"></div><figcaption><b>John Rando</b><small>Dirección</small></figcaption></figure><figure class="cr"><div class="cr-ph" data-ini="TH"><img src="creditos/tim-hatley.webp" alt="Tim Hatley" loading="lazy" onerror="this.remove()"></div><figcaption><b>Tim Hatley</b><small>Escenografía y vestuario</small></figcaption></figure></div>
   </div>
   <div class="rv">
    <p class="lead">Marty McFly tiene diecisiete años, una banda que nadie toma en serio y un mejor amigo poco convencional: el excéntrico científico Doc Brown.</p>
    <p>Una noche, Doc le muestra su mayor invento: una máquina del tiempo construida dentro de un DeLorean. Un accidente lanza a Marty treinta años al pasado, a 1955, donde sin querer se interpone en el día en que sus padres se iban a conocer.</p>
    <p>Ahora tiene que lograr que George y Lorraine se enamoren, conseguir 1.21 gigawatts de energía y regresar a 1985 antes de que su propio futuro se borre para siempre. Una aventura de rock and roll, amistad y segundas oportunidades, con la música original de la película y canciones nuevas escritas para el escenario.</p>
-   <div class="creds">
-    <span><small>Música y letras</small><b>Alan Silvestri y Glen Ballard</b></span>
-    <span><small>Libreto</small><b>Bob Gale</b></span>
-    <span><small>Basado en la película de</small><b>Robert Zemeckis y Bob Gale</b></span>
-    <span><small>Dirección original</small><b>John Rando</b></span>
-   </div>
   </div>
  </div>
 </section>
@@ -337,27 +342,17 @@ footer img{height:28px;margin:0 auto 12px}
   <div class="rv" style="max-width:760px"><span class="kick">La máquina del tiempo</span><h2 style="margin-top:14px">Destino: <span class="grad">2027</span></h2>
    <p style="color:#B9C3EE;margin:18px 0 0;font-size:18px">El condensador de flujo está listo. Programa el destino, mantén presionado el acelerador y llega a 88 millas por hora.</p></div>
   <div class="mgrid">
-   <div class="flux rv" id="flux" aria-label="Condensador de flujo">
-    <span class="warn">SHIELD EYES FROM LIGHT</span>
-    <div class="win">
-     <svg viewBox="0 0 300 400" aria-hidden="true">
-      <defs>
-       <linearGradient id="fluxGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".5" stop-color="#9FEBFF"/><stop offset="1" stop-color="#FFE27A"/></linearGradient>
-      </defs>
-      <path class="tube" d="M58 70 L150 220"/><path class="tube" d="M242 70 L150 220"/><path class="tube" d="M150 340 L150 220"/>
-      <path class="core halo" d="M58 70 L150 220"/><path class="core halo" d="M242 70 L150 220"/><path class="core halo" d="M150 340 L150 220"/><path class="core" d="M58 70 L150 220"/><path class="core" d="M242 70 L150 220"/><path class="core" d="M150 340 L150 220"/>
-      <circle cx="58" cy="70" r="16" fill="#3B4560"/><circle cx="242" cy="70" r="16" fill="#3B4560"/><circle cx="150" cy="340" r="16" fill="#3B4560"/>
-      <circle class="hub-h" id="hubh" cx="150" cy="220" r="26"/><circle class="hub" id="hub" cx="150" cy="220" r="14"/>
-     </svg>
-    </div>
-    <span class="label">FLUX CAPACITOR</span>
+   <div class="flux rv" id="flux" role="img" aria-label="Condensador de flujo">
+    <img class="fx-base" src="flux.webp" alt="" width="887" height="900" loading="lazy">
+    <img class="fx-hot" id="fxHot" src="flux-hot.webp" alt="" width="887" height="900" loading="lazy">
+    <span class="fx-core" id="fxCore"></span><span class="fx-flash" id="fxFlash"></span>
    </div>
-   <div class="circuits rv">
-    <div class="tc r" id="tcD"><div class="row"><span class="cell"><span class="cap">MONTH</span><span class="led" data-ghost="~~~">~~~</span></span><span class="cell"><span class="cap">DAY</span><span class="led" data-ghost="~~">~~</span></span><span class="cell"><span class="cap">YEAR</span><span class="led" data-ghost="~~~~">~~~~</span></span><span class="cell"><span class="cap">HOUR</span><span class="led" data-ghost="~~">~~</span></span><span class="cell"><span class="cap">MIN</span><span class="led" data-ghost="~~">~~</span></span></div><div class="name">DESTINATION TIME</div></div><div class="tc g" id="tcP"><div class="row"><span class="cell"><span class="cap">MONTH</span><span class="led" data-ghost="~~~">~~~</span></span><span class="cell"><span class="cap">DAY</span><span class="led" data-ghost="~~">~~</span></span><span class="cell"><span class="cap">YEAR</span><span class="led" data-ghost="~~~~">~~~~</span></span><span class="cell"><span class="cap">HOUR</span><span class="led" data-ghost="~~">~~</span></span><span class="cell"><span class="cap">MIN</span><span class="led" data-ghost="~~">~~</span></span></div><div class="name">PRESENT TIME</div></div><div class="tc a" id="tcL"><div class="row"><span class="cell"><span class="cap">MONTH</span><span class="led" data-ghost="~~~">~~~</span></span><span class="cell"><span class="cap">DAY</span><span class="led" data-ghost="~~">~~</span></span><span class="cell"><span class="cap">YEAR</span><span class="led" data-ghost="~~~~">~~~~</span></span><span class="cell"><span class="cap">HOUR</span><span class="led" data-ghost="~~">~~</span></span><span class="cell"><span class="cap">MIN</span><span class="led" data-ghost="~~">~~</span></span></div><div class="name">LAST TIME DEPARTED</div></div>
-    <div class="drive">
-     <div class="speedo" aria-live="off"><b id="mph">0</b><span>MPH</span></div>
-     <button class="btn b-hot hold" id="gas"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M213.85,125.46l-112,120a8,8,0,0,1-13.69-7l14.66-73.33L45.19,143.49a8,8,0,0,1-3-13l112-120a8,8,0,0,1,13.69,7L153.18,90.9l57.63,21.61a8,8,0,0,1,3,12.95Z"/></svg> Mantén presionado para acelerar</button>
-    </div>
+   <div class="circuits rv" id="circuits">
+    <div class="tc r" id="tcD"><div class="row"><span class="cell"><span class="cap">MES</span><span class="led" data-ghost="~~~">~~~</span></span><span class="cell"><span class="cap">DÍA</span><span class="led" data-ghost="~~">~~</span></span><span class="cell"><span class="cap">AÑO</span><span class="led" data-ghost="~~~~">~~~~</span></span><span class="cell"><span class="cap">HORA</span><span class="led" data-ghost="~~">~~</span></span><span class="cell"><span class="cap">MIN</span><span class="led" data-ghost="~~">~~</span></span></div><div class="name">TIEMPO DE DESTINO</div></div><div class="tc g" id="tcP"><div class="row"><span class="cell"><span class="cap">MES</span><span class="led" data-ghost="~~~">~~~</span></span><span class="cell"><span class="cap">DÍA</span><span class="led" data-ghost="~~">~~</span></span><span class="cell"><span class="cap">AÑO</span><span class="led" data-ghost="~~~~">~~~~</span></span><span class="cell"><span class="cap">HORA</span><span class="led" data-ghost="~~">~~</span></span><span class="cell"><span class="cap">MIN</span><span class="led" data-ghost="~~">~~</span></span></div><div class="name">TIEMPO PRESENTE</div></div><div class="tc a" id="tcL"><div class="row"><span class="cell"><span class="cap">MES</span><span class="led" data-ghost="~~~">~~~</span></span><span class="cell"><span class="cap">DÍA</span><span class="led" data-ghost="~~">~~</span></span><span class="cell"><span class="cap">AÑO</span><span class="led" data-ghost="~~~~">~~~~</span></span><span class="cell"><span class="cap">HORA</span><span class="led" data-ghost="~~">~~</span></span><span class="cell"><span class="cap">MIN</span><span class="led" data-ghost="~~">~~</span></span></div><div class="name">ÚLTIMA SALIDA</div></div>
+   </div>
+   <div class="drive rv">
+    <div class="speedo" aria-live="off"><b id="mph">0</b><span>MPH</span></div>
+    <button class="btn hold" id="gas"><span class="fill" aria-hidden="true"></span><span class="lbl"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M213.85,125.46l-112,120a8,8,0,0,1-13.69-7l14.66-73.33L45.19,143.49a8,8,0,0,1-3-13l112-120a8,8,0,0,1,13.69,7L153.18,90.9l57.63,21.61a8,8,0,0,1,3,12.95Z"/></svg> Mantén presionado para acelerar</span></button>
     <p class="msg" id="msg" role="status" aria-live="polite"></p>
    </div>
   </div>
@@ -486,9 +481,15 @@ let arrived=false;
 function machine(){
  setTC('tcD',['---','--','2027','--','--']);setTC('tcP',nowTC());setTC('tcL',['OCT','26','1985','01','21']);
  setInterval(()=>{if(!arrived)setTC('tcP',nowTC())},15000);
- const gas=$('#gas'),mph=$('#mph'),msg=$('#msg'),flux=$('#flux');onScreen(flux);let v=0,hold=false,raf=0,done=false;
+ const gas=$('#gas'),mph=$('#mph'),msg=$('#msg'),flux=$('#flux'),hot=$('#fxHot'),core=$('#fxCore');onScreen(flux);let v=0,hold=false,raf=0,done=false;
+ hot.classList.add('idle');
+ // el condensador mide lo mismo que la columna de los tres relojes
+ const circ=$('#circuits'),fit=()=>{const one=matchMedia('(max-width:960px)').matches;flux.style.setProperty('--fw',one?'':Math.round(circ.offsetHeight*887/900)+'px')};new ResizeObserver(fit).observe(circ);fit();
  const loop=()=>{v=hold?Math.min(88,v+(v<55?1.15:.6)):Math.max(0,v-2.2);mph.textContent=Math.round(v);
-  flux.style.setProperty('--fs',(1.4-v/88*1.25).toFixed(2)+'s');$('#hub').setAttribute('r',String(14+v/88*14));$('#hubh').setAttribute('r',String(26+v/88*22));
+  // más velocidad = más luz: la versión encendida sube y el núcleo parpadea cada vez más rápido
+  const k=v/88,fl=k>.35?(Math.random()-.5)*k*.35:0;hot.classList.toggle('idle',v===0);
+  hot.style.opacity=v?Math.min(1,Math.pow(k,1.2)+fl*.5).toFixed(3):'';core.style.opacity=Math.max(0,Math.pow(k,1.6)+fl).toFixed(3);core.style.transform=`scale(${(.7+k*.6).toFixed(3)})`;
+  gas.style.setProperty('--p',k.toFixed(3));gas.classList.toggle('hot',k>.5);gas.classList.toggle('full',k>=1);
   gas.classList.toggle('charging',hold&&v>40);
   if(v>=88&&!done){done=true;travel()}if(v<30)done=false;raf=(hold||v>0)?requestAnimationFrame(loop):0};
  const start=e=>{e.preventDefault();hold=true;msg.textContent='Acelerando… el condensador de flujo se está cargando';if(!raf)raf=requestAnimationFrame(loop)};
@@ -497,7 +498,7 @@ function machine(){
  gas.addEventListener('keydown',e=>{if((e.key===' '||e.key==='Enter')&&!e.repeat)start(e)});gas.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter')stop()});
  function travel(){hold=false;arrived=true;setTC('tcL',nowTC());setTC('tcP',['---','--','2027','20','30']);
   msg.textContent='¡88 mph! Bienvenido a 2027: te esperamos en el Teatro Telcel.';
-  if(!RM){$('#whiteout').animate([{opacity:0},{opacity:1,offset:.12},{opacity:0}],{duration:1100,easing:'ease-out'});
+  if(!RM){$('#fxFlash').animate([{opacity:0,transform:'scale(.4)'},{opacity:1,transform:'scale(1.1)',offset:.15},{opacity:0,transform:'scale(1.6)'}],{duration:900,easing:'ease-out'});$('#whiteout').animate([{opacity:0},{opacity:1,offset:.12},{opacity:0}],{duration:1100,easing:'ease-out'});
    document.body.classList.remove('quake');void document.body.offsetWidth;document.body.classList.add('quake');
    ['#trail1','#trail2'].forEach((s,i)=>$(s).animate([{opacity:0,transform:'scaleX(.2)'},{opacity:1,offset:.2},{opacity:0,transform:'scaleX(1)'}],{duration:1400,delay:i*80,easing:'ease-out'}))}}
 }
