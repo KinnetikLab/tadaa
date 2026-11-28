@@ -1,6 +1,7 @@
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
+import zlib from 'node:zlib';
 import {fileURLToPath} from 'node:url';
 import {INTEGRATIONS,sanitizedCatalog,sanitizedRecord,validateFields} from './catalog.mjs';
 import {readVault,saveVault,writeAudit,auditRecent} from './vault.mjs';
@@ -12,7 +13,9 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../web'
 const PUBLIC_ORIGIN=process.env.PUBLIC_ORIGIN||'http://localhost:3000';
 if(process.env.NODE_ENV==='production'&&!/^https:\/\/[a-z0-9.-]+(?::\d+)?$/i.test(PUBLIC_ORIGIN))throw Error('PUBLIC_ORIGIN debe tener HTTPS en producción');
 const PORT=Number(process.env.PORT||3000);
-const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.svg':'image/svg+xml','.mp4':'video/mp4','.ico':'image/x-icon'};
+const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.svg':'image/svg+xml','.mp4':'video/mp4','.ico':'image/x-icon','.mp3':'audio/mpeg','.woff2':'font/woff2','.woff':'font/woff','.mjs':'text/javascript; charset=utf-8','.txt':'text/plain; charset=utf-8','.md':'text/plain; charset=utf-8'};
+// Archivos de texto comprimidos en memoria (brotli/gzip), invalidados por tamaño y fecha.
+const zcache=new Map(),ZIP=new Set(['.html','.js','.css','.svg','.json','.mjs','.txt']);
 const send=(res,status,data,headers={})=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store',...headers});res.end(JSON.stringify(data))};
 const ipOf=req=>String(req.socket.remoteAddress||'local');
 function corsGuard(req){const origin=req.headers.origin;return !origin||origin===PUBLIC_ORIGIN;}
@@ -76,7 +79,22 @@ async function request(req,res){
  if(st.isDirectory()){if(!pathname.endsWith('/')){res.writeHead(301,{Location:pathname+'/'+(u.search||'')});return res.end()}target=path.join(target,'index.html');try{st=fs.statSync(target)}catch{res.writeHead(404);return res.end()}}
  if(!st.isFile()){res.writeHead(404);return res.end()}
  const type=types[path.extname(target)]||'application/octet-stream';
- res.setHeader('Content-Type',type);res.setHeader('Cache-Control',['.html','.js','.css'].includes(path.extname(target))?'no-store':'public, max-age=3600');
+ const ext=path.extname(target),etag='"'+st.size.toString(36)+'-'+Math.floor(st.mtimeMs).toString(36)+'"';
+ res.setHeader('Content-Type',type);res.setHeader('ETag',etag);res.setHeader('Vary','Accept-Encoding');
+ // HTML, JS y CSS se revalidan con ETag (304 instantáneo si no cambiaron); fuentes inmutables; imágenes y audio un día.
+ res.setHeader('Cache-Control',['.html','.js','.css','.mjs','.json'].includes(ext)?'no-cache':['.woff2','.woff'].includes(ext)?'public, max-age=31536000, immutable':'public, max-age=86400');
+ if(req.headers['if-none-match']===etag){res.writeHead(304);return res.end()}
+ const ae=String(req.headers['accept-encoding']||''),enc=ZIP.has(ext)&&st.size>1024?(/\bbr\b/.test(ae)?'br':/\bgzip\b/.test(ae)?'gzip':''):'';
+ if(enc){const key=target+'|'+etag+'|'+enc;let buf=zcache.get(key);
+  if(!buf){const raw=fs.readFileSync(target);buf=enc==='br'?zlib.brotliCompressSync(raw,{params:{[zlib.constants.BROTLI_PARAM_QUALITY]:9,[zlib.constants.BROTLI_PARAM_SIZE_HINT]:raw.length}}):zlib.gzipSync(raw,{level:9});if(zcache.size>400)zcache.clear();zcache.set(key,buf)}
+  res.writeHead(200,{'Content-Encoding':enc,'Content-Length':buf.length});return res.end(req.method==='HEAD'?undefined:buf)}
+ res.setHeader('Accept-Ranges','bytes');
+ // Rangos (audio y video en Safari/iOS los exigen para reproducir).
+ const rg=/^bytes=(\d*)-(\d*)$/.exec(String(req.headers.range||''));
+ if(rg&&(rg[1]||rg[2])){let a=rg[1]?Number(rg[1]):Math.max(0,st.size-Number(rg[2])),z=rg[1]&&rg[2]?Math.min(Number(rg[2]),st.size-1):st.size-1;
+  if(a>z||a>=st.size){res.writeHead(416,{'Content-Range':'bytes */'+st.size});return res.end()}
+  res.writeHead(206,{'Content-Range':`bytes ${a}-${z}/${st.size}`,'Content-Length':z-a+1});if(req.method==='HEAD')return res.end();return fs.createReadStream(target,{start:a,end:z}).pipe(res)}
+ res.setHeader('Content-Length',st.size);
  if(req.method==='HEAD'){res.writeHead(200);return res.end()}
  fs.createReadStream(target).pipe(res);
 }

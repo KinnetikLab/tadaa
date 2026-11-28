@@ -1,0 +1,12 @@
+/* Tipografías servidas desde el propio sitio (sin depender de Google Fonts). Subconjunto latino: incluye acentos, ñ, ¿ y ¡. */
+@font-face{font-family:'Outfit';src:url(/fonts/outfit-latin-wght-normal.woff2) format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Plus Jakarta Sans';src:url(/fonts/plus-jakarta-sans-latin-wght-normal.woff2) format('woff2');font-weight:200 800;font-style:normal;font-display:swap}
+@font-face{font-family:'Bricolage Grotesque';src:url(/fonts/bricolage-grotesque-latin-standard-normal.woff2) format('woff2');font-weight:200 800;font-stretch:75% 100%;font-style:normal;font-display:swap}
+@font-face{font-family:'Big Shoulders Display';src:url(/fonts/big-shoulders-display-latin-wght-normal.woff2) format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Big Shoulders Stencil Display';src:url(/fonts/big-shoulders-stencil-display-latin-wght-normal.woff2) format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Cormorant Garamond';src:url(/fonts/cormorant-garamond-latin-wght-normal.woff2) format('woff2');font-weight:300 700;font-style:normal;font-display:swap}
+@font-face{font-family:'Instrument Sans';src:url(/fonts/instrument-sans-latin-wght-normal.woff2) format('woff2');font-weight:400 700;font-style:normal;font-display:swap}
+@font-face{font-family:'Chakra Petch';src:url(/fonts/chakra-petch-latin-400-normal.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Chakra Petch';src:url(/fonts/chakra-petch-latin-500-normal.woff2) format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Chakra Petch';src:url(/fonts/chakra-petch-latin-600-normal.woff2) format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'Chakra Petch';src:url(/fonts/chakra-petch-latin-700-normal.woff2) format('woff2');font-weight:700;font-style:normal;font-display:swap}

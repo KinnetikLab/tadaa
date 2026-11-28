@@ -13,7 +13,7 @@ const IMG='img/tv/ev/matilda.webp';
 /* ───── utilidades compartidas ───── */
 let adminCsrf=null;
 TV.adminMe=async()=>{try{const r=await fetch('/api/admin/me',{credentials:'same-origin'}).then(r=>r.json());adminCsrf=r.csrf||null;return !!r.authenticated}catch{return false}};
-TV.admin=async(path,method='GET',data)=>{const h={};if(data!==undefined)h['Content-Type']='application/json';if(method!=='GET')h['x-csrf-token']=adminCsrf||'';const r=await fetch('/api/v2/admin/'+path,{method,headers:h,credentials:'same-origin',body:data===undefined?undefined:JSON.stringify(data)});const x=await r.json().catch(()=>({}));if(!r.ok)throw new Error(x.error||'Error de administración');return x};
+TV.admin=async(path,method='GET',data)=>{if(method!=='GET')window.TadaaApi?.clear?.();const h={};if(data!==undefined)h['Content-Type']='application/json';if(method!=='GET')h['x-csrf-token']=adminCsrf||'';const r=await fetch('/api/v2/admin/'+path,{method,headers:h,credentials:'same-origin',body:data===undefined?undefined:JSON.stringify(data)});const x=await r.json().catch(()=>({}));if(!r.ok)throw new Error(x.error||'Error de administración');return x};
 TV.myOrgs=async()=>{if(TV._orgs)return TV._orgs;try{TV._orgs=(await TV.api.call('/api/v2/me/orgs')).organizations||[]}catch{TV._orgs=[]}return TV._orgs};
 /* Diálogo con el lenguaje visual del diseño (tarjeta blanca, Outfit, botones píldora). */
 TV.modal=({title,text,fields=[],submit='Guardar',danger=false,onSubmit})=>new Promise(resolve=>{
