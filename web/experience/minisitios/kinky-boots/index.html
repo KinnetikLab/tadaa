@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#140A10">
+<title>Kinky Boots: El Musical · Función de prensa · CCT1</title>
+<meta name="description" content="Kinky Boots, el musical de Harvey Fierstein y Cyndi Lauper, llega al CCT1. Tu invitación a la función de prensa, con tus pases en la Wallet de TADAA!.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,700;1,6..96,900&family=Instrument+Sans:wght@400;500;600;700&family=Outfit:wght@800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="preload" href="fabrica.webp" as="image"><link rel="preload" href="logo.webp" as="image">
+<style>
+:root{--night:#140A10;--brick:#2A1218;--red:#E0102F;--red2:#9E0A22;--gold:#F2C14E;--violet:#7A4BC2;--cream:#F7EDE4;--muted:#C9B6B9;
+ --fd:'Bodoni Moda',Didot,'Times New Roman',serif;--fb:'Instrument Sans',system-ui,sans-serif;--spring:cubic-bezier(.2,1.15,.35,1);--out:cubic-bezier(0,0,.2,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;background:var(--night)}
+body{margin:0;color:var(--cream);font:500 17px/1.6 var(--fb);background:var(--night);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}a{color:inherit}button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.ic{width:1.15em;height:1.15em;fill:currentColor;flex:0 0 auto}
+.wrap{width:min(1200px,100% - 40px);margin-inline:auto}
+.kick{display:inline-flex;align-items:center;gap:8px;font:600 14px/1 var(--fb);color:var(--gold)}
+.kick .ic{width:16px;height:16px}
+h2{font:900 italic clamp(46px,6.4vw,104px)/.92 var(--fd);letter-spacing:-.02em;margin:14px 0 0}
+h2 em{font-style:italic;color:var(--red)}
+.rv{opacity:0;transform:translateY(32px)}.rv.on{opacity:1;transform:none;transition:opacity .6s var(--out),transform .8s var(--spring)}
+.btn{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 28px;border-radius:99px;border:0;text-decoration:none;font:700 15px/1 var(--fb);transition:scale .12s ease-out,box-shadow .25s var(--out),background .2s}
+.btn:active{scale:.96}
+.b-red{background:var(--red);color:#fff;box-shadow:0 12px 34px rgba(224,16,47,.45)}.b-red:hover{box-shadow:0 16px 44px rgba(224,16,47,.6)}
+.b-line{background:rgba(20,10,16,.6);color:#fff;box-shadow:inset 0 0 0 1.5px rgba(247,237,228,.5)}
+
+/* ───── HERO: la fábrica ───── */
+.hero{position:relative;height:100svh;min-height:660px;overflow:hidden;isolation:isolate;display:grid;place-items:center;text-align:center}
+.stage{position:absolute;inset:-4%;z-index:-3;background:url(fabrica.webp) center 40%/cover;animation:kb 32s ease-in-out infinite alternate;will-change:transform}
+@keyframes kb{from{transform:scale(1.04)}to{transform:scale(1.12) translate3d(-1%,1%,0)}}
+.beams{position:absolute;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(18% 70% at 22% -10%,rgba(122,75,194,.35),transparent 70%),radial-gradient(18% 70% at 50% -10%,rgba(242,193,78,.28),transparent 70%),radial-gradient(18% 70% at 78% -10%,rgba(122,75,194,.35),transparent 70%);animation:beam 6s ease-in-out infinite alternate;will-change:opacity}
+@keyframes beam{50%{opacity:.55}}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(70% 60% at 50% 45%,rgba(20,10,16,.15),rgba(20,10,16,.72) 75%),linear-gradient(180deg,rgba(20,10,16,.4),transparent 25%,transparent 55%,var(--night) 100%)}
+.hero.off .stage,.hero.off .beams{animation-play-state:paused}
+.hero-in{display:flex;flex-direction:column;align-items:center;gap:20px;padding:0 20px}
+.presenter{font:600 14px/1 var(--fb);color:var(--muted);opacity:0;transform:translateY(-10px);transition:opacity .6s var(--out) .2s,transform .8s var(--spring) .2s}
+.logo-box{position:relative;width:min(820px,88vw);aspect-ratio:1500/626;opacity:0;transform:scale(.86);transition:opacity .9s var(--out),transform 1.2s var(--spring)}
+.logo-box img{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 18px 40px rgba(0,0,0,.6))}
+.shine{position:absolute;inset:0;-webkit-mask:url(logo.webp) center/100% 100% no-repeat;mask:url(logo.webp) center/100% 100% no-repeat;background:linear-gradient(110deg,transparent 35%,rgba(255,240,215,.0) 42%,rgba(255,248,235,.85) 50%,rgba(255,240,215,0) 58%,transparent 65%) -150% 0/250% 100% no-repeat;animation:shine 4.8s ease-in-out 1.6s infinite;pointer-events:none}
+@keyframes shine{0%{background-position:-150% 0}45%,100%{background-position:150% 0}}
+#spark{position:absolute;inset:-6%;width:112%;height:112%;pointer-events:none}
+.hero.off .shine{animation-play-state:paused}
+.when{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 16px;font:900 italic clamp(22px,2.6vw,34px)/1.1 var(--fd);opacity:0;transform:translateY(20px);transition:opacity .7s var(--out) .5s,transform .9s var(--spring) .5s}
+.when b{color:var(--gold);font-weight:900}.when .dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red)}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;opacity:0;transform:translateY(20px);transition:opacity .7s var(--out) .7s,transform .9s var(--spring) .7s}
+.in .presenter,.in .logo-box,.in .when,.in .ctas{opacity:1;transform:none}
+.cue{position:absolute;bottom:22px;left:50%;translate:-50% 0;color:var(--muted);text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:13px}
+.cue .ic{animation:bob 1.6s ease-in-out infinite}@keyframes bob{50%{transform:translateY(6px)}}
+
+/* ───── marquesina ───── */
+.marq{background:var(--red);color:#fff;overflow:hidden;white-space:nowrap;border-block:2px solid #ff4a62}
+.marq .track{display:inline-flex;gap:38px;padding:14px 0;animation:marq 28s linear infinite;font:900 italic 26px/1 var(--fd)}
+.marq span{display:inline-flex;align-items:center;gap:38px}.marq .ic{width:18px;height:18px;color:var(--gold)}
+@keyframes marq{to{transform:translateX(-50%)}}
+.marq.off .track{animation-play-state:paused}
+
+/* ───── historia ───── */
+.story{padding:120px 0;background:radial-gradient(60% 50% at 85% 20%,rgba(122,75,194,.18),transparent 70%),var(--night)}
+.story-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:56px;align-items:end}
+.story-top p{color:var(--muted);font-size:19px;margin:0;max-width:44ch}
+.chs{list-style:none;margin:60px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;position:relative}
+.chs::before{content:"";position:absolute;left:28px;right:28px;top:27px;height:2px;background:linear-gradient(90deg,var(--red),var(--gold),var(--violet))}
+.ch{position:relative;padding:0 28px 0 0}
+.ch-ic{position:relative;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--night);box-shadow:inset 0 0 0 2px var(--red);color:var(--gold)}.ch-ic .ic{width:24px;height:24px}
+.ch-city{display:block;margin-top:22px;font-size:14px;font-weight:600;color:var(--gold)}
+.ch h3{margin:6px 0 10px;font:900 italic 34px/1 var(--fd)}
+.ch p{margin:0;color:var(--muted);max-width:34ch}
+.quote{margin:90px auto 0;max-width:900px;text-align:center}
+.quote blockquote{margin:0;font:900 italic clamp(30px,3.6vw,54px)/1.1 var(--fd)}
+.quote blockquote em{color:var(--red);font-style:italic}
+.quote cite{display:block;margin-top:16px;font-style:normal;color:var(--muted);font-size:15px}
+
+/* ───── el tacón ───── */
+.heel{padding:120px 0;background:linear-gradient(180deg,var(--night),var(--brick))}
+.heel-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:60px;align-items:center}
+.heel p.lead{color:var(--muted);font-size:19px;max-width:40ch;margin:20px 0 0}
+.meter{margin-top:36px;display:flex;flex-direction:column;gap:14px}
+.inch{font:900 italic 88px/.9 var(--fd);color:var(--gold)}.inch small{font:600 18px var(--fb);color:var(--muted);margin-left:8px}
+.verdict{min-height:3.2em;font-size:20px;font-weight:600;margin:0}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:12px;border-radius:99px;background:linear-gradient(90deg,var(--red) var(--p,0%),rgba(247,237,228,.15) var(--p,0%));outline-offset:6px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:34px;height:34px;border-radius:50%;background:#fff;box-shadow:0 0 0 6px rgba(224,16,47,.35),0 6px 16px rgba(0,0,0,.4);cursor:grab}
+input[type=range]::-moz-range-thumb{width:34px;height:34px;border-radius:50%;background:#fff;border:0;box-shadow:0 0 0 6px rgba(224,16,47,.35)}
+.boot{position:relative;justify-self:center;width:min(380px,80%);aspect-ratio:791/1500}
+.boot img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transform:translateY(calc(var(--h,0) * -2.2%)) rotate(calc(var(--h,0) * -.6deg));transition:transform .5s var(--spring);filter:drop-shadow(0 30px 40px rgba(0,0,0,.55))}
+.boot .floor{position:absolute;left:5%;right:5%;bottom:-2%;height:24px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.55),transparent);transform:scaleX(calc(1 - var(--h,0) * .05));transition:transform .5s var(--spring)}
+.boot canvas{position:absolute;inset:-10%;width:120%;height:120%;pointer-events:none}
+
+/* ───── personajes ───── */
+.cast{padding:120px 0;background:var(--brick)}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:50px}
+.pc{position:relative;border-radius:26px;overflow:hidden;background:#1E0D13;box-shadow:inset 0 0 0 1px rgba(247,237,228,.08);transition:transform .45s var(--spring)}
+.pc:hover,.pc:focus-within{transform:translateY(-6px)}
+.pc-ph{aspect-ratio:3/4;overflow:hidden}.pc-ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--out)}
+.pc:hover .pc-ph img{transform:scale(1.05)}
+.pc-bd{padding:18px 18px 22px}.pc-role{font-size:13px;font-weight:600;color:var(--gold)}
+.pc h3{margin:4px 0 8px;font:900 italic 32px/1 var(--fd)}.pc p{margin:0;font-size:15px;color:var(--muted)}
+
+/* ───── canciones ───── */
+.songs{padding:120px 0;background:radial-gradient(50% 60% at 15% 30%,rgba(224,16,47,.22),transparent 70%),var(--night)}
+.songs-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:60px;align-items:start}
+.songs-grid .by{color:var(--muted);font-size:18px;max-width:30ch;margin:20px 0 0}
+.trs{list-style:none;margin:0;padding:0;border-top:1px solid rgba(247,237,228,.14)}
+.tr{display:grid;grid-template-columns:56px minmax(0,1fr);gap:4px 18px;padding:22px 0;border-bottom:1px solid rgba(247,237,228,.14)}
+.tr-n{font:900 italic 30px/1 var(--fd);color:var(--red)}
+.tr-t b{display:block;font:900 italic 28px/1.05 var(--fd)}.tr-t small{display:block;margin-top:4px;font-size:14px;color:var(--gold)}
+.tr p{grid-column:2;margin:6px 0 0;color:var(--muted);font-size:15px;max-width:52ch}
+
+/* ───── invitación: wallet de TADAA! ───── */
+.tix{padding:120px 0 130px;background:#08091A;position:relative;overflow:hidden}
+.tix::before{content:"";position:absolute;inset:0;background:radial-gradient(45% 50% at 75% 40%,rgba(224,16,47,.28),transparent 70%);pointer-events:none}
+.tgrid{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:60px;align-items:center}
+.ivhi{font-size:clamp(18px,1.5vw,21px);line-height:1.55;margin:22px 0 0;max-width:36ch}.ivhi b{color:var(--gold)}
+.tinfo ul{list-style:none;margin:26px 0;padding:0;display:grid;gap:14px}.tinfo li{display:flex;gap:12px;align-items:center;font-weight:600}.tinfo li .ic{color:var(--red);width:22px;height:22px}
+.wallet{font-family:'Plus Jakarta Sans',var(--fb);color:#08091A}
+.wl-stack{display:flex;flex-direction:column}
+.wl-strip{display:block;width:100%;text-align:left;border:0;border-radius:28px 28px 0 0;padding:16px 20px 28px;margin-bottom:-14px;transition:transform .35s var(--spring)}
+.wl-strip:hover{transform:translateY(-4px)}.wl-strip .t{font-family:Outfit,sans-serif;font-weight:800;font-size:22px;margin-top:8px}
+.chip{font-size:10px;font-weight:800;letter-spacing:.06em;padding:5px 9px;border-radius:99px}
+.wl-front{position:relative;border-radius:28px;background:#D6FF35;box-shadow:0 30px 60px rgba(0,0,0,.45);overflow:hidden}
+.wl-front .top{padding:18px 20px 16px;display:flex;flex-direction:column;gap:10px}
+.wl-front .perf{position:relative;border-top:2px dashed rgba(8,9,26,.3)}
+.wl-front .perf::before,.wl-front .perf::after{content:"";position:absolute;top:-11px;width:22px;height:22px;border-radius:50%;background:#08091A}.wl-front .perf::before{left:-11px}.wl-front .perf::after{right:-11px}
+.wl-front .bot{padding:14px 20px 18px;display:flex;flex-direction:column;gap:12px}
+.wl-front .meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.wl-front .meta span{display:flex;flex-direction:column;min-width:0}.wl-front .meta small{font-size:10px;opacity:.7}.wl-front .meta b{font-size:12px;font-weight:800;overflow-wrap:anywhere}
+.wl-front .cta{height:52px;border-radius:99px;background:#08091A;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:800;font-size:14px;text-decoration:none;border:0;font-family:inherit;cursor:pointer}
+.wl-front .cta .ic{color:#D6FF35}.wl-front .cta.ghost{background:transparent;color:#08091A;box-shadow:inset 0 0 0 2px #08091A}.wl-front .cta.ghost .ic{color:#08091A}
+.wl-front.swap{animation:swap .45s var(--spring)}@keyframes swap{from{transform:translateY(24px) scale(.97);opacity:.4}}
+.qrbox{align-self:center;position:relative;width:min(220px,70%);aspect-ratio:1;border-radius:22px;background:#fff;padding:12px;box-shadow:0 0 0 2px #08091A}
+.qrbox img{width:100%;height:100%;display:block;image-rendering:pixelated}.qrbox.demo img{filter:blur(5px);opacity:.55}
+.qrbox .tag2{position:absolute;inset:auto 10px 50%;translate:0 50%;text-align:center;font-weight:800;font-size:12px;line-height:1.35;background:#08091A;color:#D6FF35;border-radius:12px;padding:8px 10px}
+.qrbox.used::after{content:"YA INGRESÓ";position:absolute;inset:0;display:grid;place-items:center;border-radius:22px;background:rgba(8,9,26,.82);color:#D6FF35;font:800 22px/1 Outfit,sans-serif;letter-spacing:.1em}
+.qrcap{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;font-weight:700;text-align:center}
+.qrcap i{width:8px;height:8px;border-radius:50%;background:#08091A;animation:blink 1.4s steps(2) infinite}@keyframes blink{50%{opacity:.2}}
+.dress{display:flex;gap:10px;align-items:flex-start;font-size:12px;font-weight:700;background:rgba(8,9,26,.08);border-radius:14px;padding:10px 12px}.dress .ic{width:18px;height:18px;flex:0 0 18px}
+.wl-note{color:#8C93B5;font-size:13px;margin-top:14px;text-align:center}
+
+/* ───── preguntas ───── */
+.faq{padding:110px 0;background:var(--night)}
+.fqs{margin-top:40px;display:grid;gap:12px;max-width:820px}
+.fq{border-radius:20px;background:#1E0D13;box-shadow:inset 0 0 0 1px rgba(247,237,228,.08)}
+.fq summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 22px;font:700 18px/1.3 var(--fb);cursor:pointer}
+.fq summary::-webkit-details-marker{display:none}.fq .pl{color:var(--red);transition:transform .3s var(--spring)}.fq[open] .pl{transform:rotate(45deg)}
+.fq p{margin:0;padding:0 22px 22px;color:var(--muted)}
+footer{padding:44px 0 60px;background:#0B0509;color:#9C8A8E;font-size:13px;text-align:center;line-height:1.7}
+footer img{height:28px;margin:0 auto 12px}
+
+@media (max-width:960px){
+ .story-top,.heel-grid,.songs-grid,.tgrid{grid-template-columns:1fr;gap:40px}
+ .chs{grid-template-columns:1fr;gap:34px}.chs::before{left:27px;right:auto;top:28px;bottom:28px;width:2px;height:auto;background:linear-gradient(180deg,var(--red),var(--gold),var(--violet))}
+ .ch{display:grid;grid-template-columns:56px 1fr;gap:0 18px;padding:0}.ch-ic{grid-row:span 3}.ch-city{margin-top:4px}
+ .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:520px){.cards{grid-template-columns:1fr}.inch{font-size:70px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.rv,.presenter,.logo-box,.when,.ctas{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+<header class="hero" id="top">
+ <div class="stage" aria-hidden="true"></div><div class="beams" aria-hidden="true"></div>
+ <div class="hero-in">
+  <span class="presenter">Banamex presenta</span>
+  <h1 class="logo-box" style="margin:0"><img src="logo.webp" alt="Kinky Boots" width="1500" height="626"><span class="shine" aria-hidden="true"></span><canvas id="spark" aria-hidden="true"></canvas></h1>
+  <p class="when" style="margin:0"><span>Función de prensa</span><span class="dot"></span><span><b>11 de mayo 2027</b></span><span class="dot"></span><span>CCT1</span></p>
+  <div class="ctas"><a class="btn b-red" href="#pases"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M232,104a8,8,0,0,0,8-8V64a16,16,0,0,0-16-16H32A16,16,0,0,0,16,64V96a8,8,0,0,0,8,8,24,24,0,0,1,0,48,8,8,0,0,0-8,8v32a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V160a8,8,0,0,0-8-8,24,24,0,0,1,0-48ZM32,167.2a40,40,0,0,0,0-78.4V64H88V192H32Z"/></svg> Ver mi invitación</a><a class="btn b-line" href="#historia"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"/></svg> Conoce la historia</a></div>
+ </div>
+ <a class="cue" href="#historia" aria-label="Bajar">Price &amp; Son · Northampton<svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M205.66,149.66l-72,72a8,8,0,0,1-11.32,0l-72-72A8,8,0,0,1,56,136h64V40a8,8,0,0,1,16,0v96h64a8,8,0,0,1,5.66,13.66Z"/></svg></a>
+</header>
+
+<div class="marq" aria-hidden="true"><div class="track"><span>Función de prensa<svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"/></svg></span><span>11 de mayo 2027<svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"/></svg></span><span>Everybody Say Yeah<svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"/></svg></span><span>CCT1<svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"/></svg></span><span>Directamente desde Broadway<svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"/></svg></span><span>Raise You Up<svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"/></svg></span><span>Función de prensa<svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"/></svg></span><span>11 de mayo 2027<svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"/></svg></span><span>Everybody Say Yeah<svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"/></svg></span><span>CCT1<svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"/></svg></span><span>Directamente desde Broadway<svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"/></svg></span><span>Raise You Up<svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"/></svg></span></div></div>
+
+<section class="story" id="historia">
+ <div class="wrap">
+  <div class="story-top"><div class="rv"><span class="kick"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M232,208h-8V136c0-.05,0-.09,0-.14s0-.29,0-.43,0-.28,0-.41a.76.76,0,0,0,0-.15l-15-105.13A16.08,16.08,0,0,0,193.06,16H174.94A16.08,16.08,0,0,0,159.1,29.74l-11.56,80.91L108.8,81.6A8,8,0,0,0,96,88v32L44.8,81.6A8,8,0,0,0,32,88V208H24a8,8,0,0,0,0,16H232a8,8,0,0,0,0-16ZM108,184H80a8,8,0,0,1,0-16h28a8,8,0,0,1,0,16Zm68,0H148a8,8,0,0,1,0-16h28a8,8,0,0,1,0,16Zm-5.33-56-8.53-6.4L174.94,32h18.12l13.72,96Z"/></svg> La historia</span><h2>De una fábrica en crisis a la pasarela de <em>Milán</em></h2></div>
+   <p class="rv">Un heredero sin rumbo, una artista drag con un problema de calzado y un taller de zapatos a punto de cerrar. Juntos inventan algo que nadie había visto: botas de ocho pulgadas hechas para aguantar un show entero.</p></div>
+  <ol class="chs"><li class="ch rv"><span class="ch-ic"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M232,208h-8V136c0-.05,0-.09,0-.14s0-.29,0-.43,0-.28,0-.41a.76.76,0,0,0,0-.15l-15-105.13A16.08,16.08,0,0,0,193.06,16H174.94A16.08,16.08,0,0,0,159.1,29.74l-11.56,80.91L108.8,81.6A8,8,0,0,0,96,88v32L44.8,81.6A8,8,0,0,0,32,88V208H24a8,8,0,0,0,0,16H232a8,8,0,0,0,0-16ZM108,184H80a8,8,0,0,1,0-16h28a8,8,0,0,1,0,16Zm68,0H148a8,8,0,0,1,0-16h28a8,8,0,0,1,0,16Zm-5.33-56-8.53-6.4L174.94,32h18.12l13.72,96Z"/></svg></span><span class="ch-city">Northampton</span><h3>Una fábrica en aprietos</h3><p>Charlie Price hereda la fábrica de zapatos de su padre justo cuando nadie compra zapatos de vestir. Tiene un taller lleno de gente buena y ninguna idea de cómo salvarlo.</p></li><li class="ch rv"><span class="ch-ic"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M32,144a95.28,95.28,0,0,1,37.53,7.67,4,4,0,0,1,2.47,3.7V192a16,16,0,0,1-16,16H40a16,16,0,0,1-16-16V148a4,4,0,0,1,4-4Zm199,12.19L180,144.71,69.66,34.34a8,8,0,0,0-11.56.26C36.11,58.64,24,89,24,120a8,8,0,0,0,8,8,111.2,111.2,0,0,1,63.34,19.7,112.45,112.45,0,0,1,40.55,50.39A15.9,15.9,0,0,0,150.72,208H240a16,16,0,0,0,16-16v-4.73A31.72,31.72,0,0,0,231,156.19Z"/></svg></span><span class="ch-city">Londres</span><h3>Entra Lola</h3><p>Una noche conoce a Lola, artista drag que necesita botas que aguanten un show entero. Ahí está el negocio: botas hechas para brillar, fabricadas en Northampton.</p></li><li class="ch rv"><span class="ch-ic"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M215.52,197.26a8,8,0,0,1-1.86,8.39l-24,24A8,8,0,0,1,184,232a7.09,7.09,0,0,1-.79,0,8,8,0,0,1-5.87-3.52l-44.07-66.12L112,183.59V208a8,8,0,0,1-2.34,5.65s-14,14.06-15.88,15.88A7.91,7.91,0,0,1,91,231.41a8,8,0,0,1-10.41-4.35l-.06-.15-14.7-36.76L29,175.42a8,8,0,0,1-2.69-13.08l16-16A8,8,0,0,1,48,144H72.4l21.27-21.27L27.56,78.65a8,8,0,0,1-1.22-12.32l24-24a8,8,0,0,1,8.39-1.86l85.94,31.25L176.2,40.19a28,28,0,0,1,39.6,39.6l-31.53,31.53Z"/></svg></span><span class="ch-city">Milán</span><h3>A la pasarela</h3><p>La fábrica apuesta todo en una pasarela internacional. Al final, la lección es para todos: puedes cambiar el mundo cuando cambias de opinión.</p></li></ol>
+  <figure class="quote rv"><blockquote>Sé quien <em>quieras</em> ser.</blockquote><cite>El corazón de Kinky Boots</cite></figure>
+ </div>
+</section>
+
+<section class="heel" id="tacon">
+ <div class="wrap heel-grid">
+  <div class="rv"><span class="kick"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M32,144a95.28,95.28,0,0,1,37.53,7.67,4,4,0,0,1,2.47,3.7V192a16,16,0,0,1-16,16H40a16,16,0,0,1-16-16V148a4,4,0,0,1,4-4Zm199,12.19L180,144.71,69.66,34.34a8,8,0,0,0-11.56.26C36.11,58.64,24,89,24,120a8,8,0,0,0,8,8,111.2,111.2,0,0,1,63.34,19.7,112.45,112.45,0,0,1,40.55,50.39A15.9,15.9,0,0,0,150.72,208H240a16,16,0,0,0,16-16v-4.73A31.72,31.72,0,0,0,231,156.19Z"/></svg> Interactivo</span><h2>Todo está en el <em>tacón</em></h2>
+   <p class="lead">Lola tiene una regla: una bota de verdad aguanta una noche entera de show. Sube el tacón y descubre qué tan Lola eres.</p>
+   <div class="meter"><span class="inch" id="inch" aria-live="polite">0<small>pulgadas</small></span><p class="verdict" id="verdict" role="status">Zapato de oficina. Cómodo, sí. Memorable, no.</p>
+    <input type="range" id="heelR" min="0" max="8" step="1" value="0" aria-label="Altura del tacón en pulgadas"></div></div>
+  <div class="boot rv" id="boot"><span class="floor"></span><img src="legs.webp" alt="Botas rojas con brillantina de Kinky Boots" loading="lazy" width="791" height="1500"><canvas id="bootSpark" aria-hidden="true"></canvas></div>
+ </div>
+</section>
+
+<section class="cast" id="personajes">
+ <div class="wrap"><div class="rv"><span class="kick"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M239.75,90.81c0,.11,0,.21-.07.32L217,195a16,16,0,0,1-15.72,13H54.71A16,16,0,0,1,39,195L16.32,91.13c0-.11-.05-.21-.07-.32A16,16,0,0,1,44,77.39l33.67,36.29,35.8-80.29a1,1,0,0,0,0-.1,16,16,0,0,1,29.06,0,1,1,0,0,0,0,.1l35.8,80.29L212,77.39a16,16,0,0,1,27.71,13.42Z"/></svg> Personajes</span><h2>Personajes que se quedan <em>contigo</em></h2></div>
+  <div class="cards"><article class="pc rv" tabindex="0"><div class="pc-ph"><img src="lola.webp" alt="" loading="lazy" style="object-position:50% 20%"></div><div class="pc-bd"><span class="pc-role">La estrella</span><h3>Lola</h3><p>Drag queen, diseñadora y fuerza de la naturaleza. Entra cantando “Land of Lola” y nadie vuelve a mirar unas botas igual.</p></div></article><article class="pc rv" tabindex="0"><div class="pc-ph"><img src="elenco.webp" alt="" loading="lazy" style="object-position:30% 30%"></div><div class="pc-bd"><span class="pc-role">El heredero</span><h3>Charlie Price</h3><p>No quería la fábrica, ni las botas, ni el riesgo. Termina desfilando en Milán con tacones rojos.</p></div></article><article class="pc rv" tabindex="0"><div class="pc-ph"><img src="elenco.webp" alt="" loading="lazy" style="object-position:78% 30%"></div><div class="pc-bd"><span class="pc-role">La fábrica</span><h3>Lauren</h3><p>Aporta la idea que salva Price & Son y la canción más divertida sobre enamorarse de tu jefe.</p></div></article><article class="pc rv" tabindex="0"><div class="pc-ph"><img src="angels.webp" alt="" loading="lazy" style="object-position:50% 40%"></div><div class="pc-bd"><span class="pc-role">El séquito</span><h3>The Angels</h3><p>Seis performers que convierten cada número en pasarela: brillo, humor y coreografía impecable.</p></div></article></div></div>
+</section>
+
+<section class="songs" id="canciones">
+ <div class="wrap songs-grid"><div class="rv"><span class="kick"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z"/></svg> Banda sonora</span><h2>La música de <em>Cyndi Lauper</em></h2><p class="by">Música y letras de Cyndi Lauper, ganadora del Tony a Mejor Música Original. Libreto de Harvey Fierstein.</p></div>
+  <ol class="trs"><li class="tr rv"><span class="tr-n">01</span><span class="tr-t"><b>Land of Lola</b><small>Lola & The Angels</small></span><p>La entrada triunfal. Lola presenta a sus Angels y deja claro que este no es un musical cualquiera.</p></li><li class="tr rv"><span class="tr-n">02</span><span class="tr-t"><b>Sex Is in the Heel</b><small>Lola, Charlie y compañía</small></span><p>El manifiesto de las botas: el secreto no es el zapato, es el tacón.</p></li><li class="tr rv"><span class="tr-n">03</span><span class="tr-t"><b>The History of Wrong Guys</b><small>Lauren</small></span><p>El número cómico favorito: Lauren se da cuenta, en tiempo real, de que se está enamorando de su jefe.</p></li><li class="tr rv"><span class="tr-n">04</span><span class="tr-t"><b>Not My Father's Son</b><small>Charlie & Lola</small></span><p>Dos personas que crecieron tratando de complacer a sus padres descubren que se parecen más de lo que creían.</p></li><li class="tr rv"><span class="tr-n">05</span><span class="tr-t"><b>Everybody Say Yeah</b><small>Toda la compañía</small></span><p>La fábrica vuelve a la vida y el primer acto cierra en fiesta total.</p></li></ol></div>
+</section>
+
+<section class="tix" id="pases">
+ <div class="wrap tgrid">
+  <div class="tinfo rv"><span class="kick" id="ivKick"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M232,104a8,8,0,0,0,8-8V64a16,16,0,0,0-16-16H32A16,16,0,0,0,16,64V96a8,8,0,0,0,8,8,24,24,0,0,1,0,48,8,8,0,0,0-8,8v32a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V160a8,8,0,0,0-8-8,24,24,0,0,1,0-48ZM32,167.2a40,40,0,0,0,0-78.4V64H88V192H32Z"/></svg> Función de prensa</span><h2 id="ivHead">Estás en <em>la lista</em></h2>
+   <p class="ivhi" id="ivHi">La función de prensa de Kinky Boots, antes que nadie. Tus pases viven aquí, en la Wallet de TADAA!.</p>
+   <ul id="ivList"></ul><div class="ctas" id="ivActs" style="opacity:1;transform:none;justify-content:flex-start"></div></div>
+  <div class="wallet rv" aria-label="Wallet de TADAA! con tus pases"><div class="wl-stack" id="wlstack"></div><div class="wl-front" id="wlfront" aria-live="polite"></div><p class="wl-note" id="wlnote"></p></div>
+ </div>
+</section>
+
+<section class="faq" id="preguntas"><div class="wrap"><div class="rv"><span class="kick"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"/></svg> Antes de la función</span><h2>Lo que <em>conviene</em> saber</h2></div><div class="fqs"><details class="fq rv"><summary>¿Puedo llevar acompañante?<svg class="ic pl" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM184,136H136v48a8,8,0,0,1-16,0V136H72a8,8,0,0,1,0-16h48V72a8,8,0,0,1,16,0v48h48a8,8,0,0,1,0,16Z"/></svg></summary><p>Tu invitación incluye los pases que ves en tu wallet. Cada uno tiene su propio QR.</p></details><details class="fq rv"><summary>¿A qué hora conviene llegar?<svg class="ic pl" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM184,136H136v48a8,8,0,0,1-16,0V136H72a8,8,0,0,1,0-16h48V72a8,8,0,0,1,16,0v48h48a8,8,0,0,1,0,16Z"/></svg></summary><p>La alfombra roja y el acceso abren a las 19:00 h. La función empieza puntual a las 20:00 h.</p></details><details class="fq rv"><summary>¿Necesito imprimir algo?<svg class="ic pl" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM184,136H136v48a8,8,0,0,1-16,0V136H72a8,8,0,0,1,0-16h48V72a8,8,0,0,1,16,0v48h48a8,8,0,0,1,0,16Z"/></svg></summary><p>No. Presenta el QR desde tu celular; se renueva cada minuto para que nadie pueda copiarlo.</p></details><details class="fq rv"><summary>¿Hay código de vestimenta?<svg class="ic pl" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM184,136H136v48a8,8,0,0,1-16,0V136H72a8,8,0,0,1,0-16h48V72a8,8,0,0,1,16,0v48h48a8,8,0,0,1,0,16Z"/></svg></summary><p>Algo rojo, algo que brille. El tacón es opcional, pero Lola lo agradece.</p></details></div></div></section>
+
+<footer><img src="../../img/tv/logo-tadaa.png" alt="TADAA!">Kinky Boots: El Musical · Banamex presenta · Una producción de Gou Producciones y Bway.<br>Libreto de Harvey Fierstein · Música y letras de Cyndi Lauper.</footer>
+
+<script>
+(()=>{'use strict';
+const IC2={"calendar-plus": "M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM152,160H136v16a8,8,0,0,1-16,0V160H104a8,8,0,0,1,0-16h16V128a8,8,0,0,1,16,0v16h16a8,8,0,0,1,0,16ZM48,80V48H72v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80Z", "map-pin": "M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z", "clock": "M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm56,112H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48a8,8,0,0,1,0,16Z", "users": "M164.47,195.63a8,8,0,0,1-6.7,12.37H10.23a8,8,0,0,1-6.7-12.37,95.83,95.83,0,0,1,47.22-37.71,60,60,0,1,1,66.5,0A95.83,95.83,0,0,1,164.47,195.63Zm87.91-.15a95.87,95.87,0,0,0-47.13-37.56A60,60,0,0,0,144.7,54.59a4,4,0,0,0-1.33,6A75.83,75.83,0,0,1,147,150.53a4,4,0,0,0,1.07,5.53,112.32,112.32,0,0,1,29.85,30.83,23.92,23.92,0,0,1,3.65,16.47,4,4,0,0,0,3.95,4.64h60.3a8,8,0,0,0,7.73-5.93A8.22,8.22,0,0,0,252.38,195.48Z", "door-open": "M232,216H208V40a16,16,0,0,0-16-16H64A16,16,0,0,0,48,40V216H24a8,8,0,0,0,0,16H232a8,8,0,0,0,0-16Zm-64,0H64V40H168Zm-40-84a12,12,0,1,1,12,12A12,12,0,0,1,128,132Z", "gift": "M216,72H180.92c.39-.33.79-.65,1.17-1A29.53,29.53,0,0,0,192,49.57,32.62,32.62,0,0,0,158.44,16,29.53,29.53,0,0,0,137,25.91a54.94,54.94,0,0,0-9,14.48,54.94,54.94,0,0,0-9-14.48A29.53,29.53,0,0,0,97.56,16,32.62,32.62,0,0,0,64,49.57,29.53,29.53,0,0,0,73.91,71c.38.33.78.65,1.17,1H40A16,16,0,0,0,24,88v32a16,16,0,0,0,16,16v64a16,16,0,0,0,16,16h60a4,4,0,0,0,4-4V120H40V88h80v32h16V88h80v32H136v92a4,4,0,0,0,4,4h60a16,16,0,0,0,16-16V136a16,16,0,0,0,16-16V88A16,16,0,0,0,216,72ZM84.51,59a13.69,13.69,0,0,1-4.5-10A16.62,16.62,0,0,1,96.59,32h.49a13.69,13.69,0,0,1,10,4.5c8.39,9.48,11.35,25.2,12.39,34.92C109.71,70.39,94,67.43,84.51,59Zm87,0c-9.49,8.4-25.24,11.36-35,12.4C137.7,60.89,141,45.5,149,36.51a13.69,13.69,0,0,1,10-4.5h.49A16.62,16.62,0,0,1,176,49.08,13.69,13.69,0,0,1,171.49,59Z", "sparkle": "M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"};
+const ic2=n=>`<svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="${IC2[n]}"/></svg>`;
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function onScreen(el,cb){new IntersectionObserver(es=>{const v=es[0].isIntersecting;el.classList.toggle('off',!v);cb&&cb(v)},{rootMargin:'100px'}).observe(el)}
+
+/* ---------- destellos: estrellitas de 4 puntas sobre los píxeles del logo ---------- */
+function sparkles(cv,img,{count=46,boost=()=>1,area}){const ctx=cv.getContext('2d');let pts=[],W=0,H=0,vis=true,raf=0;const d=Math.min(1.5,devicePixelRatio||1);
+ const fit=()=>{const r=cv.getBoundingClientRect();W=cv.width=Math.round(r.width*d);H=cv.height=Math.round(r.height*d)};
+ const sample=()=>{const o=document.createElement('canvas'),w=o.width=150,h=o.height=Math.round(150*img.naturalHeight/img.naturalWidth),x=o.getContext('2d');x.drawImage(img,0,0,w,h);const a=x.getImageData(0,0,w,h).data;
+  for(let y=0;y<h;y+=2)for(let i=0;i<w;i+=2)if(a[(y*w+i)*4+3]>180)pts.push([i/w,y/h]);};
+ const star=(x,y,r,al)=>{ctx.globalAlpha=al;ctx.beginPath();ctx.moveTo(x,y-r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.quadraticCurveTo(x,y,x,y+r);ctx.quadraticCurveTo(x,y,x-r,y);ctx.quadraticCurveTo(x,y,x,y-r);ctx.fill();
+  ctx.globalAlpha=al*.35;ctx.beginPath();ctx.arc(x,y,r*.55,0,6.283);ctx.fill()};
+ let S=[];const spawn=()=>{const p=pts[Math.random()*pts.length|0];const a=area||[.06,.06,.88,.88];return {x:(a[0]+p[0]*a[2])*W,y:(a[1]+p[1]*a[3])*H,t:0,life:500+Math.random()*900,r:(4+Math.random()*9)*d,hue:Math.random()<.75?'#FFF6E6':'#FFD27A'}};
+ let last=performance.now();const loop=n=>{const dt=Math.min(50,n-last);last=n;ctx.clearRect(0,0,W,H);const want=Math.round(count*boost());while(S.length<want&&pts.length)S.push(spawn());
+  S=S.filter(s=>{s.t+=dt;const k=s.t/s.life;if(k>=1)return false;const e=Math.sin(Math.PI*k);ctx.fillStyle=s.hue;star(s.x,s.y,s.r*(.4+e*.8),e);return true});raf=vis&&!document.hidden?requestAnimationFrame(loop):0};
+ const go=()=>{if(!raf&&vis&&!RM){last=performance.now();raf=requestAnimationFrame(loop)}};
+ const start=()=>{fit();sample();addEventListener('resize',fit);go()};if(img.complete&&img.naturalWidth)start();else img.addEventListener('load',start,{once:true});
+ onScreen(cv.parentElement,v=>{vis=v;if(v)go()});document.addEventListener('visibilitychange',go);return {go}}
+
+/* ---------- el tacón ---------- */
+const VER=["Zapato de oficina. Cómodo, sí. Memorable, no.", "Un poquito de altura. Charlie aprueba.", "Ya se nota la intención.", "Tres pulgadas: caminas distinto.", "Cuatro: el taller voltea a verte.", "Cinco: esto ya es una entrada.", "Seis: Nicola no lo puede creer.", "Siete: casi casi Lola.", "Ocho pulgadas. Eso es una bota de Lola."];
+function heel(){const r=$('#heelR'),boot=$('#boot'),inch=$('#inch'),ver=$('#verdict');let h=0;
+ const sp=sparkles($('#bootSpark'),boot.querySelector('img'),{count:4,boost:()=>1+h*1.6,area:[.083,.083,.833,.833]});
+ const set=()=>{h=+r.value;r.style.setProperty('--p',(h/8*100)+'%');boot.style.setProperty('--h',h);inch.firstChild.textContent=h;ver.textContent=VER[h];if(h===8&&!RM)boot.animate([{transform:'scale(1)'},{transform:'scale(1.04)'},{transform:'scale(1)'}],{duration:450,easing:'cubic-bezier(.2,1.2,.4,1)'});sp.go()};
+ r.addEventListener('input',set);set()}
+
+/* ---------- invitación ---------- */
+const API='/api/v2/invites/',TOKEN=new URLSearchParams(location.search).get('inv');
+const STRIPS=['#E0102F','#2A1218','#7A4BC2','#9E0A22'];let INV=null,cur=0,qrT=0;
+const DEMO={demo:true,invitation:{guest:'Tu nombre aquí',tickets:2,kind:'particular'},campaign:{title:'Función de prensa',starts_at:'2027-05-12T02:00:00Z',venue:'CCT1 · Centro Cultural Teatro 1',doors:'19:00'},passes:[{n:1,holder:'Tu nombre aquí',used:false},{n:2,holder:'Tu acompañante',used:false}]};
+const fdate=d=>d?new Date(d).toLocaleString('es-MX',{weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'America/Mexico_City'}):'Fecha por confirmar';
+const maps=v=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent((v||'Centro Cultural Teatro 1')+', Ciudad de México');
+function ics(){const c=INV.campaign;if(!c.starts_at)return;const f=d=>new Date(d).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+ const t=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//TADAA!//Invitaciones//ES','BEGIN:VEVENT','UID:'+(TOKEN||'demo')+'-kb@tadaa','DTSTAMP:'+f(Date.now()),'DTSTART:'+f(c.starts_at),'DTEND:'+f(+new Date(c.starts_at)+2.5*3600000),'SUMMARY:Kinky Boots · '+c.title,'LOCATION:'+(c.venue||'CCT1'),'DESCRIPTION:Tu invitación y tus pases: '+location.href,'END:VEVENT','END:VCALENDAR'].join('\r\n');
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/calendar'}));a.download='kinky-boots.ics';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
+const qrSrc=n=>API+encodeURIComponent(TOKEN)+'/passes/'+n+'/qr?m='+Math.floor(Date.now()/30000);
+const DEMO_QR=(()=>{let r='',x=11;for(let i=0;i<21;i++)for(let j=0;j<21;j++){x=(x*1103515245+12345)&0x7fffffff;const fin=(i<7&&j<7)||(i<7&&j>13)||(i>13&&j<7);if(fin?(i%6===0||j%6===0||(i>1&&i<5&&(j>1&&j<5||j>15&&j<19))||(i>15&&i<19&&j>1&&j<5)):(x>>16)&1)r+=`<rect x="${j}" y="${i}" width="1" height="1"/>`}return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" shape-rendering="crispEdges">${r}</svg>`})();
+function wallet(first){const P=INV.passes,f=P[cur]||P[0],c=INV.campaign,demo=!!INV.demo,many=P.length>1;
+ $('#wlstack').innerHTML=P.map((p,i)=>({...p,i})).filter(p=>p.i!==cur).map(p=>`<button class="wl-strip" data-i="${p.i}" style="background:${STRIPS[p.i%STRIPS.length]};color:#fff" aria-label="Ver pase ${p.n}: ${esc(p.holder)}"><span style="display:flex;justify-content:space-between;align-items:center"><span class="chip" style="background:#D6FF35;color:#08091A">PASE ${p.n} DE ${P.length}${p.used?' · YA INGRESÓ':''}</span><span style="font-size:11px">INVITACIÓN</span></span><div class="t">${esc(p.holder||'Invitado')}</div></button>`).join('');
+ const fr=$('#wlfront');
+ fr.innerHTML=`<div class="top"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span class="chip" style="background:#08091A;color:#D6FF35">INVITACIÓN · ${esc(c.title).toUpperCase()}</span><span style="font-size:11px;font-weight:800">${many?'Pase '+f.n+' de '+P.length:'Pase personal'}</span></div>
+  <div style="display:flex;gap:14px;align-items:center"><img src="legs.webp" alt="" style="width:76px;height:76px;border-radius:18px;object-fit:cover;object-position:50% 30%;background:#E0102F"><div style="display:flex;flex-direction:column;gap:4px;min-width:0"><span style="font-family:Outfit,sans-serif;font-weight:800;font-size:23px;line-height:1">Kinky Boots</span><span style="font-size:12px;font-weight:600">${esc(fdate(c.starts_at))}</span></div></div></div>
+  <div class="perf"></div>
+  <div class="bot"><div class="meta"><span><small>Titular</small><b>${esc(f.holder||INV.invitation.guest)}</b></span><span><small>Recinto</small><b>${esc((c.venue||'CCT1').split('·')[0].trim())}</b></span><span><small>Puertas</small><b>${esc(c.doors||'Por confirmar')}</b></span></div>
+  <div class="qrbox${demo?' demo':''}${f.used?' used':''}"><img id="qrimg" alt="${demo?'':'QR del pase '+f.n+' de '+esc(f.holder)}" src="${demo?'data:image/svg+xml;utf8,'+encodeURIComponent(DEMO_QR):qrSrc(f.n)}">${demo?'<span class="tag2">Tu QR aparece aquí cuando abres tu invitación personal</span>':''}</div>
+  <span class="qrcap">${demo?'Invitación de ejemplo':f.used?'Este pase ya se usó para entrar':'<i></i>QR dinámico · cambia cada minuto, no sirve una captura'}</span>
+  <span class="dress">${ic2('sparkle')}Código de vestimenta: algo rojo, algo que brille.</span>
+  ${demo?`<a class="cta" href="../../canjear/">${ic2('gift')} Tengo un código de sorteo</a>`:c.starts_at?`<button class="cta" id="wlIcs">${ic2('calendar-plus')} Agregar a mi calendario</button>`:''}
+  <a class="cta ghost" href="${maps(c.venue)}" target="_blank" rel="noopener">${ic2('map-pin')} Cómo llegar</a></div>`;
+ $('#wlIcs')?.addEventListener('click',ics);
+ if(!first&&!RM){fr.classList.remove('swap');void fr.offsetWidth;fr.classList.add('swap')}
+ $$('.wl-strip').forEach(b=>b.addEventListener('click',()=>{cur=+b.dataset.i;wallet(false)}));
+ $('#wlnote').textContent=demo?'Esta es una invitación de ejemplo. La tuya llega por WhatsApp o correo con tu nombre.':many?'Toca las pestañas para ver el pase de cada invitado. Muéstralo en la puerta con el brillo al máximo.':'Muéstralo en la puerta con el brillo al máximo.';
+ clearInterval(qrT);if(!demo&&!f.used)qrT=setInterval(()=>{if(!document.hidden){const im=$('#qrimg');if(im)im.src=qrSrc(f.n)}},30000)}
+function invInfo(){const v=INV.invitation,c=INV.campaign,demo=!!INV.demo,first=String(v.guest||'').split(/\s+/)[0];
+ $('#ivKick').lastChild.textContent=' '+c.title;
+ $('#ivHead').innerHTML=demo?'Estás en <em>la lista</em>':`${esc(first)}, <em>estás en la lista</em>`;
+ $('#ivHi').innerHTML=demo?'La función de prensa de Kinky Boots, antes que nadie. Abre el enlace personal que te enviamos y aquí aparecerán tus pases con QR.':`${v.company&&v.kind!=='particular'?'<b>'+esc(v.company)+'</b> te invita':'Estás invitado'} a la <b>${esc(c.title.toLowerCase())}</b> de Kinky Boots: El Musical. Tu invitación es para <b>${v.tickets} ${v.tickets===1?'persona':'personas'}</b>.`;
+ $('#ivList').innerHTML=[['clock',fdate(c.starts_at)],['map-pin',(c.venue||'CCT1')+', Ciudad de México'],['door-open','Alfombra roja y puertas: '+(c.doors||'por confirmar')],['users',v.tickets+(v.tickets===1?' pase con QR individual':' pases con QR individual, uno por invitado')]].map(([i,t])=>`<li>${ic2(i)} ${esc(t)}</li>`).join('');
+ $('#ivActs').innerHTML=demo?`<a class="btn b-red" href="../../canjear/">${ic2('gift')} Canjear código de sorteo</a>`:''}
+async function loadInvite(){if(TOKEN){try{const r=await fetch(API+encodeURIComponent(TOKEN),{credentials:'same-origin'});const d=await r.json();if(!r.ok)throw new Error(d.error||'Invitación no encontrada');INV=d}
+  catch(e){INV={...DEMO};invInfo();wallet(true);$('#ivHi').textContent=e.message+'. Revisa el enlace que te enviamos o escríbenos.';return}}else INV={...DEMO};invInfo();wallet(true)}
+
+/* ---------- entrada y scroll ---------- */
+function reveal(){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{rootMargin:'0px 0px -10% 0px'});$$('.rv').forEach(el=>io.observe(el))}
+const hero=$('.hero');onScreen(hero);onScreen($('.marq'));
+const logo=$('.logo-box img');const begin=()=>requestAnimationFrame(()=>hero.classList.add('in'));if(logo.complete)begin();else{logo.onload=begin;logo.onerror=begin}
+sparkles($('#spark'),logo,{count:42,area:[.0536,.0536,.8929,.8929]});
+heel();loadInvite();reveal();
+})();
+</script>
+</body>
+</html>

@@ -46,7 +46,7 @@ const cart={};// por evento: {typeId, qty, addons:{id:q}, seats:[]}
 function cartFor(id){return cart[id]=cart[id]||{typeId:null,qty:1,addons:{},seats:[]}}
 
 async function checkout(evId,{typeId,qty,addons,seats}){
- if(!TV.user)return TV.requireLogin('index.html#evento/'+encodeURIComponent(evId));
+ if(!TV.user)return TV.join('index.html#evento/'+encodeURIComponent(evId));
  if(!typeId)return TV.toast('Elige una zona');
  const body={ticketTypeId:typeId,quantity:seats?.length||qty,idempotencyKey:crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random()};
  const ad=Object.entries(addons||{}).filter(([,q])=>q>0).map(([id,quantity])=>({id,quantity}));if(ad.length)body.addons=ad;if(seats?.length)body.seatIds=seats;
@@ -312,7 +312,7 @@ A.DGolden=C=>class extends C{constructor(p){super(p);this.id=(p.params||[])[0]}r
 function nowModel(){const L=(TV.now||[]).slice().sort((a,b)=>(a.state==='open'?0:1)-(b.state==='open'?0:1)||new Date(a.opens_at)-new Date(b.opens_at));const c=L[0];
  const m=x=>{const e=bySlug(x.slug||x.event_id)||{};return {...x,img:x.hero_url||x.poster_url||e.img||IMG.nocturno,price:H.money(x.price_minor),regular:H.money(x.regular_price_minor),when:H.when(x.starts_at)+(x.venue?' · '+x.venue:''),opensAt:H.when(x.opens_at),quota:x.quota,signups:x.signups,maxPerUser:x.max_per_user,kicker:x.state==='open'?'NOW! ABIERTO':'PRÓXIMO NOW!',slug:x.slug}};
  return {c:c?m(c):null,rest:L.slice(1).map(m)}}
-async function nowSignup(c,on){if(!TV.user)return TV.requireLogin('index.html#now');try{await TV.api.call('/api/v2/now/'+c.id+'/signup',on?'POST':'DELETE');await TV.loadNow();TV.toast(on?'¡Listo! Te avisamos cuando abra Now!':'Inscripción cancelada','ok');TV.rerender()}catch(e){TV.toast(e.message,'err')}}
+async function nowSignup(c,on){if(!TV.user)return TV.join('index.html#now','Now! es solo para miembros: boletos de tercera llamada a precio de remate. Únete para inscribirte.');try{await TV.api.call('/api/v2/now/'+c.id+'/signup',on?'POST':'DELETE');await TV.loadNow();TV.toast(on?'¡Listo! Te avisamos cuando abra Now!':'Inscripción cancelada','ok');TV.rerender()}catch(e){TV.toast(e.message,'err')}}
 const pad=n=>String(n).padStart(2,'0');const clock=ms=>{const s=Math.max(0,Math.floor(ms/1000));return pad(Math.floor(s/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60)};
 A.MRush=C=>class extends C{constructor(p){super(p);this.state={qty:1,now:Date.now()}}renderVals(){const N=nowModel(),c=N.c;const qty=this.state.qty;
  const optBase='position: relative; flex: 1; min-height: 124px; border-radius: 22px; padding: 18px 14px 14px; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; text-align: left; font-family: inherit; color: #FFFFFF; ';
@@ -356,6 +356,6 @@ A.DCuenta=C=>class extends C{constructor(p){super(p);this.state={rfc:null}}rende
   email:X.u.email||'',phone:X.u.phone||'—',rfc,rfcTag:X.a.rfc&&rfc===X.a.rfc?'✓ Verificado':'Guardar',rfcInput:e=>{this.state.rfc=e.target.value.toUpperCase()},
   saveRfc:async()=>{try{const r=await TV.api.call('/api/v2/me/rfc','PUT',{rfc:this.state.rfc??rfc});await TV.loadAccount();this.state.rfc=null;TV.toast(r.linkedAgreements?'RFC guardado y convenio vinculado':'RFC guardado','ok');this.setState({})}catch(err){TV.toast(err.message,'err')}}}}};
 A.MBaja=C=>class extends C{renderVals(){const a=TV.account||{};const o=(a.offers||[])[0]||{discount_pct:50,months_total:3,months_used:0};
- return {...globals(),b:{company:'tu empresa',badges:(a.badges||[]).length,level:a.level?.name||'Curioso',pct:o.discount_pct,months:o.months_total-o.months_used,price:H.money(Math.round(2500*(100-o.discount_pct)/100))},keep:()=>TV.go('membresia')}}};
+ return {...globals(),b:{company:'tu empresa',badges:(a.badges||[]).length,level:a.level?.name||'Curioso',pct:o.discount_pct,months:o.months_total-o.months_used,price:H.money(Math.round(5000*(100-o.discount_pct)/100))},keep:()=>TV.go('membresia')}}};
 A.helpers=H;A.samples=SAMPLES;
 })();

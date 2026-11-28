@@ -104,14 +104,14 @@ function snapshot(host){if(REDUCE||!host.firstElementChild)return;dropGhost();co
 function dropGhost(){if(ghost){ghost.g.remove();ghost=null}}
 function choreograph(host,first){host.style.visibility='';host.style.opacity='';const root=host.firstElementChild;if(!root){dropGhost();return}
  if(REDUCE){dropGhost();root.animate([{opacity:0,offset:0},{opacity:1}],{duration:180,easing:'ease-out'});return}
- const S=spring(1,.36),dir=navDir;
- if(ghost){const {g,c}=ghost;ghost=null;c.animate([{transform:'none',opacity:1},{transform:'translateX('+(-72*dir)+'px) scale(.97)',opacity:0}],{duration:240,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'}).finished.then(()=>g.remove(),()=>g.remove());
-  root.animate([{opacity:0,offset:0},{opacity:1}],{duration:200,easing:'cubic-bezier(0,0,.2,1)'});root.animate([{transform:'translateX('+(64*dir)+'px)'},{transform:'none'}],{duration:S.duration,easing:S.easing})}
+ const S=spring(1,.26),dir=navDir;
+ if(ghost){const {g,c}=ghost;ghost=null;c.animate([{transform:'none',opacity:1},{transform:'translateX('+(-40*dir)+'px)',opacity:0}],{duration:150,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'}).finished.then(()=>g.remove(),()=>g.remove());
+  root.animate([{opacity:0,offset:0},{opacity:1}],{duration:140,easing:'cubic-bezier(0,0,.2,1)'});root.animate([{transform:'translateX('+(36*dir)+'px)'},{transform:'none'}],{duration:S.duration,easing:S.easing})}
  else root.animate([{opacity:0,transform:'translateY(16px)',offset:0},{opacity:1,transform:'none'}],{duration:S.duration,easing:S.easing});
  const vh=innerHeight,picks=[];
  root.querySelectorAll('h1, h2, [data-tv-link], aside, article, section > div > a').forEach(el=>{if(picks.length>=14)return;const r=el.getBoundingClientRect();if(r.width<120||r.height<40||r.top>vh||r.bottom<0)return;if(picks.some(p=>p.contains(el)||el.contains(p)))return;picks.push(el)});
- picks.sort((a,b)=>a.getBoundingClientRect().top-b.getBoundingClientRect().top).forEach((el,k)=>{const o={duration:S.duration,delay:(first?120:70)+k*30,easing:S.easing,fill:'backwards'};try{el.animate([{opacity:0,offset:0}],{...o,duration:220,easing:'cubic-bezier(0,0,.2,1)'});el.animate([{transform:'translateY(18px)'},{transform:'none'}],{...o,composite:'add'})}catch{}});
- const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io.unobserve(e.target);const o={duration:S.duration,easing:S.easing,fill:'backwards'};try{e.target.animate([{opacity:0,offset:0}],{...o,duration:260,easing:'cubic-bezier(0,0,.2,1)'});e.target.animate([{transform:'translateY(28px)'},{transform:'none'}],{...o,composite:'add'})}catch{}}),{rootMargin:'0px 0px -8% 0px'});
+ picks.sort((a,b)=>a.getBoundingClientRect().top-b.getBoundingClientRect().top).forEach((el,k)=>{const o={duration:S.duration,delay:(first?40:0)+k*16,easing:S.easing,fill:'backwards'};try{el.animate([{opacity:0,offset:0}],{...o,duration:160,easing:'cubic-bezier(0,0,.2,1)'});el.animate([{transform:'translateY(12px)'},{transform:'none'}],{...o,composite:'add'})}catch{}});
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io.unobserve(e.target);const o={duration:S.duration,easing:S.easing,fill:'backwards'};try{e.target.animate([{opacity:0,offset:0}],{...o,duration:200,easing:'cubic-bezier(0,0,.2,1)'});e.target.animate([{transform:'translateY(16px)'},{transform:'none'}],{...o,composite:'add'})}catch{}}),{rootMargin:'0px 0px -8% 0px'});
  root.querySelectorAll('section, aside, article, h2, [data-tv-link]').forEach(el=>{const r=el.getBoundingClientRect();if(r.top>vh&&r.height>40)io.observe(el)})}
 
 /* ───── enrutador ───── */
@@ -135,7 +135,7 @@ async function show(route,params){
  document.getElementById('tv-css').textContent=c.css;tplNode=c.node;comp=makeComponent(name,c.code,params);
  const host=$host();
  window.scrollTo({top:0,behavior:'instant'});paint(true);comp?.componentDidMount?.();const firstLoad=!document.body.classList.contains('tv-ready');document.body.classList.add('tv-ready');
- if(firstLoad){host.style.opacity='0';setTimeout(()=>{if(tok===navTok)choreograph(host,true)},260)}else choreograph(host,false);navDir=1;
+ if(firstLoad){choreograph(host,true)}else choreograph(host,false);navDir=1;
  document.title=(TV.titles[route]||'TADAA!')+' · TADAA!'}
 
 /* enlaces internos */
@@ -152,7 +152,7 @@ const TV=window.TV={
  user:null,_s:null,events:[],eventsLoaded:false,detail:{},tickets:[],account:null,now:[],paymentMode:'internal_test',currentEvent:null,
  titles:{inicio:'¿Qué plan hay hoy?',explorar:'Cartelera',evento:'Evento',now:'Now!',wallet:'Mi Wallet',pase:'Mi pase',cuenta:'Mi cuenta',golden:'Golden Ticket',addons:'Add-ons',asientos:'Asientos',baja:'Un pajarito nos contó…',admin:'Studio',productor:'Portal de productores',empresa:'Portal de empresas',staff:'Staff · Check-in',pitch:'Pitch',membresia:'Membresía'},
  api,go,rerender:()=>schedule(),
- async session(){if(this._s)return this._s;this._s=api.refresh().then(r=>{this.user=r.authenticated?r.user:null;return r}).catch(()=>({}));return this._s},
+ async session(){if(this._s)return this._s;this._s=api.refresh().then(r=>{this.user=r.authenticated?r.user:null;return r}).catch(()=>({})).then(r=>{document.body.classList.toggle('tv-auth',!!this.user);document.body.classList.toggle('tv-guest',!this.user);return r});return this._s},
  async catalog(){if(this.eventsLoaded)return this.events;try{const r=await api.call('/api/v2/catalog');this.events=(r.events||r.items||[]).filter(e=>!e.sample)}catch{this.events=[]}this.eventsLoaded=true;return this.events},
  async event(id){if(!id)return null;if(this.detail[id])return this.detail[id];try{this.detail[id]=await api.call('/api/v2/events/'+encodeURIComponent(id))}catch{this.detail[id]=null}return this.detail[id]},
  async loadTickets(){try{this.tickets=(await api.call('/api/v2/tickets')).tickets||[]}catch{this.tickets=[]}return this.tickets},
@@ -161,7 +161,16 @@ const TV=window.TV={
  async loadPaymentMode(){try{this.paymentMode=(await api.call('/api/v2/payment-mode')).mode||'internal_test'}catch{}return this.paymentMode},
  toast(msg,kind){let t=document.getElementById('tv-toast');if(!t){t=document.createElement('div');t.id='tv-toast';t.setAttribute('role','status');document.body.appendChild(t)}t.textContent=msg;t.className='on '+(kind||'');clearTimeout(t._h);t._h=setTimeout(()=>t.className='',3200)},
  money:m=>'$'+Math.round(Number(m||0)/100).toLocaleString('en-US'),
- requireLogin(next){location.href='login.html?next='+encodeURIComponent(next||('index.html'+location.hash))}
+ requireLogin(next){location.href='login.html?next='+encodeURIComponent(next||('index.html'+location.hash))},
+ /* Sin sesión: en vez de mandar al login, invitamos a unirse con las dos formas de acceso. */
+ join(next,why){next=next||('index.html'+location.hash);const q=m=>'login.html?register=1&mode='+m+'&next='+encodeURIComponent(next);
+  const ov=document.createElement('div');ov.className='tv-modal tv-join';ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Únete a TADAA!');
+  ov.innerHTML=`<div class="tv-modal-card"><img src="img/tv/logo-tadaa.png" alt="TADAA!" class="tj-logo"><h2>Únete a TADAA!</h2><p>${why||'Para comprar boletos y entrar a Now! necesitas una cuenta TADAA!. Elige cómo quieres entrar.'}</p>
+   <a class="tj-opt" href="${q('company')}"><span class="tj-ic"><svg viewBox="0 0 256 256"><path d="M239.73,208H224V96a16,16,0,0,0-16-16H164a4,4,0,0,0-4,4V208H144V32.41a16.43,16.43,0,0,0-6.16-13,16,16,0,0,0-18.72-.69L39.12,72A16,16,0,0,0,32,85.34V208H16.27A8.18,8.18,0,0,0,8,215.47,8,8,0,0,0,16,224H240a8,8,0,0,0,8-8.53A8.18,8.18,0,0,0,239.73,208ZM76,184a8,8,0,0,1-8.53,8A8.18,8.18,0,0,1,60,183.72V168.27A8.19,8.19,0,0,1,67.47,160,8,8,0,0,1,76,168Zm0-56a8,8,0,0,1-8.53,8A8.19,8.19,0,0,1,60,127.72V112.27A8.19,8.19,0,0,1,67.47,104,8,8,0,0,1,76,112Zm40,56a8,8,0,0,1-8.53,8,8.18,8.18,0,0,1-7.47-8.26V168.27a8.19,8.19,0,0,1,7.47-8.26,8,8,0,0,1,8.53,8Zm0-56a8,8,0,0,1-8.53,8,8.19,8.19,0,0,1-7.47-8.26V112.27a8.19,8.19,0,0,1,7.47-8.26,8,8,0,0,1,8.53,8Z"/></svg></span><span><b>Por convenio de tu empresa</b><small>Si tu empresa tiene convenio, tu acceso no te cuesta. Necesitas tu número de colaborador.</small></span></a>
+   <a class="tj-opt hot" href="${q('membership')}"><span class="tj-ic"><svg viewBox="0 0 256 256"><path d="M239.75,90.81c0,.11,0,.21-.07.32L217,195a16,16,0,0,1-15.72,13H54.71A16,16,0,0,1,39,195L16.32,91.13c0-.11-.05-.21-.07-.32A16,16,0,0,1,44,77.39l33.67,36.29,35.8-80.29a1,1,0,0,0,0-.1,16,16,0,0,1,29.06,0,1,1,0,0,0,0,.1l35.8,80.29L212,77.39a16,16,0,0,1,27.71,13.42Z"/></svg></span><span><b>Con tu membresía · $50 al mes</b><small>Precios de socio, Now! de tercera llamada, Golden Tickets y tu Wallet.</small></span></a>
+   <p class="tj-in">¿Ya tienes cuenta? <a href="login.html?next=${encodeURIComponent(next)}">Inicia sesión</a></p><button class="tj-x" aria-label="Cerrar">×</button></div>`;
+  document.body.appendChild(ov);requestAnimationFrame(()=>ov.classList.add('on'));const close=()=>{ov.classList.add('out');ov.classList.remove('on');setTimeout(()=>ov.remove(),200);removeEventListener('keydown',key)};const key=e=>{if(e.key==='Escape')close()};addEventListener('keydown',key);
+  ov.addEventListener('click',e=>{if(e.target===ov||e.target.closest('.tj-x'))close()});ov.querySelector('.tj-opt').focus()}
 };
 
 /* arranque */

@@ -105,7 +105,11 @@ h2{font:900 clamp(52px,7.4vw,124px)/.86 var(--fd);text-transform:uppercase;lette
 
 /* ───── SINOPSIS ───── */
 .syn{position:relative;padding:120px 0 110px;background:linear-gradient(180deg,#0A1170,#050722 60%)}
-.syn-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start}
+.syn{padding:110px 0 100px!important}
+.syn-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:64px;align-items:end}
+.crew-wrap{margin-top:64px}
+.crew-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-top:1px solid rgba(221,246,255,.15);padding-top:22px}
+.crew-note{font-size:14px;color:#9AA3C8}
 .syn h2 .y{display:block;color:var(--cyan)}
 .syn .lead{font-size:clamp(19px,1.6vw,22px);line-height:1.6;margin:0 0 18px;color:#E7EEFF}
 .syn .lead:first-letter{font:900 4.2em/.8 var(--fd);float:left;margin:6px 10px 0 0;color:var(--sun)}
@@ -113,7 +117,7 @@ h2{font:900 clamp(52px,7.4vw,124px)/.86 var(--fd);text-transform:uppercase;lette
 .creds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 26px;margin-top:30px;padding-top:26px;border-top:1px solid rgba(221,246,255,.15)}
 .creds small{display:block;font:800 12px/1 var(--fd);letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:6px}
 .creds b{font-weight:700;font-size:16px}
-.crew{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:34px}
+.crew{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;margin-top:20px}
 .cr{--n:12px;clip-path:var(--hud);margin:0;background:#0B0F33;box-shadow:inset 0 0 0 1px rgba(127,227,255,.22);display:flex;flex-direction:column}
 .cr-ph{position:relative;aspect-ratio:1;overflow:hidden;background:linear-gradient(160deg,#1E33FF,#0A1170 70%)}
 .cr-ph::before{content:attr(data-ini);position:absolute;inset:0;display:grid;place-items:center;font:900 44px/1 var(--fd);letter-spacing:.04em;color:rgba(221,246,255,.85)}
@@ -272,13 +276,14 @@ footer img{height:28px;margin:0 auto 12px}
 @media (max-width:960px){
  .syn-grid,.mgrid,.tgrid{grid-template-columns:1fr;gap:40px}
  .flux{width:min(340px,78vw)!important}
- .crew{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .crew{grid-template-columns:repeat(3,minmax(0,1fr))}
  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
  .awards{grid-template-columns:repeat(2,minmax(0,1fr))}
  .quotes{grid-template-columns:1fr}.qt.wide{grid-column:auto}
  .car-box{width:190%;margin-left:-45%}
  .tc .row{grid-template-columns:1.3fr .9fr 1.5fr}.tc .row .cell:nth-child(n+4){display:none}
 }
+@media (max-width:600px){.crew{grid-template-columns:repeat(2,minmax(0,1fr))}.crew-head{flex-direction:column;gap:4px}}
 @media (prefers-reduced-motion:reduce){
  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
  .logo,.tag,.cue{opacity:1!important;transform:none!important}
@@ -327,7 +332,6 @@ footer img{height:28px;margin:0 auto 12px}
 <section class="syn" id="sinopsis">
  <div class="wrap syn-grid">
   <div class="rv"><span class="kick">La historia</span><h2 style="margin-top:14px">Hill Valley,<span class="y">1985 → 1955</span></h2>
-   <div class="crew" aria-label="Equipo creativo"><figure class="cr"><div class="cr-ph" data-ini="AS"><img src="creditos/alan-silvestri.webp" alt="Alan Silvestri" loading="lazy" onerror="this.remove()"></div><figcaption><b>Alan Silvestri</b><small>Música y letras</small></figcaption></figure><figure class="cr"><div class="cr-ph" data-ini="GB"><img src="creditos/glen-ballard.webp" alt="Glen Ballard" loading="lazy" onerror="this.remove()"></div><figcaption><b>Glen Ballard</b><small>Música y letras</small></figcaption></figure><figure class="cr"><div class="cr-ph" data-ini="BG"><img src="creditos/bob-gale.webp" alt="Bob Gale" loading="lazy" onerror="this.remove()"></div><figcaption><b>Bob Gale</b><small>Libreto</small></figcaption></figure><figure class="cr"><div class="cr-ph" data-ini="RZ"><img src="creditos/robert-zemeckis.webp" alt="Robert Zemeckis" loading="lazy" onerror="this.remove()"></div><figcaption><b>Robert Zemeckis</b><small>Cocreador de la película</small></figcaption></figure><figure class="cr"><div class="cr-ph" data-ini="JR"><img src="creditos/john-rando.webp" alt="John Rando" loading="lazy" onerror="this.remove()"></div><figcaption><b>John Rando</b><small>Dirección</small></figcaption></figure><figure class="cr"><div class="cr-ph" data-ini="TH"><img src="creditos/tim-hatley.webp" alt="Tim Hatley" loading="lazy" onerror="this.remove()"></div><figcaption><b>Tim Hatley</b><small>Escenografía y vestuario</small></figcaption></figure></div>
   </div>
   <div class="rv">
    <p class="lead">Marty McFly tiene diecisiete años, una banda que nadie toma en serio y un mejor amigo poco convencional: el excéntrico científico Doc Brown.</p>
@@ -335,7 +339,9 @@ footer img{height:28px;margin:0 auto 12px}
    <p>Ahora tiene que lograr que George y Lorraine se enamoren, conseguir 1.21 gigawatts de energía y regresar a 1985 antes de que su propio futuro se borre para siempre. Una aventura de rock and roll, amistad y segundas oportunidades, con la música original de la película y canciones nuevas escritas para el escenario.</p>
   </div>
  </div>
-</section>
+ <div class="wrap crew-wrap rv"><div class="crew-head"><span class="kick">El equipo creativo</span><span class="crew-note">De la película al escenario</span></div>
+  <div class="crew" aria-label="Equipo creativo"><figure class="cr"><div class="cr-ph" data-ini="AS"><img src="creditos/alan-silvestri.webp" alt="Alan Silvestri" loading="lazy" onerror="this.remove()"></div><figcaption><b>Alan Silvestri</b><small>Música y letras</small></figcaption></figure><figure class="cr"><div class="cr-ph" data-ini="GB"><img src="creditos/glen-ballard.webp" alt="Glen Ballard" loading="lazy" onerror="this.remove()"></div><figcaption><b>Glen Ballard</b><small>Música y letras</small></figcaption></figure><figure class="cr"><div class="cr-ph" data-ini="BG"><img src="creditos/bob-gale.webp" alt="Bob Gale" loading="lazy" onerror="this.remove()"></div><figcaption><b>Bob Gale</b><small>Libreto</small></figcaption></figure><figure class="cr"><div class="cr-ph" data-ini="RZ"><img src="creditos/robert-zemeckis.webp" alt="Robert Zemeckis" loading="lazy" onerror="this.remove()"></div><figcaption><b>Robert Zemeckis</b><small>Cocreador de la película</small></figcaption></figure><figure class="cr"><div class="cr-ph" data-ini="JR"><img src="creditos/john-rando.webp" alt="John Rando" loading="lazy" onerror="this.remove()"></div><figcaption><b>John Rando</b><small>Dirección</small></figcaption></figure><figure class="cr"><div class="cr-ph" data-ini="TH"><img src="creditos/tim-hatley.webp" alt="Tim Hatley" loading="lazy" onerror="this.remove()"></div><figcaption><b>Tim Hatley</b><small>Escenografía y vestuario</small></figcaption></figure></div>
+ </section>
 
 <section class="machine" id="maquina">
  <div class="wrap">
@@ -463,13 +469,15 @@ function fadeTo(v,ms=900){const a=audio.volume,t0=performance.now();const s=n=>{
 async function startAudio(){try{audio.volume=0;await audio.play();playing=true;snd.classList.remove('ask');fadeTo(.55,1400)}catch{playing=false;snd.classList.add('ask')}paintSnd()}
 snd.addEventListener('click',()=>{if(playing){playing=false;wantSound=false;store.set('bttf-mute','1');fadeTo(0,400);paintSnd()}else{wantSound=true;store.set('bttf-mute','0');startAudio()}});
 // si el navegador bloquea el autoplay, la primera interacción enciende la obertura
-const unlock=e=>{if(e.target.closest&&e.target.closest('#snd'))return;if(wantSound&&!playing&&document.body.classList.contains('landed'))startAudio();removeEventListener('pointerdown',unlock);removeEventListener('keydown',unlock)};
-addEventListener('pointerdown',unlock);addEventListener('keydown',unlock);
+const UNL=['pointerdown','keydown','touchend','click'];const unlock=e=>{if(e.target.closest&&e.target.closest('#snd'))return;if(wantSound&&!playing)startAudio();UNL.forEach(t=>removeEventListener(t,unlock,true))};
+UNL.forEach(t=>addEventListener(t,unlock,true));
+// la obertura arranca sola al cargar; si el navegador la bloquea, suena con el primer toque o tecla
+if(new URLSearchParams(location.search).get('embed')!=='1'&&wantSound){snd.classList.add('show');startAudio()}
 
 function intro(strikeNow){
  const hero=$('.hero');const go=()=>{hero.classList.add('go');
   const T=RM?0:2650;
-  setTimeout(()=>{hero.classList.add('landed');document.body.classList.add('landed');if(strikeNow&&!RM)strikeNow();snd.classList.add('show');if(wantSound)startAudio();else paintSnd()},T)};
+  setTimeout(()=>{hero.classList.add('landed');document.body.classList.add('landed');if(strikeNow&&!RM)strikeNow();snd.classList.add('show');if(wantSound&&!playing)startAudio();else paintSnd()},T)};
  const im=$('#logo');if(im.complete)go();else{im.onload=go;im.onerror=go}
 }
 
