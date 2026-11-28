@@ -3,6 +3,7 @@
  * la lógica de seguridad. Todo lo comercial vive en PostgreSQL (migración 004).
  */
 import crypto from 'node:crypto';
+import {invitationsRequest} from './invitations.mjs';
 
 // ───────────────────────── helpers puros (cubiertos por features.test.mjs) ─────────────────────────
 const RFC_RE=/^([A-ZÑ&]{3,4})(\d{2})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])([A-Z\d]{2}[A\d])$/;
@@ -107,6 +108,8 @@ const withFolio=rows=>rows.map(x=>({...x,folio:folio(x.id)}));
 
 export async function featureRequest(req,res,pathname,url,parts,ctx){
  const {getPool,response,invalid,reqBody,clean,uuid,requireUser,requireAdmin,audit}=ctx;const p=getPool();const M=req.method;
+ if(await invitationsRequest(req,res,url,parts,ctx,{producerUser,staffUser,ownEvent}))return true;
+ if(parts[2]==='admin'&&parts[3]==='minisite-requests'&&M==='GET'){requireAdmin(req);const r=await p.query(`SELECT m.*,o.name org_name,u.email requested_email FROM minisite_requests m JOIN organizations o ON o.id=m.organization_id LEFT JOIN app_users u ON u.id=m.requested_by ORDER BY m.slot DESC LIMIT 200`);return response(res,200,{requests:r.rows}),true}
 
  // ── Now! (usuarios) ──
  if(pathname==='/api/v2/now'&&M==='GET'){const s=await ctx.session(req);const r=await p.query(`SELECT n.id,n.event_id,n.ticket_type_id,n.function_label,n.opens_at,n.closes_at,COALESCE(n.price_minor,t.price_minor) price_minor,t.price_minor regular_price_minor,n.quota,n.max_per_user,n.enabled,t.name ticket_type,e.title,e.slug,e.starts_at,e.metadata,v.name venue,ex.hero_url,ex.poster_url,

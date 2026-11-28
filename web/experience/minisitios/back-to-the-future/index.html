@@ -34,27 +34,31 @@ h2{font:900 clamp(52px,7.4vw,124px)/.86 var(--fd);text-transform:uppercase;lette
 .btn:active{scale:.96}
 .b-hot{background:linear-gradient(100deg,#FFD21F,#FF6B1A 60%,#FF2D2D);color:#14062A;box-shadow:0 12px 34px rgba(255,107,26,.45)}
 .b-hot:hover{box-shadow:0 16px 44px rgba(255,107,26,.6)}
-.b-ghost{background:rgba(5,7,34,.4);color:#fff;box-shadow:inset 0 0 0 1.5px rgba(221,246,255,.55);backdrop-filter:blur(8px)}
+.b-ghost{background:rgba(5,7,34,.62);color:#fff;box-shadow:inset 0 0 0 1.5px rgba(221,246,255,.55)}
 
 /* ───── HERO: el cielo vivo ───── */
 .hero{position:relative;height:100svh;min-height:640px;overflow:hidden;isolation:isolate;display:grid;place-items:center}
-.sky,.sky2{position:absolute;inset:-6%;background:url(cielo.webp) center/cover;z-index:-3}
+.sky,.sky2{position:absolute;inset:-6%;z-index:-3;will-change:transform}
+.sky{background:url(cielo.webp) center/cover}
 .sky{animation:drift 38s ease-in-out infinite alternate}
-.sky2{mix-blend-mode:screen;opacity:.0;animation:drift2 26s ease-in-out infinite alternate;filter:hue-rotate(-18deg) saturate(1.3)}
+.sky2{opacity:0;animation:drift2 26s ease-in-out infinite alternate;background:radial-gradient(55% 45% at 30% 30%,rgba(140,110,255,.55),transparent 70%),radial-gradient(45% 40% at 75% 25%,rgba(60,200,255,.4),transparent 70%)}
 @keyframes drift{from{transform:scale(1.04) translate3d(-1%,0,0)}to{transform:scale(1.14) translate3d(1.5%,-1%,0)}}
 @keyframes drift2{0%{opacity:.0;transform:scale(1.2) translate3d(2%,1%,0)}50%{opacity:.35}100%{opacity:.12;transform:scale(1.1) translate3d(-2%,-1%,0)}}
 #bolts{position:absolute;inset:0;z-index:-2;pointer-events:none}
-.hero .flash{position:absolute;inset:0;z-index:-1;background:radial-gradient(70% 60% at var(--fx,50%) 20%,rgba(235,248,255,.85),rgba(160,200,255,.25) 45%,transparent 70%);opacity:0;pointer-events:none;mix-blend-mode:screen}
+.hero .flash{position:absolute;inset:0;z-index:-1;background:radial-gradient(70% 60% at var(--fx,50%) 20%,rgba(235,248,255,.85),rgba(160,200,255,.25) 45%,transparent 70%);opacity:0;pointer-events:none;will-change:opacity}
+.hero.off .sky,.hero.off .sky2,.hero.off .cue .ic{animation-play-state:paused}
 .hero .shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,7,34,.25),transparent 30%,transparent 60%,#0A1170 100%)}
 .stage{position:relative;text-align:center;padding:0 20px;display:flex;flex-direction:column;align-items:center;gap:22px;perspective:1200px}
 .logo-wrap{position:relative;width:min(860px,92vw)}
-.logo{width:100%;height:auto;filter:drop-shadow(0 18px 40px rgba(10,17,112,.75));transform-origin:50% 55%;opacity:0}
+.logo{width:100%;height:auto;transform-origin:50% 55%;opacity:0}
+.landed .logo.main{filter:drop-shadow(0 18px 40px rgba(10,17,112,.75))}
+.go .logo{will-change:transform,opacity}.landed .logo{will-change:auto}
 .logo.ghost{position:absolute;inset:0;pointer-events:none}
 .go .logo.main{animation:spinIn 2.3s var(--zoom) .35s both}
 .go .logo.g1{animation:spinIn 2.3s var(--zoom) .41s both,ghostOut .2s 2.5s forwards}
 .go .logo.g2{animation:spinIn 2.3s var(--zoom) .48s both,ghostOut .2s 2.5s forwards}
-.logo.g1{filter:blur(2px) hue-rotate(160deg);mix-blend-mode:screen}.logo.g2{filter:blur(5px) hue-rotate(260deg);mix-blend-mode:screen}
-@keyframes spinIn{0%{opacity:0;transform:scale(14) rotate(-720deg);filter:blur(16px) brightness(2.4)}12%{opacity:1}55%{transform:scale(1.7) rotate(-60deg);filter:blur(3px) brightness(1.4)}82%{transform:scale(.93) rotate(5deg);filter:blur(0) brightness(1.1)}100%{opacity:1;transform:scale(1) rotate(0deg);filter:none}}
+.logo.g1{--gop:.55}.logo.g2{--gop:.3}
+@keyframes spinIn{0%{opacity:0;transform:scale(9) rotate(-720deg)}12%{opacity:var(--gop,1)}55%{transform:scale(1.7) rotate(-60deg)}82%{transform:scale(.93) rotate(5deg)}100%{opacity:var(--gop,1);transform:scale(1) rotate(0deg)}}
 @keyframes ghostOut{to{opacity:0}}
 .ring{position:absolute;left:50%;top:55%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;border:3px solid var(--arc);box-shadow:0 0 40px var(--cyan),inset 0 0 30px var(--cyan);opacity:0;pointer-events:none}
 .landed .ring{animation:ring 1s var(--out) forwards}
@@ -66,7 +70,7 @@ h2{font:900 clamp(52px,7.4vw,124px)/.86 var(--fd);text-transform:uppercase;lette
 .premiere{display:inline-flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;font:900 clamp(22px,2.6vw,34px)/1 var(--fd);letter-spacing:.06em;text-transform:uppercase;text-shadow:0 2px 20px rgba(10,17,112,.9)}
 .premiere .sep{width:10px;height:10px;transform:rotate(45deg);background:var(--sun);box-shadow:0 0 14px var(--sun)}
 .premiere b{color:var(--sun)}
-.olivier{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:99px;background:rgba(5,7,34,.55);backdrop-filter:blur(8px);box-shadow:inset 0 0 0 1px rgba(255,210,31,.5);font-weight:700;font-size:14px;color:#FFE9A3}
+.olivier{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:99px;background:rgba(5,7,34,.72);box-shadow:inset 0 0 0 1px rgba(255,210,31,.5);font-weight:700;font-size:14px;color:#FFE9A3}
 .olivier .ic{color:var(--sun)}
 .cue{position:absolute;bottom:22px;left:50%;translate:-50% 0;display:flex;flex-direction:column;align-items:center;gap:6px;font:800 12px/1 var(--fd);letter-spacing:.3em;color:var(--arc);opacity:0;text-decoration:none}
 .landed .cue{opacity:.85;transition:opacity 1s 1.2s}
@@ -75,10 +79,14 @@ h2{font:900 clamp(52px,7.4vw,124px)/.86 var(--fd);text-transform:uppercase;lette
 
 /* ───── EL DELOREAN ───── */
 .car{position:relative;overflow:hidden;background:#0A1170;margin-top:-1px}
-.car-box{position:relative;width:100%;aspect-ratio:16/9;max-height:120vh;-webkit-mask:linear-gradient(180deg,transparent 0,#000 12%,#000 82%,transparent 100%);mask:linear-gradient(180deg,transparent 0,#000 12%,#000 82%,transparent 100%)}
+.car-box{position:relative;width:100%;aspect-ratio:16/9;max-height:120vh}
+.car-box::before,.car-box::after{content:"";position:absolute;left:0;right:0;z-index:1;pointer-events:none}
+.car-box::before{top:0;height:13%;background:linear-gradient(180deg,#0A1170,rgba(10,17,112,0))}
+.car-box::after{bottom:0;height:19%;background:linear-gradient(0deg,#0A1170,rgba(10,17,112,0))}
 .car-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 60%;will-change:transform}
-#arcs{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen}
-.glow{position:absolute;border-radius:50%;pointer-events:none;mix-blend-mode:screen}
+#arcs{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.glow{position:absolute;border-radius:50%;pointer-events:none;will-change:transform,opacity}
+.car.off .glow{animation-play-state:paused}
 .glow.tail{width:13%;height:9%;background:radial-gradient(closest-side,rgba(255,70,40,.9),rgba(255,40,20,.25) 60%,transparent);animation:tail 1.8s ease-in-out infinite}
 .glow.tail.l{left:30%;top:52.5%}.glow.tail.r{left:57.5%;top:52.5%;animation-delay:-.9s}
 @keyframes tail{50%{opacity:.45;transform:scale(.92)}}
@@ -91,6 +99,7 @@ h2{font:900 clamp(52px,7.4vw,124px)/.86 var(--fd);text-transform:uppercase;lette
 .car-copy{position:absolute;left:0;right:0;bottom:6%;text-align:center;z-index:2;pointer-events:none}
 .car-copy p{margin:0;font:900 clamp(30px,4.6vw,72px)/.9 var(--fd);text-transform:uppercase;letter-spacing:.02em;text-shadow:0 4px 30px rgba(5,7,34,.9)}
 .car-copy span{display:block;margin-top:10px;font-weight:600;font-size:16px;color:var(--arc);opacity:.9}
+.car-copy p .grad{display:inline;margin:0;font:inherit;color:transparent;opacity:1}
 
 /* ───── SINOPSIS ───── */
 .syn{position:relative;padding:120px 0 110px;background:linear-gradient(180deg,#0A1170,#050722 60%)}
@@ -113,9 +122,11 @@ h2{font:900 clamp(52px,7.4vw,124px)/.86 var(--fd);text-transform:uppercase;lette
 .flux .win{position:relative;width:100%;height:100%;border-radius:10px;background:radial-gradient(70% 60% at 50% 55%,#1A2240,#07091A);box-shadow:inset 0 0 40px rgba(0,0,0,.8),inset 0 0 0 2px #444A60;overflow:hidden}
 .flux svg{position:absolute;inset:0;width:100%;height:100%}
 .flux .tube{fill:none;stroke:#2A3350;stroke-width:22;stroke-linecap:round}
-.flux .core{fill:none;stroke:url(#fluxGrad);stroke-width:8;stroke-linecap:round;stroke-dasharray:14 22;animation:flow var(--fs,1.4s) linear infinite;filter:url(#glowF)}
+.flux .core{fill:none;stroke:url(#fluxGrad);stroke-width:8;stroke-linecap:round;stroke-dasharray:14 22;animation:flow var(--fs,1.4s) linear infinite}
+.flux .core.halo{stroke:#9FEBFF;stroke-width:22;opacity:.22}
+.flux.off .core{animation-play-state:paused}
 @keyframes flow{to{stroke-dashoffset:-72}}
-.flux .hub{fill:#DDF6FF;filter:url(#glowF)}
+.flux .hub{fill:#DDF6FF}.flux .hub-h{fill:#9FEBFF;opacity:.3}
 .flux .label{position:absolute;left:0;right:0;bottom:-46px;text-align:center;font:900 15px/1 var(--fd);letter-spacing:.3em;color:#9AA3C8}
 .flux .warn{position:absolute;left:50%;top:12px;translate:-50% 0;background:#FFD21F;color:#111;font:800 10px/1 var(--fb);letter-spacing:.08em;padding:4px 8px;border-radius:3px}
 .circuits{display:flex;flex-direction:column;gap:14px}
@@ -154,14 +165,18 @@ body.quake{animation:quake .55s linear}
 .pc:hover,.pc:focus-within{transform:translateY(-6px);box-shadow:inset 0 0 0 1px var(--cyan),0 24px 50px rgba(30,51,255,.35)}
 .pc .ph{position:relative;aspect-ratio:3/4;overflow:hidden;background:#0A1170}
 .pc .ph .layer{position:absolute;inset:0;background:var(--src) var(--pos,50% 50%)/cover;filter:saturate(1.4) contrast(1.1)}
-.pc .ph .layer.r{mix-blend-mode:screen;filter:url(#chanR);animation:gR 2.6s steps(1) infinite}
-.pc .ph .layer.b{mix-blend-mode:screen;filter:url(#chanB);animation:gB 2.6s steps(1) infinite}
+.pc.live .ph .layer.r{animation:gR 2.6s steps(1) infinite}
+.pc .ph .layer.r{mix-blend-mode:screen;filter:url(#chanR)}
+.pc.live .ph .layer.b{animation:gB 2.6s steps(1) infinite}
+.pc .ph .layer.b{mix-blend-mode:screen;filter:url(#chanB)}
 @keyframes gR{0%,62%,100%{transform:none;clip-path:none}64%{transform:translate(-8px,0);clip-path:inset(18% 0 52% 0)}68%{transform:translate(6px,0);clip-path:inset(60% 0 12% 0)}72%{transform:none;clip-path:none}}
 @keyframes gB{0%,62%,100%{transform:none;clip-path:none}65%{transform:translate(9px,0);clip-path:inset(30% 0 40% 0)}70%{transform:translate(-5px,0);clip-path:inset(72% 0 6% 0)}74%{transform:none;clip-path:none}}
 .pc .sil{position:absolute;left:50%;bottom:-2%;width:78%;translate:-50% 0;fill:#050722;opacity:.92;filter:drop-shadow(0 0 18px rgba(127,227,255,.45))}
 .pc .scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0 1px,transparent 1px 4px);mix-blend-mode:overlay;pointer-events:none}
-.pc .noise{position:absolute;left:0;right:0;height:16%;top:-20%;background:linear-gradient(180deg,transparent,rgba(127,227,255,.35),transparent);animation:sweep 3.4s linear infinite;pointer-events:none}
-@keyframes sweep{to{top:110%}}
+.pc .noise{position:absolute;left:0;right:0;height:16%;top:0;transform:translateY(-130%);background:linear-gradient(180deg,transparent,rgba(127,227,255,.35),transparent);pointer-events:none}
+.pc.live .noise{animation:sweep 3.4s linear infinite}
+@keyframes sweep{from{transform:translateY(-130%)}to{transform:translateY(690%)}}
+.pc:not(.live) .q,.pc:not(.live) .sig i{animation-play-state:paused}
 .pc .q{position:absolute;left:50%;top:38%;translate:-50% -50%;font:900 86px/1 var(--fd);color:rgba(221,246,255,.9);text-shadow:3px 0 0 rgba(255,45,45,.8),-3px 0 0 rgba(30,180,255,.8);animation:qj 2.6s steps(1) infinite}
 @keyframes qj{0%,62%,100%{transform:none}66%{transform:translate(4px,-2px) skewX(-8deg)}70%{transform:translate(-3px,1px)}}
 .pc .sig{position:absolute;left:12px;top:12px;display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border-radius:99px;background:rgba(5,7,34,.7);font:800 10px/1 var(--fb);letter-spacing:.1em;color:var(--cyan)}
@@ -216,11 +231,26 @@ body.quake{animation:quake .55s linear}
 .wl-front.swap{animation:swap .45s var(--spring)}
 @keyframes swap{from{transform:translateY(24px) scale(.97);opacity:.4}}
 .wl-note{color:#8C93B5;font-size:13px;margin-top:14px;text-align:center}
+.ivhi{font-size:clamp(18px,1.5vw,21px);line-height:1.55;color:#E7EEFF;margin:22px 0 0;max-width:34ch}
+.ivhi b{color:var(--sun)}
+.ivacts{display:flex;gap:12px;flex-wrap:wrap}
+.qrbox{align-self:center;position:relative;width:min(220px,70%);aspect-ratio:1;border-radius:22px;background:#fff;padding:12px;box-shadow:0 0 0 2px #08091A}
+.qrbox img{width:100%;height:100%;display:block;image-rendering:pixelated}
+.qrbox.demo img{filter:blur(5px);opacity:.55}
+.qrbox .tag2{position:absolute;inset:auto 10px 50%;translate:0 50%;text-align:center;font-weight:800;font-size:12px;line-height:1.35;background:#08091A;color:#D6FF35;border-radius:12px;padding:8px 10px}
+.qrbox.used::after{content:"YA INGRESÓ";position:absolute;inset:0;display:grid;place-items:center;border-radius:22px;background:rgba(8,9,26,.82);color:#D6FF35;font:900 22px/1 var(--fd);letter-spacing:.1em}
+.qrcap{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;font-weight:700}
+.qrcap i{width:8px;height:8px;border-radius:50%;background:#08091A;animation:blink 1.4s steps(2) infinite}
+.wl-front .meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.wl-front .meta span{display:flex;flex-direction:column;min-width:0}
+.wl-front .meta small{font-size:10px;opacity:.7}.wl-front .meta b{font-size:12px;font-weight:800;overflow-wrap:anywhere}
+.wl-front .cta.ghost{background:transparent;color:#08091A;box-shadow:inset 0 0 0 2px #08091A}
+.wl-front .cta.ghost .ic{color:#08091A}
 footer{padding:40px 0 60px;background:#08091A;color:#8C93B5;font-size:13px;text-align:center}
 footer img{height:28px;margin:0 auto 12px}
 
 /* ───── sonido ───── */
-.snd{position:fixed;right:18px;bottom:18px;z-index:80;display:flex;align-items:center;gap:10px;height:52px;padding:0 18px 0 14px;border-radius:99px;border:0;background:rgba(5,7,34,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1.5px rgba(127,227,255,.4);color:#fff;font-weight:700;font-size:13px;opacity:0;translate:0 20px;transition:opacity .4s,translate .5s var(--spring),box-shadow .2s}
+.snd{position:fixed;right:18px;bottom:18px;z-index:80;display:flex;align-items:center;gap:10px;height:52px;padding:0 18px 0 14px;border-radius:99px;border:0;background:rgba(5,7,34,.9);box-shadow:inset 0 0 0 1.5px rgba(127,227,255,.4);color:#fff;font-weight:700;font-size:13px;opacity:0;translate:0 20px;transition:opacity .4s,translate .5s var(--spring),box-shadow .2s}
 .snd.show{opacity:1;translate:0 0}
 .snd.ask{box-shadow:inset 0 0 0 2px var(--sun),0 0 0 0 rgba(255,210,31,.6);animation:askp 1.6s ease-out infinite}
 @keyframes askp{70%{box-shadow:inset 0 0 0 2px var(--sun),0 0 0 14px rgba(255,210,31,0)}}
@@ -266,7 +296,7 @@ footer img{height:28px;margin:0 auto 12px}
   <div class="tag">
    <p class="premiere" style="margin:0"><span>Estrena temporada <b>2027</b></span><span class="sep"></span><span>Teatro Telcel</span></p>
    <span class="olivier"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M232,64H208V48a8,8,0,0,0-8-8H56a8,8,0,0,0-8,8V64H24A16,16,0,0,0,8,80V96a40,40,0,0,0,40,40h3.65A80.13,80.13,0,0,0,120,191.61V216H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16H136V191.58c31.94-3.23,58.44-25.64,68.08-55.58H208a40,40,0,0,0,40-40V80A16,16,0,0,0,232,64ZM48,120A24,24,0,0,1,24,96V80H48v32q0,4,.39,8ZM232,96a24,24,0,0,1-24,24h-.5a81.81,81.81,0,0,0,.5-8.9V80h24Z"/></svg> Ganador del Premio Olivier a Mejor Nuevo Musical</span>
-   <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:6px"><a class="btn b-hot" href="#boletos"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M232,104a8,8,0,0,0,8-8V64a16,16,0,0,0-16-16H32A16,16,0,0,0,16,64V96a8,8,0,0,0,8,8,24,24,0,0,1,0,48,8,8,0,0,0-8,8v32a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V160a8,8,0,0,0-8-8,24,24,0,0,1,0-48ZM32,167.2a40,40,0,0,0,0-78.4V64H88V192H32Z"/></svg> Quiero mis boletos</a><a class="btn b-ghost" href="#maquina"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M213.85,125.46l-112,120a8,8,0,0,1-13.69-7l14.66-73.33L45.19,143.49a8,8,0,0,1-3-13l112-120a8,8,0,0,1,13.69,7L153.18,90.9l57.63,21.61a8,8,0,0,1,3,12.95Z"/></svg> Viajar a 2027</a></div>
+   <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:6px"><a class="btn b-hot" href="#boletos"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M232,104a8,8,0,0,0,8-8V64a16,16,0,0,0-16-16H32A16,16,0,0,0,16,64V96a8,8,0,0,0,8,8,24,24,0,0,1,0,48,8,8,0,0,0-8,8v32a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V160a8,8,0,0,0-8-8,24,24,0,0,1,0-48ZM32,167.2a40,40,0,0,0,0-78.4V64H88V192H32Z"/></svg> Ver mi invitación</a><a class="btn b-ghost" href="#maquina"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M213.85,125.46l-112,120a8,8,0,0,1-13.69-7l14.66-73.33L45.19,143.49a8,8,0,0,1-3-13l112-120a8,8,0,0,1,13.69,7L153.18,90.9l57.63,21.61a8,8,0,0,1,3,12.95Z"/></svg> Viajar a 2027</a></div>
   </div>
  </div>
  <a class="cue" href="#delorean" aria-label="Bajar">HILL VALLEY<svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M205.66,149.66l-72,72a8,8,0,0,1-11.32,0l-72-72A8,8,0,0,1,56,136h64V40a8,8,0,0,1,16,0v96h64a8,8,0,0,1,5.66,13.66Z"/></svg></a>
@@ -313,12 +343,11 @@ footer img{height:28px;margin:0 auto 12px}
      <svg viewBox="0 0 300 400" aria-hidden="true">
       <defs>
        <linearGradient id="fluxGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".5" stop-color="#9FEBFF"/><stop offset="1" stop-color="#FFE27A"/></linearGradient>
-       <filter id="glowF" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
       <path class="tube" d="M58 70 L150 220"/><path class="tube" d="M242 70 L150 220"/><path class="tube" d="M150 340 L150 220"/>
-      <path class="core" d="M58 70 L150 220"/><path class="core" d="M242 70 L150 220"/><path class="core" d="M150 340 L150 220"/>
+      <path class="core halo" d="M58 70 L150 220"/><path class="core halo" d="M242 70 L150 220"/><path class="core halo" d="M150 340 L150 220"/><path class="core" d="M58 70 L150 220"/><path class="core" d="M242 70 L150 220"/><path class="core" d="M150 340 L150 220"/>
       <circle cx="58" cy="70" r="16" fill="#3B4560"/><circle cx="242" cy="70" r="16" fill="#3B4560"/><circle cx="150" cy="340" r="16" fill="#3B4560"/>
-      <circle class="hub" id="hub" cx="150" cy="220" r="14"/>
+      <circle class="hub-h" id="hubh" cx="150" cy="220" r="26"/><circle class="hub" id="hub" cx="150" cy="220" r="14"/>
      </svg>
     </div>
     <span class="label">FLUX CAPACITOR</span>
@@ -358,18 +387,15 @@ footer img{height:28px;margin:0 auto 12px}
 
 <section class="tix" id="boletos">
  <div class="wrap tgrid">
-  <div class="tinfo rv"><span class="kick">Boletos</span><h2 style="margin-top:14px">Tu boleto<br><span class="grad">a 2027</span></h2>
-   <ul>
-    <li><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32Zm0,48H48V48H72v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24Z"/></svg> Temporada 2027 · fechas por anunciar</li>
-    <li><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z"/></svg> Teatro Telcel, Ciudad de México</li>
-    <li><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M232,104a8,8,0,0,0,8-8V64a16,16,0,0,0-16-16H32A16,16,0,0,0,16,64V96a8,8,0,0,0,8,8,24,24,0,0,1,0,48,8,8,0,0,0-8,8v32a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V160a8,8,0,0,0-8-8,24,24,0,0,1,0-48ZM32,167.2a40,40,0,0,0,0-78.4V64H88V192H32Z"/></svg> Preventa para miembros de TADAA!, con tu boleto en la Wallet</li>
-   </ul>
-   <a class="btn b-hot" href="../../#membresia"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M213.85,125.46l-112,120a8,8,0,0,1-13.69-7l14.66-73.33L45.19,143.49a8,8,0,0,1-3-13l112-120a8,8,0,0,1,13.69,7L153.18,90.9l57.63,21.61a8,8,0,0,1,3,12.95Z"/></svg> Quiero la preventa</a>
+  <div class="tinfo rv" id="tinfo"><span class="kick" id="ivKick">Función de prensa</span><h2 style="margin-top:14px" id="ivHead">Tu invitación<br><span class="grad">a 2027</span></h2>
+   <p class="ivhi" id="ivHi">Te guardamos un lugar en Hill Valley. Tus pases viven aquí, en la Wallet de TADAA!.</p>
+   <ul id="ivList"></ul>
+   <div class="ivacts" id="ivActs"></div>
   </div>
-  <div class="wallet rv" aria-label="Así se verá tu boleto en la Wallet de TADAA!">
+  <div class="wallet rv" aria-label="Wallet de TADAA! con tus pases">
    <div class="wl-stack" id="wlstack"></div>
-   <div class="wl-front" id="wlfront"></div>
-   <p class="wl-note">Así se verá tu boleto en la Wallet de TADAA!. Toca las pestañas para cambiar de zona.</p>
+   <div class="wl-front" id="wlfront" aria-live="polite"></div>
+   <p class="wl-note" id="wlnote"></p>
   </div>
  </div>
 </section>
@@ -389,23 +415,29 @@ const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const store={get(k){try{return localStorage.getItem(k)}catch{return null}},set(k,v){try{localStorage.setItem(k,v)}catch{}}};
 
 /* ---------- rayos procedurales (cielo y coche) ---------- */
-function bolt(ctx,x1,y1,x2,y2,disp,depth,w){
- if(depth===0||disp<2){ctx.lineWidth=w;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();return}
+// El rayo se calcula una vez como trazo y se pinta en tres pasadas (halo ancho, medio y núcleo): mismo brillo que shadowBlur sin su costo.
+function bolt(p,br,x1,y1,x2,y2,disp,depth){
+ if(depth===0||disp<2){p.moveTo(x1,y1);p.lineTo(x2,y2);return}
  const mx=(x1+x2)/2+(Math.random()-.5)*disp,my=(y1+y2)/2+(Math.random()-.5)*disp*.4;
- bolt(ctx,x1,y1,mx,my,disp/2,depth-1,w);bolt(ctx,mx,my,x2,y2,disp/2,depth-1,w);
- if(Math.random()<.18&&depth>3)bolt(ctx,mx,my,mx+(Math.random()-.5)*disp*1.4,my+disp*(.4+Math.random()*.6),disp/2,depth-2,w*.55);
+ bolt(p,br,x1,y1,mx,my,disp/2,depth-1);bolt(p,br,mx,my,x2,y2,disp/2,depth-1);
+ if(Math.random()<.18&&depth>3)bolt(br,br,mx,my,mx+(Math.random()-.5)*disp*1.4,my+disp*(.4+Math.random()*.6),disp/2,depth-2);
 }
 function strike(ctx,W,H,from,to,scale){
- ctx.save();ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
- ctx.shadowColor='rgba(150,220,255,1)';ctx.shadowBlur=24*scale;ctx.strokeStyle='rgba(190,235,255,.55)';bolt(ctx,from[0],from[1],to[0],to[1],140*scale,8,6*scale);
- ctx.shadowBlur=8*scale;ctx.strokeStyle='rgba(255,255,255,.95)';bolt(ctx,from[0],from[1],to[0],to[1],140*scale,8,2*scale);ctx.restore();
+ const p=new Path2D(),br=new Path2D();bolt(p,br,from[0],from[1],to[0],to[1],140*scale,8);
+ ctx.save();ctx.globalCompositeOperation='lighter';ctx.lineCap='round';ctx.lineJoin='round';
+ for(const [w,c] of [[22,'rgba(110,190,255,.10)'],[10,'rgba(150,220,255,.22)'],[5,'rgba(190,235,255,.5)'],[2,'rgba(255,255,255,.95)']]){ctx.lineWidth=w*scale;ctx.strokeStyle=c;ctx.stroke(p);ctx.lineWidth=w*scale*.55;ctx.stroke(br)}
+ ctx.restore();
 }
-function canvasFit(cv){const d=Math.min(2,devicePixelRatio||1),r=cv.getBoundingClientRect();cv.width=r.width*d;cv.height=r.height*d;return d}
+// Densidad de píxeles limitada: los rayos se ven igual y el canvas pinta la mitad de píxeles en pantallas retina.
+function canvasFit(cv){const d=Math.min(1.25,devicePixelRatio||1),r=cv.getBoundingClientRect();cv.width=Math.round(r.width*d);cv.height=Math.round(r.height*d);return d}
+// Marca .off cuando la sección sale de pantalla para pausar animaciones y canvases.
+function onScreen(el,cb,margin='120px'){new IntersectionObserver(es=>{const v=es[0].isIntersecting;el.classList.toggle('off',!v);cb&&cb(v)},{rootMargin:margin}).observe(el)}
 
 function skyLife(){
  const cv=$('#bolts'),ctx=cv.getContext('2d'),fl=$('#skyflash');let d=canvasFit(cv);addEventListener('resize',()=>d=canvasFit(cv));
+ let vis=true;onScreen($('.hero'),v=>vis=v);
  if(RM)return;
- const one=()=>{const W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);const x=W*(.1+Math.random()*.8);
+ const one=()=>{if(!vis||document.hidden){setTimeout(one,1500);return}const W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);const x=W*(.1+Math.random()*.8);
   strike(ctx,W,H,[x,-10],[x+(Math.random()-.5)*W*.35,H*(.45+Math.random()*.4)],d);
   fl.style.setProperty('--fx',(x/W*100)+'%');
   fl.animate([{opacity:0},{opacity:.9,offset:.08},{opacity:.15,offset:.2},{opacity:.7,offset:.3},{opacity:0}],{duration:700,easing:'ease-out'});
@@ -416,13 +448,13 @@ function skyLife(){
 }
 function carLife(){
  const box=$('#carbox'),img=$('#carimg'),cv=$('#arcs'),ctx=cv.getContext('2d');let d=canvasFit(cv);addEventListener('resize',()=>d=canvasFit(cv));
- let vis=false;new IntersectionObserver(es=>{vis=es[0].isIntersecting},{threshold:.05}).observe(box);
+ let vis=false;onScreen($('.car'),v=>vis=v);
  if(RM)return;
  // parallax: el coche se acerca al hacer scroll
  let tk=false;const par=()=>{tk=false;const r=box.getBoundingClientRect(),p=Math.max(-1,Math.min(1,(r.top+r.height/2-innerHeight/2)/innerHeight));img.style.transform=`scale(${1.06-p*.06}) translateY(${p*4}%)`};
  addEventListener('scroll',()=>{if(!tk&&vis){tk=true;requestAnimationFrame(par)}},{passive:true});par();
  // arcos eléctricos saliendo del coche
- const arc=()=>{if(vis){const W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);const n=1+(Math.random()*3|0);
+ const arc=()=>{if(vis&&!document.hidden){const W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);const n=1+(Math.random()*3|0);
    for(let i=0;i<n;i++){const left=Math.random()<.5,sx=W*(left?.36:.64),sy=H*(.5+Math.random()*.2),tx=left?W*Math.random()*.25:W*(1-Math.random()*.25),ty=H*(.2+Math.random()*.6);strike(ctx,W,H,[sx,sy],[tx,ty],d*.6)}
    cv.animate([{opacity:1},{opacity:.3,offset:.3},{opacity:1,offset:.4},{opacity:0}],{duration:420,easing:'ease-out'})}
   setTimeout(arc,500+Math.random()*1300)};
@@ -454,9 +486,9 @@ let arrived=false;
 function machine(){
  setTC('tcD',['---','--','2027','--','--']);setTC('tcP',nowTC());setTC('tcL',['OCT','26','1985','01','21']);
  setInterval(()=>{if(!arrived)setTC('tcP',nowTC())},15000);
- const gas=$('#gas'),mph=$('#mph'),msg=$('#msg'),flux=$('#flux');let v=0,hold=false,raf=0,done=false;
+ const gas=$('#gas'),mph=$('#mph'),msg=$('#msg'),flux=$('#flux');onScreen(flux);let v=0,hold=false,raf=0,done=false;
  const loop=()=>{v=hold?Math.min(88,v+(v<55?1.15:.6)):Math.max(0,v-2.2);mph.textContent=Math.round(v);
-  flux.style.setProperty('--fs',(1.4-v/88*1.25).toFixed(2)+'s');$('#hub').setAttribute('r',String(14+v/88*14));
+  flux.style.setProperty('--fs',(1.4-v/88*1.25).toFixed(2)+'s');$('#hub').setAttribute('r',String(14+v/88*14));$('#hubh').setAttribute('r',String(26+v/88*22));
   gas.classList.toggle('charging',hold&&v>40);
   if(v>=88&&!done){done=true;travel()}if(v<30)done=false;raf=(hold||v>0)?requestAnimationFrame(loop):0};
  const start=e=>{e.preventDefault();hold=true;msg.textContent='Acelerando… el condensador de flujo se está cargando';if(!raf)raf=requestAnimationFrame(loop)};
@@ -475,26 +507,57 @@ const CAST=[['Marty McFly','Diecisiete años, una guitarra y un problema: borrar
 const SIL='<svg class="sil" viewBox="0 0 200 220" aria-hidden="true"><path d="M100 18c26 0 44 20 44 48 0 22-10 38-24 46v10c34 8 62 30 70 98H10c8-68 36-90 70-98v-10c-14-8-24-24-24-46 0-28 18-48 44-48z"/></svg>';
 function castCards(){$('.cards').innerHTML=CAST.map(([n,r,pos],i)=>`<article class="pc rv" tabindex="0" style="transition-delay:${i%4*50}ms">
   <div class="ph" style="--src:url(${i%2?'delorean.webp':'cielo.webp'});--pos:${pos}"><span class="layer"></span><span class="layer r"></span><span class="layer b"></span>${SIL}<span class="q">?</span><span class="scan"></span><span class="noise"></span><span class="sig"><i></i>SEÑAL 2027</span></div>
-  <div class="bd"><h3>${n}</h3><p class="role">${r}</p><div class="rv2">SE REVELA EN 2027</div></div></article>`).join('')}
+  <div class="bd"><h3>${n}</h3><p class="role">${r}</p><div class="rv2">SE REVELA EN 2027</div></div></article>`).join('');
+ // la interferencia solo corre en las tarjetas que están en pantalla
+ const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('live',e.isIntersecting)),{threshold:.15});$$('.pc').forEach(c=>io.observe(c))}
 
-/* ---------- boletos (diseño de la Wallet de TADAA!) ---------- */
-const TIX=[{z:'Preferente',seat:'Por asignar',folio:'TD-1985',strip:'#1238FF',ink:'#FFFFFF'},{z:'Platea',seat:'Por asignar',folio:'TD-1955',strip:'#161833',ink:'#FFFFFF'},{z:'Balcón',seat:'Por asignar',folio:'TD-2027',strip:'#2A2D52',ink:'#FFFFFF'}];
-let cur=1;
-function wallet(first){const others=TIX.map((t,i)=>({...t,i})).filter(t=>t.i!==cur),f=TIX[cur];
- $('#wlstack').innerHTML=others.map(t=>`<button class="wl-strip" data-i="${t.i}" style="background:${t.strip};color:${t.ink}" aria-label="Ver boleto ${t.z}"><span style="display:flex;justify-content:space-between;align-items:center"><span class="chip" style="${t.strip==='#D6FF35'?'background:#08091A;color:#D6FF35':'background:#D6FF35;color:#08091A'}">BOLETO FINAL · TADAA! TICKETS</span><span style="font-size:11px;opacity:.8">${t.folio}</span></span><span class="t" style="display:block">Back to the Future · ${t.z}</span></button>`).join('');
- const fr=$('#wlfront');fr.innerHTML=`<div class="top"><div style="display:flex;justify-content:space-between;align-items:center"><span class="chip" style="background:#08091A;color:#D6FF35">BOLETO FINAL · TADAA! TICKETS</span><span style="font-size:11px">${f.folio}</span></div>
-  <div style="display:flex;gap:14px;align-items:center"><img src="delorean.webp" alt="" style="width:84px;height:84px;border-radius:18px;object-fit:cover;object-position:50% 55%"><div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:Outfit,sans-serif;font-weight:800;font-size:24px;line-height:1">Back to the Future</span><span style="font-size:12px">Temporada 2027 · fecha por anunciar</span><span style="font-size:12px;font-weight:700">${f.z} · El Musical</span></div></div></div>
+/* ---------- invitación: wallet de TADAA! con los pases del invitado ---------- */
+const IC2={"calendar-plus": "M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM152,160H136v16a8,8,0,0,1-16,0V160H104a8,8,0,0,1,0-16h16V128a8,8,0,0,1,16,0v16h16a8,8,0,0,1,0,16ZM48,80V48H72v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80Z", "map-pin": "M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z", "clock": "M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm56,112H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48a8,8,0,0,1,0,16Z", "users": "M164.47,195.63a8,8,0,0,1-6.7,12.37H10.23a8,8,0,0,1-6.7-12.37,95.83,95.83,0,0,1,47.22-37.71,60,60,0,1,1,66.5,0A95.83,95.83,0,0,1,164.47,195.63Zm87.91-.15a95.87,95.87,0,0,0-47.13-37.56A60,60,0,0,0,144.7,54.59a4,4,0,0,0-1.33,6A75.83,75.83,0,0,1,147,150.53a4,4,0,0,0,1.07,5.53,112.32,112.32,0,0,1,29.85,30.83,23.92,23.92,0,0,1,3.65,16.47,4,4,0,0,0,3.95,4.64h60.3a8,8,0,0,0,7.73-5.93A8.22,8.22,0,0,0,252.38,195.48Z", "door-open": "M232,216H208V40a16,16,0,0,0-16-16H64A16,16,0,0,0,48,40V216H24a8,8,0,0,0,0,16H232a8,8,0,0,0,0-16Zm-64,0H64V40H168Zm-40-84a12,12,0,1,1,12,12A12,12,0,0,1,128,132Z", "qr-code": "M120,56v48a16,16,0,0,1-16,16H56a16,16,0,0,1-16-16V56A16,16,0,0,1,56,40h48A16,16,0,0,1,120,56Zm-16,80H56a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,104,136Zm96-96H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,200,40ZM144,184a8,8,0,0,0,8-8V144a8,8,0,0,0-16,0v32A8,8,0,0,0,144,184Zm64-32H184v-8a8,8,0,0,0-16,0v56H144a8,8,0,0,0,0,16h32a8,8,0,0,0,8-8V168h24a8,8,0,0,0,0-16Zm0,32a8,8,0,0,0-8,8v16a8,8,0,0,0,16,0V192A8,8,0,0,0,208,184Z", "gift": "M216,72H180.92c.39-.33.79-.65,1.17-1A29.53,29.53,0,0,0,192,49.57,32.62,32.62,0,0,0,158.44,16,29.53,29.53,0,0,0,137,25.91a54.94,54.94,0,0,0-9,14.48,54.94,54.94,0,0,0-9-14.48A29.53,29.53,0,0,0,97.56,16,32.62,32.62,0,0,0,64,49.57,29.53,29.53,0,0,0,73.91,71c.38.33.78.65,1.17,1H40A16,16,0,0,0,24,88v32a16,16,0,0,0,16,16v64a16,16,0,0,0,16,16h60a4,4,0,0,0,4-4V120H40V88h80v32h16V88h80v32H136v92a4,4,0,0,0,4,4h60a16,16,0,0,0,16-16V136a16,16,0,0,0,16-16V88A16,16,0,0,0,216,72ZM84.51,59a13.69,13.69,0,0,1-4.5-10A16.62,16.62,0,0,1,96.59,32h.49a13.69,13.69,0,0,1,10,4.5c8.39,9.48,11.35,25.2,12.39,34.92C109.71,70.39,94,67.43,84.51,59Zm87,0c-9.49,8.4-25.24,11.36-35,12.4C137.7,60.89,141,45.5,149,36.51a13.69,13.69,0,0,1,10-4.5h.49A16.62,16.62,0,0,1,176,49.08,13.69,13.69,0,0,1,171.49,59Z", "check-circle": "M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z", "ticket": "M232,104a8,8,0,0,0,8-8V64a16,16,0,0,0-16-16H32A16,16,0,0,0,16,64V96a8,8,0,0,0,8,8,24,24,0,0,1,0,48,8,8,0,0,0-8,8v32a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V160a8,8,0,0,0-8-8,24,24,0,0,1,0-48ZM32,167.2a40,40,0,0,0,0-78.4V64H88V192H32Z"};
+const ic2=n=>`<svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="${IC2[n]}"/></svg>`;
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const API='/api/v2/invites/',TOKEN=new URLSearchParams(location.search).get('inv');
+const STRIPS=['#1238FF','#161833','#2A2D52','#3A1E8C'];
+let INV=null,cur=0,qrT=0;
+const DEMO={demo:true,invitation:{guest:'Tu nombre aquí',tickets:2,kind:'particular'},campaign:{title:'Función de prensa',starts_at:null,venue:'Teatro Telcel',doors:'19:00'},passes:[{n:1,holder:'Tu nombre aquí',used:false},{n:2,holder:'Tu acompañante',used:false}]};
+const fdate=d=>d?new Date(d).toLocaleString('es-MX',{weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'America/Mexico_City'}):'Fecha por confirmar · temporada 2027';
+const maps=v=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent((v||'Teatro Telcel')+', Ciudad de México');
+function ics(){const c=INV.campaign;if(!c.starts_at)return;const f=d=>new Date(d).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+ const t=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//TADAA!//Invitaciones//ES','BEGIN:VEVENT','UID:'+(TOKEN||'demo')+'@tadaa','DTSTAMP:'+f(Date.now()),'DTSTART:'+f(c.starts_at),'DTEND:'+f(+new Date(c.starts_at)+3*3600000),'SUMMARY:Back to the Future · '+c.title,'LOCATION:'+(c.venue||'Teatro Telcel'),'DESCRIPTION:Tu invitación y tus pases: '+location.href,'END:VEVENT','END:VCALENDAR'].join('\r\n');
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/calendar'}));a.download='back-to-the-future.ics';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
+function qrSrc(n){return API+encodeURIComponent(TOKEN)+'/passes/'+n+'/qr?m='+Math.floor(Date.now()/30000)}
+function wallet(first){const P=INV.passes,f=P[cur]||P[0],c=INV.campaign,demo=!!INV.demo,many=P.length>1;
+ $('#wlstack').innerHTML=P.map((p,i)=>({...p,i})).filter(p=>p.i!==cur).map(p=>`<button class="wl-strip" data-i="${p.i}" style="background:${STRIPS[p.i%STRIPS.length]};color:#fff" aria-label="Ver pase ${p.n}: ${esc(p.holder)}"><span style="display:flex;justify-content:space-between;align-items:center"><span class="chip" style="background:#D6FF35;color:#08091A">PASE ${p.n} DE ${P.length}${p.used?' · YA INGRESÓ':''}</span><span style="font-size:11px">INVITACIÓN</span></span><div class="t">${esc(p.holder||'Invitado')}</div></button>`).join('');
+ const fr=$('#wlfront');
+ fr.innerHTML=`<div class="top"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span class="chip" style="background:#08091A;color:#D6FF35">INVITACIÓN · ${esc(c.title).toUpperCase()}</span><span style="font-size:11px;font-weight:800">${many?'Pase '+f.n+' de '+P.length:'Pase personal'}</span></div>
+  <div style="display:flex;gap:14px;align-items:center"><img src="delorean.webp" alt="" style="width:76px;height:76px;border-radius:18px;object-fit:cover;object-position:50% 55%"><div style="display:flex;flex-direction:column;gap:4px;min-width:0"><span style="font-family:Outfit,sans-serif;font-weight:800;font-size:23px;line-height:1">Back to the Future</span><span style="font-size:12px;font-weight:600">${esc(fdate(c.starts_at))}</span></div></div></div>
   <div class="perf"></div>
-  <div class="bot"><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px"><span style="display:flex;flex-direction:column"><span style="font-size:10px;opacity:.7">Recinto</span><span style="font-size:12px;font-weight:800">Teatro Telcel</span></span><span style="display:flex;flex-direction:column"><span style="font-size:10px;opacity:.7">Estado</span><span style="font-size:12px;font-weight:800">Preventa próxima</span></span><span style="display:flex;flex-direction:column"><span style="font-size:10px;opacity:.7">Asiento</span><span style="font-size:12px;font-weight:800">${f.seat}</span></span></div>
-  <a class="cta" href="../../#membresia">Quiero la preventa ${ic('arrow-right')}</a></div>`;
+  <div class="bot"><div class="meta"><span><small>Titular</small><b>${esc(f.holder||INV.invitation.guest)}</b></span><span><small>Recinto</small><b>${esc(c.venue||'Teatro Telcel')}</b></span><span><small>Puertas</small><b>${esc(c.doors||'Por confirmar')}</b></span></div>
+  <div class="qrbox${demo?' demo':''}${f.used?' used':''}"><img id="qrimg" alt="${demo?'':'QR del pase '+f.n+' de '+esc(f.holder)}" src="${demo?'data:image/svg+xml;utf8,'+encodeURIComponent(DEMO_QR):qrSrc(f.n)}">${demo?'<span class="tag2">Tu QR aparece aquí cuando abres tu invitación personal</span>':''}</div>
+  <span class="qrcap">${demo?'Invitación de ejemplo':f.used?'Este pase ya se usó para entrar':'<i></i>QR dinámico · cambia cada minuto, no sirve una captura'}</span>
+  ${demo?`<a class="cta" href="../../canjear/">${ic2('gift')} Tengo un código de sorteo</a>`:c.starts_at?`<button class="cta" id="wlIcs" style="border:0;font:inherit;font-weight:800;cursor:pointer">${ic2('calendar-plus')} Agregar a mi calendario</button>`:''}
+  <a class="cta ghost" href="${maps(c.venue)}" target="_blank" rel="noopener">${ic2('map-pin')} Cómo llegar</a></div>`;
+ $('#wlIcs')?.addEventListener('click',ics);
  if(!first&&!RM){fr.classList.remove('swap');void fr.offsetWidth;fr.classList.add('swap')}
  $$('.wl-strip').forEach(b=>b.addEventListener('click',()=>{cur=+b.dataset.i;wallet(false)}));
-}
+ $('#wlnote').textContent=demo?'Esta es una invitación de ejemplo. La tuya llega por WhatsApp o correo con tu nombre.':many?'Toca las pestañas para ver el pase de cada invitado. Muéstralo en la puerta con el brillo al máximo.':'Muéstralo en la puerta con el brillo al máximo.';
+ clearInterval(qrT);if(!demo&&!f.used)qrT=setInterval(()=>{if(!document.hidden){const im=$('#qrimg');if(im)im.src=qrSrc(f.n)}},30000)}
+const DEMO_QR=(()=>{let r='';let x=7;for(let i=0;i<21;i++)for(let j=0;j<21;j++){x=(x*1103515245+12345)&0x7fffffff;const fin=(i<7&&j<7)||(i<7&&j>13)||(i>13&&j<7);const on=fin?((i%6===0||j%6===0||i===20||j===20||(i>1&&i<5&&j>1&&j<5)||(i>1&&i<5&&j>15&&j<19)||(i>15&&i<19&&j>1&&j<5))&&!(i===6&&j>6&&j<14)):(x>>16)&1;if(on)r+=`<rect x="${j}" y="${i}" width="1" height="1"/>`}return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" shape-rendering="crispEdges">${r}</svg>`})();
+function invInfo(){const v=INV.invitation,c=INV.campaign,demo=!!INV.demo,first=String(v.guest||'').split(/\s+/)[0];
+ $('#ivKick').textContent=c.title;
+ $('#ivHead').innerHTML=demo?'Tu invitación<br><span class="grad">a 2027</span>':`${esc(first)},<br><span class="grad">te esperamos</span>`;
+ $('#ivHi').innerHTML=demo?'Te guardamos un lugar en Hill Valley. Abre el enlace personal que te enviamos y aquí aparecerán tus pases con QR.':`${v.company&&v.kind!=='particular'?'<b>'+esc(v.company)+'</b> te invita':'Estás invitado'} a la <b>${esc(c.title.toLowerCase())}</b> de Back to the Future: El Musical. Tu invitación es para <b>${v.tickets} ${v.tickets===1?'persona':'personas'}</b>.`;
+ $('#ivList').innerHTML=[[ 'clock',fdate(c.starts_at)],['map-pin',(c.venue||'Teatro Telcel')+', Ciudad de México'],['door-open','Apertura de puertas: '+(c.doors||'por confirmar')],['users',v.tickets+(v.tickets===1?' pase con QR individual':' pases con QR individual, uno por invitado')]].map(([i,t])=>`<li>${ic2(i)} ${esc(t)}</li>`).join('');
+ $('#ivActs').innerHTML=demo?`<a class="btn b-hot" href="../../canjear/">${ic2('gift')} Canjear código de sorteo</a>`:'';}
+async function loadInvite(){
+ if(TOKEN){try{const r=await fetch(API+encodeURIComponent(TOKEN),{credentials:'same-origin'});const d=await r.json();if(!r.ok)throw new Error(d.error||'Invitación no encontrada');INV=d}
+  catch(e){INV={...DEMO};invInfo();wallet(true);$('#ivHi').textContent=e.message+'. Revisa el enlace que te enviamos o escríbenos.';return}}
+ else INV={...DEMO};
+ invInfo();wallet(true)}
 
 /* ---------- aparición al hacer scroll ---------- */
 function reveal(){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{rootMargin:'0px 0px -10% 0px'});$$('.rv').forEach(el=>io.observe(el))}
 
-castCards();wallet(true);reveal();machine();const s1=skyLife();carLife();intro(s1);
+castCards();loadInvite();reveal();machine();const s1=skyLife();carLife();intro(s1);
 // en una vista incrustada (presentación) no se inicia el audio solo
 if(new URLSearchParams(location.search).get('embed')==='1'){wantSound=false}
 })();

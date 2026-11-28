@@ -37,7 +37,8 @@ async function request(req,res){
   res.end();return;
  }
  // Enlaces cortos para compartir: /obra/<slug> abre la landing de la obra; /p/<slug> abre la presentación personalizada.
- {const m=pathname.match(/^\/(obra|p)\/([a-z0-9-]{2,80})\/?$/);if(m){res.writeHead(302,{'Location':m[1]==='obra'?'/experience/landings/?s='+m[2]:'/experience/#pitch/'+m[2],'Cache-Control':'no-store'});res.end();return}}
+ if(pathname==='/canjear'||pathname==='/canjear/'){res.writeHead(302,{'Location':'/experience/canjear/'+(u.search||''),'Cache-Control':'no-store'});res.end();return}
+ {const m=pathname.match(/^\/(obra|p)\/([a-z0-9-]{2,80})\/?$/);if(m){res.writeHead(302,{'Location':m[1]==='obra'?'/experience/landings/?s='+m[2]+(u.search?'&'+u.search.slice(1):''):'/experience/#pitch/'+m[2],'Cache-Control':'no-store'});res.end();return}}
 
  if(pathname.startsWith('/api/')){
   if(process.env.NODE_ENV==='production'&&!reqSecure(req))return send(res,403,{error:'HTTPS obligatorio'});

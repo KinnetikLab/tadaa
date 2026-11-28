@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Canjea tu código · TADAA!</title>
+<meta name="description" content="¿Ganaste un sorteo? Canjea tu código y recibe tu pase con QR para la función.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#1238FF;--lime:#D6FF35;--ink:#08091A;--spring:cubic-bezier(.34,1.56,.64,1);--out:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{min-height:100svh;background:var(--blue) url(../img/tv/glitter.png) center/600px;color:#fff;font-family:'Plus Jakarta Sans',system-ui,sans-serif;display:grid;place-items:center;padding:28px 18px 40px}
+.ic{width:1.15em;height:1.15em;fill:currentColor;flex:0 0 auto}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+main{width:100%;max-width:440px}
+.brand{display:block;margin:0 auto 22px;height:34px}
+.card{position:relative;width:min(440px,100%);background:var(--lime);color:var(--ink);border-radius:32px;box-shadow:0 40px 80px rgba(8,9,26,.4)}
+.card .hd{padding:28px 26px 22px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--ink);color:var(--lime);border-radius:99px;padding:6px 12px;font-size:12px;font-weight:800}
+h1{font:900 clamp(44px,12vw,60px)/.9 Outfit,sans-serif;letter-spacing:-1.5px;margin:16px 0 10px}
+.hd p{margin:0;font-size:15px;line-height:1.5;font-weight:600;max-width:32ch}
+.perf{position:relative;border-top:2px dashed rgba(8,9,26,.32)}
+.perf::before,.perf::after{content:"";position:absolute;top:-13px;width:26px;height:26px;border-radius:50%;background:var(--blue)}
+.perf::before{left:-13px}.perf::after{right:-13px}
+form{padding:22px 26px 26px;display:flex;flex-direction:column;gap:16px}
+label{display:flex;flex-direction:column;gap:8px;font-size:13px;font-weight:800}
+input{height:58px;border-radius:18px;border:0;background:#fff;color:var(--ink);padding:0 18px;font:700 17px 'Plus Jakarta Sans',sans-serif;box-shadow:inset 0 0 0 2px transparent;transition:box-shadow .2s}
+input:focus{outline:0;box-shadow:inset 0 0 0 2.5px var(--ink)}
+#code{height:72px;text-align:center;font:900 30px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+#code::placeholder{color:#C9CEDF}
+.hint{font-size:12px;font-weight:600;opacity:.7;margin-top:-4px}
+button{height:60px;border:0;border-radius:99px;background:var(--ink);color:#fff;font:800 16px 'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:transform .12s ease-out,opacity .2s}
+button:active{transform:scale(.97)}
+button[disabled]{opacity:.6;cursor:progress}
+button .ic{color:var(--lime)}
+.err{min-height:1.4em;margin:0;font-size:14px;font-weight:700;color:#B4232F;display:flex;gap:6px;align-items:center}
+.err:empty{display:none}
+.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.done{display:none;padding:26px;flex-direction:column;align-items:center;text-align:center;gap:14px}
+.card.ok form{display:none}.card.ok .done{display:flex}
+.stamp{width:120px;height:120px;border-radius:50%;background:var(--ink);color:var(--lime);display:grid;place-items:center}
+.stamp .ic{width:64px;height:64px}
+.card.ok .stamp{animation:stamp .55s var(--spring)}
+@keyframes stamp{from{transform:scale(.3) rotate(-25deg);opacity:0}}
+.done b{font:900 30px/1 Outfit,sans-serif}
+.done a{width:100%;height:60px;border-radius:99px;background:var(--ink);color:#fff;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:10px;font-weight:800}
+.done a .ic{color:var(--lime)}
+.foot{margin:22px auto 0;max-width:440px;text-align:center;font-size:13px;line-height:1.5;color:#DCE2FF}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+ <img class="brand" src="../img/tv/logo-tadaa.png" alt="TADAA!">
+ <section class="card" id="card" aria-labelledby="t">
+  <div class="hd"><span class="chip"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M216,72H180.92c.39-.33.79-.65,1.17-1A29.53,29.53,0,0,0,192,49.57,32.62,32.62,0,0,0,158.44,16,29.53,29.53,0,0,0,137,25.91a54.94,54.94,0,0,0-9,14.48,54.94,54.94,0,0,0-9-14.48A29.53,29.53,0,0,0,97.56,16,32.62,32.62,0,0,0,64,49.57,29.53,29.53,0,0,0,73.91,71c.38.33.78.65,1.17,1H40A16,16,0,0,0,24,88v32a16,16,0,0,0,16,16v64a16,16,0,0,0,16,16h60a4,4,0,0,0,4-4V120H40V88h80v32h16V88h80v32H136v92a4,4,0,0,0,4,4h60a16,16,0,0,0,16-16V136a16,16,0,0,0,16-16V88A16,16,0,0,0,216,72ZM84.51,59a13.69,13.69,0,0,1-4.5-10A16.62,16.62,0,0,1,96.59,32h.49a13.69,13.69,0,0,1,10,4.5c8.39,9.48,11.35,25.2,12.39,34.92C109.71,70.39,94,67.43,84.51,59Zm87,0c-9.49,8.4-25.24,11.36-35,12.4C137.7,60.89,141,45.5,149,36.51a13.69,13.69,0,0,1,10-4.5h.49A16.62,16.62,0,0,1,176,49.08,13.69,13.69,0,0,1,171.49,59Z"/></svg> Ganador de sorteo</span>
+   <h1 id="t">¡Ganaste!</h1>
+   <p>Escribe el código que te entregaron y tu nombre completo. Te damos tu pase con QR al instante.</p></div>
+  <div class="perf"></div>
+  <form id="f" novalidate>
+   <label>Tu código<input id="code" name="code" autocomplete="one-time-code" inputmode="text" maxlength="12" placeholder="TD-XXXX-XXXX" required spellcheck="false" autocapitalize="characters"></label>
+   <label>Nombre completo<input id="name" name="name" autocomplete="name" placeholder="Como aparece en tu identificación" required></label>
+   <span class="hint">En la entrada te pueden pedir una identificación con foto.</span>
+   <p class="err" id="err" role="alert"></p>
+   <button id="go" type="submit"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M232,104a8,8,0,0,0,8-8V64a16,16,0,0,0-16-16H32A16,16,0,0,0,16,64V96a8,8,0,0,0,8,8,24,24,0,0,1,0,48,8,8,0,0,0-8,8v32a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V160a8,8,0,0,0-8-8,24,24,0,0,1,0-48ZM32,167.2a40,40,0,0,0,0-78.4V64H88V192H32Z"/></svg> Canjear mi pase</button>
+  </form>
+  <div class="done" role="status"><span class="stamp"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg></span><b>Tu pase está listo</b><span id="hello">Te llevamos a tu invitación…</span><a id="link" href="#"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M221.66,133.66l-72,72A8,8,0,0,1,136,200V136H40a8,8,0,0,1,0-16h96V56a8,8,0,0,1,13.66-5.66l72,72A8,8,0,0,1,221.66,133.66Z"/></svg> Ver mi invitación</a></div>
+ </section>
+ <p class="foot">Cada código se canjea una sola vez y el pase queda a tu nombre. ¿Problemas? Escríbele a quien te entregó el código.</p>
+</main>
+<script>
+(()=>{'use strict';
+const $=s=>document.querySelector(s);const code=$('#code'),name=$('#name'),err=$('#err'),go=$('#go'),card=$('#card');
+// formato TD-XXXX-XXXX mientras escribe (sin letras ambiguas como O, I o L)
+const fmt=v=>{let x=v.toUpperCase().replace(/[^A-Z0-9]/g,'');if(x.startsWith('TD'))x=x.slice(2);x=x.slice(0,8);return x?'TD-'+x.slice(0,4)+(x.length>4?'-'+x.slice(4):''):''};
+code.addEventListener('input',()=>{const v=fmt(code.value);if(v!==code.value)code.value=v});
+const pre=new URLSearchParams(location.search).get('code');if(pre){code.value=fmt(pre);name.focus()}else code.focus();
+const fail=m=>{err.textContent=m;card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');navigator.vibrate?.([60,40,60])};
+$('#f').addEventListener('submit',async e=>{e.preventDefault();err.textContent='';
+ if(!/^TD-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(code.value))return fail('Revisa tu código: tiene la forma TD-XXXX-XXXX.'),code.focus();
+ if(name.value.trim().length<3)return fail('Escribe tu nombre completo.'),name.focus();
+ go.disabled=true;go.lastChild.textContent=' Canjeando…';
+ try{const r=await fetch('/api/v2/invites/redeem',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code:code.value,name:name.value.trim()})});const d=await r.json().catch(()=>({}));
+  if(!r.ok)throw new Error(d.error||'No pudimos canjear el código');
+  $('#link').href=d.link;$('#hello').textContent='¡Felicidades, '+name.value.trim().split(/\s+/)[0]+'! Te llevamos a tu invitación…';card.classList.add('ok');navigator.vibrate?.([30,30,80]);
+  setTimeout(()=>location.assign(d.link),2200)}
+ catch(x){fail(x.message);go.disabled=false;go.lastChild.textContent=' Canjear mi pase'}});
+})();
+</script>
+</body>
+</html>
