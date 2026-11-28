@@ -30,7 +30,15 @@ try{
     L+=r.rowCount;
   }
   for(const d of DECKS){const r=await c.query(`INSERT INTO pitch_decks(slug,prospect,contact_name,landing_slug,status,message,config) VALUES($1,$2,$3,$4,$5,$6,$7) ON CONFLICT(slug) DO NOTHING RETURNING id`,[d.slug,d.prospect,d.contact_name||null,d.landing_slug,d.status,d.message,JSON.stringify(d.config||{})]);D+=r.rowCount}
+  // Campaña demo de invitaciones: función de prensa de Back to the Future (token fijo demo-prensa-bttf para probar el wallet).
+  const org=(await c.query(`SELECT a.organization_id id JOIN organizations o ON o.id=a.organization_id WHERE a.kind='producer' AND a.status='active' ORDER BY (o.slug='escena-viva') DESC,a.created_at LIMIT 1`)).rows[0];
+  let I=0;
+  if(org&&!(await c.query(`SELECT 1 FROM invitations WHERE token='demo-prensa-bttf'`)).rowCount&&(await c.query(`SELECT 1 FROM show_landings WHERE slug='back-to-the-future'`)).rowCount){
+    const camp=(await c.query(`INSERT INTO invite_campaigns(organization_id,landing_slug,site_url,title,starts_at,venue,doors) VALUES($1,'back-to-the-future','/experience/minisitios/back-to-the-future/','Función de prensa',$2,'Teatro Telcel','19:00') RETURNING id`,[org.id,'2027-03-04T02:30:00Z'])).rows[0];
+    const inv=(await c.query(`INSERT INTO invitations(campaign_id,token,kind,guest_name,email,tickets) VALUES($1,'demo-prensa-bttf','particular','Marty McFly','marty@example.com',2) RETURNING id`,[camp.id])).rows[0];
+    await c.query(`INSERT INTO invitation_passes(invitation_id,n,holder_name) VALUES($1,1,'Marty McFly'),($1,2,'Acompañante de Marty')`,[inv.id]);I=1;
+  }
   await c.query('COMMIT');
-  console.log(`✓ Pitch listo: ${L} landings${force?' (reescritas)':' nuevas'}, ${D} presentaciones nuevas.`);
+  console.log(`✓ Pitch listo: ${L} landings${force?' (reescritas)':' nuevas'}, ${D} presentaciones nuevas${I?', campaña demo de invitaciones':''}.`);
   console.log('  Presentaciones: index.html#pitch/gou-producciones · index.html#pitch/mejor-teatro · Landings: landings/?s=kinky-boots');
 }catch(e){await c.query('ROLLBACK');throw e}finally{c.release();await closePool()}

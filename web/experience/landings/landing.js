@@ -9,6 +9,8 @@ const SLUG=(Q.get('s')||'').replace(/[^a-z0-9-]/g,'');
 const EMBED=Q.get('embed')==='1';
 const GUEST=(Q.get('para')||'').replace(/[<>]/g,'').trim().slice(0,60);
 const PASES=Math.max(1,Math.min(6,parseInt(Q.get('pases'),10)||0));
+// ?inv=TOKEN: invitación real creada en el portal de productores (pases y QR firmados por invitado).
+const INV_T=(Q.get('inv')||'').replace(/[^\w-]/g,'').slice(0,40);let INVD=null;
 const ROOT=new URL('../',location.href).href; // /experience/
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
@@ -79,7 +81,7 @@ function boltSVG(cls){return `<svg class="bolt ${cls}" viewBox="0 0 64 120" aria
 
 
 /* ---------- invitación (función de prensa, F&F, estreno) ---------- */
-const guestName=()=>GUEST||((C.invite||{}).guest)||'Invitado';
+const guestName=()=>GUEST||INVD?.invitation?.guest||((C.invite||{}).guest)||'Invitado';
 const firstName=()=>GUEST?GUEST.split(/\s+/)[0]:'';
 function inviteHeroHTML(h){const iv=C.invite||{};const fn=firstName();
  return `<section class="hero h-invite" id="top"><div class="beams" aria-hidden="true"><i></i><i></i></div><div class="floorglow" aria-hidden="true"></div>
@@ -93,8 +95,8 @@ function inviteHeroHTML(h){const iv=C.invite||{};const fn=firstName();
    ${countdownHTML(h)}${ctas(h)}</div>
   <div class="art3d art-in" id="art3d" role="button" tabindex="0" aria-label="Lanzar confeti"><img src="${src(h.art)}" alt="" draggable="false">${h.badge?`<span class="badge" id="badge"><span><b>${esc(h.badge.big)}</b>${esc(h.badge.small)}</span></span>`:''}</div>
  </div></section>`}
-function walletHTML(){const iv=C.invite;if(!iv)return '';const n=PASES||iv.passes||1,g=guestName(),f=firstName()||g.split(/\s+/)[0];
- const passes=Array.from({length:n},(_,k)=>({n:k+1,name:k===0?g:'Acompañante de '+f}));
+function walletHTML(){const iv=C.invite;if(!iv)return '';const g=guestName(),f=firstName()||g.split(/\s+/)[0];
+ const passes=INVD?INVD.passes.map(p=>({n:p.n,name:p.holder||g})):Array.from({length:PASES||iv.passes||1},(_,k)=>({n:k+1,name:k===0?g:'Acompañante de '+f}));const n=passes.length;
  return `<section id="pases" class="dark wallet-sec"><div class="wrap wal-grid">
   <div>${head({kicker:iv.kicker||'Tu wallet',title:iv.title||'Tus pases',text:iv.text})}
    <ul class="idet rv">${(iv.details||[]).map(d=>`<li>${ic(d.icon||'star')}<span>${esc(d.t)}</span></li>`).join('')}</ul>
@@ -112,7 +114,7 @@ function wireWallet(){const w=$('#wallet');if(!w)return;const ps=$$('.pass',w);l
  const lay=()=>{const full=ps[act].offsetHeight;let j=0;ps.forEach((p,k)=>{if(k===act){p.style.transform='translateY(0) scale(1)';p.style.zIndex=20;p.classList.add('on');p.setAttribute('aria-expanded','true')}else{p.style.transform=`translateY(${full+18+j*16}px) scale(${.95-j*.03})`;p.style.zIndex=10-j;p.classList.remove('on');p.setAttribute('aria-expanded','false');j++}});w.style.height=(full+18+Math.max(0,ps.length-1)*16+70)+'px'};
  ps.forEach((p,k)=>{const sel=()=>{if(k===act)return;act=k;lay()};p.addEventListener('click',sel);p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();sel()}})});
  const imgs=$$('img[data-n]',w),rings=$$('[data-ring]',w),lefts=$$('[data-left]',w);let lastM=-1;
- const qsrc=(im,m)=>'/api/v2/landings/'+SLUG+'/invite-qr?n='+im.dataset.n+'&g='+encodeURIComponent(im.dataset.g)+'&m='+m;
+ const qsrc=(im,m)=>INVD?'/api/v2/invites/'+INV_T+'/passes/'+im.dataset.n+'/qr?m='+m:'/api/v2/landings/'+SLUG+'/invite-qr?n='+im.dataset.n+'&g='+encodeURIComponent(im.dataset.g)+'&m='+m;
  const tick=()=>{const now=Date.now(),m=Math.floor(now/60000),left=60-Math.floor(now/1000)%60;
   lefts.forEach(e=>e.textContent=left);rings.forEach(r=>r.style.strokeDashoffset=String(126*(1-left/60)));
   if(m!==lastM){lastM=m;imgs.forEach(im=>{const pre=new Image();pre.onload=()=>{im.src=pre.src;if(!RM&&lastM>=0)im.animate([{transform:'rotateY(90deg)',opacity:.3},{transform:'none',opacity:1}],{duration:380,easing:'cubic-bezier(.2,1.2,.4,1)'})};pre.src=qsrc(im,m)})}};
@@ -414,7 +416,8 @@ async function boot(){
  if(!r.ok)return fail(r.status===404?'Esta landing no existe o ya no está publicada.':'No pudimos cargar la landing. Recarga la página en un momento.');
  const j=await r.json();C=Object.assign({title:j.landing.title},j.landing.config||{});
  // Obras con micrositio propio: la landing redirige a su página dedicada (conserva ?embed=1).
- if(C.page&&/^[a-z0-9/_-]+\/?$/i.test(C.page)){location.replace(ROOT+C.page+(EMBED?'?embed=1':''));return}
+ if(C.page&&/^[a-z0-9/_-]+\/?$/i.test(C.page)){const q=new URLSearchParams();if(EMBED)q.set('embed','1');if(INV_T)q.set('inv',INV_T);location.replace(ROOT+C.page+(q.toString()?'?'+q:''));return}
+ if(INV_T&&C.invite){try{const ir=await fetch('/api/v2/invites/'+INV_T);if(ir.ok)INVD=await ir.json()}catch{}}
  theme(C.theme||{});document.body.classList.toggle('inv',C.mode==='invite');render();
  document.body.classList.remove('boot-hide');document.body.classList.add('in-a');
  ambient((C.theme||{}).particles);confettiIntro();wireWallet();
