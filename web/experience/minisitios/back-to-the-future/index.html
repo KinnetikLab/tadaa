@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050722">
+<title>Back to the Future: El Musical · Temporada 2027 · Teatro Telcel</title>
+<meta name="description" content="Back to the Future: El Musical, ganador del Premio Olivier a Mejor Nuevo Musical, estrena temporada en 2027 en el Teatro Telcel. Preventa con TADAA!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&family=Big+Shoulders+Display:wght@700;800;900&family=Outfit:wght@800&display=swap" rel="stylesheet">
+<link rel="preload" href="cielo.webp" as="image">
+<link rel="preload" href="logo.webp" as="image">
+<style>
+@font-face{font-family:DSEG14;src:url(DSEG14Classic-Bold.woff2) format('woff2');font-display:block}
+:root{--night:#050722;--deep:#0A1170;--volt:#1E33FF;--arc:#DDF6FF;--cyan:#7FE3FF;--flux:#FF6B1A;--sun:#FFD21F;--red:#FF2D2D;--led-r:#FF3B30;--led-g:#3BFF6E;--led-a:#FFB02E;
+ --fd:'Big Shoulders Display',Impact,sans-serif;--fb:'Archivo',system-ui,sans-serif;--fl:DSEG14,ui-monospace,monospace;
+ --spring:cubic-bezier(.2,1.15,.35,1);--out:cubic-bezier(0,0,.2,1);--zoom:cubic-bezier(.33,.05,.25,1)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--night)}
+body{margin:0;color:#fff;font:400 17px/1.6 var(--fb);background:var(--night);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:10px}
+.ic{width:1.15em;height:1.15em;fill:currentColor;flex:0 0 auto}
+.wrap{width:min(1200px,100% - 40px);margin-inline:auto}
+.kick{font:800 14px/1 var(--fd);letter-spacing:.24em;text-transform:uppercase;color:var(--cyan)}
+h2{font:900 clamp(52px,7.4vw,124px)/.86 var(--fd);text-transform:uppercase;letter-spacing:-.01em;margin:0}
+.grad{background:linear-gradient(180deg,#FFF36B 0%,#FFD21F 32%,#FF8A1A 64%,#FF2D2D 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 0 #1E33FF) drop-shadow(0 10px 24px rgba(30,51,255,.45))}
+.rv{opacity:0;transform:translateY(40px)}
+.rv.on{opacity:1;transform:none;transition:opacity .6s var(--out),transform .9s var(--spring)}
+.btn{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 26px;border-radius:99px;border:0;text-decoration:none;font:800 15px/1 var(--fb);letter-spacing:.02em;transition:scale .12s ease-out,box-shadow .25s var(--out),background .2s}
+.btn:active{scale:.96}
+.b-hot{background:linear-gradient(100deg,#FFD21F,#FF6B1A 60%,#FF2D2D);color:#14062A;box-shadow:0 12px 34px rgba(255,107,26,.45)}
+.b-hot:hover{box-shadow:0 16px 44px rgba(255,107,26,.6)}
+.b-ghost{background:rgba(5,7,34,.4);color:#fff;box-shadow:inset 0 0 0 1.5px rgba(221,246,255,.55);backdrop-filter:blur(8px)}
+
+/* ───── HERO: el cielo vivo ───── */
+.hero{position:relative;height:100svh;min-height:640px;overflow:hidden;isolation:isolate;display:grid;place-items:center}
+.sky,.sky2{position:absolute;inset:-6%;background:url(cielo.webp) center/cover;z-index:-3}
+.sky{animation:drift 38s ease-in-out infinite alternate}
+.sky2{mix-blend-mode:screen;opacity:.0;animation:drift2 26s ease-in-out infinite alternate;filter:hue-rotate(-18deg) saturate(1.3)}
+@keyframes drift{from{transform:scale(1.04) translate3d(-1%,0,0)}to{transform:scale(1.14) translate3d(1.5%,-1%,0)}}
+@keyframes drift2{0%{opacity:.0;transform:scale(1.2) translate3d(2%,1%,0)}50%{opacity:.35}100%{opacity:.12;transform:scale(1.1) translate3d(-2%,-1%,0)}}
+#bolts{position:absolute;inset:0;z-index:-2;pointer-events:none}
+.hero .flash{position:absolute;inset:0;z-index:-1;background:radial-gradient(70% 60% at var(--fx,50%) 20%,rgba(235,248,255,.85),rgba(160,200,255,.25) 45%,transparent 70%);opacity:0;pointer-events:none;mix-blend-mode:screen}
+.hero .shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,7,34,.25),transparent 30%,transparent 60%,#0A1170 100%)}
+.stage{position:relative;text-align:center;padding:0 20px;display:flex;flex-direction:column;align-items:center;gap:22px;perspective:1200px}
+.logo-wrap{position:relative;width:min(860px,92vw)}
+.logo{width:100%;height:auto;filter:drop-shadow(0 18px 40px rgba(10,17,112,.75));transform-origin:50% 55%;opacity:0}
+.logo.ghost{position:absolute;inset:0;pointer-events:none}
+.go .logo.main{animation:spinIn 2.3s var(--zoom) .35s both}
+.go .logo.g1{animation:spinIn 2.3s var(--zoom) .41s both,ghostOut .2s 2.5s forwards}
+.go .logo.g2{animation:spinIn 2.3s var(--zoom) .48s both,ghostOut .2s 2.5s forwards}
+.logo.g1{filter:blur(2px) hue-rotate(160deg);mix-blend-mode:screen}.logo.g2{filter:blur(5px) hue-rotate(260deg);mix-blend-mode:screen}
+@keyframes spinIn{0%{opacity:0;transform:scale(14) rotate(-720deg);filter:blur(16px) brightness(2.4)}12%{opacity:1}55%{transform:scale(1.7) rotate(-60deg);filter:blur(3px) brightness(1.4)}82%{transform:scale(.93) rotate(5deg);filter:blur(0) brightness(1.1)}100%{opacity:1;transform:scale(1) rotate(0deg);filter:none}}
+@keyframes ghostOut{to{opacity:0}}
+.ring{position:absolute;left:50%;top:55%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;border:3px solid var(--arc);box-shadow:0 0 40px var(--cyan),inset 0 0 30px var(--cyan);opacity:0;pointer-events:none}
+.landed .ring{animation:ring 1s var(--out) forwards}
+@keyframes ring{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(28)}}
+.landed .logo.main{animation:spinIn 2.3s var(--zoom) .35s both,thump .5s var(--spring) 0s}
+@keyframes thump{50%{transform:scale(1.06)}}
+.tag{display:flex;flex-direction:column;align-items:center;gap:16px;opacity:0;transform:translateY(24px)}
+.landed .tag{opacity:1;transform:none;transition:opacity .7s var(--out) .15s,transform .9s var(--spring) .15s}
+.premiere{display:inline-flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;font:900 clamp(22px,2.6vw,34px)/1 var(--fd);letter-spacing:.06em;text-transform:uppercase;text-shadow:0 2px 20px rgba(10,17,112,.9)}
+.premiere .sep{width:10px;height:10px;transform:rotate(45deg);background:var(--sun);box-shadow:0 0 14px var(--sun)}
+.premiere b{color:var(--sun)}
+.olivier{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:99px;background:rgba(5,7,34,.55);backdrop-filter:blur(8px);box-shadow:inset 0 0 0 1px rgba(255,210,31,.5);font-weight:700;font-size:14px;color:#FFE9A3}
+.olivier .ic{color:var(--sun)}
+.cue{position:absolute;bottom:22px;left:50%;translate:-50% 0;display:flex;flex-direction:column;align-items:center;gap:6px;font:800 12px/1 var(--fd);letter-spacing:.3em;color:var(--arc);opacity:0;text-decoration:none}
+.landed .cue{opacity:.85;transition:opacity 1s 1.2s}
+.cue .ic{animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(6px)}}
+
+/* ───── EL DELOREAN ───── */
+.car{position:relative;overflow:hidden;background:#0A1170;margin-top:-1px}
+.car-box{position:relative;width:100%;aspect-ratio:16/9;max-height:120vh;-webkit-mask:linear-gradient(180deg,transparent 0,#000 12%,#000 82%,transparent 100%);mask:linear-gradient(180deg,transparent 0,#000 12%,#000 82%,transparent 100%)}
+.car-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 60%;will-change:transform}
+#arcs{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen}
+.glow{position:absolute;border-radius:50%;pointer-events:none;mix-blend-mode:screen}
+.glow.tail{width:13%;height:9%;background:radial-gradient(closest-side,rgba(255,70,40,.9),rgba(255,40,20,.25) 60%,transparent);animation:tail 1.8s ease-in-out infinite}
+.glow.tail.l{left:30%;top:52.5%}.glow.tail.r{left:57.5%;top:52.5%;animation-delay:-.9s}
+@keyframes tail{50%{opacity:.45;transform:scale(.92)}}
+.glow.vent{width:7%;height:9%;background:radial-gradient(closest-side,rgba(160,240,255,.95),rgba(60,180,255,.3) 60%,transparent);animation:vent 1.1s steps(2) infinite}
+.glow.vent.l{left:39.5%;top:44%}.glow.vent.r{left:53.5%;top:44%;animation-delay:-.4s}
+@keyframes vent{50%{opacity:.55}}
+.glow.fire{width:22%;height:20%;background:radial-gradient(closest-side,rgba(255,190,90,.85),rgba(255,90,20,.35) 55%,transparent);animation:fire .35s ease-in-out infinite alternate}
+.glow.fire.l{left:23%;top:76%}.glow.fire.r{left:55%;top:76%;animation-delay:-.17s}
+@keyframes fire{from{opacity:.55;transform:scale(.94) translateY(2%)}to{opacity:1;transform:scale(1.06)}}
+.car-copy{position:absolute;left:0;right:0;bottom:6%;text-align:center;z-index:2;pointer-events:none}
+.car-copy p{margin:0;font:900 clamp(30px,4.6vw,72px)/.9 var(--fd);text-transform:uppercase;letter-spacing:.02em;text-shadow:0 4px 30px rgba(5,7,34,.9)}
+.car-copy span{display:block;margin-top:10px;font-weight:600;font-size:16px;color:var(--arc);opacity:.9}
+
+/* ───── SINOPSIS ───── */
+.syn{position:relative;padding:120px 0 110px;background:linear-gradient(180deg,#0A1170,#050722 60%)}
+.syn-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start}
+.syn h2 .y{display:block;color:var(--cyan)}
+.syn .lead{font-size:clamp(19px,1.6vw,22px);line-height:1.6;margin:0 0 18px;color:#E7EEFF}
+.syn .lead:first-letter{font:900 4.2em/.8 var(--fd);float:left;margin:6px 10px 0 0;color:var(--sun)}
+.syn p{color:#B9C3EE;margin:0 0 16px}
+.creds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 26px;margin-top:30px;padding-top:26px;border-top:1px solid rgba(221,246,255,.15)}
+.creds small{display:block;font:800 12px/1 var(--fd);letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:6px}
+.creds b{font-weight:700;font-size:16px}
+.songs{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.songs span{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:99px;background:rgba(30,51,255,.18);box-shadow:inset 0 0 0 1px rgba(127,227,255,.3);font-weight:600;font-size:14px}
+.songs .ic{color:var(--sun)}
+
+/* ───── LA MÁQUINA: condensador + circuitos ───── */
+.machine{position:relative;padding:110px 0;background:radial-gradient(60% 50% at 30% 50%,rgba(30,51,255,.25),transparent 70%),#050722;overflow:hidden}
+.mgrid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:60px;align-items:center;margin-top:44px}
+.flux{position:relative;aspect-ratio:3/4;max-width:430px;width:100%;justify-self:center;border-radius:20px;padding:22px;background:linear-gradient(180deg,#2A2E3E,#14161F);box-shadow:inset 0 0 0 3px #3B4054,inset 0 0 0 10px #1B1D27,0 40px 80px rgba(0,0,0,.6)}
+.flux .win{position:relative;width:100%;height:100%;border-radius:10px;background:radial-gradient(70% 60% at 50% 55%,#1A2240,#07091A);box-shadow:inset 0 0 40px rgba(0,0,0,.8),inset 0 0 0 2px #444A60;overflow:hidden}
+.flux svg{position:absolute;inset:0;width:100%;height:100%}
+.flux .tube{fill:none;stroke:#2A3350;stroke-width:22;stroke-linecap:round}
+.flux .core{fill:none;stroke:url(#fluxGrad);stroke-width:8;stroke-linecap:round;stroke-dasharray:14 22;animation:flow var(--fs,1.4s) linear infinite;filter:url(#glowF)}
+@keyframes flow{to{stroke-dashoffset:-72}}
+.flux .hub{fill:#DDF6FF;filter:url(#glowF)}
+.flux .label{position:absolute;left:0;right:0;bottom:-46px;text-align:center;font:900 15px/1 var(--fd);letter-spacing:.3em;color:#9AA3C8}
+.flux .warn{position:absolute;left:50%;top:12px;translate:-50% 0;background:#FFD21F;color:#111;font:800 10px/1 var(--fb);letter-spacing:.08em;padding:4px 8px;border-radius:3px}
+.circuits{display:flex;flex-direction:column;gap:14px}
+.tc{border-radius:14px;padding:14px 18px 16px;background:linear-gradient(180deg,#2B2F3F,#1A1C26);box-shadow:inset 0 0 0 2px #3B4054,0 20px 40px rgba(0,0,0,.4)}
+.tc .row{display:grid;grid-template-columns:1.3fr .9fr 1.5fr .9fr .9fr;gap:8px}
+.tc .cell{display:flex;flex-direction:column;align-items:center;gap:6px}
+.tc .cap{font:800 10px/1 var(--fb);letter-spacing:.12em;color:#C9CEDD;background:#5A1010;padding:4px 8px;border-radius:3px;width:100%;text-align:center}
+.tc.g .cap{background:#0F4A1E}.tc.a .cap{background:#5A3A08}
+.tc .led{width:100%;text-align:center;padding:10px 4px 8px;border-radius:6px;background:#0B0B0E;box-shadow:inset 0 0 0 1px #000,inset 0 2px 8px rgba(0,0,0,.8);font:400 clamp(16px,2.1vw,30px)/1 var(--fl);position:relative}
+.tc .led::before{content:attr(data-ghost);position:absolute;inset:10px 4px 8px;opacity:.08}
+.tc.r .led{color:var(--led-r);text-shadow:0 0 10px rgba(255,59,48,.8)}
+.tc.g .led{color:var(--led-g);text-shadow:0 0 10px rgba(59,255,110,.7)}
+.tc.a .led{color:var(--led-a);text-shadow:0 0 10px rgba(255,176,46,.7)}
+.tc .name{margin-top:12px;text-align:center;font:900 14px/1 var(--fd);letter-spacing:.32em;color:#1A1C26;background:#C9CEDD;border-radius:4px;padding:6px}
+.tc .led.flip{animation:ledflip .6s steps(4)}
+@keyframes ledflip{25%,75%{opacity:.15}}
+.drive{display:flex;align-items:center;gap:18px;margin-top:6px;flex-wrap:wrap}
+.speedo{display:flex;align-items:baseline;gap:8px;min-width:150px}
+.speedo b{font:400 54px/1 var(--fl);color:var(--sun);text-shadow:0 0 20px rgba(255,210,31,.7);font-variant-numeric:tabular-nums;min-width:2.2ch;text-align:right}
+.speedo span{font:900 18px/1 var(--fd);letter-spacing:.2em;color:#9AA3C8}
+.hold{user-select:none;-webkit-user-select:none;touch-action:none;height:64px;padding:0 30px;font-size:16px}
+.hold.charging{animation:shk .12s linear infinite}
+@keyframes shk{25%{transform:translate(1px,-1px)}75%{transform:translate(-1px,1px)}}
+.msg{min-height:1.5em;font-weight:700;color:var(--cyan);margin:4px 0 0}
+#whiteout{position:fixed;inset:0;background:#EAF7FF;opacity:0;pointer-events:none;z-index:90}
+body.quake{animation:quake .55s linear}
+@keyframes quake{20%{transform:translate(-8px,3px)}40%{transform:translate(8px,-3px)}60%{transform:translate(-5px,-2px)}80%{transform:translate(5px,2px)}}
+.trail{position:fixed;left:-10%;right:-10%;height:6px;z-index:89;pointer-events:none;background:linear-gradient(90deg,transparent,#FF8A1A,#FFE27A,#FF8A1A,transparent);filter:blur(1px) drop-shadow(0 0 10px #FF6B1A);opacity:0}
+
+/* ───── PERSONAJES: señales del futuro ───── */
+.cast{padding:110px 0;background:#050722;position:relative}
+.cast .head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+.cast .head p{max-width:420px;color:#B9C3EE;margin:0}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.pc{position:relative;border-radius:20px;overflow:hidden;background:#0B0F33;box-shadow:inset 0 0 0 1px rgba(127,227,255,.18);transition:transform .45s var(--spring),box-shadow .25s var(--out)}
+.pc:hover,.pc:focus-within{transform:translateY(-6px);box-shadow:inset 0 0 0 1px var(--cyan),0 24px 50px rgba(30,51,255,.35)}
+.pc .ph{position:relative;aspect-ratio:3/4;overflow:hidden;background:#0A1170}
+.pc .ph .layer{position:absolute;inset:0;background:var(--src) var(--pos,50% 50%)/cover;filter:saturate(1.4) contrast(1.1)}
+.pc .ph .layer.r{mix-blend-mode:screen;filter:url(#chanR);animation:gR 2.6s steps(1) infinite}
+.pc .ph .layer.b{mix-blend-mode:screen;filter:url(#chanB);animation:gB 2.6s steps(1) infinite}
+@keyframes gR{0%,62%,100%{transform:none;clip-path:none}64%{transform:translate(-8px,0);clip-path:inset(18% 0 52% 0)}68%{transform:translate(6px,0);clip-path:inset(60% 0 12% 0)}72%{transform:none;clip-path:none}}
+@keyframes gB{0%,62%,100%{transform:none;clip-path:none}65%{transform:translate(9px,0);clip-path:inset(30% 0 40% 0)}70%{transform:translate(-5px,0);clip-path:inset(72% 0 6% 0)}74%{transform:none;clip-path:none}}
+.pc .sil{position:absolute;left:50%;bottom:-2%;width:78%;translate:-50% 0;fill:#050722;opacity:.92;filter:drop-shadow(0 0 18px rgba(127,227,255,.45))}
+.pc .scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0 1px,transparent 1px 4px);mix-blend-mode:overlay;pointer-events:none}
+.pc .noise{position:absolute;left:0;right:0;height:16%;top:-20%;background:linear-gradient(180deg,transparent,rgba(127,227,255,.35),transparent);animation:sweep 3.4s linear infinite;pointer-events:none}
+@keyframes sweep{to{top:110%}}
+.pc .q{position:absolute;left:50%;top:38%;translate:-50% -50%;font:900 86px/1 var(--fd);color:rgba(221,246,255,.9);text-shadow:3px 0 0 rgba(255,45,45,.8),-3px 0 0 rgba(30,180,255,.8);animation:qj 2.6s steps(1) infinite}
+@keyframes qj{0%,62%,100%{transform:none}66%{transform:translate(4px,-2px) skewX(-8deg)}70%{transform:translate(-3px,1px)}}
+.pc .sig{position:absolute;left:12px;top:12px;display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border-radius:99px;background:rgba(5,7,34,.7);font:800 10px/1 var(--fb);letter-spacing:.1em;color:var(--cyan)}
+.pc .sig i{width:7px;height:7px;border-radius:50%;background:var(--red);animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.2}}
+.pc .bd{padding:16px 16px 18px}
+.pc h3{margin:0;font:900 28px/1 var(--fd);text-transform:uppercase;letter-spacing:.01em}
+.pc .role{font-size:13px;color:#9AA3C8;margin:6px 0 0;line-height:1.45}
+.pc .rv2{margin-top:12px;font:800 12px/1 var(--fd);letter-spacing:.2em;color:var(--sun)}
+
+/* ───── PREMIOS Y CRÍTICAS ───── */
+.praise{padding:110px 0;background:linear-gradient(180deg,#050722,#0A1170)}
+.awards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:40px 0 64px}
+.aw{position:relative;border-radius:22px;padding:22px;min-height:190px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;background:linear-gradient(160deg,#121856,#0A0E3A);box-shadow:inset 0 0 0 1px rgba(255,210,31,.25);overflow:hidden}
+.aw.big{background:linear-gradient(150deg,#FFD21F,#FF8A1A 70%);color:#14062A;box-shadow:0 30px 60px rgba(255,138,26,.3)}
+.aw .ic{width:36px;height:36px;color:var(--sun)}.aw.big .ic{color:#14062A}
+.aw b{display:block;font:900 clamp(26px,2.4vw,40px)/.92 var(--fd);text-transform:uppercase;overflow-wrap:anywhere}
+.aw span{font-size:14px;line-height:1.4;opacity:.85}
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.qt{border-radius:22px;padding:24px;background:rgba(5,7,34,.55);box-shadow:inset 0 0 0 1px rgba(127,227,255,.18);display:flex;flex-direction:column;gap:14px;transition:transform .4s var(--spring)}
+.qt:hover{transform:translateY(-4px)}
+.qt.wide{grid-column:span 2;background:linear-gradient(135deg,rgba(30,51,255,.45),rgba(5,7,34,.6))}
+.qt .ic.q{width:28px;height:28px;color:var(--flux)}
+.qt blockquote{margin:0;font:800 clamp(22px,2vw,30px)/1.15 var(--fd);letter-spacing:.005em}
+.qt.wide blockquote{font-size:clamp(28px,3vw,46px)}
+.qt cite{font-style:normal;font-size:14px;color:#B9C3EE;margin-top:auto;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.qt cite b{color:#fff}
+.stars{color:var(--sun);letter-spacing:2px}
+.note{margin-top:18px;font-size:13px;color:#8C93B5}
+
+/* ───── BOLETOS: wallet de TADAA! (mismo diseño de la app) ───── */
+.tix{padding:110px 0 120px;background:#08091A;position:relative;overflow:hidden}
+.tix::before{content:"";position:absolute;inset:0;background:radial-gradient(50% 50% at 75% 40%,rgba(30,51,255,.35),transparent 70%);pointer-events:none}
+.tgrid{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:60px;align-items:center}
+.tinfo ul{list-style:none;margin:26px 0;padding:0;display:grid;gap:14px}
+.tinfo li{display:flex;gap:12px;align-items:center;font-weight:600}
+.tinfo li .ic{color:var(--sun);width:22px;height:22px}
+.wallet{font-family:'Plus Jakarta Sans',var(--fb);color:#08091A}
+.wl-stack{display:flex;flex-direction:column}
+.wl-strip{display:block;width:100%;text-align:left;border:0;border-radius:28px 28px 0 0;padding:16px 20px 28px;margin-bottom:-14px;transition:transform .35s var(--spring)}
+.wl-strip:hover{transform:translateY(-4px)}
+.wl-strip .t{font-family:Outfit,sans-serif;font-weight:800;font-size:22px;margin-top:8px}
+.chip{font-size:10px;font-weight:800;letter-spacing:.06em;padding:5px 9px;border-radius:99px}
+.wl-front{position:relative;border-radius:28px;background:#D6FF35;box-shadow:0 30px 60px rgba(0,0,0,.45);overflow:hidden}
+.wl-front .top{padding:18px 20px 16px;display:flex;flex-direction:column;gap:10px}
+.wl-front .perf{position:relative;border-top:2px dashed rgba(8,9,26,.3)}
+.wl-front .perf::before,.wl-front .perf::after{content:"";position:absolute;top:-11px;width:22px;height:22px;border-radius:50%;background:#08091A}
+.wl-front .perf::before{left:-11px}.wl-front .perf::after{right:-11px}
+.wl-front .bot{padding:14px 20px 18px;display:flex;flex-direction:column;gap:12px}
+.wl-front .cta{height:52px;border-radius:99px;background:#08091A;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:800;font-size:14px;text-decoration:none}
+.wl-front .cta .ic{color:#D6FF35}
+.wl-front.swap{animation:swap .45s var(--spring)}
+@keyframes swap{from{transform:translateY(24px) scale(.97);opacity:.4}}
+.wl-note{color:#8C93B5;font-size:13px;margin-top:14px;text-align:center}
+footer{padding:40px 0 60px;background:#08091A;color:#8C93B5;font-size:13px;text-align:center}
+footer img{height:28px;margin:0 auto 12px}
+
+/* ───── sonido ───── */
+.snd{position:fixed;right:18px;bottom:18px;z-index:80;display:flex;align-items:center;gap:10px;height:52px;padding:0 18px 0 14px;border-radius:99px;border:0;background:rgba(5,7,34,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1.5px rgba(127,227,255,.4);color:#fff;font-weight:700;font-size:13px;opacity:0;translate:0 20px;transition:opacity .4s,translate .5s var(--spring),box-shadow .2s}
+.snd.show{opacity:1;translate:0 0}
+.snd.ask{box-shadow:inset 0 0 0 2px var(--sun),0 0 0 0 rgba(255,210,31,.6);animation:askp 1.6s ease-out infinite}
+@keyframes askp{70%{box-shadow:inset 0 0 0 2px var(--sun),0 0 0 14px rgba(255,210,31,0)}}
+.snd .eq{display:flex;gap:3px;align-items:flex-end;height:16px}
+.snd .eq i{width:3px;height:4px;border-radius:2px;background:var(--cyan)}
+.snd.on .eq i{animation:eq .8s ease-in-out infinite alternate}
+.snd.on .eq i:nth-child(2){animation-delay:-.3s}.snd.on .eq i:nth-child(3){animation-delay:-.55s}.snd.on .eq i:nth-child(4){animation-delay:-.15s}
+@keyframes eq{from{height:4px}to{height:16px}}
+
+@media (max-width:960px){
+ .syn-grid,.mgrid,.tgrid{grid-template-columns:1fr;gap:40px}
+ .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .awards{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .quotes{grid-template-columns:1fr}.qt.wide{grid-column:auto}
+ .car-box{width:190%;margin-left:-45%}
+ .tc .row{grid-template-columns:1.3fr .9fr 1.5fr}.tc .row .cell:nth-child(n+4){display:none}
+}
+@media (prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+ .logo,.tag,.cue{opacity:1!important;transform:none!important}
+ .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <filter id="chanR"><feColorMatrix type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/></filter>
+ <filter id="chanB"><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0"/></filter>
+</svg>
+
+<header class="hero" id="top">
+ <div class="sky"></div><div class="sky2"></div>
+ <canvas id="bolts" aria-hidden="true"></canvas>
+ <div class="flash" id="skyflash"></div>
+ <div class="shade"></div>
+ <div class="stage">
+  <h1 class="logo-wrap" style="margin:0">
+   <img class="logo ghost g2" src="logo.webp" alt="" aria-hidden="true">
+   <img class="logo ghost g1" src="logo.webp" alt="" aria-hidden="true">
+   <img class="logo main" id="logo" src="logo.webp" alt="Back to the Future: El Musical" width="1726" height="911">
+   <span class="ring"></span>
+  </h1>
+  <div class="tag">
+   <p class="premiere" style="margin:0"><span>Estrena temporada <b>2027</b></span><span class="sep"></span><span>Teatro Telcel</span></p>
+   <span class="olivier"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M232,64H208V48a8,8,0,0,0-8-8H56a8,8,0,0,0-8,8V64H24A16,16,0,0,0,8,80V96a40,40,0,0,0,40,40h3.65A80.13,80.13,0,0,0,120,191.61V216H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16H136V191.58c31.94-3.23,58.44-25.64,68.08-55.58H208a40,40,0,0,0,40-40V80A16,16,0,0,0,232,64ZM48,120A24,24,0,0,1,24,96V80H48v32q0,4,.39,8ZM232,96a24,24,0,0,1-24,24h-.5a81.81,81.81,0,0,0,.5-8.9V80h24Z"/></svg> Ganador del Premio Olivier a Mejor Nuevo Musical</span>
+   <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:6px"><a class="btn b-hot" href="#boletos"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M232,104a8,8,0,0,0,8-8V64a16,16,0,0,0-16-16H32A16,16,0,0,0,16,64V96a8,8,0,0,0,8,8,24,24,0,0,1,0,48,8,8,0,0,0-8,8v32a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V160a8,8,0,0,0-8-8,24,24,0,0,1,0-48ZM32,167.2a40,40,0,0,0,0-78.4V64H88V192H32Z"/></svg> Quiero mis boletos</a><a class="btn b-ghost" href="#maquina"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M213.85,125.46l-112,120a8,8,0,0,1-13.69-7l14.66-73.33L45.19,143.49a8,8,0,0,1-3-13l112-120a8,8,0,0,1,13.69,7L153.18,90.9l57.63,21.61a8,8,0,0,1,3,12.95Z"/></svg> Viajar a 2027</a></div>
+  </div>
+ </div>
+ <a class="cue" href="#delorean" aria-label="Bajar">HILL VALLEY<svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M205.66,149.66l-72,72a8,8,0,0,1-11.32,0l-72-72A8,8,0,0,1,56,136h64V40a8,8,0,0,1,16,0v96h64a8,8,0,0,1,5.66,13.66Z"/></svg></a>
+</header>
+
+<section class="car" id="delorean" aria-label="El DeLorean">
+ <div class="car-box" id="carbox">
+  <img class="car-img" id="carimg" src="delorean.webp" alt="El DeLorean frente a la torre del reloj de Hill Valley, rodeado de rayos" loading="lazy" width="1920" height="1080">
+  <span class="glow vent l"></span><span class="glow vent r"></span>
+  <span class="glow tail l"></span><span class="glow tail r"></span>
+  <span class="glow fire l"></span><span class="glow fire r"></span>
+  <canvas id="arcs" aria-hidden="true"></canvas>
+ </div>
+ <div class="car-copy"><p>A 88 millas por hora<br><span class="grad">vas a ver algo serio.</span></p></div>
+</section>
+
+<section class="syn" id="sinopsis">
+ <div class="wrap syn-grid">
+  <div class="rv"><span class="kick">La historia</span><h2 style="margin-top:14px">Hill Valley,<span class="y">1985 → 1955</span></h2>
+   <div class="songs"><span><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z"/></svg>The Power of Love</span><span><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z"/></svg>Johnny B. Goode</span><span><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z"/></svg>Earth Angel</span><span><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z"/></svg>It's Only a Matter of Time</span><span><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z"/></svg>Good Morning Hill Valley</span><span><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z"/></svg>21st Century</span></div>
+  </div>
+  <div class="rv">
+   <p class="lead">Marty McFly tiene diecisiete años, una banda que nadie toma en serio y un mejor amigo poco convencional: el excéntrico científico Doc Brown.</p>
+   <p>Una noche, Doc le muestra su mayor invento: una máquina del tiempo construida dentro de un DeLorean. Un accidente lanza a Marty treinta años al pasado, a 1955, donde sin querer se interpone en el día en que sus padres se iban a conocer.</p>
+   <p>Ahora tiene que lograr que George y Lorraine se enamoren, conseguir 1.21 gigawatts de energía y regresar a 1985 antes de que su propio futuro se borre para siempre. Una aventura de rock and roll, amistad y segundas oportunidades, con la música original de la película y canciones nuevas escritas para el escenario.</p>
+   <div class="creds">
+    <span><small>Música y letras</small><b>Alan Silvestri y Glen Ballard</b></span>
+    <span><small>Libreto</small><b>Bob Gale</b></span>
+    <span><small>Basado en la película de</small><b>Robert Zemeckis y Bob Gale</b></span>
+    <span><small>Dirección original</small><b>John Rando</b></span>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="machine" id="maquina">
+ <div class="wrap">
+  <div class="rv" style="max-width:760px"><span class="kick">La máquina del tiempo</span><h2 style="margin-top:14px">Destino: <span class="grad">2027</span></h2>
+   <p style="color:#B9C3EE;margin:18px 0 0;font-size:18px">El condensador de flujo está listo. Programa el destino, mantén presionado el acelerador y llega a 88 millas por hora.</p></div>
+  <div class="mgrid">
+   <div class="flux rv" id="flux" aria-label="Condensador de flujo">
+    <span class="warn">SHIELD EYES FROM LIGHT</span>
+    <div class="win">
+     <svg viewBox="0 0 300 400" aria-hidden="true">
+      <defs>
+       <linearGradient id="fluxGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".5" stop-color="#9FEBFF"/><stop offset="1" stop-color="#FFE27A"/></linearGradient>
+       <filter id="glowF" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <path class="tube" d="M58 70 L150 220"/><path class="tube" d="M242 70 L150 220"/><path class="tube" d="M150 340 L150 220"/>
+      <path class="core" d="M58 70 L150 220"/><path class="core" d="M242 70 L150 220"/><path class="core" d="M150 340 L150 220"/>
+      <circle cx="58" cy="70" r="16" fill="#3B4560"/><circle cx="242" cy="70" r="16" fill="#3B4560"/><circle cx="150" cy="340" r="16" fill="#3B4560"/>
+      <circle class="hub" id="hub" cx="150" cy="220" r="14"/>
+     </svg>
+    </div>
+    <span class="label">FLUX CAPACITOR</span>
+   </div>
+   <div class="circuits rv">
+    <div class="tc r" id="tcD"><div class="row"><span class="cell"><span class="cap">MONTH</span><span class="led" data-ghost="~~~">~~~</span></span><span class="cell"><span class="cap">DAY</span><span class="led" data-ghost="~~">~~</span></span><span class="cell"><span class="cap">YEAR</span><span class="led" data-ghost="~~~~">~~~~</span></span><span class="cell"><span class="cap">HOUR</span><span class="led" data-ghost="~~">~~</span></span><span class="cell"><span class="cap">MIN</span><span class="led" data-ghost="~~">~~</span></span></div><div class="name">DESTINATION TIME</div></div><div class="tc g" id="tcP"><div class="row"><span class="cell"><span class="cap">MONTH</span><span class="led" data-ghost="~~~">~~~</span></span><span class="cell"><span class="cap">DAY</span><span class="led" data-ghost="~~">~~</span></span><span class="cell"><span class="cap">YEAR</span><span class="led" data-ghost="~~~~">~~~~</span></span><span class="cell"><span class="cap">HOUR</span><span class="led" data-ghost="~~">~~</span></span><span class="cell"><span class="cap">MIN</span><span class="led" data-ghost="~~">~~</span></span></div><div class="name">PRESENT TIME</div></div><div class="tc a" id="tcL"><div class="row"><span class="cell"><span class="cap">MONTH</span><span class="led" data-ghost="~~~">~~~</span></span><span class="cell"><span class="cap">DAY</span><span class="led" data-ghost="~~">~~</span></span><span class="cell"><span class="cap">YEAR</span><span class="led" data-ghost="~~~~">~~~~</span></span><span class="cell"><span class="cap">HOUR</span><span class="led" data-ghost="~~">~~</span></span><span class="cell"><span class="cap">MIN</span><span class="led" data-ghost="~~">~~</span></span></div><div class="name">LAST TIME DEPARTED</div></div>
+    <div class="drive">
+     <div class="speedo" aria-live="off"><b id="mph">0</b><span>MPH</span></div>
+     <button class="btn b-hot hold" id="gas"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M213.85,125.46l-112,120a8,8,0,0,1-13.69-7l14.66-73.33L45.19,143.49a8,8,0,0,1-3-13l112-120a8,8,0,0,1,13.69,7L153.18,90.9l57.63,21.61a8,8,0,0,1,3,12.95Z"/></svg> Mantén presionado para acelerar</button>
+    </div>
+    <p class="msg" id="msg" role="status" aria-live="polite"></p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="cast" id="personajes">
+ <div class="wrap">
+  <div class="head rv"><div><span class="kick">Los personajes</span><h2 style="margin-top:14px">Señales<br><span class="grad">del futuro</span></h2></div><p>El elenco mexicano todavía viaja por el continuo espacio-tiempo. Sus rostros se revelan en 2027; por ahora, solo nos llegan interferencias.</p></div>
+  <div class="cards"></div>
+ </div>
+</section>
+
+<section class="praise" id="criticas">
+ <div class="wrap">
+  <div class="rv"><span class="kick">Premios y crítica</span><h2 style="margin-top:14px">El mundo ya<br><span class="grad">viajó con ella</span></h2></div>
+  <div class="awards">
+   <div class="aw big rv"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M232,64H208V48a8,8,0,0,0-8-8H56a8,8,0,0,0-8,8V64H24A16,16,0,0,0,8,80V96a40,40,0,0,0,40,40h3.65A80.13,80.13,0,0,0,120,191.61V216H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16H136V191.58c31.94-3.23,58.44-25.64,68.08-55.58H208a40,40,0,0,0,40-40V80A16,16,0,0,0,232,64ZM48,120A24,24,0,0,1,24,96V80H48v32q0,4,.39,8ZM232,96a24,24,0,0,1-24,24h-.5a81.81,81.81,0,0,0,.5-8.9V80h24Z"/></svg><div><b>Premio Olivier</b><span>Mejor Nuevo Musical, 2022 · Londres</span></div></div>
+   <div class="aw rv"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"/></svg><div><b>4 premios WhatsOnStage</b><span>Incluido Mejor Nuevo Musical</span></div></div>
+   <div class="aw rv"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"/></svg><div><b>BroadwayWorld UK</b><span>Mejor Nuevo Musical</span></div></div>
+   <div class="aw rv"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M232,64H208V48a8,8,0,0,0-8-8H56a8,8,0,0,0-8,8V64H24A16,16,0,0,0,8,80V96a40,40,0,0,0,40,40h3.65A80.13,80.13,0,0,0,120,191.61V216H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16H136V191.58c31.94-3.23,58.44-25.64,68.08-55.58H208a40,40,0,0,0,40-40V80A16,16,0,0,0,232,64ZM48,120A24,24,0,0,1,24,96V80H48v32q0,4,.39,8ZM232,96a24,24,0,0,1-24,24h-.5a81.81,81.81,0,0,0,.5-8.9V80h24Z"/></svg><div><b>7 nominaciones</b><span>a los Premios Olivier 2022</span></div></div>
+  </div>
+  <div class="quotes"><figure class="qt rv wide" style="margin:0"><svg class="ic q" viewBox="0 0 256 256" aria-hidden="true"><path d="M116,72v88a48.05,48.05,0,0,1-48,48,8,8,0,0,1,0-16,32,32,0,0,0,32-32v-8H40a16,16,0,0,1-16-16V72A16,16,0,0,1,40,56h60A16,16,0,0,1,116,72ZM216,56H156a16,16,0,0,0-16,16v64a16,16,0,0,0,16,16h60v8a32,32,0,0,1-32,32,8,8,0,0,0,0,16,48.05,48.05,0,0,0,48-48V72A16,16,0,0,0,216,56Z"/></svg><blockquote>“Regreso al futuro acaba de convertirse en el nuevo musical de éxito imprescindible.”</blockquote><cite><span><b>London Theatre Direct</b> · Reseña en español · Manchester</span></cite></figure><figure class="qt rv" style="margin:0"><svg class="ic q" viewBox="0 0 256 256" aria-hidden="true"><path d="M116,72v88a48.05,48.05,0,0,1-48,48,8,8,0,0,1,0-16,32,32,0,0,0,32-32v-8H40a16,16,0,0,1-16-16V72A16,16,0,0,1,40,56h60A16,16,0,0,1,116,72ZM216,56H156a16,16,0,0,0-16,16v64a16,16,0,0,0,16,16h60v8a32,32,0,0,1-32,32,8,8,0,0,0,0,16,48.05,48.05,0,0,0,48-48V72A16,16,0,0,0,216,56Z"/></svg><blockquote>“De Doc al DeLorean, esta joya del pasado da en todas las notas correctas.”</blockquote><cite><span><b>Daily Mail</b> · Londres</span><span class=stars aria-label="5 estrellas">★★★★★</span></cite></figure><figure class="qt rv" style="margin:0"><svg class="ic q" viewBox="0 0 256 256" aria-hidden="true"><path d="M116,72v88a48.05,48.05,0,0,1-48,48,8,8,0,0,1,0-16,32,32,0,0,0,32-32v-8H40a16,16,0,0,1-16-16V72A16,16,0,0,1,40,56h60A16,16,0,0,1,116,72ZM216,56H156a16,16,0,0,0-16,16v64a16,16,0,0,0,16,16h60v8a32,32,0,0,1-32,32,8,8,0,0,0,0,16,48.05,48.05,0,0,0,48-48V72A16,16,0,0,0,216,56Z"/></svg><blockquote>“Una maravilla técnica que presiona todos los botones de la nostalgia.”</blockquote><cite><span><b>USA Today</b> · Broadway</span></cite></figure><figure class="qt rv" style="margin:0"><svg class="ic q" viewBox="0 0 256 256" aria-hidden="true"><path d="M116,72v88a48.05,48.05,0,0,1-48,48,8,8,0,0,1,0-16,32,32,0,0,0,32-32v-8H40a16,16,0,0,1-16-16V72A16,16,0,0,1,40,56h60A16,16,0,0,1,116,72ZM216,56H156a16,16,0,0,0-16,16v64a16,16,0,0,0,16,16h60v8a32,32,0,0,1-32,32,8,8,0,0,0,0,16,48.05,48.05,0,0,0,48-48V72A16,16,0,0,0,216,56Z"/></svg><blockquote>“Justifica por completo su salto de la pantalla al escenario.”</blockquote><cite><span><b>Deadline</b> · Broadway</span></cite></figure><figure class="qt rv" style="margin:0"><svg class="ic q" viewBox="0 0 256 256" aria-hidden="true"><path d="M116,72v88a48.05,48.05,0,0,1-48,48,8,8,0,0,1,0-16,32,32,0,0,0,32-32v-8H40a16,16,0,0,1-16-16V72A16,16,0,0,1,40,56h60A16,16,0,0,1,116,72ZM216,56H156a16,16,0,0,0-16,16v64a16,16,0,0,0,16,16h60v8a32,32,0,0,1-32,32,8,8,0,0,0,0,16,48.05,48.05,0,0,0,48-48V72A16,16,0,0,0,216,56Z"/></svg><blockquote>“Si este espectáculo es el futuro del West End, que me apunten.”</blockquote><cite><span><b>The Stage</b> · Londres</span></cite></figure></div>
+  <p class="note">Críticas de las producciones de Londres y Broadway. Las citas de medios en inglés son traducciones al español.</p>
+ </div>
+</section>
+
+<section class="tix" id="boletos">
+ <div class="wrap tgrid">
+  <div class="tinfo rv"><span class="kick">Boletos</span><h2 style="margin-top:14px">Tu boleto<br><span class="grad">a 2027</span></h2>
+   <ul>
+    <li><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32Zm0,48H48V48H72v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24Z"/></svg> Temporada 2027 · fechas por anunciar</li>
+    <li><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z"/></svg> Teatro Telcel, Ciudad de México</li>
+    <li><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M232,104a8,8,0,0,0,8-8V64a16,16,0,0,0-16-16H32A16,16,0,0,0,16,64V96a8,8,0,0,0,8,8,24,24,0,0,1,0,48,8,8,0,0,0-8,8v32a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V160a8,8,0,0,0-8-8,24,24,0,0,1,0-48ZM32,167.2a40,40,0,0,0,0-78.4V64H88V192H32Z"/></svg> Preventa para miembros de TADAA!, con tu boleto en la Wallet</li>
+   </ul>
+   <a class="btn b-hot" href="../../#membresia"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M213.85,125.46l-112,120a8,8,0,0,1-13.69-7l14.66-73.33L45.19,143.49a8,8,0,0,1-3-13l112-120a8,8,0,0,1,13.69,7L153.18,90.9l57.63,21.61a8,8,0,0,1,3,12.95Z"/></svg> Quiero la preventa</a>
+  </div>
+  <div class="wallet rv" aria-label="Así se verá tu boleto en la Wallet de TADAA!">
+   <div class="wl-stack" id="wlstack"></div>
+   <div class="wl-front" id="wlfront"></div>
+   <p class="wl-note">Así se verá tu boleto en la Wallet de TADAA!. Toca las pestañas para cambiar de zona.</p>
+  </div>
+ </div>
+</section>
+
+<footer><img src="../../img/tv/logo-tadaa.png" alt="TADAA!">Back to the Future: El Musical · Temporada 2027 · Teatro Telcel. Premio Olivier 2022 a Mejor Nuevo Musical.</footer>
+
+<div id="whiteout"></div><div class="trail" id="trail1" style="top:62%"></div><div class="trail" id="trail2" style="top:64%"></div>
+<button class="snd" id="snd" aria-pressed="false"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="sndIc"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M160,32.25V223.69a8.29,8.29,0,0,1-3.91,7.18,8,8,0,0,1-9-.56l-65.57-51A4,4,0,0,1,80,176.16V79.84a4,4,0,0,1,1.55-3.15l65.57-51a8,8,0,0,1,10,.16A8.27,8.27,0,0,1,160,32.25ZM60,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H60a4,4,0,0,0,4-4V84A4,4,0,0,0,60,80Zm126.77,20.84a8,8,0,0,0-.72,11.3,24,24,0,0,1,0,31.72,8,8,0,1,0,12,10.58,40,40,0,0,0,0-52.88A8,8,0,0,0,186.74,100.84Zm40.89-26.17a8,8,0,1,0-11.92,10.66,64,64,0,0,1,0,85.34,8,8,0,1,0,11.92,10.66,80,80,0,0,0,0-106.66Z"/></svg></span><span id="sndT">Obertura</span></button>
+<audio id="ov" src="overtura.mp3" preload="auto" loop></audio>
+
+<script>
+(()=>{'use strict';
+const ICONS={"speaker-high": "M160,32.25V223.69a8.29,8.29,0,0,1-3.91,7.18,8,8,0,0,1-9-.56l-65.57-51A4,4,0,0,1,80,176.16V79.84a4,4,0,0,1,1.55-3.15l65.57-51a8,8,0,0,1,10,.16A8.27,8.27,0,0,1,160,32.25ZM60,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H60a4,4,0,0,0,4-4V84A4,4,0,0,0,60,80Zm126.77,20.84a8,8,0,0,0-.72,11.3,24,24,0,0,1,0,31.72,8,8,0,1,0,12,10.58,40,40,0,0,0,0-52.88A8,8,0,0,0,186.74,100.84Zm40.89-26.17a8,8,0,1,0-11.92,10.66,64,64,0,0,1,0,85.34,8,8,0,1,0,11.92,10.66,80,80,0,0,0,0-106.66Z", "speaker-slash": "M213.92,210.62a8,8,0,1,1-11.84,10.76L160,175.09v48.6a8.29,8.29,0,0,1-3.91,7.18,8,8,0,0,1-9-.56l-65.55-51A4,4,0,0,1,80,176.18V87.09L42.08,45.38A8,8,0,1,1,53.92,34.62Zm-27.21-55.46a8,8,0,0,0,11.29-.7,40,40,0,0,0,0-52.88,8,8,0,1,0-12,10.57,24,24,0,0,1,0,31.72A8,8,0,0,0,186.71,155.16Zm40.92-80.49a8,8,0,1,0-11.92,10.66,64,64,0,0,1,0,85.34,8,8,0,1,0,11.92,10.66,80,80,0,0,0,0-106.66ZM153,119.87a4,4,0,0,0,7-2.7V32.25a8.27,8.27,0,0,0-2.88-6.4,8,8,0,0,0-10-.16L103.83,59.33a4,4,0,0,0-.5,5.85ZM60,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H60a4,4,0,0,0,4-4V84A4,4,0,0,0,60,80Z", "arrow-right": "M221.66,133.66l-72,72A8,8,0,0,1,136,200V136H40a8,8,0,0,1,0-16h96V56a8,8,0,0,1,13.66-5.66l72,72A8,8,0,0,1,221.66,133.66Z"};
+const ic=n=>`<svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="${ICONS[n]}"/></svg>`;
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const store={get(k){try{return localStorage.getItem(k)}catch{return null}},set(k,v){try{localStorage.setItem(k,v)}catch{}}};
+
+/* ---------- rayos procedurales (cielo y coche) ---------- */
+function bolt(ctx,x1,y1,x2,y2,disp,depth,w){
+ if(depth===0||disp<2){ctx.lineWidth=w;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();return}
+ const mx=(x1+x2)/2+(Math.random()-.5)*disp,my=(y1+y2)/2+(Math.random()-.5)*disp*.4;
+ bolt(ctx,x1,y1,mx,my,disp/2,depth-1,w);bolt(ctx,mx,my,x2,y2,disp/2,depth-1,w);
+ if(Math.random()<.18&&depth>3)bolt(ctx,mx,my,mx+(Math.random()-.5)*disp*1.4,my+disp*(.4+Math.random()*.6),disp/2,depth-2,w*.55);
+}
+function strike(ctx,W,H,from,to,scale){
+ ctx.save();ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
+ ctx.shadowColor='rgba(150,220,255,1)';ctx.shadowBlur=24*scale;ctx.strokeStyle='rgba(190,235,255,.55)';bolt(ctx,from[0],from[1],to[0],to[1],140*scale,8,6*scale);
+ ctx.shadowBlur=8*scale;ctx.strokeStyle='rgba(255,255,255,.95)';bolt(ctx,from[0],from[1],to[0],to[1],140*scale,8,2*scale);ctx.restore();
+}
+function canvasFit(cv){const d=Math.min(2,devicePixelRatio||1),r=cv.getBoundingClientRect();cv.width=r.width*d;cv.height=r.height*d;return d}
+
+function skyLife(){
+ const cv=$('#bolts'),ctx=cv.getContext('2d'),fl=$('#skyflash');let d=canvasFit(cv);addEventListener('resize',()=>d=canvasFit(cv));
+ if(RM)return;
+ const one=()=>{const W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);const x=W*(.1+Math.random()*.8);
+  strike(ctx,W,H,[x,-10],[x+(Math.random()-.5)*W*.35,H*(.45+Math.random()*.4)],d);
+  fl.style.setProperty('--fx',(x/W*100)+'%');
+  fl.animate([{opacity:0},{opacity:.9,offset:.08},{opacity:.15,offset:.2},{opacity:.7,offset:.3},{opacity:0}],{duration:700,easing:'ease-out'});
+  cv.animate([{opacity:1},{opacity:.2,offset:.25},{opacity:1,offset:.35},{opacity:0}],{duration:650,easing:'ease-out'}).onfinish=()=>ctx.clearRect(0,0,cv.width,cv.height);
+  setTimeout(one,2600+Math.random()*4200)};
+ setTimeout(one,1200);
+ return one;
+}
+function carLife(){
+ const box=$('#carbox'),img=$('#carimg'),cv=$('#arcs'),ctx=cv.getContext('2d');let d=canvasFit(cv);addEventListener('resize',()=>d=canvasFit(cv));
+ let vis=false;new IntersectionObserver(es=>{vis=es[0].isIntersecting},{threshold:.05}).observe(box);
+ if(RM)return;
+ // parallax: el coche se acerca al hacer scroll
+ let tk=false;const par=()=>{tk=false;const r=box.getBoundingClientRect(),p=Math.max(-1,Math.min(1,(r.top+r.height/2-innerHeight/2)/innerHeight));img.style.transform=`scale(${1.06-p*.06}) translateY(${p*4}%)`};
+ addEventListener('scroll',()=>{if(!tk&&vis){tk=true;requestAnimationFrame(par)}},{passive:true});par();
+ // arcos eléctricos saliendo del coche
+ const arc=()=>{if(vis){const W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);const n=1+(Math.random()*3|0);
+   for(let i=0;i<n;i++){const left=Math.random()<.5,sx=W*(left?.36:.64),sy=H*(.5+Math.random()*.2),tx=left?W*Math.random()*.25:W*(1-Math.random()*.25),ty=H*(.2+Math.random()*.6);strike(ctx,W,H,[sx,sy],[tx,ty],d*.6)}
+   cv.animate([{opacity:1},{opacity:.3,offset:.3},{opacity:1,offset:.4},{opacity:0}],{duration:420,easing:'ease-out'})}
+  setTimeout(arc,500+Math.random()*1300)};
+ arc();
+}
+
+/* ---------- entrada del logo y audio ---------- */
+const audio=$('#ov'),snd=$('#snd');let wantSound=store.get('bttf-mute')!=='1',playing=false;
+function paintSnd(){snd.classList.toggle('on',playing);snd.setAttribute('aria-pressed',String(playing));$('#sndIc').innerHTML=ic(playing?'speaker-high':'speaker-slash');$('#sndT').textContent=playing?'Silenciar':'Escuchar la obertura';snd.setAttribute('aria-label',playing?'Silenciar la obertura':'Reproducir la obertura')}
+function fadeTo(v,ms=900){const a=audio.volume,t0=performance.now();const s=n=>{const k=Math.min(1,(n-t0)/ms);audio.volume=Math.max(0,Math.min(1,a+(v-a)*k));if(k<1)requestAnimationFrame(s);else if(v===0){audio.pause()}};requestAnimationFrame(s)}
+async function startAudio(){try{audio.volume=0;await audio.play();playing=true;snd.classList.remove('ask');fadeTo(.55,1400)}catch{playing=false;snd.classList.add('ask')}paintSnd()}
+snd.addEventListener('click',()=>{if(playing){playing=false;wantSound=false;store.set('bttf-mute','1');fadeTo(0,400);paintSnd()}else{wantSound=true;store.set('bttf-mute','0');startAudio()}});
+// si el navegador bloquea el autoplay, la primera interacción enciende la obertura
+const unlock=e=>{if(e.target.closest&&e.target.closest('#snd'))return;if(wantSound&&!playing&&document.body.classList.contains('landed'))startAudio();removeEventListener('pointerdown',unlock);removeEventListener('keydown',unlock)};
+addEventListener('pointerdown',unlock);addEventListener('keydown',unlock);
+
+function intro(strikeNow){
+ const hero=$('.hero');const go=()=>{hero.classList.add('go');
+  const T=RM?0:2650;
+  setTimeout(()=>{hero.classList.add('landed');document.body.classList.add('landed');if(strikeNow&&!RM)strikeNow();snd.classList.add('show');if(wantSound)startAudio();else paintSnd()},T)};
+ const im=$('#logo');if(im.complete)go();else{im.onload=go;im.onerror=go}
+}
+
+/* ---------- circuitos del tiempo + condensador ---------- */
+const MES=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+function setTC(id,[m,d,y,h,mi]){const row=$('#'+id);const cells=row.querySelectorAll('.led');[m,d,y,h,mi].forEach((v,i)=>{if(cells[i].textContent!==v){cells[i].textContent=v;if(!RM){cells[i].classList.remove('flip');void cells[i].offsetWidth;cells[i].classList.add('flip')}}})}
+const nowTC=()=>{const n=new Date();return [MES[n.getMonth()],String(n.getDate()).padStart(2,'0'),String(n.getFullYear()),String(n.getHours()).padStart(2,'0'),String(n.getMinutes()).padStart(2,'0')]};
+let arrived=false;
+function machine(){
+ setTC('tcD',['---','--','2027','--','--']);setTC('tcP',nowTC());setTC('tcL',['OCT','26','1985','01','21']);
+ setInterval(()=>{if(!arrived)setTC('tcP',nowTC())},15000);
+ const gas=$('#gas'),mph=$('#mph'),msg=$('#msg'),flux=$('#flux');let v=0,hold=false,raf=0,done=false;
+ const loop=()=>{v=hold?Math.min(88,v+(v<55?1.15:.6)):Math.max(0,v-2.2);mph.textContent=Math.round(v);
+  flux.style.setProperty('--fs',(1.4-v/88*1.25).toFixed(2)+'s');$('#hub').setAttribute('r',String(14+v/88*14));
+  gas.classList.toggle('charging',hold&&v>40);
+  if(v>=88&&!done){done=true;travel()}if(v<30)done=false;raf=(hold||v>0)?requestAnimationFrame(loop):0};
+ const start=e=>{e.preventDefault();hold=true;msg.textContent='Acelerando… el condensador de flujo se está cargando';if(!raf)raf=requestAnimationFrame(loop)};
+ const stop=()=>{if(!hold)return;hold=false;if(v<88)msg.textContent=v>8?`Llegaste a ${Math.round(v)} mph. Necesitas 88.`:''};
+ gas.addEventListener('pointerdown',start);addEventListener('pointerup',stop);gas.addEventListener('pointercancel',stop);gas.addEventListener('lostpointercapture',stop);
+ gas.addEventListener('keydown',e=>{if((e.key===' '||e.key==='Enter')&&!e.repeat)start(e)});gas.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter')stop()});
+ function travel(){hold=false;arrived=true;setTC('tcL',nowTC());setTC('tcP',['---','--','2027','20','30']);
+  msg.textContent='¡88 mph! Bienvenido a 2027: te esperamos en el Teatro Telcel.';
+  if(!RM){$('#whiteout').animate([{opacity:0},{opacity:1,offset:.12},{opacity:0}],{duration:1100,easing:'ease-out'});
+   document.body.classList.remove('quake');void document.body.offsetWidth;document.body.classList.add('quake');
+   ['#trail1','#trail2'].forEach((s,i)=>$(s).animate([{opacity:0,transform:'scaleX(.2)'},{opacity:1,offset:.2},{opacity:0,transform:'scaleX(1)'}],{duration:1400,delay:i*80,easing:'ease-out'}))}}
+}
+
+/* ---------- personajes ---------- */
+const CAST=[['Marty McFly','Diecisiete años, una guitarra y un problema: borrarse a sí mismo de la historia.','50% 40%'],['Doc Brown','El inventor más brillante y despeinado de Hill Valley.','62% 30%'],['Lorraine Baines','La mamá de Marty… en 1955, cuando todavía no lo era.','40% 35%'],['George McFly','Tímido, escritor en secreto, a un baile de cambiar su vida.','70% 45%'],['Biff Tannen','El bully de Hill Valley, en cualquier época.','30% 55%'],['Jennifer Parker','La novia de Marty, que lo espera en 1985.','55% 60%'],['Goldie Wilson','Hoy limpia pisos; mañana será alcalde.','45% 25%'],['Señal desconocida','Un personaje más está por aparecer en el radar.','65% 70%']];
+const SIL='<svg class="sil" viewBox="0 0 200 220" aria-hidden="true"><path d="M100 18c26 0 44 20 44 48 0 22-10 38-24 46v10c34 8 62 30 70 98H10c8-68 36-90 70-98v-10c-14-8-24-24-24-46 0-28 18-48 44-48z"/></svg>';
+function castCards(){$('.cards').innerHTML=CAST.map(([n,r,pos],i)=>`<article class="pc rv" tabindex="0" style="transition-delay:${i%4*50}ms">
+  <div class="ph" style="--src:url(${i%2?'delorean.webp':'cielo.webp'});--pos:${pos}"><span class="layer"></span><span class="layer r"></span><span class="layer b"></span>${SIL}<span class="q">?</span><span class="scan"></span><span class="noise"></span><span class="sig"><i></i>SEÑAL 2027</span></div>
+  <div class="bd"><h3>${n}</h3><p class="role">${r}</p><div class="rv2">SE REVELA EN 2027</div></div></article>`).join('')}
+
+/* ---------- boletos (diseño de la Wallet de TADAA!) ---------- */
+const TIX=[{z:'Preferente',seat:'Por asignar',folio:'TD-1985',strip:'#1238FF',ink:'#FFFFFF'},{z:'Platea',seat:'Por asignar',folio:'TD-1955',strip:'#161833',ink:'#FFFFFF'},{z:'Balcón',seat:'Por asignar',folio:'TD-2027',strip:'#2A2D52',ink:'#FFFFFF'}];
+let cur=1;
+function wallet(first){const others=TIX.map((t,i)=>({...t,i})).filter(t=>t.i!==cur),f=TIX[cur];
+ $('#wlstack').innerHTML=others.map(t=>`<button class="wl-strip" data-i="${t.i}" style="background:${t.strip};color:${t.ink}" aria-label="Ver boleto ${t.z}"><span style="display:flex;justify-content:space-between;align-items:center"><span class="chip" style="${t.strip==='#D6FF35'?'background:#08091A;color:#D6FF35':'background:#D6FF35;color:#08091A'}">BOLETO FINAL · TADAA! TICKETS</span><span style="font-size:11px;opacity:.8">${t.folio}</span></span><span class="t" style="display:block">Back to the Future · ${t.z}</span></button>`).join('');
+ const fr=$('#wlfront');fr.innerHTML=`<div class="top"><div style="display:flex;justify-content:space-between;align-items:center"><span class="chip" style="background:#08091A;color:#D6FF35">BOLETO FINAL · TADAA! TICKETS</span><span style="font-size:11px">${f.folio}</span></div>
+  <div style="display:flex;gap:14px;align-items:center"><img src="delorean.webp" alt="" style="width:84px;height:84px;border-radius:18px;object-fit:cover;object-position:50% 55%"><div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:Outfit,sans-serif;font-weight:800;font-size:24px;line-height:1">Back to the Future</span><span style="font-size:12px">Temporada 2027 · fecha por anunciar</span><span style="font-size:12px;font-weight:700">${f.z} · El Musical</span></div></div></div>
+  <div class="perf"></div>
+  <div class="bot"><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px"><span style="display:flex;flex-direction:column"><span style="font-size:10px;opacity:.7">Recinto</span><span style="font-size:12px;font-weight:800">Teatro Telcel</span></span><span style="display:flex;flex-direction:column"><span style="font-size:10px;opacity:.7">Estado</span><span style="font-size:12px;font-weight:800">Preventa próxima</span></span><span style="display:flex;flex-direction:column"><span style="font-size:10px;opacity:.7">Asiento</span><span style="font-size:12px;font-weight:800">${f.seat}</span></span></div>
+  <a class="cta" href="../../#membresia">Quiero la preventa ${ic('arrow-right')}</a></div>`;
+ if(!first&&!RM){fr.classList.remove('swap');void fr.offsetWidth;fr.classList.add('swap')}
+ $$('.wl-strip').forEach(b=>b.addEventListener('click',()=>{cur=+b.dataset.i;wallet(false)}));
+}
+
+/* ---------- aparición al hacer scroll ---------- */
+function reveal(){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{rootMargin:'0px 0px -10% 0px'});$$('.rv').forEach(el=>io.observe(el))}
+
+castCards();wallet(true);reveal();machine();const s1=skyLife();carLife();intro(s1);
+// en una vista incrustada (presentación) no se inicia el audio solo
+if(new URLSearchParams(location.search).get('embed')==='1'){wantSound=false}
+})();
+</script>
+</body>
+</html>

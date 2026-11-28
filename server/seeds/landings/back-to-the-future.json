@@ -1,72 +1,347 @@
 {
   "title": "Back to the Future — The Musical",
   "theme": {
-    "mode": "dark", "particles": "stars", "signature": "timemachine",
-    "colors": {"bg":"#04091D","surface":"#0A1A3F","ink":"#EEF4FF","muted":"#A9BDE4","accent":"#FFB02E","accent2":"#FF5A2E","gold":"#FFD23F","dark":"#020617","onDark":"#EEF4FF","line":"rgba(140,180,255,.22)","glow":"#6EE7FF"},
-    "fonts": {"display":"Anton","body":"Archivo","mono":"Share Tech Mono","url":"https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;700;800&family=Share+Tech+Mono&display=swap"},
-    "displayCase": "upper", "skew": -6
+    "mode": "dark",
+    "particles": "stars",
+    "signature": "timemachine",
+    "colors": {
+      "bg": "#04091D",
+      "surface": "#0A1A3F",
+      "ink": "#EEF4FF",
+      "muted": "#A9BDE4",
+      "accent": "#FFB02E",
+      "accent2": "#FF5A2E",
+      "gold": "#FFD23F",
+      "dark": "#020617",
+      "onDark": "#EEF4FF",
+      "line": "rgba(140,180,255,.22)",
+      "glow": "#6EE7FF"
+    },
+    "fonts": {
+      "display": "Anton",
+      "body": "Archivo",
+      "mono": "Share Tech Mono",
+      "url": "https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;700;800&family=Share+Tech+Mono&display=swap"
+    },
+    "displayCase": "upper",
+    "skew": -6
   },
-  "card": {"img":"landings/back-to-the-future/poster.webp","when":"Temporada 2027","venue":"Por confirmar"},
-  "nav": ["maquina","historia","personajes","canciones","boletos"],
+  "card": {
+    "img": "minisitios/back-to-the-future/delorean.webp",
+    "when": "Temporada 2027",
+    "venue": "Teatro Telcel"
+  },
+  "nav": [
+    "maquina",
+    "historia",
+    "personajes",
+    "canciones",
+    "boletos"
+  ],
   "hero": {
-    "layout": "poster", "kicker": "El musical · West End ★ Broadway",
+    "layout": "poster",
+    "kicker": "El musical · West End ★ Broadway",
     "art": "landings/back-to-the-future/poster.webp",
-    "title": "Back to the Future", "titleB": "The Musical",
+    "title": "Back to the Future",
+    "titleB": "The Musical",
     "sub": "La película que definió a una generación acelera hasta el escenario: un DeLorean en vivo, 1.21 gigawatts de energía y las canciones que ya conoces, como nunca las habías visto.",
-    "chips": [{"icon":"lightning","t":"88 MPH"},{"icon":"lightning","t":"1.21 gigawatts"},{"icon":"clock","t":"1955 ↔ 1985"}],
-    "countdown": "2027-05-21T20:00:00-06:00", "countdownLabel": "Para el despegue",
-    "ctas": [{"t":"Quiero boletos","href":"#boletos","primary":true},{"t":"Probar la máquina del tiempo","href":"#maquina"}]
+    "chips": [
+      {
+        "icon": "lightning",
+        "t": "88 MPH"
+      },
+      {
+        "icon": "lightning",
+        "t": "1.21 gigawatts"
+      },
+      {
+        "icon": "clock",
+        "t": "1955 ↔ 1985"
+      }
+    ],
+    "countdown": "2027-05-21T20:00:00-06:00",
+    "countdownLabel": "Para el despegue",
+    "ctas": [
+      {
+        "t": "Quiero boletos",
+        "href": "#boletos",
+        "primary": true
+      },
+      {
+        "t": "Probar la máquina del tiempo",
+        "href": "#maquina"
+      }
+    ],
+    "logo": "minisitios/back-to-the-future/logo-sm.webp"
   },
-  "marquee": ["Great Scott!","1.21 gigawatts","88 MPH","Hill Valley","Flux capacitor","1955 ↔ 1985"],
-  "stats": [{"n":2022,"s":"","l":"Premio Olivier · Mejor musical nuevo"},{"n":88,"s":" mph","l":"Para viajar en el tiempo"},{"n":30,"s":" años","l":"Atrás en el tiempo"},{"n":1,"s":" DeLorean","l":"En vivo sobre el escenario"}],
+  "marquee": [
+    "Great Scott!",
+    "1.21 gigawatts",
+    "88 MPH",
+    "Hill Valley",
+    "Flux capacitor",
+    "1955 ↔ 1985"
+  ],
+  "stats": [
+    {
+      "n": 2022,
+      "s": "",
+      "l": "Premio Olivier · Mejor musical nuevo"
+    },
+    {
+      "n": 88,
+      "s": " mph",
+      "l": "Para viajar en el tiempo"
+    },
+    {
+      "n": 30,
+      "s": " años",
+      "l": "Atrás en el tiempo"
+    },
+    {
+      "n": 1,
+      "s": " DeLorean",
+      "l": "En vivo sobre el escenario"
+    }
+  ],
   "signature": {
-    "id": "maquina", "kicker": "Interactivo", "title": "La máquina del tiempo",
+    "id": "maquina",
+    "kicker": "Interactivo",
+    "title": "La máquina del tiempo",
     "text": "Programa los circuitos, elige tu año destino y mantén presionado el acelerador. Si el velocímetro llega a 88 millas por hora… vas a ver algo serio.",
     "img": "landings/back-to-the-future/delorean.webp",
-    "destinations": [{"y":"1885","date":"SEP 02 1885","h":"08:00"},{"y":"1955","date":"NOV 05 1955","h":"01:21"},{"y":"1985","date":"OCT 26 1985","h":"01:21"},{"y":"2015","date":"OCT 21 2015","h":"16:29"}]
+    "destinations": [
+      {
+        "y": "1885",
+        "date": "SEP 02 1885",
+        "h": "08:00"
+      },
+      {
+        "y": "1955",
+        "date": "NOV 05 1955",
+        "h": "01:21"
+      },
+      {
+        "y": "1985",
+        "date": "OCT 26 1985",
+        "h": "01:21"
+      },
+      {
+        "y": "2015",
+        "date": "OCT 21 2015",
+        "h": "16:29"
+      }
+    ]
   },
   "story": {
-    "kicker": "La historia", "title": "Hill Valley, dos épocas", "img": "landings/back-to-the-future/torre.webp", "tabsAsEras": true,
+    "kicker": "La historia",
+    "title": "Hill Valley, dos épocas",
+    "img": "landings/back-to-the-future/torre.webp",
+    "tabsAsEras": true,
     "chapters": [
-      {"tab":"1985","title":"El presente en juego","text":"Doc Brown cita a Marty en el estacionamiento de Twin Pines Mall para mostrarle su invento: una máquina del tiempo construida con un DeLorean. Cuando todo sale mal, Marty huye en el auto y acelera hacia 30 años en el pasado."},
-      {"tab":"1955","title":"El pasado por arreglar","text":"Marty aterriza en un Hill Valley de coches cromados y rocolas. Su futura mamá se enamora de él y no de su papá. Si no logra que se conozcan en el baile, dejará de existir. Su única salida: el rayo que caerá sobre la torre del reloj a las 10:04 pm."}
+      {
+        "tab": "1985",
+        "title": "El presente en juego",
+        "text": "Doc Brown cita a Marty en el estacionamiento de Twin Pines Mall para mostrarle su invento: una máquina del tiempo construida con un DeLorean. Cuando todo sale mal, Marty huye en el auto y acelera hacia 30 años en el pasado."
+      },
+      {
+        "tab": "1955",
+        "title": "El pasado por arreglar",
+        "text": "Marty aterriza en un Hill Valley de coches cromados y rocolas. Su futura mamá se enamora de él y no de su papá. Si no logra que se conozcan en el baile, dejará de existir. Su única salida: el rayo que caerá sobre la torre del reloj a las 10:04 pm."
+      }
     ],
-    "facts": [{"n":"30","l":"Años atrás en el tiempo"},{"n":"10:04","l":"La hora exacta del rayo"},{"n":"1.21","l":"Gigawatts para regresar"}]
+    "facts": [
+      {
+        "n": "30",
+        "l": "Años atrás en el tiempo"
+      },
+      {
+        "n": "10:04",
+        "l": "La hora exacta del rayo"
+      },
+      {
+        "n": "1.21",
+        "l": "Gigawatts para regresar"
+      }
+    ]
   },
   "characters": {
-    "kicker": "Personajes", "title": "Los viajeros del tiempo",
+    "kicker": "Personajes",
+    "title": "Los viajeros del tiempo",
     "cards": [
-      {"name":"Marty McFly","role":"El viajero accidental","text":"Solo quería probar el DeLorean de Doc. Ahora debe arreglar 1955 sin borrar su propio futuro.","quote":"Esto es pesado."},
-      {"name":"Doc Brown","role":"El inventor","text":"Se golpeó la cabeza y vio el condensador de flujo. Treinta años después, su máquina por fin funciona.","quote":"¡Santo cielo, Marty!"},
-      {"name":"Lorraine Baines","role":"La chica de 1955","text":"Se enamora del misterioso chico que cayó frente a su casa, sin sospechar que es su propio hijo del futuro."},
-      {"name":"George McFly","role":"El escritor inseguro","text":"Amante de la ciencia ficción y blanco favorito de Biff. Su destino cambia la noche del baile."},
-      {"name":"Biff Tannen","role":"El bravucón","text":"En cualquier línea temporal, Biff siempre encuentra la manera de arruinar el día."},
-      {"name":"Jennifer Parker","role":"La novia de Marty","text":"Es la razón más importante que Marty tiene para volver a 1985."}
+      {
+        "name": "Marty McFly",
+        "role": "El viajero accidental",
+        "text": "Solo quería probar el DeLorean de Doc. Ahora debe arreglar 1955 sin borrar su propio futuro.",
+        "quote": "Esto es pesado."
+      },
+      {
+        "name": "Doc Brown",
+        "role": "El inventor",
+        "text": "Se golpeó la cabeza y vio el condensador de flujo. Treinta años después, su máquina por fin funciona.",
+        "quote": "¡Santo cielo, Marty!"
+      },
+      {
+        "name": "Lorraine Baines",
+        "role": "La chica de 1955",
+        "text": "Se enamora del misterioso chico que cayó frente a su casa, sin sospechar que es su propio hijo del futuro."
+      },
+      {
+        "name": "George McFly",
+        "role": "El escritor inseguro",
+        "text": "Amante de la ciencia ficción y blanco favorito de Biff. Su destino cambia la noche del baile."
+      },
+      {
+        "name": "Biff Tannen",
+        "role": "El bravucón",
+        "text": "En cualquier línea temporal, Biff siempre encuentra la manera de arruinar el día."
+      },
+      {
+        "name": "Jennifer Parker",
+        "role": "La novia de Marty",
+        "text": "Es la razón más importante que Marty tiene para volver a 1985."
+      }
     ]
   },
   "songs": {
-    "kicker": "Banda sonora", "title": "Canciones que ya amas", "credit": "Música y letras de Alan Silvestri y Glen Ballard, más los clásicos de la película.", "disc": "landings/back-to-the-future/delorean.webp",
+    "kicker": "Banda sonora",
+    "title": "Canciones que ya amas",
+    "credit": "Música y letras de Alan Silvestri y Glen Ballard, más los clásicos de la película.",
+    "disc": "landings/back-to-the-future/delorean.webp",
     "tracks": [
-      {"t":"It's Only a Matter of Time","who":"Marty y la compañía","act":"Acto I","dur":222,"d":"Marty sueña con salir de Hill Valley y triunfar con su banda."},
-      {"t":"It Works","who":"Doc Brown","act":"Acto I","dur":195,"d":"Doc celebra que, después de treinta años, su invento por fin funciona."},
-      {"t":"Future Boy","who":"Marty y Doc","act":"Acto II","dur":216,"d":"El Doc de 1955 intenta entender al chico que dice venir del futuro."},
-      {"t":"The Power of Love","who":"Marty y la compañía","act":"Acto II","dur":231,"d":"El clásico de la película, a todo volumen y en vivo."},
-      {"t":"Johnny B. Goode","who":"Marty McFly","act":"Acto II","dur":188,"d":"El baile de 1955 conoce el rock and roll antes de tiempo."},
-      {"t":"Back in Time","who":"Compañía completa","act":"Final","dur":252,"d":"El gran final, con el DeLorean listo para el siguiente viaje."}
+      {
+        "t": "It's Only a Matter of Time",
+        "who": "Marty y la compañía",
+        "act": "Acto I",
+        "dur": 222,
+        "d": "Marty sueña con salir de Hill Valley y triunfar con su banda."
+      },
+      {
+        "t": "It Works",
+        "who": "Doc Brown",
+        "act": "Acto I",
+        "dur": 195,
+        "d": "Doc celebra que, después de treinta años, su invento por fin funciona."
+      },
+      {
+        "t": "Future Boy",
+        "who": "Marty y Doc",
+        "act": "Acto II",
+        "dur": 216,
+        "d": "El Doc de 1955 intenta entender al chico que dice venir del futuro."
+      },
+      {
+        "t": "The Power of Love",
+        "who": "Marty y la compañía",
+        "act": "Acto II",
+        "dur": 231,
+        "d": "El clásico de la película, a todo volumen y en vivo."
+      },
+      {
+        "t": "Johnny B. Goode",
+        "who": "Marty McFly",
+        "act": "Acto II",
+        "dur": 188,
+        "d": "El baile de 1955 conoce el rock and roll antes de tiempo."
+      },
+      {
+        "t": "Back in Time",
+        "who": "Compañía completa",
+        "act": "Final",
+        "dur": 252,
+        "d": "El gran final, con el DeLorean listo para el siguiente viaje."
+      }
     ]
   },
-  "gallery": {"kicker":"Galería","title":"Postales de Hill Valley","images":[{"src":"landings/back-to-the-future/poster.webp","cap":"Arte oficial"},{"src":"landings/back-to-the-future/delorean.webp","cap":"El DeLorean"},{"src":"landings/back-to-the-future/torre.webp","cap":"La torre del reloj"}]},
+  "gallery": {
+    "kicker": "Galería",
+    "title": "Postales de Hill Valley",
+    "images": [
+      {
+        "src": "landings/back-to-the-future/poster.webp",
+        "cap": "Arte oficial"
+      },
+      {
+        "src": "landings/back-to-the-future/delorean.webp",
+        "cap": "El DeLorean"
+      },
+      {
+        "src": "landings/back-to-the-future/torre.webp",
+        "cap": "La torre del reloj"
+      }
+    ]
+  },
   "tickets": {
-    "kicker": "Boletos", "title": "Arma tu viaje", "venue": "Teatro por confirmar", "eventSlug": "",
-    "days": [{"dow":"Viernes","day":"21","mon":"may","times":["20:00"]},{"dow":"Sábado","day":"22","mon":"may","times":["17:00","20:30"]},{"dow":"Domingo","day":"23","mon":"may","times":["13:00","18:00"]}],
-    "zones": [{"name":"Platea VIP","price":2450},{"name":"Platea","price":1750},{"name":"Preferente","price":1250},{"name":"Balcón","price":750}],
+    "kicker": "Boletos",
+    "title": "Arma tu viaje",
+    "venue": "Teatro por confirmar",
+    "eventSlug": "",
+    "days": [
+      {
+        "dow": "Viernes",
+        "day": "21",
+        "mon": "may",
+        "times": [
+          "20:00"
+        ]
+      },
+      {
+        "dow": "Sábado",
+        "day": "22",
+        "mon": "may",
+        "times": [
+          "17:00",
+          "20:30"
+        ]
+      },
+      {
+        "dow": "Domingo",
+        "day": "23",
+        "mon": "may",
+        "times": [
+          "13:00",
+          "18:00"
+        ]
+      }
+    ],
+    "zones": [
+      {
+        "name": "Platea VIP",
+        "price": 2450
+      },
+      {
+        "name": "Platea",
+        "price": 1750
+      },
+      {
+        "name": "Preferente",
+        "price": 1250
+      },
+      {
+        "name": "Balcón",
+        "price": 750
+      }
+    ],
     "note": "Fechas, horarios y precios de ejemplo para la presentación."
   },
   "faq": [
-    {"q":"¿El DeLorean aparece en el escenario?","a":"Sí. Un DeLorean de tamaño real acelera, gira y viaja en el tiempo frente al público."},
-    {"q":"¿Necesito haber visto la película?","a":"No. El musical cuenta la historia completa, con libro de Bob Gale, coguionista del filme de 1985."},
-    {"q":"¿Cuánto dura la función?","a":"Aproximadamente 2 horas 40 minutos, con un intermedio de 20 minutos."}
+    {
+      "q": "¿El DeLorean aparece en el escenario?",
+      "a": "Sí. Un DeLorean de tamaño real acelera, gira y viaja en el tiempo frente al público."
+    },
+    {
+      "q": "¿Necesito haber visto la película?",
+      "a": "No. El musical cuenta la historia completa, con libro de Bob Gale, coguionista del filme de 1985."
+    },
+    {
+      "q": "¿Cuánto dura la función?",
+      "a": "Aproximadamente 2 horas 40 minutos, con un intermedio de 20 minutos."
+    }
   ],
-  "cta": {"title":"¿Listo para viajar?","text":"Abróchate el cinturón: el condensador de flujo ya está encendido."},
-  "footer": "Back to the Future — The Musical. Basado en la película de Robert Zemeckis y Bob Gale. Landing de presentación hecha con TADAA!"
+  "cta": {
+    "title": "¿Listo para viajar?",
+    "text": "Abróchate el cinturón: el condensador de flujo ya está encendido."
+  },
+  "footer": "Back to the Future — The Musical. Basado en la película de Robert Zemeckis y Bob Gale. Landing de presentación hecha con TADAA!",
+  "page": "minisitios/back-to-the-future/"
 }

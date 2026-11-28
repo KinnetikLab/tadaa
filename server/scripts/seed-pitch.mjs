@@ -1,6 +1,7 @@
 // Landings de obras y presentaciones por prospecto (gestor de pitch).
 //   node server/scripts/seed-pitch.mjs          → crea lo que falte (no pisa ediciones hechas en Studio)
 //   node server/scripts/seed-pitch.mjs --force  → reescribe las landings con los JSON de server/seeds/landings
+//   node server/scripts/seed-pitch.mjs --force --only=back-to-the-future  → reescribe solo esa landing
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -8,6 +9,8 @@ import {getPool,closePool} from '../src/db.mjs';
 
 const dir=path.join(path.dirname(fileURLToPath(import.meta.url)),'..','seeds','landings');
 const force=process.argv.includes('--force');
+// --only=slug limita la reescritura a una landing (para no pisar ediciones hechas en Studio)
+const only=(process.argv.find(a=>a.startsWith('--only='))||'').slice(7);
 const DECKS=[
   {slug:'gou-producciones',prospect:'Gou Producciones',contact_name:'Equipo Gou',landing_slug:'kinky-boots',status:'sent',message:'Preparamos esta propuesta pensando en Kinky Boots y en la temporada 2027 en el CCT1.'},
   {slug:'mejor-teatro',prospect:'Mejor Teatro',contact_name:'Equipo Mejor Teatro',landing_slug:'back-to-the-future',status:'sent',message:'Así se vería Back to the Future — The Musical en TADAA!: un minisitio que se siente como la obra y vende como boletera.'},
@@ -21,7 +24,7 @@ try{
   await c.query('BEGIN');
   let L=0,D=0;
   for(const f of (await fs.readdir(dir)).filter(x=>x.endsWith('.json')).sort()){
-    const slug=f.replace(/\.json$/,'');const cfg=JSON.parse(await fs.readFile(path.join(dir,f),'utf8'));
+    const slug=f.replace(/\.json$/,'');if(only&&force&&slug!==only)continue;const cfg=JSON.parse(await fs.readFile(path.join(dir,f),'utf8'));
     const r=await c.query(`INSERT INTO show_landings(slug,title,config,status) VALUES($1,$2,$3,'published')
       ON CONFLICT(slug) DO ${force?`UPDATE SET title=EXCLUDED.title,config=EXCLUDED.config,updated_at=now()`:'NOTHING'} RETURNING id`,[slug,cfg.title,JSON.stringify(cfg)]);
     L+=r.rowCount;
