@@ -27,11 +27,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
       <span style="width: 38px; height: 38px; border-radius: 12px; background: #D6FF35; color: #08091A; display: grid; place-items: center; font-weight: 900">{{orgIni}}</span>
       <span style="display: flex; flex-direction: column"><b style="font-size: 13px">{{orgName}}</b><span style="font-size: 11px; color: #AEB6D6">{{orgSub}}</span></span>
     </div>
-    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Resumen</a>
-    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; background: #FFFFFF; color: #08091A; display: flex; align-items: center; justify-content: space-between; font-weight: 800; font-size: 13px">Colaboradores <span style="background: #EEF1F7; border-radius: 99px; padding: 2px 8px; font-size: 11px">{{k.total}}</span></a>
-    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Reportes de uso</a>
-    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Comunicación interna</a>
-    <a href="#" style="height: 46px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; font-weight: 700; font-size: 13px">Facturación</a>
+    <sc-for list="{{nav}}" as="n"><button onClick="{{n.pick}}" aria-current="{{n.on}}" style="{{n.style}}">{{n.label}}<span style="{{n.badgeStyle}}">{{n.badge}}</span></button></sc-for>
     <div style="margin-top: auto; background: #161833; border-radius: 18px; padding: 14px; font-size: 12px; line-height: 1.5; color: #C7CDE6">
       <b style="display: block; color: #D6FF35">Solo ves datos agregados</b>Las compras de cada colaborador son privadas.
     </div>
@@ -41,7 +37,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
       <div>
         <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #1238FF">{{month}}</span>
-        <h1 style="margin: 6px 0 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: 46px; letter-spacing: -2px; line-height: 1">Tu equipo, saliendo más.</h1>
+        <h1 style="margin: 6px 0 0; font-family: Outfit, sans-serif; font-weight: 900; font-size: 46px; letter-spacing: -2px; line-height: 1">{{title}}</h1>
       </div>
       <div style="display: flex; gap: 10px; flex-wrap: wrap">
         <label style="height: 48px; padding: 0 18px; border-radius: 99px; border: 1px solid #D5DBEA; background: #FFFFFF; display: flex; align-items: center; font-weight: 700; font-size: 13px" style="cursor: pointer">Subir CSV<input type="file" accept=".csv,text/csv" onChange="{{uploadCsv}}" style="display: none"></label>
@@ -49,14 +45,14 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
       </div>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px">
+    <sc-if value="{{vRes}}"><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px">
       <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Colaboradores activos</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">{{active}}</b><span style="font-size: 12px; color: #4A5068">{{k.activeSub}}</span></div>
       <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Usaron el beneficio</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">{{k.adoption}}</b><span style="font-size: 12px; font-weight: 700; color: #0B7A3B">{{k.adoptionSub}}</span></div>
       <div style="background: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #4A5068">Planes realizados</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">{{k.plans}}</b><span style="font-size: 12px; color: #4A5068">{{k.plansSub}}</span></div>
       <div style="background: #1238FF; color: #FFFFFF; border-radius: 24px; padding: 18px"><span style="font-size: 12px; color: #D9E0FF">Gasto del equipo (90 días)</span><b style="display: block; font-family: Outfit, sans-serif; font-size: 34px">{{k.spend}}</b><span style="font-size: 12px; color: #D6FF35; font-weight: 700">{{k.spendSub}}</span></div>
-    </div>
+    </div></sc-if>
 
-    <sc-if value="{{adding}}" hint-placeholder-val="{{ false }}">
+    <sc-if value="{{addOpen}}" hint-placeholder-val="{{ false }}">
       <section style="background: #FFFFFF; border-radius: 28px; padding: 22px; display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-end; box-shadow: inset 0 0 0 2px #1238FF">
         <label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A5068">Nombre<input value="{{form.name}}" onInput="{{form.setName}}" placeholder="Nombre" style="height: 46px; border: 1px solid #D5DBEA; border-radius: 14px; padding: 0 14px; font: inherit; font-size: 14px; color: #08091A"></label>
         <label style="flex: 1 1 140px; display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A5068">No. colaborador<input value="{{form.code}}" onInput="{{form.setCode}}" placeholder="EMP-0001" style="height: 46px; border: 1px solid #D5DBEA; border-radius: 14px; padding: 0 14px; font: inherit; font-size: 14px; color: #08091A"></label>
@@ -69,7 +65,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
       </section>
     </sc-if>
 
-    <section style="background: #FFFFFF; border-radius: 28px; padding: 22px">
+    <sc-if value="{{vCol}}"><section style="background: #FFFFFF; border-radius: 28px; padding: 22px">
       <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 10px">
         <h2 style="margin: 0; font-family: Outfit, sans-serif; font-size: 22px">Colaboradores</h2>
         <label style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px; border-radius: 99px; border: 1px solid #D5DBEA; flex: 0 1 320px">
@@ -96,9 +92,9 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
           </tbody>
         </table>
       </div>
-    </section>
+    </section></sc-if>
 
-    <section style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
+    <sc-if value="{{vRes}}"><section style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
       <div style="flex: 1 1 360px; background: #08091A; color: #FFFFFF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
         <span style="font-size: 11px; font-weight: 800; letter-spacing: .14em; color: #D6FF35">¿QUÉ PASA AL DAR DE BAJA?</span>
         <h3 style="margin: 0; font-family: Outfit, sans-serif; font-size: 24px">Solo se inactivan sus beneficios</h3>
@@ -108,7 +104,46 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
         <span style="width: 54px; height: 54px; flex: 0 0 54px; border-radius: 16px; background: #1238FF; display: grid; place-items: center"><img src="/_blob/940a3ed37e1bd1fb06f8379dc058b8a2" alt="" style="width: 40px"></span>
         <span style="display: flex; flex-direction: column; gap: 4px"><b style="font-size: 13px">Vista previa del aviso al colaborador</b><span style="font-size: 13px; color: #2A2F48">"Un pajarito nos contó que ya no estás en {{orgName}}. Nos rifamos contigo: 3 meses de membresía al 50%."</span><a href="MBaja.dc.html" style="font-size: 12px; font-weight: 800; color: #1238FF">Ver pantalla →</a></span>
       </div>
-    </section>
+    </section></sc-if>
+    <sc-if value="{{vRep}}">
+      <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
+        <section style="flex: 2 1 420px; background: #FFFFFF; border-radius: 28px; padding: 22px">
+          <h2 style="margin: 0 0 4px; font-family: Outfit, sans-serif; font-size: 22px">Planes por mes</h2>
+          <p style="margin: 0 0 18px; font-size: 13px; color: #5A6178">Compras pagadas del equipo en los últimos 6 meses.</p>
+          <div style="display: flex; align-items: flex-end; gap: 14px; height: 200px">
+            <sc-for list="{{rep.months}}" as="m"><span style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 8px; height: 100%"><b style="font-size: 13px">{{m.v}}</b><span style="{{m.bar}}"></span><span style="font-size: 12px; color: #5A6178">{{m.l}}</span></span></sc-for>
+          </div>
+          <p style="margin: 12px 0 0; font-size: 13px; color: #5A6178">{{rep.empty}}</p>
+        </section>
+        <section style="flex: 1 1 300px; background: #08091A; color: #FFFFFF; border-radius: 28px; padding: 22px">
+          <h2 style="margin: 0 0 14px; font-family: Outfit, sans-serif; font-size: 22px">Lo que más disfrutan</h2>
+          <div style="display: flex; flex-direction: column; gap: 10px">
+            <sc-for list="{{rep.top}}" as="t"><div style="display: flex; justify-content: space-between; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,.12); font-size: 14px"><span>{{t.title}}</span><b style="color: #D6FF35">{{t.orders}}</b></div></sc-for>
+          </div>
+          <p style="margin: 12px 0 0; font-size: 13px; color: #AEB6D6">{{rep.topEmpty}}</p>
+        </section>
+      </div>
+      <section style="background: #FFFFFF; border-radius: 28px; padding: 22px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between">
+        <span style="font-size: 14px; color: #2A2F48; max-width: 640px">{{rep.privacy}}</span>
+        <button onClick="{{rep.export}}" style="height: 44px; padding: 0 18px; border-radius: 99px; border: 0; background: #08091A; color: #FFFFFF; font-family: inherit; font-weight: 800; font-size: 13px; cursor: pointer">Descargar reporte CSV</button>
+      </section>
+    </sc-if>
+    <sc-if value="{{vCom}}">
+      <section style="background: #1238FF; color: #FFFFFF; border-radius: 28px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+        <h2 style="margin: 0; font-family: Outfit, sans-serif; font-size: 30px; line-height: 1.05; max-width: 22ch">Cuéntale a tu equipo que ya tiene TADAA!</h2>
+        <p style="margin: 0; font-size: 15px; line-height: 1.55; max-width: 60ch; color: #DCE3FF">Comparte este mensaje por correo, WhatsApp o en tu intranet. Cada colaborador se registra con su número de colaborador y su acceso queda activo sin costo.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px">
+          <button onClick="{{com.copyLink}}" style="height: 46px; padding: 0 18px; border-radius: 99px; border: 0; background: #D6FF35; color: #08091A; font-family: inherit; font-weight: 800; font-size: 13px; cursor: pointer">Copiar enlace de registro</button>
+          <button onClick="{{com.wa}}" style="height: 46px; padding: 0 18px; border-radius: 99px; border: 1px solid rgba(255,255,255,.35); background: transparent; color: #FFFFFF; font-family: inherit; font-weight: 800; font-size: 13px; cursor: pointer">Compartir por WhatsApp</button>
+          <button onClick="{{com.mail}}" style="height: 46px; padding: 0 18px; border-radius: 99px; border: 1px solid rgba(255,255,255,.35); background: transparent; color: #FFFFFF; font-family: inherit; font-weight: 800; font-size: 13px; cursor: pointer">Enviar por correo</button>
+        </div>
+      </section>
+      <section style="background: #FFFFFF; border-radius: 28px; padding: 22px">
+        <h2 style="margin: 0 0 12px; font-family: Outfit, sans-serif; font-size: 22px">Mensaje sugerido</h2>
+        <textarea onInput="{{com.edit}}" aria-label="Mensaje para el equipo" style="width: 100%; min-height: 220px; border-radius: 18px; border: 1px solid #D5DBEA; padding: 16px; font-family: inherit; font-size: 14px; line-height: 1.6; resize: vertical; box-sizing: border-box">{{com.text}}</textarea>
+        <button onClick="{{com.copyText}}" style="margin-top: 10px; height: 44px; padding: 0 18px; border-radius: 99px; border: 1px solid #D5DBEA; background: #FFFFFF; font-family: inherit; font-weight: 800; font-size: 13px; cursor: pointer">Copiar mensaje</button>
+      </section>
+    </sc-if>
   </main>
 </div>
 </x-dc>
@@ -131,7 +166,7 @@ class Component extends DCLogic {
         btn: 'height: 38px; padding: 0 14px; border-radius: 99px; font-family: inherit; font-weight: 700; font-size: 12px; ' + (inactive ? 'border: 0; background: #08091A; color: #FFFFFF;' : 'border: 1px solid #D5DBEA; background: #FFFFFF; color: #08091A;'),
         toggle: () => this.setState({ off: { ...off, [id]: !inactive } }) };
     });
-    return { people, active: 412 - Object.values(off).filter(Boolean).length + 1, adding: this.state.adding,
+    return { people, nav: [], title: 'Tu equipo, saliendo más.', vRes: true, vCol: true, vRep: false, vCom: false, addOpen: this.state.adding, rep: { months: [], top: [] }, com: {}, active: 412 - Object.values(off).filter(Boolean).length + 1, adding: this.state.adding,
       openAdd: () => this.setState({ adding: true }), closeAdd: () => this.setState({ adding: false }) };
   }
 }

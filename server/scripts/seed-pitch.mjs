@@ -31,7 +31,7 @@ try{
   }
   for(const d of DECKS){const r=await c.query(`INSERT INTO pitch_decks(slug,prospect,contact_name,landing_slug,status,message,config) VALUES($1,$2,$3,$4,$5,$6,$7) ON CONFLICT(slug) DO NOTHING RETURNING id`,[d.slug,d.prospect,d.contact_name||null,d.landing_slug,d.status,d.message,JSON.stringify(d.config||{})]);D+=r.rowCount}
   // Campaña demo de invitaciones: función de prensa de Back to the Future (token fijo demo-prensa-bttf para probar el wallet).
-  const org=(await c.query(`SELECT a.organization_id id JOIN organizations o ON o.id=a.organization_id WHERE a.kind='producer' AND a.status='active' ORDER BY (o.slug='escena-viva') DESC,a.created_at LIMIT 1`)).rows[0];
+  const org=(await c.query(`SELECT a.organization_id id FROM partner_agreements a JOIN organizations o ON o.id=a.organization_id WHERE a.kind='producer' AND a.status='active' ORDER BY (o.slug='escena-viva') DESC,a.created_at LIMIT 1`)).rows[0];
   let I=0;
   if(org&&!(await c.query(`SELECT 1 FROM invitations WHERE token='demo-prensa-bttf'`)).rowCount&&(await c.query(`SELECT 1 FROM show_landings WHERE slug='back-to-the-future'`)).rowCount){
     const camp=(await c.query(`INSERT INTO invite_campaigns(organization_id,landing_slug,site_url,title,starts_at,venue,doors) VALUES($1,'back-to-the-future','/experience/minisitios/back-to-the-future/','Función de prensa',$2,'Teatro Telcel','19:00') RETURNING id`,[org.id,'2027-03-04T02:30:00Z'])).rows[0];

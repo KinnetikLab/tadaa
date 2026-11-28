@@ -84,3 +84,18 @@ img.ticket-qr.tvm-refresh{opacity:.35;filter:blur(2px)}
 /* respuesta táctil inmediata al presionar (principio: feedback en pointer-down) */
 #tv button:active:not([disabled]),#tv a[data-tv-link]:active{scale:.97;transition:scale .1s ease-out}
 @media (prefers-reduced-motion:reduce){#tv button:active,#tv a[data-tv-link]:active{scale:none}}
+
+/* sesión: sin cuenta no hay Wallet en menús; con cuenta ya no se ofrece la membresía en el menú */
+body.tv-guest [data-tv-link="wallet"]{display:none!important}
+body.tv-auth nav [data-tv-link="membresia"],body.tv-auth header [data-tv-link="membresia"]{display:none!important}
+.tv-join .tv-modal-card{position:relative;text-align:left;display:flex;flex-direction:column;gap:12px}
+.tv-join .tj-logo{height:30px;width:auto;align-self:flex-start;background:#1238FF;padding:8px 12px;border-radius:12px}
+.tv-join h2{margin:4px 0 0;font:900 32px/1 Outfit,sans-serif;letter-spacing:-1px}
+.tv-join p{margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;line-height:1.5;color:#3A3F58}
+.tj-opt{display:flex;gap:14px;align-items:center;padding:16px;border-radius:20px;background:#EEF1F7;color:#08091A;text-decoration:none;font-family:'Plus Jakarta Sans',sans-serif;transition:transform .15s ease-out,background .2s}
+.tj-opt:hover{background:#E3E9FF}.tj-opt:active{transform:scale(.98)}
+.tj-opt.hot{background:#D6FF35}.tj-opt.hot:hover{background:#CBF52A}
+.tj-opt b{display:block;font-size:15px}.tj-opt small{display:block;font-size:12.5px;line-height:1.4;color:#3A3F58;margin-top:2px}
+.tj-ic{width:46px;height:46px;flex:0 0 46px;border-radius:14px;background:#08091A;color:#D6FF35;display:grid;place-items:center}.tj-ic svg{width:24px;height:24px;fill:currentColor}
+.tv-join .tj-in{text-align:center;font-weight:600}.tv-join .tj-in a{color:#1238FF;font-weight:800}
+.tj-x{position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:50%;border:0;background:#EEF1F7;font-size:22px;line-height:1;cursor:pointer}

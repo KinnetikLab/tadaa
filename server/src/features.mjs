@@ -65,7 +65,7 @@ async function estrenos(){if(Date.now()-_est.at<6*3600e3&&_est.data)return _est.
   const r=await fetch('https://api.themoviedb.org/3/movie/now_playing?language=es-MX&region=MX&page=1'+q,{...auth,signal:AbortSignal.timeout(6000)});if(!r.ok)throw new Error('tmdb '+r.status);const d=await r.json();
   const movies=(d.results||[]).filter(m=>m.poster_path).sort((a,b)=>String(b.release_date).localeCompare(String(a.release_date))).slice(0,4).map(m=>({title:m.title,genre:'',rating:'',runtime:'',release:m.release_date,score:m.vote_average?Math.round(m.vote_average*10)/10:null,poster:'https://image.tmdb.org/t/p/w500'+m.poster_path,overview:m.overview||''}));
   _est={at:Date.now(),data:{source:'tmdb',movies}};return _est.data}catch(e){return _est.data||{source:null,movies:[]}}}
-export const MEMBERSHIP_PRICE_MINOR=Math.max(100,Number(process.env.MEMBERSHIP_PRICE_MINOR)||2500);
+export const MEMBERSHIP_PRICE_MINOR=Math.max(100,Number(process.env.MEMBERSHIP_PRICE_MINOR)||5000);
 export async function membershipQuote(c,userId,baseMinor=MEMBERSHIP_PRICE_MINOR){
  const r=await c.query(`SELECT id,discount_pct FROM membership_offers WHERE user_id=$1 AND months_used<months_total AND expires_at>now() ORDER BY discount_pct DESC LIMIT 1`,[userId]);const o=r.rows[0];
  return o?{priceMinor:discounted(baseMinor,o.discount_pct),offerId:o.id,discountPct:o.discount_pct}:{priceMinor:baseMinor,offerId:null,discountPct:0};
@@ -102,7 +102,7 @@ const EVENT_ORDERS=`FROM orders o JOIN reservations r ON r.id=o.reservation_id J
 const ORDER_FIELDS=`o.id,o.status,o.total_minor,o.created_at,o.metadata->>'nowCampaignId' now_campaign_id,e.id event_id,e.title event_title,e.ticketing_mode,u.full_name buyer_name,u.email buyer_email,
  (SELECT COALESCE(sum(oi.quantity),0)::int FROM order_items oi WHERE oi.order_id=o.id) quantity,
  (SELECT json_agg(json_build_object('id',t.id,'status',t.status,'delivery_status',t.delivery_status,'golden',t.golden,'used_at',t.used_at,'external_reference',t.external_reference) ORDER BY t.created_at) FROM tickets t JOIN order_items oi ON oi.id=t.order_item_id WHERE oi.order_id=o.id) tickets,
- (SELECT json_agg(json_build_object('id',x.id,'title',x.title,'quantity',x.quantity,'delivered_at',x.delivered_at)) FROM order_addons x WHERE x.order_id=o.id) addons,
+ (SELECT json_agg(json_build_object('id',x.id,'title',x.title,'quantity',x.quantity,'total_minor',x.total_minor,'delivered_at',x.delivered_at)) FROM order_addons x WHERE x.order_id=o.id) addons,
  (SELECT COALESCE(sum(people),0)::int FROM order_access_checks ac WHERE ac.order_id=o.id) people_checked`;
 const withFolio=rows=>rows.map(x=>({...x,folio:folio(x.id)}));
 
@@ -162,7 +162,7 @@ export async function featureRequest(req,res,pathname,url,parts,ctx){
     p.query('SELECT * FROM event_golden_config WHERE event_id=$1',[e.id]),
     p.query(`SELECT n.*,t.name ticket_type,(SELECT count(*)::int FROM now_signups s WHERE s.campaign_id=n.id) signups FROM now_campaigns n JOIN ticket_types t ON t.id=n.ticket_type_id WHERE n.event_id=$1 ORDER BY n.opens_at`,[e.id]),
     p.query(`SELECT a.*,(SELECT COALESCE(sum(x.quantity),0)::int FROM order_addons x JOIN orders o ON o.id=x.order_id WHERE x.addon_id=a.id AND o.status='paid') sold FROM event_addons a WHERE a.event_id=$1 ORDER BY a.sort_order,a.created_at`,[e.id]),
-    p.query('SELECT id,name,price_minor,quantity_total,quantity_reserved FROM ticket_types WHERE event_id=$1 ORDER BY price_minor',[e.id])]);
+    p.query(`SELECT t.id,t.name,t.price_minor,t.quantity_total,t.quantity_reserved,(SELECT COALESCE(sum(oi.quantity),0)::int FROM order_items oi JOIN orders o ON o.id=oi.order_id WHERE oi.ticket_type_id=t.id AND o.status='paid') sold,(SELECT COALESCE(sum(oi.quantity*oi.unit_price_minor),0)::bigint FROM order_items oi JOIN orders o ON o.id=oi.order_id WHERE oi.ticket_type_id=t.id AND o.status='paid') gross_minor FROM ticket_types t WHERE t.event_id=$1 ORDER BY t.price_minor`,[e.id])]);
    return response(res,200,{event:e,golden:golden.rows[0]||{enabled:false,odds:100,max_winners:10,benefit_kind:'upgrade',benefit_title:'Upgrade de sección'},now:now.rows.map(x=>({...x,state:nowState(x)})),addons:addons.rows,ticketTypes:types.rows}),true}
   if(parts[5]==='events'&&uuid(parts[6])&&parts[7]==='golden'&&M==='PUT'){const s=await producerUser(req,ctx,org),e=await ownEvent(ctx,org,parts[6]),d=await reqBody(req);const kind=BENEFIT_KINDS.includes(d.benefitKind)?d.benefitKind:'upgrade',title=clean(d.benefitTitle,120)||'Upgrade de sección',odds=Math.max(2,Math.min(100000,Math.trunc(Number(d.odds)||100))),max=Number.isFinite(Number(d.maxWinners))&&d.maxWinners!==''&&d.maxWinners!==null?Math.max(0,Math.min(10000,Math.trunc(Number(d.maxWinners)))):10;
    if(kind==='ticket'&&d.benefitEventId&&!uuid(d.benefitEventId))throw invalid('Evento de regalo inválido');

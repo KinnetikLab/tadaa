@@ -33,7 +33,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
       <div>
         <span style="font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #1238FF">{{today}}</span>
-        <h1 style="margin: 6px 0 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 48px; letter-spacing: -2px; line-height: 1">Haz que suceda.</h1>
+        <h1 style="margin: 6px 0 0; font-family: Outfit, sans-serif; font-weight: 800; font-size: 48px; letter-spacing: -2px; line-height: 1">{{title}}</h1>
       </div>
       <div style="display: flex; gap: 10px; flex-wrap: wrap">
         <label style="display: flex; align-items: center; gap: 8px; height: 48px; padding: 0 16px; border-radius: 99px; background: #FFFFFF; border: 1px solid #D5DBEA">
@@ -44,7 +44,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
       </div>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px">
+    <sc-if value="{{vRes}}"><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px">
       <div style="background: #FFFFFF; border-radius: 24px; padding: 18px; display: flex; flex-direction: column; gap: 6px">
         <span style="font-size: 12px; color: #4A5068">Por confirmar con productor</span><b style="font-family: Outfit, sans-serif; font-size: 36px">{{k.provisional}}</b>
         <span style="align-self: flex-start; font-size: 10px; font-weight: 800; color: #4A5068; border: 1.5px dashed #8C93B5; border-radius: 99px; padding: 3px 8px">PROVISIONALES</span>
@@ -61,10 +61,10 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
         <span style="font-size: 12px; color: #AEB6D6">Ventas de la semana</span><b style="font-family: Outfit, sans-serif; font-size: 36px">{{k.week}}</b>
         <span style="font-size: 12px; color: #D6FF35; font-weight: 700">{{k.delta}}</span>
       </div>
-    </div>
+    </div></sc-if>
 
     <div style="display: flex; flex-wrap: wrap; gap: 22px; align-items: flex-start">
-      <section style="flex: 999 1 560px; min-width: 0; background: #FFFFFF; border-radius: 28px; padding: 22px">
+      <sc-if value="{{vEv}}"><section style="flex: 999 1 560px; min-width: 0; background: #FFFFFF; border-radius: 28px; padding: 22px">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px">
           <h2 style="margin: 0; font-family: Outfit, sans-serif; font-size: 24px">Eventos y funciones</h2>
           <div style="display: flex; gap: 6px">
@@ -92,10 +92,10 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
             </tbody>
           </table>
         </div>
-      </section>
+      </section></sc-if>
 
-      <div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
-        <section style="position: relative; background: #08091A; color: #FFFFFF; border-radius: 28px; padding: 20px; overflow: hidden">
+      <sc-if value="{{vSide}}"><div style="{{sideStyle}}">
+        <sc-if value="{{vNow}}"><section style="position: relative; background: #08091A; color: #FFFFFF; border-radius: 28px; padding: 20px; overflow: hidden">
           <span style="position: absolute; right: -40px; top: -40px; width: 160px; height: 160px; border-radius: 50%; background: radial-gradient(circle, rgba(255,79,147,.5), transparent 70%)"></span>
           <span style="position: relative; display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 800; letter-spacing: .1em; color: #FF4F93"><span style="width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(100deg, #FF3D8B, #FF8A3D)"></span>{{nw.kicker}}</span>
           <b style="position: relative; display: block; font-family: Outfit, sans-serif; font-size: 40px; margin-top: 6px">{{nw.when}}</b>
@@ -108,22 +108,22 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
             <a href="{{nw.cfg}}" style="flex: 1; height: 44px; border-radius: 99px; background: linear-gradient(100deg, #FF3D8B, #FF8A3D); color: #08091A; display: grid; place-items: center; font-weight: 800; font-size: 13px">Configurar Now!</a>
             <button onClick="{{nw.pause}}" style="flex: 1; height: 44px; border-radius: 99px; border: 1px solid #3A3E66; background: transparent; color: #FFFFFF; font: inherit; display: grid; place-items: center; font-weight: 700; font-size: 13px; cursor: pointer">{{nw.pauseLabel}}</button>
           </div>
-        </section>
+        </section></sc-if>
 
-        <section style="background: #FFFFFF; border-radius: 28px; padding: 20px">
+        <sc-if value="{{vSol}}"><section style="background: #FFFFFF; border-radius: 28px; padding: 20px">
           <h2 style="margin: 0 0 10px; font-family: Outfit, sans-serif; font-size: 20px">Solicitudes por confirmar</h2>
           <div style="display: flex; flex-direction: column">
             <sc-for list="{{requests}}" as="r"><div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #EEF1F7"><span style="flex: 1"><b style="font-size: 13px">{{r.title}}</b><br><span style="font-size: 12px; color: #5A6178">{{r.sub}}</span></span><button onClick="{{r.primary}}" style="height: 34px; padding: 0 12px; border-radius: 99px; border: 0; background: #D6FF35; font: inherit; display: flex; align-items: center; font-weight: 800; font-size: 12px; cursor: pointer">{{r.primaryLabel}}</button><button onClick="{{r.reject}}" title="Rechazar" style="height: 34px; padding: 0 12px; border-radius: 99px; border: 1px solid #D5DBEA; background: #FFFFFF; font: inherit; display: flex; align-items: center; font-weight: 700; font-size: 12px; cursor: pointer">Rechazar</button></div></sc-for>
             <sc-if value="{{noRequests}}"><p style="margin: 0; color: #5A6178; font-size: 13px">Sin solicitudes pendientes.</p></sc-if>
           </div>
-        </section>
+        </section></sc-if>
 
-        <section style="background: #FFFFFF; border-radius: 28px; padding: 20px; display: flex; align-items: center; gap: 14px">
+        <sc-if value="{{vRes}}"><section style="background: #FFFFFF; border-radius: 28px; padding: 20px; display: flex; align-items: center; gap: 14px">
           <span style="width: 64px; height: 64px; border-radius: 50%; background: {{ck.ring}}; display: grid; place-items: center"><span style="width: 46px; height: 46px; border-radius: 50%; background: #FFFFFF; display: grid; place-items: center; font-weight: 800; font-size: 13px">{{ck.pct}}</span></span>
           <span><b style="font-family: Outfit, sans-serif; font-size: 18px">{{ck.title}}</b><br><span style="font-size: 12px; color: #5A6178">{{ck.sub}}</span></span>
-        </section>
+        </section></sc-if>
 
-        <section style="background: #FFFFFF; border-radius: 28px; padding: 20px">
+        <sc-if value="{{vEq}}"><section style="background: #FFFFFF; border-radius: 28px; padding: 20px">
           <h2 style="margin: 0 0 10px; font-family: Outfit, sans-serif; font-size: 20px">Equipos y staff</h2>
           <select onChange="{{pickOrg}}" aria-label="Organización" style="width: 100%; height: 44px; border-radius: 14px; border: 1px solid #D5DBEA; padding: 0 12px; font: inherit; font-size: 13px; background: #FFFFFF">
             <sc-for list="{{orgs}}" as="o"><option value="{{o.id}}" selected="{{o.on}}">{{o.label}}</option></sc-for>
@@ -136,9 +136,36 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
             <select onChange="{{inviteRole}}" aria-label="Rol" style="height: 40px; border-radius: 12px; border: 1px solid #D5DBEA; font: inherit; font-size: 12px"><option value="staff">Staff</option><option value="admin">Admin</option><option value="owner">Dueño</option></select>
             <button onClick="{{invite.send}}" style="height: 40px; padding: 0 12px; border-radius: 99px; border: 0; background: #08091A; color: #FFFFFF; font: inherit; font-weight: 800; font-size: 12px; cursor: pointer">Agregar</button>
           </div>
-        </section>
-      </div>
+        </section></sc-if>
+      </div></sc-if>
     </div>
+    <sc-if value="{{vMic}}">
+      <section style="background: #FFFFFF; border-radius: 28px; padding: 22px">
+        <h2 style="margin: 0 0 4px; font-family: Outfit, sans-serif; font-size: 24px">Videollamadas de micrositio</h2>
+        <p style="margin: 0 0 14px; font-size: 13px; color: #5A6178">{{micNote}}</p>
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <sc-for list="{{calls}}" as="c">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 14px; border-radius: 20px; background: #EEF1F7">
+              <span style="width: 58px; height: 58px; flex: 0 0 58px; border-radius: 16px; background: #08091A; color: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1"><b style="font-family: Outfit, sans-serif; font-size: 22px">{{c.day}}</b><span style="font-size: 11px; color: #D6FF35; font-weight: 800">{{c.mon}}</span></span>
+              <span style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px"><b style="font-size: 15px">{{c.production}} · {{c.org}}</b><span style="font-size: 12px; color: #5A6178">{{c.when}} · {{c.contact}}</span><span style="font-size: 12px; color: #2A2F48">{{c.notes}}</span></span>
+              <span style="{{c.chip}}">{{c.status}}</span>
+              <button onClick="{{c.join}}" style="height: 44px; padding: 0 18px; border-radius: 99px; border: 0; background: #08091A; color: #FFFFFF; display: inline-flex; align-items: center; gap: 8px; font-family: inherit; font-weight: 800; font-size: 13px; cursor: pointer"><svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M249.45,69.31a12,12,0,0,0-12.51,1L212,88.43V72a20,20,0,0,0-20-20H32A20,20,0,0,0,12,72V184a20,20,0,0,0,20,20H192a20,20,0,0,0,20-20V167.57l24.94,18.14A12,12,0,0,0,256,176V80A12,12,0,0,0,249.45,69.31ZM188,180H36V76H188Zm44-27.57-20-14.54V118.11l20-14.54Z"/></svg>Entrar</button>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+    <sc-if value="{{vTools}}">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px">
+        <sc-for list="{{tools}}" as="t">
+          <a href="{{t.href}}" style="background: #FFFFFF; border-radius: 28px; padding: 22px; display: flex; flex-direction: column; gap: 10px; min-height: 180px; transition: transform .15s ease-out, box-shadow .2s">
+            <span style="width: 46px; height: 46px; border-radius: 14px; background: #1238FF; color: #D6FF35; display: grid; place-items: center"><svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M228,104a12,12,0,0,1-24,0V69l-59.51,59.51a12,12,0,0,1-17-17L187,52H152a12,12,0,0,1,0-24h64a12,12,0,0,1,12,12Zm-44,24a12,12,0,0,0-12,12v64H52V84h64a12,12,0,0,0,0-24H48A20,20,0,0,0,28,80V208a20,20,0,0,0,20,20H176a20,20,0,0,0,20-20V140A12,12,0,0,0,184,128Z"/></svg></span>
+            <b style="font-family: Outfit, sans-serif; font-size: 20px">{{t.title}}</b>
+            <span style="font-size: 13px; line-height: 1.5; color: #4A5068">{{t.text}}</span>
+          </a>
+        </sc-for>
+      </div>
+    </sc-if>
   </main>
 </div>
 </x-dc>
