@@ -413,6 +413,8 @@ async function boot(){
  let r;try{r=await fetch('/api/v2/landings/'+SLUG,{credentials:'same-origin'})}catch{return fail('No pudimos conectar con TADAA!. Revisa tu conexión y recarga la página.')}
  if(!r.ok)return fail(r.status===404?'Esta landing no existe o ya no está publicada.':'No pudimos cargar la landing. Recarga la página en un momento.');
  const j=await r.json();C=Object.assign({title:j.landing.title},j.landing.config||{});
+ // Obras con micrositio propio: la landing redirige a su página dedicada (conserva ?embed=1).
+ if(C.page&&/^[a-z0-9/_-]+\/?$/i.test(C.page)){location.replace(ROOT+C.page+(EMBED?'?embed=1':''));return}
  theme(C.theme||{});document.body.classList.toggle('inv',C.mode==='invite');render();
  document.body.classList.remove('boot-hide');document.body.classList.add('in-a');
  ambient((C.theme||{}).particles);confettiIntro();wireWallet();
