@@ -70,8 +70,8 @@ try {
      : (await client.query('SELECT id FROM events WHERE slug=$1',[item.slug])).rows[0];
    if(!event) throw new Error('No se pudo recuperar el evento '+item.slug);
    if(insertedEvent.rowCount) inserted++;
-   const poster=`/experience/img/catalogo/${item.art}.svg`;
-   const hero=`/experience/img/catalogo/${item.art}-hero.svg`;
+   const poster=`/img/catalogo/${item.art}.svg`;
+   const hero=`/img/catalogo/${item.art}-hero.svg`;
    await client.query(`
      INSERT INTO event_extras(event_id,poster_url,hero_url,ticket_url,picks,credits,instructions,maps_url)
      VALUES($1,$2,$3,$4,$5,'[]'::jsonb,$6::jsonb,$7)

@@ -182,7 +182,7 @@ await buy('ana','cinepolis','Sala tradicional',3,{addons:[['Nachos con queso',1]
  // oferta de baja (pajarito) para un colaborador inactivo con cuenta
  await q(`INSERT INTO membership_offers(user_id,kind,discount_pct,months_total,source_organization_id) VALUES($1,'company_exit',50,3,$2) ON CONFLICT DO NOTHING`,[U.sofia,id('org-empresa')]);
  // notificaciones de bienvenida
- for(const k of ['ana','diego'])await q(`INSERT INTO user_notifications(user_id,kind,title,message,action_url) VALUES($1,'demo','Bienvenida a TADAA!','Esta es una cuenta de demostración con boletos de ejemplo.','/experience/index.html#wallet')`,[U[k]]).catch(()=>{});
+ for(const k of ['ana','diego'])await q(`INSERT INTO user_notifications(user_id,kind,title,message,action_url) VALUES($1,'demo','Bienvenida a TADAA!','Esta es una cuenta de demostración con boletos de ejemplo.','/index.html#wallet')`,[U[k]]).catch(()=>{});
  if(!keepCdmx){const r=await q(`UPDATE events SET status='draft',updated_at=now() WHERE slug LIKE 'cdmx-demo-%' AND status='published'`);if(r.rowCount)console.log('↷ Archivados (borrador)',r.rowCount,'eventos cdmx-demo del seed anterior');}
  await q('COMMIT');
  console.log(`✓ Demo listo: ${EVENTS.length} eventos, ${orders} compras, ${tickets} boletos.`);

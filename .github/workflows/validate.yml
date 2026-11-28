@@ -13,10 +13,10 @@ jobs:
           node-version: '22'
       - name: Validar scripts web y servidor
         run: |
-          node --check web/data.js
-          node --check web/app.js
-          node --check web/integrations.js
-          node --check web/integrations-catalog.js
+          node --check legacy/web-v1/data.js
+          node --check legacy/web-v1/app.js
+          node --check legacy/web-v1/integrations.js
+          node --check legacy/web-v1/integrations-catalog.js
           node --check server/src/server.mjs
           node --check server/src/db.mjs
           node --check server/scripts/migrate.mjs
@@ -30,23 +30,20 @@ jobs:
       - name: Validar nuevas API y experiencia web
         run: |
           node --check server/src/platform.mjs
-          node --check web/experience/api.js
-          node --check web/experience/site-live.js
-          node --check web/experience/app-live.js
-          node --check web/experience/admin-live.js
-          node --check web/experience/partner-live.js
-          node --check web/experience/curtain.js
-          node --check web/experience/staff-live.js
-          node --check web/experience/tv-motion.js
-          node --check web/experience/tv-app.js
-          node --check web/experience/tv-adapters.js
-          node --check web/experience/tv-portals.js
+          node --check web/api.js
+          node --check web/curtain.js
+          node --check web/tv-motion.js
+          node --check web/tv-app.js
+          node --check web/tv-adapters.js
+          node --check web/tv-portals.js
+          node --check web/landings/landing.js
+          node --check server/src/invitations.mjs
           node --check server/scripts/seed-vibrante-demo.mjs
-          node tools/build-vibrante.mjs && git diff --exit-code web/experience/tv-screens.js
+          node tools/build-vibrante.mjs && git diff --exit-code web/tv-screens.js
           node --check server/src/features.mjs
           test -s server/migrations/004_now_golden_addons_rfc.sql
           test -s server/migrations/002_beta2_core.sql
-          test -s web/experience/admin.html
+          test -s web/index.html
           test -s docs/BETA2_INTEGRACION.md
       - name: Revisar Expo JSON
         run: |

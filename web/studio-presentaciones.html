@@ -25,6 +25,8 @@ aside a[aria-current=page]{background:#fff;color:var(--ink);font-weight:800}
 aside .tip{margin-top:auto;background:rgba(8,9,26,.35);border-radius:18px;padding:14px;font-size:12px;line-height:1.5}
 aside .tip b{display:block;color:var(--lime)}
 main{flex:1;min-width:0;padding:30px 32px 60px;display:flex;flex-direction:column;gap:22px}
+/* dentro de Studio: sin menú ni título propios */
+body.embed aside,body.embed .top h1,body.embed .top small{display:none}body.embed{background:#fff}body.embed main{padding:22px}
 .top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px}
 .top small{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--blue)}
 h1{margin:6px 0 0;font:800 46px/1 Outfit,sans-serif;letter-spacing:-2px}
@@ -107,15 +109,16 @@ details summary{cursor:pointer;font-weight:800;font-size:13px;display:flex;align
 </style>
 </head>
 <body>
+<script>if(new URLSearchParams(location.search).get("embed")==="1")document.body.classList.add("embed");else if(window.top===window)location.replace("/#admin/presentaciones")</script>
 <div class="app">
  <aside aria-label="Menú de Studio">
   <div class="lg"><img src="img/tv/logo-tadaa.png" alt="Tadaa!"><span>STUDIO</span></div>
   <a href="index.html#admin">Resumen</a>
   <a href="index.html#admin">Eventos y funciones</a>
   <a href="index.html#productor">Partners y productores</a>
-  <a href="presentaciones.html" aria-current="page"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M216,36H140V24a12,12,0,0,0-24,0V36H40A20,20,0,0,0,20,56V176a20,20,0,0,0,20,20H71l-16.4,20.5a12,12,0,0,0,18.74,15l28.4-35.5h52.46l28.4,35.5a12,12,0,0,0,18.74-15L185,196h31a20,20,0,0,0,20-20V56A20,20,0,0,0,216,36Zm-4,136H44V60H212ZM104,120v24a12,12,0,0,1-24,0V120a12,12,0,0,1,24,0Zm24-28a12,12,0,0,1,12,12v40a12,12,0,0,1-24,0V104A12,12,0,0,1,128,92Zm24,52V88a12,12,0,0,1,24,0v56a12,12,0,0,1-24,0Z"/></svg> Presentaciones</a>
+  <a href="index.html#admin/presentaciones" aria-current="page"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M216,36H140V24a12,12,0,0,0-24,0V36H40A20,20,0,0,0,20,56V176a20,20,0,0,0,20,20H71l-16.4,20.5a12,12,0,0,0,18.74,15l28.4-35.5h52.46l28.4,35.5a12,12,0,0,0,18.74-15L185,196h31a20,20,0,0,0,20-20V56A20,20,0,0,0,216,36Zm-4,136H44V60H212ZM104,120v24a12,12,0,0,1-24,0V120a12,12,0,0,1,24,0Zm24-28a12,12,0,0,1,12,12v40a12,12,0,0,1-24,0V104A12,12,0,0,1,128,92Zm24,52V88a12,12,0,0,1,24,0v56a12,12,0,0,1-24,0Z"/></svg> Presentaciones</a>
   <a href="index.html#pitch" target="_blank" rel="noopener">Pitch general</a>
-  <a href="admin.html">Administración avanzada</a>
+  
   <div class="tip"><b>Una presentación por prospecto</b>Elige la obra que viene, escribe un mensaje y comparte el enlace corto. Aquí verás cuántas veces la abrieron y quién dejó sus datos.</div>
  </aside>
  <main>
