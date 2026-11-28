@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#050722">
 <title>Back to the Future: El Musical · Temporada 2027 · Teatro Telcel</title>
 <meta name="description" content="Back to the Future: El Musical, ganador del Premio Olivier a Mejor Nuevo Musical, estrena temporada en 2027 en el Teatro Telcel. Preventa con TADAA!">
-<link rel="preload" href="/fonts/chakra-petch-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/big-shoulders-display-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/chakra-petch-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/big-shoulders-display-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts/fonts.css?v=2">
 <link rel="preload" href="cielo.webp" as="image">
 <link rel="preload" href="logo.webp" as="image">
 <style>
@@ -46,6 +46,19 @@ h2{font:900 clamp(52px,7.4vw,124px)/.86 var(--fd);text-transform:uppercase;lette
 #bolts{position:absolute;inset:0;z-index:-2;pointer-events:none}
 .hero .flash{position:absolute;inset:0;z-index:-1;background:radial-gradient(70% 60% at var(--fx,50%) 20%,rgba(235,248,255,.85),rgba(160,200,255,.25) 45%,transparent 70%);opacity:0;pointer-events:none;will-change:opacity}
 .hero.off .sky,.hero.off .sky2,.hero.off .cue .ic{animation-play-state:paused}
+.gate{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:24px;background:radial-gradient(60% 50% at 50% 45%,#1E33FF 0%,#0A1170 45%,#050722 100%);text-align:center;transition:opacity .6s var(--out),visibility 0s .6s}
+.gate.out{opacity:0;visibility:hidden}
+.gate::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(127,227,255,.05) 0 1px,transparent 1px 4px);pointer-events:none}
+.gate-in{position:relative;display:flex;flex-direction:column;align-items:center;gap:18px;max-width:520px}
+.gate-logo{width:min(320px,70vw);height:auto;filter:drop-shadow(0 14px 30px rgba(0,0,0,.5));animation:gpulse 3s ease-in-out infinite}
+@keyframes gpulse{50%{transform:scale(1.03)}}
+.gate-t{margin:0;font:900 clamp(40px,7vw,72px)/.95 var(--fd);text-transform:uppercase;letter-spacing:.01em}
+.gate-t span{color:var(--sun)}
+.gate-p{margin:0;color:#C9D6FF;font-size:17px;max-width:34ch}
+.gate-on{height:64px;padding:0 34px;font-size:17px;margin-top:6px}
+.gate-off{border:0;background:none;color:#9AA3C8;font:600 14px var(--fb);text-decoration:underline;text-underline-offset:4px;cursor:pointer;padding:8px}
+body.gated{overflow:hidden}
+@media (prefers-reduced-motion:reduce){.gate-logo{animation:none}}
 .hero .shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,7,34,.25),transparent 30%,transparent 60%,#0A1170 100%)}
 .stage{position:relative;text-align:center;padding:0 20px;display:flex;flex-direction:column;align-items:center;gap:22px;perspective:1200px}
 .logo-wrap{position:relative;width:min(731px,78vw)}
@@ -295,6 +308,13 @@ footer img{height:28px;margin:0 auto 12px}
  <filter id="chanB"><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0"/></filter>
 </svg>
 
+<div class="gate" id="gate" hidden role="dialog" aria-modal="true" aria-labelledby="gateT">
+ <div class="gate-in"><img src="logo-sm.webp" alt="Back to the Future: El Musical" class="gate-logo">
+  <h2 id="gateT" class="gate-t">Destino: <span>1985</span></h2>
+  <p class="gate-p">La función empieza con la obertura. Sube el volumen y abróchate el cinturón.</p>
+  <button class="btn b-hot gate-on" id="gateOn"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M160,32.25V223.69a8.29,8.29,0,0,1-3.91,7.18,8,8,0,0,1-9-.56l-65.57-51A4,4,0,0,1,80,176.16V79.84a4,4,0,0,1,1.55-3.15l65.57-51a8,8,0,0,1,10,.16A8.27,8.27,0,0,1,160,32.25ZM60,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H60a4,4,0,0,0,4-4V84A4,4,0,0,0,60,80Zm126.77,20.84a8,8,0,0,0-.72,11.3,24,24,0,0,1,0,31.72,8,8,0,1,0,12,10.58,40,40,0,0,0,0-52.88A8,8,0,0,0,186.74,100.84Zm40.89-26.17a8,8,0,1,0-11.92,10.66,64,64,0,0,1,0,85.34,8,8,0,1,0,11.92,10.66,80,80,0,0,0,0-106.66Z"/></svg> Entrar con sonido</button>
+  <button class="gate-off" id="gateOff">Entrar sin sonido</button></div>
+</div>
 <header class="hero" id="top">
  <div class="sky"></div><div class="sky2"></div>
  <canvas id="bolts" aria-hidden="true"></canvas>
@@ -461,22 +481,27 @@ function carLife(){
 }
 
 /* ---------- entrada del logo y audio ---------- */
-const audio=$('#ov'),snd=$('#snd');let wantSound=store.get('bttf-mute')!=='1',playing=false;
+const audio=$('#ov'),snd=$('#snd');let wantSound=true,playing=false;
 function paintSnd(){snd.classList.toggle('on',playing);snd.setAttribute('aria-pressed',String(playing));$('#sndIc').innerHTML=ic(playing?'speaker-high':'speaker-slash');$('#sndT').textContent=playing?'Silenciar':'Escuchar la obertura';snd.setAttribute('aria-label',playing?'Silenciar la obertura':'Reproducir la obertura')}
 function fadeTo(v,ms=900){const a=audio.volume,t0=performance.now();const s=n=>{const k=Math.min(1,(n-t0)/ms);audio.volume=Math.max(0,Math.min(1,a+(v-a)*k));if(k<1)requestAnimationFrame(s);else if(v===0){audio.pause()}};requestAnimationFrame(s)}
 async function startAudio(){try{audio.volume=0;await audio.play();playing=true;snd.classList.remove('ask');fadeTo(.55,1400)}catch{playing=false;snd.classList.add('ask')}paintSnd()}
-snd.addEventListener('click',()=>{if(playing){playing=false;wantSound=false;store.set('bttf-mute','1');fadeTo(0,400);paintSnd()}else{wantSound=true;store.set('bttf-mute','0');startAudio()}});
+snd.addEventListener('click',()=>{if(playing){playing=false;wantSound=false;fadeTo(0,400);paintSnd()}else{wantSound=true;startAudio()}});
 // si el navegador bloquea el autoplay, la primera interacción enciende la obertura
 const UNL=['pointerdown','keydown','touchend','click'];const unlock=e=>{if(e.target.closest&&e.target.closest('#snd'))return;if(wantSound&&!playing)startAudio();UNL.forEach(t=>removeEventListener(t,unlock,true))};
 UNL.forEach(t=>addEventListener(t,unlock,true));
-// la obertura arranca sola al cargar; si el navegador la bloquea, suena con el primer toque o tecla
-if(new URLSearchParams(location.search).get('embed')!=='1'&&wantSound){snd.classList.add('show');startAudio()}
+
 
 function intro(strikeNow){
  const hero=$('.hero');const go=()=>{hero.classList.add('go');
   const T=RM?0:2650;
   setTimeout(()=>{hero.classList.add('landed');document.body.classList.add('landed');if(strikeNow&&!RM)strikeNow();snd.classList.add('show');if(wantSound&&!playing)startAudio();else paintSnd()},T)};
- const im=$('#logo');if(im.complete)go();else{im.onload=go;im.onerror=go}
+ const ready=()=>{const im=$('#logo');if(im.complete)go();else{im.onload=go;im.onerror=go}};
+ // Los navegadores solo dejan sonar audio después de un toque: la entrada pide ese toque y arranca la obertura con el logo.
+ const gate=$('#gate');if(!gate||new URLSearchParams(location.search).get('embed')==='1'){gate?.remove();return ready()}
+ document.body.classList.add('gated');gate.hidden=false;$('#gateOn').focus({preventScroll:true});
+ const enter=withSound=>{wantSound=withSound;if(withSound){audio.volume=0;const pr=audio.play();playing=true;pr.then(()=>fadeTo(.55,1400)).catch(()=>{playing=false;snd.classList.add('ask');paintSnd()})}
+  gate.classList.add('out');document.body.classList.remove('gated');setTimeout(()=>gate.remove(),RM?0:650);ready()};
+ $('#gateOn').addEventListener('click',()=>enter(true));$('#gateOff').addEventListener('click',()=>enter(false))
 }
 
 /* ---------- circuitos del tiempo + condensador ---------- */
