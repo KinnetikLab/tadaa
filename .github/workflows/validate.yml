@@ -13,10 +13,10 @@ jobs:
           node-version: '22'
       - name: Validar scripts web y servidor
         run: |
-          node --check web/data.js
-          node --check web/app.js
-          node --check web/integrations.js
-          node --check web/integrations-catalog.js
+          node --check legacy/web-v1/data.js
+          node --check legacy/web-v1/app.js
+          node --check legacy/web-v1/integrations.js
+          node --check legacy/web-v1/integrations-catalog.js
           node --check server/src/server.mjs
           node --check server/src/db.mjs
           node --check server/scripts/migrate.mjs
