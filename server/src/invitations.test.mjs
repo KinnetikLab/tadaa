@@ -7,5 +7,5 @@ test('código de sorteo con forma TD-XXXX-XXXX sin caracteres ambiguos',()=>{con
 test('QR del pase: válido 2 minutos, rechaza firmas alteradas y vencidos',()=>{const now=Date.now(),m=Math.floor(now/60000);
  assert.deepEqual(verifyPass(passPayload(id,m),now),{passId:id});assert.deepEqual(verifyPass(passPayload(id,m-2),now),{passId:id});
  assert.deepEqual(verifyPass(passPayload(id,m-5),now),{expired:true});assert.equal(verifyPass(passPayload(id,m).slice(0,-1)+'x',now),null);assert.equal(verifyPass('basura'),null)});
-test('enlace e ics',()=>{assert.equal(inviteLink('/experience/minisitios/bttf/','abc'),'/experience/minisitios/bttf/?inv=abc');assert.equal(inviteLink('/experience/landings/?s=kb','abc'),'/experience/landings/?s=kb&inv=abc');
+test('enlace e ics',()=>{assert.equal(inviteLink('/minisitios/bttf/','abc'),'/minisitios/bttf/?inv=abc');assert.equal(inviteLink('/landings/?s=kb','abc'),'/landings/?s=kb&inv=abc');
  const ics=icsFor({title:'X',start:'2026-12-01T18:00:00Z',url:'https://meet.jit.si/a'});assert.match(ics,/DTSTART:20261201T180000Z/);assert.match(ics,/DTEND:20261201T183000Z/);assert.equal(slugify('Volver al Futuro: El Musical'),'volver-al-futuro-el-musical')});

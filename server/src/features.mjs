@@ -54,7 +54,7 @@ export async function issueTicket(c,{itemId,userId,seatId=null,eventId=null,rand
    if(won.rows[0].n<cfg.max_winners&&rollGolden(cfg.odds,rand)){golden=true;benefit={kind:cfg.benefit_kind,title:cfg.benefit_title,detail:cfg.benefit_detail||null,eventId:cfg.benefit_event_id||null};}}}
  let delivery='final';if(eventId){const m=await c.query('SELECT ticketing_mode FROM events WHERE id=$1',[eventId]);if(m.rows[0]?.ticketing_mode==='external')delivery='provisional'}
  const t=await c.query(`INSERT INTO tickets(order_item_id,owner_user_id,code_hash,seat_id,golden,golden_benefit,delivery_status) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING id`,[itemId,userId,code,seatId,golden,benefit?JSON.stringify(benefit):null,delivery]);
- if(golden)await c.query(`INSERT INTO user_notifications(user_id,kind,title,message,action_url) VALUES($1,'golden_ticket','¡Te salió un Golden Ticket!','Uno de tus boletos se volvió dorado. Ábrelo para descubrir tu beneficio.','/experience/app.html#/boletos')`,[userId]);
+ if(golden)await c.query(`INSERT INTO user_notifications(user_id,kind,title,message,action_url) VALUES($1,'golden_ticket','¡Te salió un Golden Ticket!','Uno de tus boletos se volvió dorado. Ábrelo para descubrir tu beneficio.','/app.html#/boletos')`,[userId]);
  return {id:t.rows[0].id,golden};
 }
 /** Precio de membresía: $100/mes o el descuento de una oferta abierta (p. ej. salida de convenio). */
@@ -75,7 +75,7 @@ export async function consumeMembershipOffer(c,orderId){const r=await c.query(`S
 export async function employeeExit(c,{orgId,employee}){
  if(!employee?.claimed_by)return false;
  await c.query(`INSERT INTO membership_offers(user_id,kind,discount_pct,months_total,source_organization_id) VALUES($1,'company_exit',50,3,$2) ON CONFLICT DO NOTHING`,[employee.claimed_by,orgId]);
- await c.query(`INSERT INTO user_notifications(user_id,kind,title,message,action_url) VALUES($1,'company_exit','Un pajarito nos contó…','Tus beneficios de convenio se pausaron, pero tu cuenta sigue aquí. Te regalamos 3 meses de membresía al 50%.','/experience/app.html#/membresia')`,[employee.claimed_by]);
+ await c.query(`INSERT INTO user_notifications(user_id,kind,title,message,action_url) VALUES($1,'company_exit','Un pajarito nos contó…','Tus beneficios de convenio se pausaron, pero tu cuenta sigue aquí. Te regalamos 3 meses de membresía al 50%.','/app.html#/membresia')`,[employee.claimed_by]);
  return true;
 }
 /** Re-afiliación por RFC: liga el registro de colaborador con la cuenta existente, sin duplicar. */
@@ -179,7 +179,7 @@ export async function featureRequest(req,res,pathname,url,parts,ctx){
    await syncFlags(p,e.id);await audit(s.user_id,'producer.addon.create','event',e.id,{addonId:r.rows[0].id});return response(res,201,{addonId:r.rows[0].id}),true}
   if(parts[5]==='addons'&&uuid(parts[6])&&M==='PATCH'){const s=await producerUser(req,ctx,org),d=await reqBody(req);const num=x=>x===undefined||x===null||x===''?null:Math.max(0,Math.trunc(Number(x)));const r=await p.query(`UPDATE event_addons a SET active=COALESCE($1,a.active),stock=COALESCE($2,a.stock),price_minor=COALESCE($3,a.price_minor) FROM events e WHERE a.id=$4 AND e.id=a.event_id AND e.organization_id=$5 RETURNING a.event_id`,[typeof d.active==='boolean'?d.active:null,num(d.stock),num(d.priceMinor),parts[6],org]);if(!r.rowCount)throw invalid('Add-on no encontrado',404);await syncFlags(p,r.rows[0].event_id);await audit(s.user_id,'producer.addon.update','event_addon',parts[6]);return response(res,200,{ok:true}),true}
   if(parts[5]==='tickets'&&uuid(parts[6])&&parts[7]==='delivery'&&M==='PATCH'){const s=await producerUser(req,ctx,org),d=await reqBody(req);if(!['provisional','delivering','final'].includes(d.status))throw invalid('Estado de entrega inválido');const r=await p.query(`UPDATE tickets t SET delivery_status=$1,external_reference=COALESCE($2,t.external_reference) FROM order_items oi,orders o,reservations re,events e WHERE t.id=$3 AND oi.id=t.order_item_id AND o.id=oi.order_id AND re.id=o.reservation_id AND e.id=re.event_id AND e.organization_id=$4 RETURNING t.owner_user_id`,[d.status,clean(d.externalReference,120)||null,parts[6],org]);if(!r.rowCount)throw invalid('Boleto no encontrado',404);
-   if(d.status==='final'&&r.rows[0].owner_user_id)await p.query(`INSERT INTO user_notifications(user_id,kind,title,message,action_url) VALUES($1,'ticket_final','Tu boleto final está listo','Ya puedes usar tu boleto final en la entrada.','/experience/app.html#/boletos')`,[r.rows[0].owner_user_id]);
+   if(d.status==='final'&&r.rows[0].owner_user_id)await p.query(`INSERT INTO user_notifications(user_id,kind,title,message,action_url) VALUES($1,'ticket_final','Tu boleto final está listo','Ya puedes usar tu boleto final en la entrada.','/app.html#/boletos')`,[r.rows[0].owner_user_id]);
    await audit(s.user_id,'producer.ticket.delivery','ticket',parts[6],{status:d.status});return response(res,200,{ok:true}),true}
  }
 
@@ -238,13 +238,13 @@ export async function featureRequest(req,res,pathname,url,parts,ctx){
   const set=act==='confirm'?`delivery_status='delivering'`:act==='deliver'?`delivery_status='final'`:`status='cancelled'`;
   const r=await p.query(`UPDATE tickets t SET ${set},external_reference=COALESCE($2,t.external_reference) FROM order_items oi WHERE oi.id=t.order_item_id AND oi.order_id=$1 AND t.status='valid' RETURNING t.owner_user_id`,[parts[4],clean(d.externalReference,120)||null]);if(!r.rowCount)throw invalid('Solicitud no encontrada',404);
   const u=r.rows[0].owner_user_id;const msg={confirm:['Tu solicitud fue confirmada','El productor confirmó tus lugares. Te avisamos cuando lleguen tus boletos oficiales.'],deliver:['Tus boletos están listos','Ya puedes ver tu acceso en Mi Wallet.'],reject:['Tu solicitud no pudo confirmarse','No hubo disponibilidad. Se reembolsará tu pago.']}[act];
-  if(u)await p.query(`INSERT INTO user_notifications(user_id,kind,title,message,action_url) VALUES($1,'request_'||$2,$3,$4,'/experience/index.html#wallet')`,[u,act,msg[0],msg[1]]);
+  if(u)await p.query(`INSERT INTO user_notifications(user_id,kind,title,message,action_url) VALUES($1,'request_'||$2,$3,$4,'/index.html#wallet')`,[u,act,msg[0],msg[1]]);
   if(act==='reject')await p.query(`UPDATE orders SET status='refunded',updated_at=now() WHERE id=$1`,[parts[4]]);
   await audit(null,'admin.request.'+act,'order',parts[4]);return response(res,200,{ok:true,tickets:r.rowCount}),true}
  if(parts[2]==='admin'&&parts[3]==='orgs'&&uuid(parts[4])&&parts[5]==='members'&&M==='POST'){requireAdmin(req);const d=await reqBody(req);const email=clean(d.email,254).toLowerCase(),role=['owner','admin','manager','staff','scanner'].includes(d.role)?d.role:'staff';
   const u=await p.query('SELECT id,full_name FROM app_users WHERE email=$1',[email]);if(!u.rowCount)throw invalid('Esa persona primero debe crear su cuenta TADAA! con ese correo',404);
   await p.query(`INSERT INTO organization_members(organization_id,user_id,role) VALUES($1,$2,$3) ON CONFLICT(organization_id,user_id) DO UPDATE SET role=EXCLUDED.role`,[parts[4],u.rows[0].id,role]);
-  await p.query(`INSERT INTO user_notifications(user_id,kind,title,message,action_url) VALUES($1,'org_invite','Te agregaron a un equipo',$2,$3)`,[u.rows[0].id,'Ahora tienes rol '+role+' en una organización de TADAA!.',role==='staff'||role==='scanner'?'/experience/index.html#staff':'/experience/index.html#productor']);
+  await p.query(`INSERT INTO user_notifications(user_id,kind,title,message,action_url) VALUES($1,'org_invite','Te agregaron a un equipo',$2,$3)`,[u.rows[0].id,'Ahora tienes rol '+role+' en una organización de TADAA!.',role==='staff'||role==='scanner'?'/index.html#staff':'/index.html#productor']);
   await audit(null,'admin.org.member','organization',parts[4],{role});return response(res,201,{ok:true,name:u.rows[0].full_name,role}),true}
  if(parts[2]==='admin'&&parts[3]==='orgs'&&uuid(parts[4])&&parts[5]==='members'&&M==='GET'){requireAdmin(req);const r=await p.query(`SELECT m.role,u.email,u.full_name FROM organization_members m JOIN app_users u ON u.id=m.user_id WHERE m.organization_id=$1 ORDER BY m.created_at`,[parts[4]]);return response(res,200,{members:r.rows}),true}
 

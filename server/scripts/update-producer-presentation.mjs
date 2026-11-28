@@ -1,6 +1,6 @@
 import { getPool, closePool } from '../src/db.mjs';
 import { readFile } from 'node:fs/promises';
-const source = await readFile(new URL('../../web/experience/producer-deck.js', import.meta.url), 'utf8');
+const source = await readFile(new URL('../../legacy/web-v1/pages/producer-deck.js', import.meta.url), 'utf8');
 const deck = JSON.parse(source.slice(source.indexOf('=')+1).trim().replace(/;$/, ''));
 const pool = getPool();
 if (!pool) throw new Error('DATABASE_URL no configurada');

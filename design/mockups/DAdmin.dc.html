@@ -155,16 +155,28 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
         </div>
       </section>
     </sc-if>
-    <sc-if value="{{vTools}}">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px">
-        <sc-for list="{{tools}}" as="t">
-          <a href="{{t.href}}" style="background: #FFFFFF; border-radius: 28px; padding: 22px; display: flex; flex-direction: column; gap: 10px; min-height: 180px; transition: transform .15s ease-out, box-shadow .2s">
-            <span style="width: 46px; height: 46px; border-radius: 14px; background: #1238FF; color: #D6FF35; display: grid; place-items: center"><svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M228,104a12,12,0,0,1-24,0V69l-59.51,59.51a12,12,0,0,1-17-17L187,52H152a12,12,0,0,1,0-24h64a12,12,0,0,1,12,12Zm-44,24a12,12,0,0,0-12,12v64H52V84h64a12,12,0,0,0,0-24H48A20,20,0,0,0,28,80V208a20,20,0,0,0,20,20H176a20,20,0,0,0,20-20V140A12,12,0,0,0,184,128Z"/></svg></span>
-            <b style="font-family: Outfit, sans-serif; font-size: 20px">{{t.title}}</b>
-            <span style="font-size: 13px; line-height: 1.5; color: #4A5068">{{t.text}}</span>
-          </a>
-        </sc-for>
-      </div>
+    <sc-if value="{{vGen}}">
+      <sc-for list="{{panels}}" as="pn">
+        <section style="background: #FFFFFF; border-radius: 28px; padding: 22px">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; align-items: flex-start; margin-bottom: 14px">
+            <span style="flex: 1 1 320px"><h2 style="margin: 0; font-family: Outfit, sans-serif; font-size: 22px">{{pn.title}}</h2><span style="display: block; margin-top: 4px; font-size: 13px; line-height: 1.5; color: #5A6178; max-width: 70ch">{{pn.text}}</span></span>
+            <span style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{pn.acts}}" as="a"><button onClick="{{a.go}}" style="{{a.style}}">{{a.label}}</button></sc-for></span>
+          </div>
+          <div style="display: flex; flex-direction: column">
+            <sc-for list="{{pn.rows}}" as="r">
+              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid #EEF1F7">
+                <span style="flex: 1 1 260px; min-width: 0"><b style="font-size: 14px">{{r.title}}</b><br><span style="font-size: 12px; color: #5A6178">{{r.sub}}</span></span>
+                <span style="{{r.chipStyle}}">{{r.chip}}</span>
+                <button onClick="{{r.go1}}" style="{{r.s1}}">{{r.l1}}</button><button onClick="{{r.go2}}" style="{{r.s2}}">{{r.l2}}</button><button onClick="{{r.go3}}" style="{{r.s3}}">{{r.l3}}</button>
+              </div>
+            </sc-for>
+          </div>
+          <p style="{{pn.emptyStyle}}">{{pn.empty}}</p>
+        </section>
+      </sc-for>
+    </sc-if>
+    <sc-if value="{{vPres}}">
+      <section style="background: #FFFFFF; border-radius: 28px; overflow: hidden"><iframe title="Presentaciones" src="studio-presentaciones.html?embed=1" style="display: block; width: 100%; height: calc(100vh - 170px); min-height: 640px; border: 0"></iframe></section>
     </sc-if>
   </main>
 </div>

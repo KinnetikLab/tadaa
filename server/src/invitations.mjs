@@ -16,14 +16,14 @@ export function slugify(s){return String(s||'').normalize('NFD').replace(/[\u030
 export function passPayload(passId,minute=Math.floor(Date.now()/60000)){const sig=crypto.createHmac('sha256',SECRET()).update(passId+'|'+minute).digest('base64url').slice(0,12);return `TADAA|INV|${passId}|${minute}|${sig}`}
 export function verifyPass(payload,now=Date.now()){const m=String(payload||'').trim().match(/^TADAA\|INV\|([0-9a-f-]{36})\|(\d+)\|([\w-]{12})$/i);if(!m)return null;const minute=Number(m[2]),cur=Math.floor(now/60000);if(minute>cur+1||minute<cur-2)return {expired:true};
  const want=crypto.createHmac('sha256',SECRET()).update(m[1]+'|'+minute).digest('base64url').slice(0,12);if(!crypto.timingSafeEqual(Buffer.from(want),Buffer.from(m[3])))return null;return {passId:m[1].toLowerCase()}}
-export function inviteLink(siteUrl,token){const base=siteUrl||'/experience/';return base+(base.includes('?')?'&':'?')+'inv='+encodeURIComponent(token)}
+export function inviteLink(siteUrl,token){const base=siteUrl||'/';return base+(base.includes('?')?'&':'?')+'inv='+encodeURIComponent(token)}
 export function icsFor({title,start,minutes=30,url,description}){const f=d=>new Date(d).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');const end=new Date(+new Date(start)+minutes*60000);
  return ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//TADAA!//Micrositios//ES','BEGIN:VEVENT','UID:'+crypto.randomUUID()+'@tadaa','DTSTAMP:'+f(Date.now()),'DTSTART:'+f(start),'DTEND:'+f(end),'SUMMARY:'+title,'LOCATION:'+url,'DESCRIPTION:'+String(description||'').replace(/\n/g,'\\n')+'\\n'+url,'END:VEVENT','END:VCALENDAR'].join('\r\n')}
 
 const redeemHits=new Map();
 function redeemLimited(ip){const now=Date.now(),a=(redeemHits.get(ip)||[]).filter(t=>now-t<600000);a.push(now);redeemHits.set(ip,a);return a.length>12}
 
-async function siteFor(p,slug){if(!slug)return null;const r=await p.query(`SELECT slug,config->>'page' page FROM show_landings WHERE slug=$1 AND status<>'archived'`,[slug]);if(!r.rowCount)return null;const pg=r.rows[0].page;return pg&&/^[a-z0-9/_-]+\/?$/i.test(pg)?'/experience/'+pg:'/experience/landings/?s='+slug}
+async function siteFor(p,slug){if(!slug)return null;const r=await p.query(`SELECT slug,config->>'page' page FROM show_landings WHERE slug=$1 AND status<>'archived'`,[slug]);if(!r.rowCount)return null;const pg=r.rows[0].page;return pg&&/^[a-z0-9/_-]+\/?$/i.test(pg)?'/'+pg:'/landings/?s='+slug}
 
 async function campaignOf(p,org,id,uuid,invalid){if(!uuid(id))throw invalid('Campaña inválida');const r=await p.query('SELECT * FROM invite_campaigns WHERE id=$1 AND organization_id=$2',[id,org]);if(!r.rowCount)throw invalid('Campaña no encontrada',404);return r.rows[0]}
 async function makePasses(c,invId,n,first,rest){for(let i=1;i<=n;i++)await c.query('INSERT INTO invitation_passes(invitation_id,n,holder_name) VALUES($1,$2,$3) ON CONFLICT DO NOTHING',[invId,i,i===1?first:(rest||null)])}

@@ -21,24 +21,13 @@ async function body(req){let count=0;const chunks=[];for await(const chunk of re
 async function request(req,res){
  res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('X-Frame-Options','SAMEORIGIN');res.setHeader('Referrer-Policy','no-referrer');res.setHeader('Permissions-Policy','camera=(self), microphone=(), geolocation=()');
  const u=new URL(req.url,'http://local');const pathname=u.pathname;
- // La portada vive en /experience/. Sin esta redirección, /curtain.js,
- // /site-live.js y /login.html se resuelven incorrectamente desde /.
- const aliasPaths={
-  '/':'/experience/',
-  '/index.html':'/experience/',
-  '/login.html':'/experience/login.html',
-  '/app.html':'/experience/app.html',
-  '/admin.html':'/experience/admin.html',
-  '/partner.html':'/experience/partner.html',
-  '/staff.html':'/experience/staff.html'
- };
- if(Object.prototype.hasOwnProperty.call(aliasPaths,pathname)){
-  res.writeHead(302,{'Location':aliasPaths[pathname]+(u.search||'')+(u.hash||''),'Cache-Control':'no-store'});
-  res.end();return;
- }
+ // El sitio vive en la raíz. /experience/* quedó de la versión anterior: redirige permanente a la misma ruta sin el prefijo.
+ if(pathname==='/experience'||pathname.startsWith('/experience/')){res.writeHead(301,{'Location':(pathname.slice(11)||'/')+(u.search||''),'Cache-Control':'public, max-age=86400'});res.end();return}
+ // Páginas de gestión anteriores: todo vive ahora dentro de la app (Studio, portal de productores, app de staff).
+ const legacy={'/admin.html':'/#admin','/presentaciones.html':'/#admin/presentaciones','/partner.html':'/#productor','/staff.html':'/#staff','/app.html':'/#cuenta','/inicio-clasico.html':'/','/evento-clasico.html':'/#explorar','/event.html':'/#explorar'};
+ if(Object.prototype.hasOwnProperty.call(legacy,pathname)){res.writeHead(301,{'Location':legacy[pathname],'Cache-Control':'no-store'});res.end();return}
  // Enlaces cortos para compartir: /obra/<slug> abre la landing de la obra; /p/<slug> abre la presentación personalizada.
- if(pathname==='/canjear'||pathname==='/canjear/'){res.writeHead(302,{'Location':'/experience/canjear/'+(u.search||''),'Cache-Control':'no-store'});res.end();return}
- {const m=pathname.match(/^\/(obra|p)\/([a-z0-9-]{2,80})\/?$/);if(m){res.writeHead(302,{'Location':m[1]==='obra'?'/experience/landings/?s='+m[2]+(u.search?'&'+u.search.slice(1):''):'/experience/#pitch/'+m[2],'Cache-Control':'no-store'});res.end();return}}
+ {const m=pathname.match(/^\/(obra|p)\/([a-z0-9-]{2,80})\/?$/);if(m){res.writeHead(302,{'Location':m[1]==='obra'?'/landings/?s='+m[2]+(u.search?'&'+u.search.slice(1):''):'/#pitch/'+m[2],'Cache-Control':'no-store'});res.end();return}}
 
  if(pathname.startsWith('/api/')){
   if(process.env.NODE_ENV==='production'&&!reqSecure(req))return send(res,403,{error:'HTTPS obligatorio'});
@@ -78,7 +67,7 @@ async function request(req,res){
  }
  if(req.method!=='GET'&&req.method!=='HEAD'){res.writeHead(405);return res.end()}
  let file=decodeURIComponent(pathname);
- if(pathname==='/experience/'||pathname==='/experience')file='/experience/index.html';
+ if(file==='/')file='/index.html';
  // Never expose files outside the web directory.
  if(file.includes('\0')){res.writeHead(400);return res.end()}
  let target=path.resolve(root,'.'+file);

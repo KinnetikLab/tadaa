@@ -11,7 +11,7 @@ const GUEST=(Q.get('para')||'').replace(/[<>]/g,'').trim().slice(0,60);
 const PASES=Math.max(1,Math.min(6,parseInt(Q.get('pases'),10)||0));
 // ?inv=TOKEN: invitación real creada en el portal de productores (pases y QR firmados por invitado).
 const INV_T=(Q.get('inv')||'').replace(/[^\w-]/g,'').slice(0,40);let INVD=null;
-const ROOT=new URL('../',location.href).href; // /experience/
+const ROOT=new URL('../',location.href).href; // /
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

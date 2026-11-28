@@ -7,21 +7,21 @@
 <title>Kinky Boots: El Musical · Función de prensa · CCT1</title>
 <meta name="description" content="Kinky Boots, el musical de Harvey Fierstein y Cyndi Lauper, llega al CCT1. Tu invitación a la función de prensa, con tus pases en la Wallet de TADAA!.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,700;1,6..96,900&family=Instrument+Sans:wght@400;500;600;700&family=Outfit:wght@800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Outfit:wght@800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="preload" href="fabrica.webp" as="image"><link rel="preload" href="logo.webp" as="image">
 <style>
 :root{--night:#140A10;--brick:#2A1218;--red:#E0102F;--red2:#9E0A22;--gold:#F2C14E;--violet:#7A4BC2;--cream:#F7EDE4;--muted:#C9B6B9;
- --fd:'Bodoni Moda',Didot,'Times New Roman',serif;--fb:'Instrument Sans',system-ui,sans-serif;--spring:cubic-bezier(.2,1.15,.35,1);--out:cubic-bezier(0,0,.2,1)}
+ --fd:'Bricolage Grotesque',system-ui,sans-serif;--fb:'Bricolage Grotesque',system-ui,sans-serif;--spring:cubic-bezier(.2,1.15,.35,1);--out:cubic-bezier(0,0,.2,1)}
 *{box-sizing:border-box}html{scroll-behavior:smooth;background:var(--night)}
-body{margin:0;color:var(--cream);font:500 17px/1.6 var(--fb);background:var(--night);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{margin:0;color:var(--cream);font:400 17.5px/1.62 var(--fb);font-variation-settings:'opsz' 16;background:var(--night);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}a{color:inherit}button{font:inherit;color:inherit;cursor:pointer}
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .ic{width:1.15em;height:1.15em;fill:currentColor;flex:0 0 auto}
 .wrap{width:min(1200px,100% - 40px);margin-inline:auto}
 .kick{display:inline-flex;align-items:center;gap:8px;font:600 14px/1 var(--fb);color:var(--gold)}
 .kick .ic{width:16px;height:16px}
-h2{font:900 italic clamp(46px,6.4vw,104px)/.92 var(--fd);letter-spacing:-.02em;margin:14px 0 0}
-h2 em{font-style:italic;color:var(--red)}
+h2{font:800 clamp(44px,6vw,96px)/.95 var(--fd);font-stretch:75%;font-variation-settings:'wdth' 75,'opsz' 96;letter-spacing:-.01em;margin:14px 0 0;text-transform:uppercase}
+h2 em{font-style:normal;color:var(--red)}
 .rv{opacity:0;transform:translateY(32px)}.rv.on{opacity:1;transform:none;transition:opacity .6s var(--out),transform .8s var(--spring)}
 .btn{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 28px;border-radius:99px;border:0;text-decoration:none;font:700 15px/1 var(--fb);transition:scale .12s ease-out,box-shadow .25s var(--out),background .2s}
 .btn:active{scale:.96}
@@ -44,8 +44,8 @@ h2 em{font-style:italic;color:var(--red)}
 @keyframes shine{0%{background-position:-150% 0}45%,100%{background-position:150% 0}}
 #spark{position:absolute;inset:-6%;width:112%;height:112%;pointer-events:none}
 .hero.off .shine{animation-play-state:paused}
-.when{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 16px;font:900 italic clamp(22px,2.6vw,34px)/1.1 var(--fd);opacity:0;transform:translateY(20px);transition:opacity .7s var(--out) .5s,transform .9s var(--spring) .5s}
-.when b{color:var(--gold);font-weight:900}.when .dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red)}
+.when{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 16px;font:800 clamp(22px,2.6vw,34px)/1.1 var(--fd);letter-spacing:.02em;opacity:0;transform:translateY(20px);transition:opacity .7s var(--out) .5s,transform .9s var(--spring) .5s;font-variation-settings:'wdth' 75,'opsz' 72;text-transform:uppercase}
+.when b{color:var(--gold);font-weight:800}.when .dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red)}
 .ctas{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;opacity:0;transform:translateY(20px);transition:opacity .7s var(--out) .7s,transform .9s var(--spring) .7s}
 .in .presenter,.in .logo-box,.in .when,.in .ctas{opacity:1;transform:none}
 .cue{position:absolute;bottom:22px;left:50%;translate:-50% 0;color:var(--muted);text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:13px}
@@ -53,7 +53,7 @@ h2 em{font-style:italic;color:var(--red)}
 
 /* ───── marquesina ───── */
 .marq{background:var(--red);color:#fff;overflow:hidden;white-space:nowrap;border-block:2px solid #ff4a62}
-.marq .track{display:inline-flex;gap:38px;padding:14px 0;animation:marq 28s linear infinite;font:900 italic 26px/1 var(--fd)}
+.marq .track{display:inline-flex;gap:38px;padding:14px 0;animation:marq 28s linear infinite;font:800 26px/1 var(--fd);font-variation-settings:'wdth' 75,'opsz' 72;text-transform:uppercase}
 .marq span{display:inline-flex;align-items:center;gap:38px}.marq .ic{width:18px;height:18px;color:var(--gold)}
 @keyframes marq{to{transform:translateX(-50%)}}
 .marq.off .track{animation-play-state:paused}
@@ -67,11 +67,11 @@ h2 em{font-style:italic;color:var(--red)}
 .ch{position:relative;padding:0 28px 0 0}
 .ch-ic{position:relative;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--night);box-shadow:inset 0 0 0 2px var(--red);color:var(--gold)}.ch-ic .ic{width:24px;height:24px}
 .ch-city{display:block;margin-top:22px;font-size:14px;font-weight:600;color:var(--gold)}
-.ch h3{margin:6px 0 10px;font:900 italic 34px/1 var(--fd)}
+.ch h3{margin:6px 0 10px;font:800 34px/1 var(--fd);font-variation-settings:'wdth' 75,'opsz' 72;text-transform:uppercase}
 .ch p{margin:0;color:var(--muted);max-width:34ch}
 .quote{margin:90px auto 0;max-width:900px;text-align:center}
-.quote blockquote{margin:0;font:900 italic clamp(30px,3.6vw,54px)/1.1 var(--fd)}
-.quote blockquote em{color:var(--red);font-style:italic}
+.quote blockquote{margin:0;font:800 clamp(30px,3.6vw,54px)/1.1 var(--fd);font-variation-settings:'wdth' 75,'opsz' 72;text-transform:uppercase}
+.quote blockquote em{color:var(--red);font-style:normal}
 .quote cite{display:block;margin-top:16px;font-style:normal;color:var(--muted);font-size:15px}
 
 /* ───── el tacón ───── */
@@ -79,7 +79,7 @@ h2 em{font-style:italic;color:var(--red)}
 .heel-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:60px;align-items:center}
 .heel p.lead{color:var(--muted);font-size:19px;max-width:40ch;margin:20px 0 0}
 .meter{margin-top:36px;display:flex;flex-direction:column;gap:14px}
-.inch{font:900 italic 88px/.9 var(--fd);color:var(--gold)}.inch small{font:600 18px var(--fb);color:var(--muted);margin-left:8px}
+.inch{font:800 88px/.9 var(--fd);color:var(--gold);font-variation-settings:'wdth' 75,'opsz' 72;text-transform:uppercase}.inch small{font:600 18px var(--fb);color:var(--muted);margin-left:8px}
 .verdict{min-height:3.2em;font-size:20px;font-weight:600;margin:0}
 input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:12px;border-radius:99px;background:linear-gradient(90deg,var(--red) var(--p,0%),rgba(247,237,228,.15) var(--p,0%));outline-offset:6px}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:34px;height:34px;border-radius:50%;background:#fff;box-shadow:0 0 0 6px rgba(224,16,47,.35),0 6px 16px rgba(0,0,0,.4);cursor:grab}
@@ -97,17 +97,32 @@ input[type=range]::-moz-range-thumb{width:34px;height:34px;border-radius:50%;bac
 .pc-ph{aspect-ratio:3/4;overflow:hidden}.pc-ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--out)}
 .pc:hover .pc-ph img{transform:scale(1.05)}
 .pc-bd{padding:18px 18px 22px}.pc-role{font-size:13px;font-weight:600;color:var(--gold)}
-.pc h3{margin:4px 0 8px;font:900 italic 32px/1 var(--fd)}.pc p{margin:0;font-size:15px;color:var(--muted)}
+.pc h3{margin:4px 0 8px;font:800 32px/1 var(--fd);font-variation-settings:'wdth' 75,'opsz' 72;text-transform:uppercase}.pc p{margin:0;font-size:15px;color:var(--muted)}
 
-/* ───── canciones ───── */
-.songs{padding:120px 0;background:radial-gradient(50% 60% at 15% 30%,rgba(224,16,47,.22),transparent 70%),var(--night)}
-.songs-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:60px;align-items:start}
-.songs-grid .by{color:var(--muted);font-size:18px;max-width:30ch;margin:20px 0 0}
-.trs{list-style:none;margin:0;padding:0;border-top:1px solid rgba(247,237,228,.14)}
-.tr{display:grid;grid-template-columns:56px minmax(0,1fr);gap:4px 18px;padding:22px 0;border-bottom:1px solid rgba(247,237,228,.14)}
-.tr-n{font:900 italic 30px/1 var(--fd);color:var(--red)}
-.tr-t b{display:block;font:900 italic 28px/1.05 var(--fd)}.tr-t small{display:block;margin-top:4px;font-size:14px;color:var(--gold)}
-.tr p{grid-column:2;margin:6px 0 0;color:var(--muted);font-size:15px;max-width:52ch}
+/* ───── créditos, premios y crítica ───── */
+.credits{padding:120px 0;background:radial-gradient(50% 60% at 15% 20%,rgba(224,16,47,.2),transparent 70%),var(--night)}
+.cr-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:56px;align-items:end}
+.cr-top p{color:var(--muted);font-size:19px;margin:0;max-width:44ch}
+.crew{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;margin-top:52px}
+.cr{margin:0;border-radius:20px;overflow:hidden;background:#1E0D13;box-shadow:inset 0 0 0 1px rgba(247,237,228,.08)}
+.cr-ph{position:relative;aspect-ratio:1;background:linear-gradient(160deg,var(--red),var(--red2) 60%,#3A0A14)}
+.cr-ph::before{content:attr(data-ini);position:absolute;inset:0;display:grid;place-items:center;font:800 46px/1 var(--fd);font-variation-settings:'wdth' 75;color:rgba(255,240,230,.9)}
+.cr-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cr figcaption{padding:12px 14px 14px;border-top:2px solid var(--gold)}
+.cr b{display:block;font:800 18px/1.05 var(--fd);font-variation-settings:'wdth' 80}
+.cr small{display:block;margin-top:4px;font-size:13px;line-height:1.3;color:var(--gold)}
+.awards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:56px}
+.aw{border-radius:24px;padding:24px;background:#1E0D13;box-shadow:inset 0 0 0 1px rgba(242,193,78,.25);display:grid;grid-template-columns:auto 1fr;gap:2px 16px;align-items:center}
+.aw:first-child{background:linear-gradient(150deg,var(--red),var(--red2));box-shadow:0 24px 50px rgba(224,16,47,.3)}
+.aw b{grid-row:span 2;font:800 92px/.85 var(--fd);font-variation-settings:'wdth' 75;color:var(--gold)}
+.aw:first-child b{color:#fff}
+.aw-t{font:800 24px/1.05 var(--fd);font-variation-settings:'wdth' 80;text-transform:uppercase}
+.aw-d{font-size:14px;line-height:1.4;color:var(--cream);opacity:.8}
+.quotes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:14px}
+.qt{margin:0;border-radius:24px;padding:24px;background:rgba(247,237,228,.04);box-shadow:inset 0 0 0 1px rgba(247,237,228,.1);display:flex;flex-direction:column;justify-content:space-between;gap:18px}
+.qt blockquote{margin:0;font:700 22px/1.2 var(--fd)}
+.qt figcaption{font-size:14px;color:var(--muted)}.qt figcaption b{color:var(--cream)}
+.note{margin:18px 0 0;font-size:13px;color:var(--muted)}
 
 /* ───── invitación: wallet de TADAA! ───── */
 .tix{padding:120px 0 130px;background:#08091A;position:relative;overflow:hidden}
@@ -149,12 +164,13 @@ footer{padding:44px 0 60px;background:#0B0509;color:#9C8A8E;font-size:13px;text-
 footer img{height:28px;margin:0 auto 12px}
 
 @media (max-width:960px){
- .story-top,.heel-grid,.songs-grid,.tgrid{grid-template-columns:1fr;gap:40px}
+ .story-top,.heel-grid,.cr-top,.tgrid{grid-template-columns:1fr;gap:40px}
+ .crew{grid-template-columns:repeat(3,minmax(0,1fr))}.awards,.quotes{grid-template-columns:1fr 1fr}
  .chs{grid-template-columns:1fr;gap:34px}.chs::before{left:27px;right:auto;top:28px;bottom:28px;width:2px;height:auto;background:linear-gradient(180deg,var(--red),var(--gold),var(--violet))}
  .ch{display:grid;grid-template-columns:56px 1fr;gap:0 18px;padding:0}.ch-ic{grid-row:span 3}.ch-city{margin-top:4px}
  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-@media (max-width:520px){.cards{grid-template-columns:1fr}.inch{font-size:70px}}
+@media (max-width:520px){.crew{grid-template-columns:1fr 1fr}.awards,.quotes{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.inch{font-size:70px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.rv,.presenter,.logo-box,.when,.ctas{opacity:1!important;transform:none!important}}
 </style>
 </head>
@@ -196,9 +212,15 @@ footer img{height:28px;margin:0 auto 12px}
   <div class="cards"><article class="pc rv" tabindex="0"><div class="pc-ph"><img src="lola.webp" alt="" loading="lazy" style="object-position:50% 20%"></div><div class="pc-bd"><span class="pc-role">La estrella</span><h3>Lola</h3><p>Drag queen, diseñadora y fuerza de la naturaleza. Entra cantando “Land of Lola” y nadie vuelve a mirar unas botas igual.</p></div></article><article class="pc rv" tabindex="0"><div class="pc-ph"><img src="elenco.webp" alt="" loading="lazy" style="object-position:30% 30%"></div><div class="pc-bd"><span class="pc-role">El heredero</span><h3>Charlie Price</h3><p>No quería la fábrica, ni las botas, ni el riesgo. Termina desfilando en Milán con tacones rojos.</p></div></article><article class="pc rv" tabindex="0"><div class="pc-ph"><img src="elenco.webp" alt="" loading="lazy" style="object-position:78% 30%"></div><div class="pc-bd"><span class="pc-role">La fábrica</span><h3>Lauren</h3><p>Aporta la idea que salva Price & Son y la canción más divertida sobre enamorarse de tu jefe.</p></div></article><article class="pc rv" tabindex="0"><div class="pc-ph"><img src="angels.webp" alt="" loading="lazy" style="object-position:50% 40%"></div><div class="pc-bd"><span class="pc-role">El séquito</span><h3>The Angels</h3><p>Seis performers que convierten cada número en pasarela: brillo, humor y coreografía impecable.</p></div></article></div></div>
 </section>
 
-<section class="songs" id="canciones">
- <div class="wrap songs-grid"><div class="rv"><span class="kick"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z"/></svg> Banda sonora</span><h2>La música de <em>Cyndi Lauper</em></h2><p class="by">Música y letras de Cyndi Lauper, ganadora del Tony a Mejor Música Original. Libreto de Harvey Fierstein.</p></div>
-  <ol class="trs"><li class="tr rv"><span class="tr-n">01</span><span class="tr-t"><b>Land of Lola</b><small>Lola & The Angels</small></span><p>La entrada triunfal. Lola presenta a sus Angels y deja claro que este no es un musical cualquiera.</p></li><li class="tr rv"><span class="tr-n">02</span><span class="tr-t"><b>Sex Is in the Heel</b><small>Lola, Charlie y compañía</small></span><p>El manifiesto de las botas: el secreto no es el zapato, es el tacón.</p></li><li class="tr rv"><span class="tr-n">03</span><span class="tr-t"><b>The History of Wrong Guys</b><small>Lauren</small></span><p>El número cómico favorito: Lauren se da cuenta, en tiempo real, de que se está enamorando de su jefe.</p></li><li class="tr rv"><span class="tr-n">04</span><span class="tr-t"><b>Not My Father's Son</b><small>Charlie & Lola</small></span><p>Dos personas que crecieron tratando de complacer a sus padres descubren que se parecen más de lo que creían.</p></li><li class="tr rv"><span class="tr-n">05</span><span class="tr-t"><b>Everybody Say Yeah</b><small>Toda la compañía</small></span><p>La fábrica vuelve a la vida y el primer acto cierra en fiesta total.</p></li></ol></div>
+<section class="credits" id="creditos">
+ <div class="wrap">
+  <div class="cr-top"><div class="rv"><span class="kick"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"/></svg> Créditos</span><h2>De Broadway al <em>CCT1</em></h2></div>
+   <p class="rv">Una historia real convertida en película británica y luego en el musical más premiado de su temporada. En México lo producen Gou Producciones y Bway.</p></div>
+  <div class="crew"><figure class="cr rv"><div class="cr-ph" data-ini="HF"><img src="creditos/harvey-fierstein.webp" alt="Harvey Fierstein" loading="lazy" onerror="this.remove()"></div><figcaption><b>Harvey Fierstein</b><small>Libreto</small></figcaption></figure><figure class="cr rv"><div class="cr-ph" data-ini="CL"><img src="creditos/cyndi-lauper.webp" alt="Cyndi Lauper" loading="lazy" onerror="this.remove()"></div><figcaption><b>Cyndi Lauper</b><small>Música y letras</small></figcaption></figure><figure class="cr rv"><div class="cr-ph" data-ini="JM"><img src="creditos/jerry-mitchell.webp" alt="Jerry Mitchell" loading="lazy" onerror="this.remove()"></div><figcaption><b>Jerry Mitchell</b><small>Dirección y coreografía</small></figcaption></figure><figure class="cr rv"><div class="cr-ph" data-ini="SO"><img src="creditos/stephen-oremus.webp" alt="Stephen Oremus" loading="lazy" onerror="this.remove()"></div><figcaption><b>Stephen Oremus</b><small>Orquestaciones y supervisión musical</small></figcaption></figure><figure class="cr rv"><div class="cr-ph" data-ini="GP"><img src="creditos/gou-producciones.webp" alt="Gou Producciones" loading="lazy" onerror="this.remove()"></div><figcaption><b>Gou Producciones</b><small>Producción en México</small></figcaption></figure><figure class="cr rv"><div class="cr-ph" data-ini="B"><img src="creditos/bway.webp" alt="Bway" loading="lazy" onerror="this.remove()"></div><figcaption><b>Bway</b><small>Producción en México</small></figcaption></figure></div>
+  <div class="awards"><div class="aw rv"><b>6</b><span class="aw-t">premios Tony 2013</span><span class="aw-d">Incluido Mejor Musical: el más premiado de la temporada en Broadway.</span></div><div class="aw rv"><b>1</b><span class="aw-t">Grammy 2014</span><span class="aw-d">Mejor Álbum de Teatro Musical para el elenco original.</span></div><div class="aw rv"><b>3</b><span class="aw-t">premios Olivier 2016</span><span class="aw-d">Incluido Mejor Nuevo Musical en Londres.</span></div></div>
+  <div class="quotes"><figure class="qt rv"><blockquote>“Lauper es una natural del teatro musical.”</blockquote><figcaption><b>Time Out New York</b> · ★★★★</figcaption></figure><figure class="qt rv"><blockquote>“Un musical arrollador.”</blockquote><figcaption><b>Exeunt NYC</b></figcaption></figure><figure class="qt rv"><blockquote>“Quizá por esto se inventó la palabra fabuloso.”</blockquote><figcaption><b>The Philadelphia Inquirer</b></figcaption></figure><figure class="qt rv"><blockquote>“Nunca aburre: sales entretenido y satisfecho.”</blockquote><figcaption><b>New York Magazine</b></figcaption></figure></div>
+  <p class="note rv">Críticas de la producción de Broadway (2013), traducidas al español.</p>
+ </div>
 </section>
 
 <section class="tix" id="pases">
